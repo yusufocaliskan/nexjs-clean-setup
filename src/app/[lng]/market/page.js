@@ -1,7 +1,7 @@
 import { MarketScreen } from "@/screens";
 
-const Market = () => {
+const Page = () => {
   return <MarketScreen />;
 };
 
-export default Market;
+export default Page;

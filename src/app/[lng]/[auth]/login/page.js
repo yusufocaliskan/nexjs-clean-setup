@@ -1,7 +1,7 @@
 import { LoginScreen } from "@/screens";
 
-const Login = () => {
+const Page = () => {
   return <LoginScreen />;
 };
 
-export default Login;
+export default Page;
