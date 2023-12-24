@@ -1,8 +1,6 @@
-import { useTranslation } from "@/app/i18n";
+import { useTranslation } from "@/app/i18n/client";
 
-const Welcome = async ({ lng }) => {
-  console.log(lng);
-  const { t } = await useTranslation(lng);
+const Welcome = ({ t }) => {
   return <>{t("welcome_slogan")}</>;
 };
 
