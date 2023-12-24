@@ -1,7 +1,7 @@
 import { RegisterScreen } from "@/screens";
 
-const Page = () => {
-  return <RegisterScreen />;
+const Page = ({ params: { lng } }) => {
+  return <RegisterScreen lng={lng} />;
 };
 
 export default Page;

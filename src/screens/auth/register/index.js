@@ -1,4 +1,5 @@
 "use client";
+import { useTranslation } from "@/app/i18n/client";
 import { CoolButton, TextBox } from "@/components";
 import { useState } from "react";
 
@@ -7,6 +8,9 @@ const Register = ({ lng }) => {
   const [getEmail, setEmail] = useState("");
   const [getPassword, setPassword] = useState("");
 
+  //client side translation, works like this
+  const { t } = useTranslation(lng);
+
   const handleOnSubmitRegisterForm = () => {
     console.log("Resgistereedd");
   };
@@ -14,7 +18,11 @@ const Register = ({ lng }) => {
   return (
     <>
       <TextBox label={t("email")} value={getEmail} setValue={setEmail} />
-      <TextBox label="password" value={getPassword} setValue={setPassword} />
+      <TextBox
+        label={t("password")}
+        value={getPassword}
+        setValue={setPassword}
+      />
       <div>
         <CoolButton onClick={handleOnSubmitRegisterForm} label="Register" />
       </div>
