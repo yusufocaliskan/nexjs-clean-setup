@@ -1,3 +1,4 @@
+"use client";
 import { WelcomeScreen } from "@/screens";
 
 //server side rendring transltion
@@ -9,8 +10,7 @@ import { useTranslation } from "@/app/i18n";
 
 import "./globals.css";
 
-const Home = async ({ params: { lng } }) => {
-  const { t } = await useTranslation(lng);
-  return <WelcomeScreen t={t} />;
+const Home = ({ params: { lng } }) => {
+  return <WelcomeScreen lng={lng} />;
 };
 export default Home;
