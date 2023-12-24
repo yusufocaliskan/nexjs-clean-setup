@@ -1,7 +1,7 @@
-import { RegisterPage } from "@/pages";
+import { RegisterScreen } from "@/screens";
 
 const Register = () => {
-  return <RegisterPage />;
+  return <RegisterScreen />;
 };
 
 export default Register;

@@ -1,7 +1,7 @@
-import { LoginPage } from "@/pages";
+import { LoginScreen } from "@/screens";
 
 const Login = () => {
-  return <LoginPage />;
+  return <LoginScreen />;
 };
 
 export default Login;

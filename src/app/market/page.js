@@ -1,8 +1,7 @@
-import { MarketPage } from "@/pages";
+import { MarketScreen } from "@/screens";
 
-import { RegisterPage } from "@/pages";
 const Market = () => {
-  return <RegisterPage />;
+  return <MarketScreen />;
 };
 
 export default Market;
