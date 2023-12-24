@@ -22,6 +22,7 @@ const persistConfig = {
   storage: storage,
   whitelist: ["market"],
 };
+
 //Combine theme.
 const persistedReducers = persistReducer(persistConfig, rootReducers);
 

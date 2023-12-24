@@ -7,6 +7,7 @@ const Welcome = ({ lng }) => {
   const { t } = useTranslation(lng);
   const dispatch = useDispatch();
   const market = useSelector((state) => state.market);
+
   useEffect(() => {
     dispatch(setSelectedMarket(2));
   }, [dispatch]);
