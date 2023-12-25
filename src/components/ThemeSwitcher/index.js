@@ -10,7 +10,6 @@ const ThemeSwitcher = () => {
 
   //Switching current themee
   const handleSwitcheTheme = (theme) => {
-    console.log(theme);
     //REmove opposite
     if (theme == "dark_theme") {
       document.body.classList.remove("light_theme");
@@ -30,7 +29,7 @@ const ThemeSwitcher = () => {
   return (
     <>
       <CoolButton
-        label={app.currentTheme == "dark_theme" ? "dark" : "light"}
+        label={app.currentTheme !== "dark_theme" ? "dark" : "light"}
         onClick={() =>
           handleSwitcheTheme(
             app.currentTheme == "dark_theme" ? "light_theme" : "dark_theme",
