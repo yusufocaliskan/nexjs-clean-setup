@@ -1,8 +1,10 @@
 "use client";
+import "./welcome.scss";
 import { useTranslation } from "@/app/i18n/client";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { loginApi } from "@/store/users";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 const Welcome = ({ lng }) => {
   const { t } = useTranslation(lng);
@@ -27,7 +29,14 @@ const Welcome = ({ lng }) => {
     console.log("The data in the store: here ", user.informations);
   }, [user]);
 
-  return <>{queryRes.isLoading ? "Loading...." : "Done!"}</>;
+  return (
+    <>
+      <div>
+        <ThemeSwitcher />
+      </div>
+      {queryRes.isLoading ? "Loading...." : "Done!"}
+    </>
+  );
 };
 
 export default Welcome;
