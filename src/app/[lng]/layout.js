@@ -1,5 +1,5 @@
+import "@/theme/theme.scss";
 import { DM_Sans } from "next/font/google";
-
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
 import { RootProvider } from "@/boot";

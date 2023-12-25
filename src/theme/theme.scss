@@ -1,0 +1,10 @@
+@import "colors/dark_colors.scss";
+@import "colors/light_colors.scss";
+
+body {
+  @extend .light_colors;
+}
+
+body.dark_theme {
+  @extend .dark_colors;
+}

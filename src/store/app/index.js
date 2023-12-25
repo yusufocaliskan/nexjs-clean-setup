@@ -4,8 +4,9 @@ export const appAdapter = createEntityAdapter();
 //The App's settings will be stored here
 const initialState = appAdapter.getInitialState({
   //The current theme of the app selected by user
-  currentTheme: "dark",
+  currentTheme: "dark_theme",
 });
+
 const appSlice = createSlice({
   name: "app",
   initialState,
