@@ -8,7 +8,9 @@ const Login = () => {
       <div className="login-page-left-background" />
 
       <div>
-        <ThemeSwitcher />
+        <div>
+          <ThemeSwitcher />
+        </div>
         login kısmı
       </div>
     </div>
