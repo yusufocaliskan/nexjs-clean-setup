@@ -13,4 +13,5 @@ import "./globals.css";
 const Home = ({ params: { lng } }) => {
   return <WelcomeScreen lng={lng} />;
 };
+
 export default Home;

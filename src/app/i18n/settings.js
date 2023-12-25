@@ -5,7 +5,7 @@ export const cookieName = "i18next";
 
 export function getOptions(lng = fallbackLng, ns = defaultNS) {
   return {
-    // debug: true,
+    debug: false,
     supportedLngs: languages,
     fallbackLng,
     lng,
