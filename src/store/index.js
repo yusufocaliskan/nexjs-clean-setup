@@ -3,11 +3,13 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "./persist-storage.js";
 import user, { loginApi } from "./users";
+import app from "./app";
 
 //using for persist storage, due to ssr or crs
 const reducers = combineReducers({
   [loginApi.reducerPath]: loginApi.reducer,
   user: user,
+  app: app,
 });
 
 //Settings for persists
@@ -19,7 +21,7 @@ const rootReducers = (state, action) => {
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: [loginApi.reducerPath],
+  whitelist: [loginApi.reducerPath, "app"],
 };
 
 //Combine theme.

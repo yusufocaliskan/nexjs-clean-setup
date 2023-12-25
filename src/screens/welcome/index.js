@@ -17,8 +17,6 @@ const Welcome = ({ lng }) => {
       email: "yusufocaliskan@gmail.com",
       password: "Ma5i2121",
     });
-
-    //dispatch(setSelectedMarket(2));
   }, []);
 
   useEffect(() => {
