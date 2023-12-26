@@ -1,0 +1,36 @@
+.btn-main {
+    display: flex;
+    padding: 1rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    align-self: stretch;
+    border-radius: 5.625rem;
+    background: var(--Primary-1, #3772FF);
+    color: var(--Neutrals-8, #FCFCFD);
+    text-align: center;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1rem;
+}
+
+.btn-selected {
+    border-radius: 6.25rem;
+    background: $neutrals3;
+    display: flex;
+    padding: 0.375rem 0.75rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    color: $white;
+}
+
+.btn-not-selected {
+    border-radius: 6.25rem;
+    display: flex;
+    padding: 0.375rem 0.75rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+}

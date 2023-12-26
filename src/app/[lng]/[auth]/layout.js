@@ -1,5 +1,5 @@
 import { DM_Sans } from "next/font/google";
-import "../globals.css";
+import "../globals.scss";
 
 const inter = DM_Sans({ subsets: ["latin"] });
 

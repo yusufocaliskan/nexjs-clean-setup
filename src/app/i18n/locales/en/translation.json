@@ -1,5 +1,8 @@
 {
   "welcome_slogan": "Hey user, we're glad to have you here :))",
   "email": "E-mail",
-  "password": "Password"
+  "password": "Password",
+  "loginPageDontHaveAnAccount": "Don't have an account",
+  "loginPageSignUpForFree": "Sign up for free",
+  "loginPageSignInToHepbit":"Sign in to Hepbit"
 }
