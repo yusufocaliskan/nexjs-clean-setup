@@ -1,7 +1,8 @@
+import { appConfigs } from "@/configs";
 import axios from "axios";
 
 const clientInstance = axios.create({
-  baseURL: "https://api.cizgi.studio/v1",
+  baseURL: appConfigs.api.baseUrl,
   headers: {
     "Content-Type": "application/json",
   },

@@ -1,7 +1,7 @@
 import { LoginScreen } from "@/screens";
 
-const Page = () => {
-  return <LoginScreen />;
+const Page = ({ params: { lng } }) => {
+  return <LoginScreen lng={lng} />;
 };
 
 export default Page;

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export const loginApi = createApi({
   reducerPath: "loginApi",
-  baseQuery: clientBaseQuery({ baseUrl: "https://api.cizgi.studio/v1/" }),
+  baseQuery: clientBaseQuery(),
   endpoints: (builder) => ({
     check4CandidateData: builder.mutation({
       query: (data) => ({

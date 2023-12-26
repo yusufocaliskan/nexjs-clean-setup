@@ -1,5 +1,7 @@
 {
   "welcome_slogan": "Hey user, we're glad to have you here :))",
   "email": "E-mail",
-  "password": "Password"
+  "password": "Password",
+
+  "password is a required field": "Please fill the password input"
 }
