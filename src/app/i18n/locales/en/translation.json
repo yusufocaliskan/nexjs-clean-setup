@@ -4,5 +4,6 @@
   "password": "Password",
   "loginPageDontHaveAnAccount": "Don't have an account",
   "loginPageSignUpForFree": "Sign up for free",
-  "loginPageSignInToHepbit":"Sign in to Hepbit"
+  "loginPageSignInToHepbit":"Sign in to Hepbit",
+  "password is a required field": "Please fill the password input"
 }

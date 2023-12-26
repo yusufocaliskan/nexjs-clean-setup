@@ -1,13 +1,13 @@
-const TextBox = ({ value, setValue, label }) => {
+const TextBox = ({ value, setValue, type = "text", label }) => {
   const handleOnKeyDown = (e) => {
-    if (e.target.value) setValue(e.target.value);
+    setValue(e.target.value);
   };
 
   return (
     <>
       <label>
         <p>{label}</p>
-        <input value={value} onChange={handleOnKeyDown} />
+        <input type={type} value={value} onChange={handleOnKeyDown} />
       </label>
     </>
   );

@@ -3,6 +3,7 @@ import { DM_Sans } from "next/font/google";
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
 import { RootProvider } from "@/boot";
+import ToastErrors from "@/components/Form/ErrorsDisplayer/ToastErrors";
 
 //Fonts and metadata
 const inter = DM_Sans({ subsets: ["latin"] });
@@ -20,6 +21,7 @@ export default function RootLayout({ children, params: { lng } }) {
   return (
     <html lang={lng} dir={dir(lng)}>
       <body className={inter.className}>
+        <ToastErrors />
         <RootProvider>{children}</RootProvider>
       </body>
     </html>
