@@ -1,6 +1,9 @@
 {
   "welcome_slogan": "Merhaba kullanici, seni burada gormek guzel :))",
   "email": "ePosta",
+
+  "light": "Acik Mode",
+  "dark": "Koyu Mode",
   "password": "Sifre",
   "password is a required field": "Sifre alani zorunlu"
 }

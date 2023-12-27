@@ -1,11 +1,10 @@
 import { useTranslation } from "@/app/i18n/client";
-import { usePathname, useSearchParams } from "next/navigation";
+import { getSelectedLanguage } from "@/utils";
 
 const FormikFormErrorDisplayer = ({ formInstance }) => {
   //Get the selected language
   //We use it to translate the errors of the form validations
-  const path = usePathname();
-  const lang = path.substring(1).split("/")[0];
+  const lang = getSelectedLanguage();
   const { t } = useTranslation(lang);
 
   if (formInstance.errors)

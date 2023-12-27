@@ -5,10 +5,11 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { loginApi } from "@/store/users";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Welcome = ({ lng }) => {
-  const { t } = useTranslation(lng);
   const user = useSelector((state) => state.user);
+  const app = useSelector((state) => state.app);
 
   //Request
   const [check4CandidateData, queryRes] =
@@ -33,6 +34,9 @@ const Welcome = ({ lng }) => {
     <>
       <div>
         <ThemeSwitcher />
+      </div>
+      <div>
+        <LanguageSwitcher />
       </div>
       {queryRes.isLoading ? "Loading...." : "Done!"}
     </>

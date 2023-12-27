@@ -1,9 +1,12 @@
 {
   "welcome_slogan": "Hey user, we're glad to have you here :))",
   "email": "E-mail",
+
+  "light": "Light Mode",
+  "dark": "Dark Mode",
   "password": "Password",
   "loginPageDontHaveAnAccount": "Don't have an account",
   "loginPageSignUpForFree": "Sign up for free",
-  "loginPageSignInToHepbit":"Sign in to Hepbit",
+  "loginPageSignInToHepbit": "Sign in to Hepbit",
   "password is a required field": "Please fill the password input"
 }

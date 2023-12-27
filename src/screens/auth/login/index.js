@@ -7,6 +7,7 @@ import LeftBG from "../../../../public/assets/images/auth/left-background.png";
 import { useState } from "react";
 import { CoolButton, PhoneInput } from "@/components";
 import { EyeLine, EyeSlash } from "../../../../public/assets/icons";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
@@ -16,7 +17,6 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
-
   return (
     <div className="login-page-container">
       <div className="login-page-left-background">
@@ -25,10 +25,20 @@ const Login = () => {
       <div className="login-page-right">
         <div className="login-page-right-top">
           <div className="login-page-right-top-logo"></div>
-          <p className="login-page-right-top-text">
-            Don’t have an account?{" "}
-            <span className="sign-up-for-free">Sign up for free</span>
-          </p>
+          <div className="login-page-right-top-text">
+            <div>
+              <LanguageSwitcher />
+            </div>
+            <div>|</div>
+            <div>
+              <ThemeSwitcher />
+            </div>
+            <div>|</div>
+            <div>
+              Don’t have an account?
+              <span className="sign-up-for-free">Sign up for free</span>
+            </div>
+          </div>
         </div>
         <div className="login-page-right-content">
           <p className="sign-in-to-hepbit">Sign in to Hepbit</p>

@@ -1,12 +1,15 @@
+import { useTranslation } from "@/app/i18n/client";
 import { setTheme } from "@/store/app";
-import { useEffect } from "react";
+import { getSelectedLanguage } from "@/utils";
 import { useDispatch, useSelector } from "react-redux";
 
 const { default: CoolButton } = require("../form/CoolButton");
 
 const ThemeSwitcher = () => {
   const dispatch = useDispatch();
+  const selectedLanguage = getSelectedLanguage();
   const app = useSelector((state) => state.app);
+  const { t } = useTranslation(selectedLanguage);
 
   //Switching current themee
   const handleSwitcheTheme = (theme) => {
@@ -21,6 +24,7 @@ const ThemeSwitcher = () => {
     dispatch(setTheme(theme));
   };
 
+  //TODO: client system sttings
   // useEffect(() => {
   //   const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)");
   //   prefersDarkMode.addEventListener("change", handleSwitcheTheme);
@@ -29,10 +33,10 @@ const ThemeSwitcher = () => {
   return (
     <>
       <CoolButton
-        label={app.currentTheme !== "dark_theme" ? "dark" : "light"}
+        label={app.currentTheme !== "dark_theme" ? t("dark") : t("light")}
         onClick={() =>
           handleSwitcheTheme(
-            app.currentTheme == "dark_theme" ? "light_theme" : "dark_theme"
+            app.currentTheme == "dark_theme" ? "light_theme" : "dark_theme",
           )
         }
       />
