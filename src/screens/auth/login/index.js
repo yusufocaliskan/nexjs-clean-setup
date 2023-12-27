@@ -6,7 +6,9 @@ import Image from "next/image";
 import LeftBG from "../../../../public/assets/images/auth/left-background.png";
 import { useState } from "react";
 import { CoolButton, PhoneInput } from "@/components";
-import { EyeLine, EyeSlash } from "../../../../public/assets/icons";
+import { EyeLine, EyeSlash, Logo } from "../../../../public/assets/icons";
+import { useTranslation } from "@/app/i18n/client";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
@@ -16,30 +18,39 @@ const Login = () => {
     setShowPassword(!showPassword);
   };
 
+  const path = usePathname();
+  const lang = path.substring(1).split("/")[0];
+  const { t } = useTranslation(lang);
 
   return (
     <div className="login-page-container">
+      <ThemeSwitcher />
       <div className="login-page-left-background">
-        <Image src={LeftBG} alt="left logo" />{" "}
+        <Image src={LeftBG} alt={t("loginPageLeftLogoAlt")} />{" "}
       </div>
       <div className="login-page-right">
         <div className="login-page-right-top">
-          <div className="login-page-right-top-logo"></div>
-          <p className="login-page-right-top-text">
-            Don’t have an account?{" "}
-            <span className="sign-up-for-free">Sign up for free</span>
+          <div className="login-page-right-top-logo">
+            <Logo /> <p className="logo-hepbit">{t("loginPageHepBit")}</p>
+          </div>
+          <p
+            style={{ display: "flex", gap: "10px" }}
+            className="login-page-right-top-text"
+          >
+            {t("loginPageDontHaveAnAccount")}
+            <span className="sign-up-for-free">
+              {t("loginPageSignUpForFree")}
+            </span>
           </p>
         </div>
         <div className="login-page-right-content">
-          <p className="sign-in-to-hepbit">Sign in to Hepbit</p>
+          <p className="sign-in-to-hepbit">{t("loginPageSignInToHepbit")} </p>
           <div className="visit-url">
-            <p className="visit-text">
-              Please ensure you are visiting the correct url.
-            </p>
+            <p className="visit-text">{t("loginPageCorrectUrl")}</p>
             <p className="visit-url-login">
               <LockLine />
-              <span className="visit-https">https://</span>
-              accounts.hepbit.com/login
+              <span className="visit-https"> {t("loginPageHttps")}</span>
+              {t("loginPageLoginUrl")}
             </p>
           </div>
           <div className="divider" />
@@ -48,30 +59,30 @@ const Login = () => {
               <CoolButton
                 selected={button === "Email"}
                 onClick={() => setButton("Email")}
-                label={"Email"}
+                label={t("loginPageEmail")}
               />
               <CoolButton
                 onClick={() => setButton("Mobile")}
                 selected={button === "Mobile"}
-                label={"Mobile"}
+                label={t("loginPageMobile")}
               />
             </div>
             {button === "Email" && (
               <div className="form-inputs">
                 <div className="email">
-                  <p className="email-label">EMAIL</p>
+                  <p className="email-label">{t("loginPageEmail")}</p>
                   <input
                     type="email"
-                    placeholder="Email Address"
+                    placeholder={t("loginPageEmailPlaceHolder")}
                     className="email-input"
                   />
                 </div>
                 <div className="password">
-                  <p className="password-label">PASSWORD</p>
+                  <p className="password-label">{t("loginPagePassword")}</p>
                   <div className="password-area">
                     <input
                       type={showPassword ? "text" : "password"}
-                      placeholder="Password"
+                      placeholder={t("loginPagePasswordPlaceHolder")}
                       className="password-input"
                     />
                     <button
@@ -83,27 +94,33 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="scan-and-forgot">
-                  <p className="scan-login">Scan to login</p>
-                  <p className="forgot-password">Forgot Password?</p>
+                  <p className="scan-login">{t("loginPageScanToLogin")} </p>
+                  <p className="forgot-password">
+                    {t("loginPageForgotPassword")}
+                  </p>
                 </div>
                 <div className="login-btn-area">
-                  <CoolButton className="login-btn" label="Login" />
+                  <CoolButton
+                    className="login-btn"
+                    type="Main"
+                    label={t("loginPageLogin")}
+                  />
                 </div>
               </div>
             )}
             {button === "Mobile" && (
               <div className="form-inputs">
                 <div className="email">
-                  <p className="email-label">Mobile</p>
+                  <p className="email-label">{t("loginPageMobile")}</p>
 
                   <PhoneInput onChange={(e) => console.log(e)} />
                 </div>
                 <div className="password">
-                  <p className="password-label">PASSWORD</p>
+                  <p className="password-label">{t("loginPagePassword")}</p>
                   <div className="password-area">
                     <input
                       type={showPassword ? "text" : "password"}
-                      placeholder="Password"
+                      placeholder={t("loginPagePasswordPlaceHolder")}
                       className="password-input"
                     />
                     <button
@@ -115,11 +132,17 @@ const Login = () => {
                   </div>
                 </div>
                 <div className="scan-and-forgot">
-                  <p className="scan-login">Scan to login</p>
-                  <p className="forgot-password">Forgot Password?</p>
+                  <p className="scan-login">{t("loginPageScanToLogin")} </p>
+                  <p className="forgot-password">
+                    {t("loginPageForgotPassword")}
+                  </p>{" "}
                 </div>
                 <div className="login-btn-area">
-                  <CoolButton className="login-btn" label="Login" />
+                  <CoolButton
+                    className="login-btn"
+                    type="Main"
+                    label={t("loginPageLogin")}
+                  />
                 </div>
               </div>
             )}

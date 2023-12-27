@@ -22,6 +22,8 @@
     height: 100%;
     max-height: 64rem;
     width: 100%;
+    align-items: center;
+    justify-content: center;
 
     .login-page-right-top {
       display: flex;
@@ -37,12 +39,14 @@
       }
 
       .login-page-right-top-text {
-        color: $neutrals2;
+        color: var(--neutrals2);
         text-align: center;
         font-size: 0.875rem;
         font-style: normal;
         font-weight: 700;
         line-height: 1rem;
+        display: flex;
+        gap: 1rem;
       }
 
       .sign-up-for-free {
@@ -58,17 +62,14 @@
     }
 
     .login-page-right-content {
-      width: 100%;
+      width: 380px;
       display: flex;
-      padding: 3rem 17.125rem 14.4375rem 17.125rem;
       justify-content: center;
       align-items: center;
-      flex: 1 0 0;
-      align-self: stretch;
       flex-direction: column;
 
       .sign-in-to-hepbit {
-        color: $neutrals2;
+        color: var(--neutrals2);
         text-align: center;
         font-family: DM Sans;
         font-size: 2.5rem;
@@ -107,13 +108,13 @@
           align-self: stretch;
           border-radius: 3rem;
           font-family: 'Poppins', sans-serif;
-          background: $neutrals7;
-          color: $neutrals2;
+          color: var(--neutrals2);
           text-align: center;
           font-size: 0.875rem;
           font-style: normal;
           font-weight: 500;
           line-height: 1.5rem;
+          background-color: var(--neutrals7);
         }
 
         .visit-https {
@@ -201,7 +202,6 @@
               padding: 0.75rem 1rem;
               align-items: flex-start;
               gap: 0.625rem;
-              flex: 1 0 0;
               align-self: stretch;
               border-radius: 0.75rem;
               border: 2px solid var(--Neutrals-6, #E6E8EC);
@@ -228,27 +228,37 @@
               text-transform: uppercase;
 
             }
+
             .password-area {
               display: flex;
               width: 100%;
+
               .password-input {
                 display: flex;
-                width: 95%;
+                width: 90%;
                 padding: 0.75rem 1rem;
                 justify-content: space-between;
                 align-items: flex-start;
                 align-self: stretch;
-                border-radius: 0.75rem;
-                border: 2px solid var(--Neutrals-6, #E6E8EC);
+                border-top-left-radius: 0.75rem;
+                border-bottom-left-radius: 0.75rem;
+                border-left: 2px solid var(--Neutrals-6, #E6E8EC);
+                border-top: 2px solid var(--Neutrals-6, #E6E8EC);
+                border-bottom: 2px solid var(--Neutrals-6, #E6E8EC);
+
               }
+
               .password-toggle {
                 display: flex;
                 align-items: center;
                 align-self: stretch;
                 justify-content: center;
-                width: 5%;
-                border-radius: 0.75rem;
-                border: 2px solid var(--Neutrals-6, #E6E8EC);
+                width: 10%;
+                border-top-right-radius: 0.75rem;
+                border-bottom-right-radius: 0.75rem;
+                border-right: 2px solid var(--Neutrals-6, #E6E8EC);
+                border-top: 2px solid var(--Neutrals-6, #E6E8EC);
+                border-bottom: 2px solid var(--Neutrals-6, #E6E8EC);
               }
             }
 
@@ -304,6 +314,74 @@
             /* 100% */
           }
         }
+      }
+    }
+  }
+}
+
+@media (max-width:1024px) {
+  .login-page-container {
+    .login-page-left-background {
+      display: none;
+    }
+
+    .login-page-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .login-page-right-top {
+        display: flex;
+        padding: 3rem;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
+
+        .login-page-right-top-logo {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          .logo-hepbit {
+            color: var(--Neutrals-2, #23262F);
+            font-family: Poppins;
+            font-size: 1.5rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 2rem;
+            letter-spacing: -0.03rem;
+          }
+        }
+      }
+
+      .login-page-right-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.625rem;
+      }
+    }
+  }
+}
+
+@media (max-width:768px) {
+  .login-page-container {
+    padding: 2rem;
+    .login-page-right {
+
+      .login-page-right-top {
+        padding: 0rem;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .login-page-right-content {
+        display: flex;
+        padding: 0rem;
+        align-items: center;
+        justify-content: center;
+        gap: 0.625rem;
       }
     }
   }
