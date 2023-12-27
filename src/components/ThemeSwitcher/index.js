@@ -2,7 +2,7 @@ import { useTranslation } from "@/app/i18n/client";
 import { setTheme } from "@/store/app";
 import { getSelectedLanguage } from "@/utils";
 import { useDispatch, useSelector } from "react-redux";
-import CoolButton from "../form/CoolButton";
+import { CoolButton } from "@/components";
 
 const ThemeSwitcher = () => {
   const dispatch = useDispatch();

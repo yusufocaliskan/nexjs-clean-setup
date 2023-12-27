@@ -1,13 +1,15 @@
 "use client";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 import "../auth.scss";
-import LockLine from "../../../../public/assets/icons/LockLine";
 import Image from "next/image";
 import LeftBG from "../../../../public/assets/images/auth/left-background.png";
 import { useState } from "react";
-import { CoolButton, PhoneInput } from "@/components";
-import { EyeLine, EyeSlash } from "../../../../public/assets/icons";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
+import {
+  LockLine,
+  EyeLine,
+  EyeSlash,
+  CoolButton,
+  PhoneInput,
+} from "@/components";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
@@ -25,20 +27,10 @@ const Login = () => {
       <div className="login-page-right">
         <div className="login-page-right-top">
           <div className="login-page-right-top-logo"></div>
-          <div className="login-page-right-top-text">
-            <div>
-              <LanguageSwitcher />
-            </div>
-            <div>|</div>
-            <div>
-              <ThemeSwitcher />
-            </div>
-            <div>|</div>
-            <div>
-              Don’t have an account?
-              <span className="sign-up-for-free">Sign up for free</span>
-            </div>
-          </div>
+          <p className="login-page-right-top-text">
+            Don’t have an account?{" "}
+            <span className="sign-up-for-free">Sign up for free</span>
+          </p>
         </div>
         <div className="login-page-right-content">
           <p className="sign-in-to-hepbit">Sign in to Hepbit</p>

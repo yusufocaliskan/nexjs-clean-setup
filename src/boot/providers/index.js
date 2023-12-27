@@ -4,9 +4,11 @@ import ReduxProvider from "./redux";
 
 const RootProvider = ({ children }) => {
   return (
-    <ReduxProvider>
-      <ThemeProvider>{children}</ThemeProvider>
-    </ReduxProvider>
+    <>
+      <ReduxProvider>
+        <ThemeProvider>{children}</ThemeProvider>
+      </ReduxProvider>{" "}
+    </>
   );
 };
 export default RootProvider;

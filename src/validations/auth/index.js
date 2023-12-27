@@ -3,7 +3,9 @@ import * as yup from "yup";
 //Register Form
 export const registerFormValidations = yup.object().shape({
   name: yup.string().required(),
-  email: yup.string().email(),
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+  passwordAgain: yup.string().required(),
   nationalId: yup.number().integer().required(),
 });
 
