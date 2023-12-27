@@ -32,7 +32,7 @@ const ThemeSwitcher = () => {
         label={app.currentTheme !== "dark_theme" ? "dark" : "light"}
         onClick={() =>
           handleSwitcheTheme(
-            app.currentTheme == "dark_theme" ? "light_theme" : "dark_theme",
+            app.currentTheme == "dark_theme" ? "light_theme" : "dark_theme"
           )
         }
       />
