@@ -7,8 +7,8 @@ const FormikFormErrorDisplayer = ({ formInstance }) => {
   const lang = getSelectedLanguage();
   const { t } = useTranslation(lang);
 
-  if (formInstance.errors)
-    return Object.keys(formInstance.errors).map((key, index) => {
+  if (formInstance?.errors)
+    return Object.keys(formInstance?.errors).map((key, index) => {
       return <div key={index}>{t(formInstance.errors[key])}</div>;
     });
   return <></>;

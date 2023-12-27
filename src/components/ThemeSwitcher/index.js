@@ -2,8 +2,7 @@ import { useTranslation } from "@/app/i18n/client";
 import { setTheme } from "@/store/app";
 import { getSelectedLanguage } from "@/utils";
 import { useDispatch, useSelector } from "react-redux";
-
-const { default: CoolButton } = require("../form/CoolButton");
+import CoolButton from "../form/CoolButton";
 
 const ThemeSwitcher = () => {
   const dispatch = useDispatch();
