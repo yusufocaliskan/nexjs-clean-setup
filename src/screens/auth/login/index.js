@@ -1,60 +1,129 @@
 "use client";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import "../auth.scss";
-import { useFormik } from "formik";
-import { loginFormValidations } from "@/validations/auth";
-import { CoolButton, TextBox } from "@/components";
-import { useEffect } from "react";
-import Form from "@/components/Form";
-import toast from "react-hot-toast";
-import { useTranslation } from "@/app/i18n/client";
+import LockLine from "../../../../public/assets/icons/LockLine";
+import Image from "next/image";
+import LeftBG from "../../../../public/assets/images/auth/left-background.png";
+import { useState } from "react";
+import { CoolButton, PhoneInput } from "@/components";
+import { EyeLine, EyeSlash } from "../../../../public/assets/icons";
 
-const Login = ({ lng }) => {
-  const { t } = useTranslation(lng);
+const Login = () => {
+  const [button, setButton] = useState("Email");
+  const [showPassword, setShowPassword] = useState(false);
 
-  //Checking for the login formm
-  const loginForm = useFormik({
-    initialValues: {
-      email: "",
-      password: "",
-    },
-    validationSchema: loginFormValidations,
-    onSubmit: (values) => {
-      toast.success("Good!");
-      console.log("Submitteedd", values);
-    },
-  });
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
-  useEffect(() => {
-    console.log(loginForm.errors);
-  }, [loginForm]);
 
   return (
     <div className="login-page-container">
-      <div className="login-page-left-background" />
-
-      <div>
-        <div>
-          <ThemeSwitcher />
+      <div className="login-page-left-background">
+        <Image src={LeftBG} alt="left logo" />{" "}
+      </div>
+      <div className="login-page-right">
+        <div className="login-page-right-top">
+          <div className="login-page-right-top-logo"></div>
+          <p className="login-page-right-top-text">
+            Don’t have an account?{" "}
+            <span className="sign-up-for-free">Sign up for free</span>
+          </p>
         </div>
-        <div>
-          <Form onSubmit={loginForm.handleSubmit} formInstance={loginForm}>
-            <div>
-              <TextBox
-                label={t("email")}
-                value={loginForm.values.email}
-                setValue={(value) => loginForm.setFieldValue("email", value)}
+        <div className="login-page-right-content">
+          <p className="sign-in-to-hepbit">Sign in to Hepbit</p>
+          <div className="visit-url">
+            <p className="visit-text">
+              Please ensure you are visiting the correct url.
+            </p>
+            <p className="visit-url-login">
+              <LockLine />
+              <span className="visit-https">https://</span>
+              accounts.hepbit.com/login
+            </p>
+          </div>
+          <div className="divider" />
+          <div className="login-form">
+            <div className="form-buttons">
+              <CoolButton
+                selected={button === "Email"}
+                onClick={() => setButton("Email")}
+                label={"Email"}
+              />
+              <CoolButton
+                onClick={() => setButton("Mobile")}
+                selected={button === "Mobile"}
+                label={"Mobile"}
               />
             </div>
-            <div>
-              <TextBox
-                label={t("password")}
-                value={loginForm.values.password}
-                setValue={(value) => loginForm.setFieldValue("password", value)}
-              />
-            </div>
-            <CoolButton label="Submitooo" type="submit" />
-          </Form>
+            {button === "Email" && (
+              <div className="form-inputs">
+                <div className="email">
+                  <p className="email-label">EMAIL</p>
+                  <input
+                    type="email"
+                    placeholder="Email Address"
+                    className="email-input"
+                  />
+                </div>
+                <div className="password">
+                  <p className="password-label">PASSWORD</p>
+                  <div className="password-area">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Password"
+                      className="password-input"
+                    />
+                    <button
+                      className="password-toggle"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {showPassword ? <EyeSlash /> : <EyeLine />}
+                    </button>
+                  </div>
+                </div>
+                <div className="scan-and-forgot">
+                  <p className="scan-login">Scan to login</p>
+                  <p className="forgot-password">Forgot Password?</p>
+                </div>
+                <div className="login-btn-area">
+                  <CoolButton className="login-btn" label="Login" />
+                </div>
+              </div>
+            )}
+            {button === "Mobile" && (
+              <div className="form-inputs">
+                <div className="email">
+                  <p className="email-label">Mobile</p>
+
+                  <PhoneInput onChange={(e) => console.log(e)} />
+                </div>
+                <div className="password">
+                  <p className="password-label">PASSWORD</p>
+                  <div className="password-area">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Password"
+                      className="password-input"
+                    />
+                    <button
+                      className="password-toggle"
+                      onClick={togglePasswordVisibility}
+                    >
+                      {showPassword ? <EyeSlash /> : <EyeLine />}
+                    </button>
+                  </div>
+                </div>
+                <div className="scan-and-forgot">
+                  <p className="scan-login">Scan to login</p>
+                  <p className="forgot-password">Forgot Password?</p>
+                </div>
+                <div className="login-btn-area">
+                  <CoolButton className="login-btn" label="Login" />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
