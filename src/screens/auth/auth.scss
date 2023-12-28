@@ -1,6 +1,5 @@
-@import '../../../public/assets/colors/variables.scss';
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-
+@import "../../../public/assets/colors/variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 .login-page-container {
   width: 100%;
@@ -46,7 +45,9 @@
         font-weight: 700;
         line-height: 1rem;
         display: flex;
-        gap: 1rem;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
       }
 
       .sign-up-for-free {
@@ -78,7 +79,6 @@
         line-height: 3rem;
         letter-spacing: -0.025rem;
         margin-bottom: 2rem;
-
       }
 
       .visit-url {
@@ -95,7 +95,7 @@
           text-align: center;
           font-size: 0.75rem;
           font-style: normal;
-          font-family: 'Poppins', sans-serif;
+          font-family: "Poppins", sans-serif;
           font-weight: 400;
           line-height: 1.25rem;
         }
@@ -109,6 +109,7 @@
           border-radius: 3rem;
           font-family: 'Poppins', sans-serif;
           color: var(--neutrals2);
+          font-family: "Poppins", sans-serif;
           text-align: center;
           font-size: 0.875rem;
           font-style: normal;
@@ -121,7 +122,7 @@
           color: $primary7;
           text-align: center;
           font-size: 0.875rem;
-          font-family: 'Poppins', sans-serif;
+          font-family: "Poppins", sans-serif;
           font-style: normal;
           font-weight: 500;
         }
@@ -148,7 +149,6 @@
           justify-content: center;
           gap: 1.5rem;
           margin-bottom: 1.5rem;
-
 
           .btn-selected {
             border-radius: 6.25rem;
@@ -188,8 +188,8 @@
             align-self: stretch;
 
             .email-label {
-              color: var(--Neutrals-5, #B1B5C3);
-              font-family: 'Poppins', sans-serif;
+              color: var(--Neutrals-5, #b1b5c3);
+              font-family: "Poppins", sans-serif;
               font-size: 0.75rem;
               font-style: normal;
               font-weight: 700;
@@ -204,7 +204,7 @@
               gap: 0.625rem;
               align-self: stretch;
               border-radius: 0.75rem;
-              border: 2px solid var(--Neutrals-6, #E6E8EC);
+              border: 2px solid var(--Neutrals-6, #e6e8ec);
             }
           }
 
@@ -217,16 +217,13 @@
             align-self: stretch;
 
             .password-label {
-              color: var(--Neutrals-5, #B1B5C3);
-              /* Hairline 2 */
-              font-family: 'Poppins', sans-serif;
+              color: var(--Neutrals-5, #b1b5c3);
+              font-family: "Poppins", sans-serif;
               font-size: 0.75rem;
               font-style: normal;
               font-weight: 700;
               line-height: 0.75rem;
-              /* 100% */
               text-transform: uppercase;
-
             }
 
             .password-area {
@@ -245,10 +242,9 @@
                 border-left: 2px solid var(--Neutrals-6, #E6E8EC);
                 border-top: 2px solid var(--Neutrals-6, #E6E8EC);
                 border-bottom: 2px solid var(--Neutrals-6, #E6E8EC);
-
               }
 
-              .password-toggle {
+              .password-toggle-page {
                 display: flex;
                 align-items: center;
                 align-self: stretch;
@@ -261,7 +257,6 @@
                 border-bottom: 2px solid var(--Neutrals-6, #E6E8EC);
               }
             }
-
           }
 
           .scan-and-forgot {
@@ -271,10 +266,10 @@
             align-self: stretch;
 
             .scan-login {
-              color: var(--Neutrals-4, #777E90);
+              color: var(--Neutrals-4, #777e90);
 
               /* Caption 2 (Bold) */
-              font-family: 'Poppins', sans-serif;
+              font-family: "Poppins", sans-serif;
               font-size: 0.75rem;
               font-style: normal;
               font-weight: 600;
@@ -283,10 +278,10 @@
             }
 
             .forgot-password {
-              color: var(--Primary-1, #3772FF);
+              color: var(--Primary-1, #3772ff);
               text-align: right;
 
-              font-family: 'Poppins', sans-serif;
+              font-family: "Poppins", sans-serif;
               font-size: 0.75rem;
               font-style: normal;
               font-weight: 600;
@@ -303,8 +298,8 @@
             gap: 0.75rem;
             align-self: stretch;
             border-radius: 5.625rem;
-            background: var(--Primary-1, #3772FF);
-            color: var(--Neutrals-8, #FCFCFD);
+            background: var(--Primary-1, #3772ff);
+            color: var(--Neutrals-8, #fcfcfd);
             text-align: center;
             /* Button 1 */
             font-size: 1rem;

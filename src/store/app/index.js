@@ -5,6 +5,9 @@ export const appAdapter = createEntityAdapter();
 const initialState = appAdapter.getInitialState({
   //The current theme of the app selected by user
   currentTheme: "dark_theme",
+
+  //selected language of the app
+  selectedLanguage: "en",
 });
 
 const appSlice = createSlice({
@@ -15,8 +18,13 @@ const appSlice = createSlice({
     setTheme(state, action) {
       state.currentTheme = action.payload;
     },
+
+    //set selected language
+    setSelectedLanguage(state, action) {
+      state.selectedLanguage = action.payload;
+    },
   },
 });
 
-export const { setTheme } = appSlice.actions;
+export const { setTheme, setSelectedLanguage } = appSlice.actions;
 export default appSlice.reducer;

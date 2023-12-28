@@ -1,14 +1,18 @@
 "use client";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
 import "../auth.scss";
-import LockLine from "../../../../public/assets/icons/LockLine";
 import Image from "next/image";
 import LeftBG from "../../../../public/assets/images/auth/left-background.png";
 import { useState } from "react";
-import { CoolButton, PhoneInput } from "@/components";
-import { EyeLine, EyeSlash, Logo } from "../../../../public/assets/icons";
 import { useTranslation } from "@/app/i18n/client";
 import { usePathname, useSearchParams } from "next/navigation";
+import {
+  LockLine,
+  EyeLine,
+  EyeSlash,
+  CoolButton,
+  PhoneInput,
+  Logo,
+} from "@/components";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
@@ -24,7 +28,6 @@ const Login = () => {
 
   return (
     <div className="login-page-container">
-      <ThemeSwitcher />
       <div className="login-page-left-background">
         <Image src={LeftBG} alt={t("loginPageLeftLogoAlt")} />{" "}
       </div>
@@ -86,7 +89,7 @@ const Login = () => {
                       className="password-input"
                     />
                     <button
-                      className="password-toggle"
+                      className="password-toggle-page"
                       onClick={togglePasswordVisibility}
                     >
                       {showPassword ? <EyeSlash /> : <EyeLine />}
@@ -124,7 +127,7 @@ const Login = () => {
                       className="password-input"
                     />
                     <button
-                      className="password-toggle"
+                      className="password-toggle-page"
                       onClick={togglePasswordVisibility}
                     >
                       {showPassword ? <EyeSlash /> : <EyeLine />}
