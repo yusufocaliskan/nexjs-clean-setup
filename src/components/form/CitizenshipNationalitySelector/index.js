@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./stye.scss";
 import { SelectBox } from "@/components";
 import { useTranslation } from "@/app/i18n/client";
+import countries from "@/store/statics/countries";
 
 const DateSelectBox = ({ formInstance }) => {
   const [getDays, setDays] = useState([]);
@@ -11,6 +12,7 @@ const DateSelectBox = ({ formInstance }) => {
 
   //create options
   useEffect(() => {
+    console.log(countries.getAllCountries());
     const days = [];
     const months = [];
     const years = [];
@@ -32,6 +34,7 @@ const DateSelectBox = ({ formInstance }) => {
     setDays(days);
     setMonths(months);
     setYears(years);
+    console.log(formInstance.citizenship);
   }, []);
 
   //Returns the number of days of the current month
@@ -40,16 +43,39 @@ const DateSelectBox = ({ formInstance }) => {
     return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
   };
 
+  const handleMakeSelection = (val) => {
+    //setIsOptionOpen(false);
+    console.log(val);
+    formInstance.setFieldValue("citizenship", val);
+  };
+
   return (
     <div className="date-selectbox-wrapper">
       <SelectBox
-        optionsData={getDays}
         formInstance={formInstance}
         label={t("day")}
         placeholder={t("dayPlaceholder")}
-        name="birthDay"
-        value={formInstance.values.birthDay}
-        setValue={(value) => formInstance.setFieldValue("birthDay", value)}
+        name="citizenship"
+        value={formInstance.values.citizenship}
+        setValue={(value) => formInstance.setFieldValue("citizenship", value)}
+        RenderOption={() => {
+          return countries.getAllCountries().map((item, index) => {
+            console.log(formInstance.citizenship, item.value);
+            return (
+              <div
+                key={index}
+                onClick={() => handleMakeSelection(item.value.replace("'", ""))}
+                className={`
+                    selectbox-item ${
+                      formInstance.citizenship == item.value.replace("'", "") &&
+                      "selectbox-selected-item"
+                    }`}
+              >
+                <span>{item.text}</span>
+              </div>
+            );
+          });
+        }}
       />
       <SelectBox
         optionsData={getMonths}
@@ -60,16 +86,6 @@ const DateSelectBox = ({ formInstance }) => {
         name="birthMonth"
         value={formInstance.values.birthMonth}
         setValue={(value) => formInstance.setFieldValue("birthMonth", value)}
-      />
-      <SelectBox
-        optionsData={getYears}
-        formInstance={formInstance}
-        isSecure
-        label={t("year")}
-        placeholder={t("yearPlaceholder")}
-        name="birthYear"
-        value={formInstance.values.birthYear}
-        setValue={(value) => formInstance.setFieldValue("birthYear", value)}
       />
     </div>
   );

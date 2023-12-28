@@ -17,6 +17,14 @@
   "surname": "Surname",
   "surnamePlaceholder": "Your last name",
 
+  "day": "Day",
+  "dayPlaceholder": "Day",
+
+  "month": "Month",
+  "monthPlaceholder": "Month",
+  "year": "Year",
+  "yearPlaceholder": "Year",
+
   "loginPageDontHaveAnAccount": "Don't have an account",
   "loginPageSignUpForFree": "Sign up for free",
   "loginPageSignInToHepbit": "Sign in to Hepbit",

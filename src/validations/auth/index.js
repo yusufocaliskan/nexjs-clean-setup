@@ -12,7 +12,8 @@ export const registerFormValidations = yup.object().shape({
   birthDay: yup.number().required(),
   birthMonth: yup.number().required(),
   birthYear: yup.number().required(),
-  nationalId: yup.number().integer().required(),
+  citizenship: yup.string().required(),
+  nationalId: yup.string().required(),
 });
 
 //Login form

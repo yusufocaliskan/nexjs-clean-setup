@@ -11,13 +11,36 @@ const SelectBox = ({
   name,
   formInstance,
   optionsData,
+  RenderOption,
 }) => {
   const [isOptionOpen, setIsOptionOpen] = useState(false);
 
+  //Setting the selected options
   const handleMakeSelection = (val) => {
     setValue(val);
     setIsOptionOpen(false);
   };
+
+  const RenderItem = ({ data }) => {
+    if (RenderOption) {
+      return <RenderOption optionsData={optionsData} />;
+    }
+    return data.map((item, index) => {
+      return (
+        <div
+          key={index}
+          className={`
+                    selectbox-item ${
+                      value == item.val && "selectbox-selected-item"
+                    }`}
+          onClick={() => handleMakeSelection(item.val)}
+        >
+          <span>{item.val}</span>
+        </div>
+      );
+    });
+  };
+
   return (
     <div className="text-box-wrapper">
       <p className="text-box-label">{label}</p>
@@ -42,21 +65,7 @@ const SelectBox = ({
 
       {isOptionOpen && (
         <div className="selectbox-options">
-          {optionsData.map((item, index) => {
-            return (
-              <>
-                <div
-                  className={`
-                    selectbox-item ${
-                      value == item.key && "selectbox-selected-item"
-                    }`}
-                  onClick={() => handleMakeSelection(item.val)}
-                >
-                  <span>{item.val}</span>
-                </div>
-              </>
-            );
-          })}
+          <RenderItem data={optionsData} />
         </div>
       )}
     </div>

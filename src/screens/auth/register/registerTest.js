@@ -9,8 +9,8 @@ import {
   PasswordInputs,
   PhoneInput,
   FullNameInputs,
-  SelectBox,
   DateSelectBox,
+  CitizenshipNationalitySelector,
 } from "@/components";
 import Form from "@/components/Form";
 import { useFormik } from "formik";
@@ -26,6 +26,9 @@ const RegisterTest = () => {
       password: "",
       passwordAgain: "",
       email: "",
+      citizenship: "",
+      nationalId: "",
+      referralId: "",
       birthDay: "",
     },
     validationSchema: registerFormValidations,
@@ -87,6 +90,7 @@ const RegisterTest = () => {
 
                 <FullNameInputs formInstance={registerForm} />
                 <DateSelectBox formInstance={registerForm} />
+                <CitizenshipNationalitySelector formInstance={registerForm} />
                 <TextBox
                   formInstance={registerForm}
                   isSecure

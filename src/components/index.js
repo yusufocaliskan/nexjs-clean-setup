@@ -6,6 +6,7 @@ export { default as PhoneInput } from "./form/PhoneWithCountryCodeInput";
 export { default as PasswordInputs } from "./form/PasswordInputs";
 export { default as FullNameInputs } from "./form/FullNameInputs";
 export { default as DateSelectBox } from "./form/DateSelectBox";
+export { default as CitizenshipNationalitySelector } from "./form/CitizenshipNationalitySelector";
 
 //Screen Commons
 export { default as Title } from "./ScreenCommons/Title";
