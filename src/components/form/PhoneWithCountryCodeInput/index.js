@@ -8,6 +8,7 @@ const InputWithCountryCode = ({ onChange }) => {
       inputClass="inputClass"
       containerClass="container"
       onChange={onChange}
+      country={'tr'}
     />
   );
 };

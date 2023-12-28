@@ -13,6 +13,7 @@ import {
   PhoneInput,
   Logo,
 } from "@/components";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
