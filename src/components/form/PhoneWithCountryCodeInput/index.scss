@@ -1,56 +1,66 @@
 .inputClass {
-    display: flex;
-    height: 3.25rem !important;
-    width: 100% ;
-    padding: 0.75rem 1rem;
-    align-items: flex-start;
-    gap: 0.625rem;
-    align-self: stretch;
-    border-radius: 0.75rem !important;
-    color: var(--loginPageText) !important;
-    background-color: var(--inputBg) !important;
-    border: 2px solid var(--inputBorderColor) !important;
-    left: 5rem;
+  display: flex;
+  height: 3.25rem !important;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  align-items: flex-start;
+  gap: 0.625rem;
+  align-self: stretch;
+  border-radius: 0.75rem !important;
+  color: var(--loginPageText) !important;
+  background-color: var(--inputBg) !important;
+  border: 2px solid var(--inputBorderColor) !important;
+  left: 5rem;
 }
 
 .selected-flag {
-    background-color: var(--inputBg) !important;
-    display: flex;
-    padding: 0.75rem 1rem;
-    align-items: center;
-    justify-content: center;
-    gap: 0.625rem;
-    height: 3.25rem !important;
-    width: 6rem !important;
-    border-top-left-radius: 0.75rem !important;
-    border-bottom-left-radius: 0.75rem !important;
-    border: 2px solid var(--inputBorderColor) !important;
+  background-color: var(--inputBg) !important;
+  display: flex;
+  padding: 0.75rem 1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  height: 3.25rem !important;
+  width: 6rem !important;
+  border-top-left-radius: 0.75rem !important;
+  border-bottom-left-radius: 0.75rem !important;
+  border: 2px solid var(--inputBorderColor) !important;
 }
 
 .flag-dropdown {
-    border: none !important;
-    background-color: var(--inputBg) !important;
-    color: var(--loginPageText) !important;
+  border: none !important;
+  background-color: var(--inputBg) !important;
+  color: var(--loginPageText) !important;
 }
 
-.country-list  {
-    border-radius: 0.75rem !important;
-    color: var(--loginPageText) !important;
-    background-color: var(--inputBg) !important;
-    border: 2px solid var(--inputBorderColor) !important;
+.country-list {
+  border-radius: 0.75rem !important;
+  color: var(--loginPageText) !important;
+  background-color: var(--inputBg) !important;
+  border: 2px solid var(--inputBorderColor) !important;
 }
 
+.text-box-label {
+  color: var(--Neutrals-5, #b1b5c3);
+  font-family: "Poppins", sans-serif;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 0.75rem;
+  text-transform: uppercase;
+  user-select: none;
+}
 .highlight {
-    color: #000;
+  color: #000;
 }
 
 .country:hover {
-    color: #000;
+  color: #000;
 }
 
 .container {
-    display: flex;
-    height: 3.25rem !important;
-    width: 100% !important;
-    gap: 1rem;
+  display: flex;
+  height: 3.25rem !important;
+  width: 100% !important;
+  gap: 1rem;
 }

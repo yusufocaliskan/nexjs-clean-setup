@@ -2,6 +2,7 @@
 export { default as TextBox } from "./form/TextBox";
 export { default as CoolButton } from "./form/CoolButton";
 export { default as PhoneInput } from "./form/PhoneWithCountryCodeInput";
+export { default as PasswordInputs } from "./form/PasswordInputs";
 
 //Screen Commons
 export { default as Title } from "./ScreenCommons/Title";

@@ -2,8 +2,13 @@
 import "../auth.scss";
 import Image from "next/image";
 import LeftBG from "../../../../public/assets/images/auth/left-background.png";
-import { useState } from "react";
-import { CoolButton, TextBox, Title, EyeLine, EyeSlash } from "@/components";
+import {
+  CoolButton,
+  TextBox,
+  Title,
+  PasswordInputs,
+  PhoneInput,
+} from "@/components";
 import Form from "@/components/Form";
 import { useFormik } from "formik";
 import { registerFormValidations } from "@/validations/auth";
@@ -35,11 +40,7 @@ const RegisterTest = () => {
             <span className="sign-up-for-free">Sign up for free</span>
           </p>
         </div>
-        <Title
-          text="Sign in to Hepbit"
-          desc="OR continue with e-mail"
-          addDivider
-        />
+        <Title text="Sign in to Hepbit" />
         <div className="login-page-right-content">
           <Form
             onSubmit={handleOnSubmitRegisterForm}
@@ -56,6 +57,47 @@ const RegisterTest = () => {
                   value={registerForm.values.email}
                   setValue={(value) =>
                     registerForm.setFieldValue("email", value)
+                  }
+                />
+
+                <PhoneInput
+                  label="Phone Number"
+                  onChange={(e) => console.log(e)}
+                />
+                <PasswordInputs
+                  formInstance={registerForm}
+                  isSecure
+                  label="PASSWORD"
+                  type="password"
+                  placeholder="Let's create a strong password."
+                  name="password"
+                  value={registerForm.values.password}
+                  setValue={(value) =>
+                    registerForm.setFieldValue("password", value)
+                  }
+                />
+                <TextBox
+                  formInstance={registerForm}
+                  isSecure
+                  label="PASSWORD"
+                  type="password"
+                  placeholder="Let's create a strong password."
+                  name="password"
+                  value={registerForm.values.password}
+                  setValue={(value) =>
+                    registerForm.setFieldValue("password", value)
+                  }
+                />
+                <TextBox
+                  formInstance={registerForm}
+                  isSecure
+                  label="PASSWORD"
+                  type="password"
+                  placeholder="Let's create a strong password."
+                  name="password"
+                  value={registerForm.values.password}
+                  setValue={(value) =>
+                    registerForm.setFieldValue("password", value)
                   }
                 />
                 <TextBox
