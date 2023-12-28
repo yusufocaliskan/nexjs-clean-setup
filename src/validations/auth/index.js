@@ -6,6 +6,12 @@ export const registerFormValidations = yup.object().shape({
   email: yup.string().email().required(),
   password: yup.string().required(),
   passwordAgain: yup.string().required(),
+  referralId: yup.string(),
+  name: yup.string().required(),
+  surname: yup.string().required(),
+  birthDay: yup.number().required(),
+  birthMonth: yup.number().required(),
+  birthYear: yup.number().required(),
   nationalId: yup.number().integer().required(),
 });
 

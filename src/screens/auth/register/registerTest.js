@@ -8,21 +8,30 @@ import {
   Title,
   PasswordInputs,
   PhoneInput,
+  FullNameInputs,
+  SelectBox,
+  DateSelectBox,
 } from "@/components";
 import Form from "@/components/Form";
 import { useFormik } from "formik";
 import { registerFormValidations } from "@/validations/auth";
+import { useTranslation } from "@/app/i18n/client";
 
 const RegisterTest = () => {
+  const { t } = useTranslation();
+
+  //form validations
   const registerForm = useFormik({
     initialValues: {
       password: "",
       passwordAgain: "",
       email: "",
+      birthDay: "",
     },
     validationSchema: registerFormValidations,
     onSubmit: () => console.log("Res"),
   });
+
   const handleOnSubmitRegisterForm = () => {
     console.log("handleOnSubmitRegisterForm");
   };
@@ -64,42 +73,20 @@ const RegisterTest = () => {
                   label="Phone Number"
                   onChange={(e) => console.log(e)}
                 />
-                <PasswordInputs
-                  formInstance={registerForm}
-                  isSecure
-                  label="PASSWORD"
-                  type="password"
-                  placeholder="Let's create a strong password."
-                  name="password"
-                  value={registerForm.values.password}
-                  setValue={(value) =>
-                    registerForm.setFieldValue("password", value)
-                  }
-                />
+                <PasswordInputs formInstance={registerForm} />
                 <TextBox
                   formInstance={registerForm}
-                  isSecure
-                  label="PASSWORD"
-                  type="password"
-                  placeholder="Let's create a strong password."
-                  name="password"
-                  value={registerForm.values.password}
+                  label={t("referralId")}
+                  placeholder={t("referralIdPlaceholder")}
+                  name="referralId"
+                  value={registerForm.values.referralId}
                   setValue={(value) =>
-                    registerForm.setFieldValue("password", value)
+                    registerForm.setFieldValue("referralId", value)
                   }
                 />
-                <TextBox
-                  formInstance={registerForm}
-                  isSecure
-                  label="PASSWORD"
-                  type="password"
-                  placeholder="Let's create a strong password."
-                  name="password"
-                  value={registerForm.values.password}
-                  setValue={(value) =>
-                    registerForm.setFieldValue("password", value)
-                  }
-                />
+
+                <FullNameInputs formInstance={registerForm} />
+                <DateSelectBox formInstance={registerForm} />
                 <TextBox
                   formInstance={registerForm}
                   isSecure

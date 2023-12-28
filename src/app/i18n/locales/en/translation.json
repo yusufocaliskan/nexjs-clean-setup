@@ -8,6 +8,15 @@
   "passwordPlaceholder": "Your password",
   "passwordAgain": "Password Again",
   "passwordAgainPlaceholder": "Type password again",
+  "referralId": "Referral ID",
+  "referralIdPlaceholder": "Type referral Id here (optional)",
+
+  "name": "Name",
+  "namePlaceholder": "Your first name",
+
+  "surname": "Surname",
+  "surnamePlaceholder": "Your last name",
+
   "loginPageDontHaveAnAccount": "Don't have an account",
   "loginPageSignUpForFree": "Sign up for free",
   "loginPageSignInToHepbit": "Sign in to Hepbit",
