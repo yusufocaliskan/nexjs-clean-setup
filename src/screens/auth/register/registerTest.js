@@ -63,7 +63,7 @@ const RegisterTest = () => {
                   isSecure
                   label="PASSWORD"
                   type="password"
-                  placeholder="Password"
+                  placeholder="Let's create a strong password."
                   name="password"
                   value={registerForm.values.password}
                   setValue={(value) =>
@@ -76,7 +76,7 @@ const RegisterTest = () => {
                   label="PASSWORD AGAIN"
                   type="password"
                   name="passwordAgain"
-                  placeholder="Password"
+                  placeholder="Enter your password again"
                   value={registerForm.values.passwordAgain}
                   setValue={(value) =>
                     registerForm.setFieldValue("passwordAgain", value)
