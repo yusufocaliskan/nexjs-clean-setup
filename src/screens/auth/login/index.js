@@ -14,6 +14,9 @@ import {
   Logo,
 } from "@/components";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
+import LogoBg from "@/components/Logo";
+import Link from "next/link";
+import SmallLogo from "@/components/Logo/smallLogo";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
@@ -30,21 +33,17 @@ const Login = () => {
   return (
     <div className="login-page-container">
       <div className="login-page-left-background">
-        <Image src={LeftBG} alt={t("loginPageLeftLogoAlt")} />{" "}
+        <LogoBg />
       </div>
       <div className="login-page-right">
         <div className="login-page-right-top">
-          <div className="login-page-right-top-logo">
-            <Logo /> <p className="logo-hepbit">{t("loginPageHepBit")}</p>
-          </div>
+          <SmallLogo />
           <p
             style={{ display: "flex", gap: "10px" }}
             className="login-page-right-top-text"
           >
-            {t("loginPageDontHaveAnAccount")}
-            <span className="sign-up-for-free">
-              {t("loginPageSignUpForFree")}
-            </span>
+            {t("dontHaveAnAccount")}
+            <span className="sign-up-for-free">{t("signUpForFree")}</span>
           </p>
         </div>
         <div className="login-page-right-content">
@@ -64,11 +63,13 @@ const Login = () => {
                 selected={button === "Email"}
                 onClick={() => setButton("Email")}
                 label={t("loginPageEmail")}
+                type="Selected"
               />
               <CoolButton
                 onClick={() => setButton("Mobile")}
                 selected={button === "Mobile"}
                 label={t("loginPageMobile")}
+                type="Selected"
               />
             </div>
             {button === "Email" && (
@@ -100,7 +101,9 @@ const Login = () => {
                 <div className="scan-and-forgot">
                   <p className="scan-login">{t("loginPageScanToLogin")} </p>
                   <p className="forgot-password">
-                    {t("loginPageForgotPassword")}
+                    <Link href="/auth/forgot-password">
+                      {t("loginPageForgotPassword")}
+                    </Link>
                   </p>
                 </div>
                 <div className="login-btn-area">
@@ -138,8 +141,10 @@ const Login = () => {
                 <div className="scan-and-forgot">
                   <p className="scan-login">{t("loginPageScanToLogin")} </p>
                   <p className="forgot-password">
-                    {t("loginPageForgotPassword")}
-                  </p>{" "}
+                    <Link href="/auth/forgot-password">
+                      {t("loginPageForgotPassword")}
+                    </Link>
+                  </p>
                 </div>
                 <div className="login-btn-area">
                   <CoolButton

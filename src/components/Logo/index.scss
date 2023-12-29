@@ -1,0 +1,47 @@
+.logo-div {
+    position: relative;
+
+    .logo-bg-div {
+        position: absolute;
+        top: 0px;
+        display: flex;
+        width: 32rem;
+        height: 11rem;
+        padding: 0rem 15.96875rem 0rem 5rem;
+        align-items: center;
+        align-content: center;
+
+        .logo {
+            display: flex;
+            align-items: center !important;
+            flex-direction: row;
+        }
+    }
+}
+
+.small-logo-div {
+    display: none;
+}
+
+
+@media (max-width: 1024px) {
+    .logo-div {
+        display: none;
+    }
+
+    .small-logo-div {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        .hepbit {
+            color: var(--loginPageText);
+            font-family: "Poppins", sans-serif;
+            font-size: 1.5rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 2rem;
+            letter-spacing: -0.03rem;
+        }
+    }
+}

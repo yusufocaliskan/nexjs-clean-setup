@@ -11,6 +11,7 @@ const TextBox = ({
   label,
   name,
   formInstance,
+  icon
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const handleOnKeyDown = (e) => {
@@ -39,6 +40,11 @@ const TextBox = ({
       {isSecure && (
         <span className="password-toggle" onClick={togglePasswordVisibility}>
           {showPassword ? <EyeSlash /> : <EyeLine />}
+        </span>
+      )}
+      {icon && (
+        <span className="password-toggle" onClick={togglePasswordVisibility}>
+          {icon}
         </span>
       )}
     </div>
