@@ -11,11 +11,9 @@ const TextBox = ({
   label,
   name,
   formInstance,
-
-  icon
-
+  icon,
   leftSideRenderItem,
-main
+  main,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const isError = formInstance?.errors[name] && formInstance.submitCount > 0;
