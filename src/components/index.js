@@ -1,11 +1,16 @@
 //Form
 export { default as TextBox } from "./Form/TextBox";
 export { default as SelectBox } from "./Form/SelectBox";
+export { default as CheckBox } from "./Form/CheckBox";
 export { default as PhoneInput } from "./Form/PhoneWithCountryCodeInput";
 export { default as PasswordInputs } from "./Form/PasswordInputs";
 export { default as FullNameInputs } from "./Form/FullNameInputs";
 export { default as DateSelectBox } from "./Form/DateSelectBox";
+
+//Register Form Components
 export { default as CitizenshipNationalitySelector } from "./Form/CitizenshipNationalitySelector";
+export { default as TermAndPolicyCheckBox } from "./Form/TermAndPolicyCheckBox";
+export { default as DeclarationCheckBox } from "./Form/DeclarationCheckBox";
 
 //buttons
 export { default as CoolButton } from "./Form/CoolButton";

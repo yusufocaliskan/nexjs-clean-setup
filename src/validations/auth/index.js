@@ -26,7 +26,7 @@ export const registerFormValidations = yup.object().shape({
   password: yup
     .string()
     .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
-    .required("Password must contain A-Z and at least 8 chraacters"),
+    .required(),
   passwordAgain: yup.string().required(),
   referralId: yup.string(),
 
@@ -38,6 +38,8 @@ export const registerFormValidations = yup.object().shape({
   foreingNationalId: yup.string().required(),
   tukishNationalId: yup.string().check4ValidIndentity().required(),
   nationalId: yup.number().required(),
+  termAndPolicy: yup.boolean().required(),
+  declaration: yup.boolean().required(),
 });
 
 //Login form

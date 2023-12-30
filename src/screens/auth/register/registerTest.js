@@ -12,6 +12,8 @@ import {
   DateSelectBox,
   CitizenshipNationalitySelector,
   FormTriggerButton,
+  TermAndPolicyCheckBox,
+  DeclarationCheckBox,
 } from "@/components";
 import Form from "@/components/Form";
 import { useFormik } from "formik";
@@ -31,6 +33,8 @@ const RegisterTest = () => {
       nationalId: "",
       referralId: "",
       birthDay: "",
+      termAndPolicy: false,
+      declaration: false,
     },
     validationSchema: registerFormValidations,
     onSubmit: () => handleOnSubmitRegisterForm(),
@@ -94,28 +98,21 @@ const RegisterTest = () => {
                   label={t("Citizenship")}
                   formInstance={registerForm}
                 />
-                <TextBox
+
+                <TermAndPolicyCheckBox
                   formInstance={registerForm}
-                  isSecure
-                  label="PASSWORD"
-                  type="password"
-                  placeholder="Let's create a strong password."
-                  name="password"
-                  value={registerForm.values.password}
+                  name="termAndPolicy"
+                  value={registerForm.values.termAndPolicy}
                   setValue={(value) =>
-                    registerForm.setFieldValue("password", value)
+                    registerForm.setFieldValue("termAndPolicy", value)
                   }
                 />
-                <TextBox
+                <DeclarationCheckBox
                   formInstance={registerForm}
-                  isSecure
-                  label="PASSWORD AGAIN"
-                  type="password"
-                  name="passwordAgain"
-                  placeholder="Enter your password again"
-                  value={registerForm.values.passwordAgain}
+                  name="declaration"
+                  value={registerForm.values.declaration}
                   setValue={(value) =>
-                    registerForm.setFieldValue("passwordAgain", value)
+                    registerForm.setFieldValue("declaration", value)
                   }
                 />
               </div>
