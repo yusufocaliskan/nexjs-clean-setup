@@ -250,11 +250,11 @@ export default {
     for (let i = 0; i < allcountries.length; i++) {
       const e = allcountries[i];
       allcountries[i] = {
-        text: e[0],
-        value: e[1],
+        title: e[0],
+        val: e[1],
       };
     }
 
-    return array.sort(allcountries, "text");
+    return array.sort(allcountries, "title");
   },
 };

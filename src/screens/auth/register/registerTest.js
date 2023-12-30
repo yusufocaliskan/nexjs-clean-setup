@@ -3,7 +3,6 @@ import "../auth.scss";
 import Image from "next/image";
 import LeftBG from "../../../../public/assets/images/auth/left-background.png";
 import {
-  CoolButton,
   TextBox,
   Title,
   PasswordInputs,
@@ -11,14 +10,20 @@ import {
   FullNameInputs,
   DateSelectBox,
   CitizenshipNationalitySelector,
+  FormTriggerButton,
+  TermAndPolicyCheckBox,
+  DeclarationCheckBox,
+  GoogleReCaptcha,
 } from "@/components";
 import Form from "@/components/form";
 import { useFormik } from "formik";
 import { registerFormValidations } from "@/validations/auth";
 import { useTranslation } from "@/app/i18n/client";
+import { useRef } from "react";
 
 const RegisterTest = () => {
   const { t } = useTranslation();
+  const reCapthchaRef = useRef();
 
   //form validations
   const registerForm = useFormik({
@@ -30,13 +35,20 @@ const RegisterTest = () => {
       nationalId: "",
       referralId: "",
       birthDay: "",
+      termAndPolicy: false,
+      declaration: false,
     },
     validationSchema: registerFormValidations,
-    onSubmit: () => console.log("Res"),
+    onSubmit: () => handleOnSubmitRegisterForm(),
   });
 
-  const handleOnSubmitRegisterForm = () => {
-    console.log("handleOnSubmitRegisterForm");
+  const handleOnSubmitRegisterForm = (vals) => {
+    const isRecaptchaValid = reCapthchaRef.current.getValue();
+    console.log("All errors gone and form submitted");
+  };
+
+  const handleOnReCaptchaChanged = (val) => {
+    console.log(val);
   };
 
   return (
@@ -52,10 +64,11 @@ const RegisterTest = () => {
             <span className="sign-up-for-free">Sign up for free</span>
           </p>
         </div>
-        <Title text="Sign in to Hepbit" />
+
         <div className="login-page-right-content">
+          <Title text="Sign in to Hepbit" />
           <Form
-            onSubmit={handleOnSubmitRegisterForm}
+            onSubmit={registerForm.handleSubmit}
             formInstance={registerForm}
           >
             <div className="login-form">
@@ -90,41 +103,35 @@ const RegisterTest = () => {
 
                 <FullNameInputs formInstance={registerForm} />
                 <DateSelectBox formInstance={registerForm} />
-                <CitizenshipNationalitySelector formInstance={registerForm} />
-                <TextBox
+                <CitizenshipNationalitySelector
+                  label={t("Citizenship")}
                   formInstance={registerForm}
-                  isSecure
-                  label="PASSWORD"
-                  type="password"
-                  placeholder="Let's create a strong password."
-                  name="password"
-                  value={registerForm.values.password}
-                  setValue={(value) =>
-                    registerForm.setFieldValue("password", value)
-                  }
-                />
-                <TextBox
-                  formInstance={registerForm}
-                  isSecure
-                  label="PASSWORD AGAIN"
-                  type="password"
-                  name="passwordAgain"
-                  placeholder="Enter your password again"
-                  value={registerForm.values.passwordAgain}
-                  setValue={(value) =>
-                    registerForm.setFieldValue("passwordAgain", value)
-                  }
                 />
 
-                <div className="scan-and-forgot">
-                  <p className="scan-login">Scan to login</p>
-                  <p className="forgot-password">Forgot Password?</p>
-                </div>
-                <div className="login-btn-area">
-                  <CoolButton className="login-btn" label="Login" />
-                </div>
+                <TermAndPolicyCheckBox
+                  formInstance={registerForm}
+                  name="termAndPolicy"
+                  value={registerForm.values.termAndPolicy}
+                  setValue={(value) =>
+                    registerForm.setFieldValue("termAndPolicy", value)
+                  }
+                />
+                <DeclarationCheckBox
+                  formInstance={registerForm}
+                  name="declaration"
+                  value={registerForm.values.declaration}
+                  setValue={(value) =>
+                    registerForm.setFieldValue("declaration", value)
+                  }
+                />
+                <GoogleReCaptcha
+                  reCapthchaRef={reCapthchaRef}
+                  onChange={handleOnReCaptchaChanged}
+                />
               </div>
             </div>
+
+            <FormTriggerButton label="Login" />
           </Form>
         </div>
       </div>

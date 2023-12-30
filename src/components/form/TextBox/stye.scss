@@ -13,7 +13,6 @@
   margin-bottom: 0.75rem;
   user-select: none;
 }
-
 .text-box-input {
   display: flex;
   padding: 0.75rem 1rem;
@@ -24,6 +23,31 @@
   border-radius: 0.75rem;
   border: 2px solid var(--Neutrals-6, #e6e8ec);
   width: 100%;
+}
+
+.text-box-has-val-input {
+  border: 2px solid var(--black-border) !important;
+}
+.text-box-errorred-input {
+  border: 2px solid var(--red-error) !important;
+}
+.left-side-of-input {
+  position: absolute;
+  background: var(--white);
+  color: var(--Neutrals-5, #b1b5c3);
+  height: 64%;
+  top: 1.6rem;
+  left: 0.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.5rem;
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+  border-right: 2px solid var(--Neutrals-6, #e6e8ec);
+}
+.text-box-with-text-indent {
+  text-indent: 2rem;
 }
 .password-toggle {
   cursor: pointer;

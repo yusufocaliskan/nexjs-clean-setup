@@ -4,7 +4,9 @@ import FormikFormErrorDisplayer from "./FormikFormErrorDisplayer";
 const ErrorDisplayer = ({ formInstance }) => {
   return (
     <>
-      <FormikFormErrorDisplayer formInstance={formInstance} />
+      {!formInstance.isValid && formInstance.submitCount > 0 && (
+        <FormikFormErrorDisplayer formInstance={formInstance} />
+      )}
     </>
   );
 };

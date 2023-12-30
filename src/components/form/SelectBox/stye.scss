@@ -36,8 +36,8 @@
 }
 .selectbox-arrow {
   position: absolute;
-  right: 1.4rem;
-  top: 3rem;
+  right: 1rem;
+  top: 1.4rem;
 }
 
 .text-box-wrapper {
@@ -67,8 +67,16 @@
   border: 2px solid var(--Neutrals-6, #e6e8ec);
   width: 100%;
 }
+.text-box-has-val-input {
+  border: 2px solid var(--black-border) !important;
+}
+.text-box-errorred-input {
+  border: 2px solid var(--red-error) !important;
+}
+
 .selectbox-container {
   cursor: pointer;
+  position: relative;
 }
 .password-toggle {
   cursor: pointer;

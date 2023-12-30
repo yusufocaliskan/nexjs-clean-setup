@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./stye.scss";
 import ChevronDownIcon from "@/components/Icons/ChevronDownIcon";
 import ChevronUpIcon from "@/components/Icons/ChevronUpIcon";
@@ -11,9 +11,9 @@ const SelectBox = ({
   name,
   formInstance,
   optionsData,
-  RenderOption,
 }) => {
   const [isOptionOpen, setIsOptionOpen] = useState(false);
+  const isError = formInstance?.errors[name] && formInstance.submitCount > 0;
 
   //Setting the selected options
   const handleMakeSelection = (val) => {
@@ -21,11 +21,9 @@ const SelectBox = ({
     setIsOptionOpen(false);
   };
 
-  const RenderItem = ({ data }) => {
-    if (RenderOption) {
-      return <RenderOption optionsData={optionsData} />;
-    }
-    return data.map((item, index) => {
+  //Rendirin the optins
+  const RenderItem = () => {
+    return optionsData.map((item, index) => {
       return (
         <div
           key={index}
@@ -33,9 +31,9 @@ const SelectBox = ({
                     selectbox-item ${
                       value == item.val && "selectbox-selected-item"
                     }`}
-          onClick={() => handleMakeSelection(item.val)}
+          onClick={() => handleMakeSelection(item)}
         >
-          <span>{item.val}</span>
+          <span>{item.title ? item.title : item.val}</span>
         </div>
       );
     });
@@ -43,29 +41,31 @@ const SelectBox = ({
 
   return (
     <div className="text-box-wrapper">
-      <p className="text-box-label">{label}</p>
+      {label && <p className="text-box-label">{label}</p>}
       <div
-        placeholder={placeholder}
-        className="text-box-input selectbox-container"
+        className={` text-box-input selectbox-container  ${
+          value && "text-box-has-val-input"
+        } ${isError && "text-box-errorred-input"} `}
         style={{ height: 52 }}
         value={value}
         onClick={() => setIsOptionOpen(!isOptionOpen)}
       >
-        {value && <span className="selectbox-selected">{value}</span>}
-        {!value && <span className="selectbox-placeholder">{placeholder}</span>}
+        {value && (
+          <span className="selectbox-selected">
+            {value.title ? value.title : value.val}
+          </span>
+        )}
+        {!value?.val && (
+          <span className="selectbox-placeholder">{placeholder}</span>
+        )}
         <span className="selectbox-arrow">
           {!isOptionOpen && <ChevronDownIcon width={15} />}
           {isOptionOpen && <ChevronUpIcon width={15} />}
         </span>
       </div>
-
-      {formInstance?.errors[name] && (
-        <div className="text-box-errors">{formInstance?.errors[name]}</div>
-      )}
-
       {isOptionOpen && (
         <div className="selectbox-options">
-          <RenderItem data={optionsData} />
+          <RenderItem />
         </div>
       )}
     </div>

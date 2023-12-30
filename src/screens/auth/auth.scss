@@ -70,7 +70,7 @@
     }
 
     .login-page-right-content {
-      width: 380px;
+      width: 500px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -114,7 +114,7 @@
           align-items: center;
           align-self: stretch;
           border-radius: 3rem;
-          font-family: 'Poppins', sans-serif;
+          font-family: "Poppins", sans-serif;
           color: var(--loginPageText);
 
           font-family: "Poppins", sans-serif;
@@ -252,7 +252,6 @@
                 border-top: 2px solid var(--inputBorderColor);
                 border-bottom: 2px solid var(--inputBorderColor);
                 background-color: var(--inputBg);
-
               }
 
               .password-toggle-page {
@@ -267,7 +266,6 @@
                 border-top: 2px solid var(--inputBorderColor);
                 border-bottom: 2px solid var(--inputBorderColor);
                 background-color: var(--inputBg);
-
               }
             }
           }
@@ -373,7 +371,6 @@
     padding: 2rem;
     .login-page-right {
       margin-left: 0;
-
 
       .login-page-right-top {
         padding: 0rem;
