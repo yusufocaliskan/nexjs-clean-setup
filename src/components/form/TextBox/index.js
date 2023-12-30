@@ -11,7 +11,11 @@ const TextBox = ({
   label,
   name,
   formInstance,
+
+  icon
+
   leftSideRenderItem,
+main
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const isError = formInstance?.errors[name] && formInstance.submitCount > 0;
@@ -45,6 +49,11 @@ const TextBox = ({
       {isSecure && (
         <span className="password-toggle" onClick={togglePasswordVisibility}>
           {showPassword ? <EyeSlash /> : <EyeLine />}
+        </span>
+      )}
+      {icon && (
+        <span className="password-toggle" onClick={togglePasswordVisibility}>
+          {icon}
         </span>
       )}
     </div>

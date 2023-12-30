@@ -1,0 +1,244 @@
+@import "../../../../public/assets/colors/variables.scss";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+.forgot-page-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+
+    .forgot-page-left-background {
+        width: 32rem;
+        height: 100vh;
+        display: flex;
+        flex-shrink: 0;
+        background-color: #22262f;
+        position: fixed;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        img {
+            width: 100vw;
+            object-fit: contain;
+        }
+    }
+
+    .forgot-page-right {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        max-height: 64rem;
+        width: 100%;
+        align-items: center;
+        margin-left: 22rem;
+
+        .forgot-page-right-top {
+            display: flex;
+            height: 11rem;
+            padding: 0rem 5rem 0rem 36.125rem;
+            justify-content: flex-end;
+            align-items: center;
+            flex-shrink: 0;
+            align-self: stretch;
+
+            .forgot-page-right-top-logo {
+                display: none;
+            }
+
+            .forgot-page-right-top-text {
+                color: var(--loginPageText);
+                text-align: center;
+                font-size: 0.875rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 1rem;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+            }
+
+            .sign-up-for-free {
+                color: $primary1;
+                text-align: center;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 0.875rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 1rem;
+                cursor: pointer;
+            }
+        }
+
+        .forgot-page-right-content {
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 2rem;
+
+            .sign-in-to-hepbit {
+                color: var(--loginPageText);
+                text-align: center;
+                font-family: 'DM Sans', sans-serif;
+                font-size: 2.5rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 3rem;
+                letter-spacing: -0.025rem;
+            }
+
+            .visit-url {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 0.75rem;
+                align-self: stretch;
+
+                .visit-text {
+                    color: $neutrals4;
+                    text-align: center;
+                    font-size: 0.75rem;
+                    font-style: normal;
+                    font-family: "Poppins", sans-serif;
+                    font-weight: 400;
+                    line-height: 1.25rem;
+                }
+
+                .visit-text-six-digit {
+                    color: var(--Neutrals-4, #777E90);
+                    text-align: center;
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.5rem;
+                }
+
+                .visit-text-six-digit-mail {
+                    color: var(--loginPageText);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5rem;
+                }
+
+                .verification-div {
+                    display: flex;
+                    width: 100%;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 1rem;
+
+                    .verification-inputs {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 1rem;
+                        padding: 1rem;
+                        width: 100%;
+                        align-self: stretch;
+                        border-radius: 0.5rem;
+                        border: 1px solid var(--inputBorderColor);
+                        background: var(--inputBg);
+                    }
+                }
+            }
+
+            .divider {
+                height: 0.0625rem;
+                align-self: stretch;
+                border-radius: 0.0625rem;
+                background: var(--inputBorderColor);
+                margin-top: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .forgot-password-buttons {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .forgot-password-buttons-bottom {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .forgot-password-never-mind {
+                    color: var(--loginPageText);
+                    text-align: center;
+                    font-family: 'DM Sans', sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 700;
+                    line-height: 1rem;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 1024px) {
+    .forgot-page-container {
+        .forgot-page-left-background {
+            display: none;
+        }
+
+        .forgot-page-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 0;
+
+            .forgot-page-right-top {
+                display: flex;
+                padding: 3rem;
+                justify-content: space-between;
+                align-items: center;
+                align-self: stretch;
+            }
+
+            .forgot-page-right-content {
+                display: flex;
+                align-items: flex-start;
+                gap: 0.625rem;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .forgot-page-container {
+        padding: 2rem;
+
+        .forgot-page-right {
+            margin-left: 0;
+
+
+            .forgot-page-right-top {
+                padding: 0rem;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                gap: 1.5rem;
+
+                .forgot-page-right-top-logo {}
+            }
+
+            .forgot-page-right-content {
+                display: flex;
+                padding: 0rem;
+                align-items: center;
+                justify-content: center;
+                gap: 0.625rem;
+            }
+        }
+    }
+}

@@ -15,7 +15,7 @@ import {
   DeclarationCheckBox,
   GoogleReCaptcha,
 } from "@/components";
-import Form from "@/components/Form";
+import Form from "@/components/form";
 import { useFormik } from "formik";
 import { registerFormValidations } from "@/validations/auth";
 import { useTranslation } from "@/app/i18n/client";

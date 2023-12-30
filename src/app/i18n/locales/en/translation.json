@@ -25,8 +25,12 @@
   "year": "Year",
   "yearPlaceholder": "Year",
 
-  "loginPageDontHaveAnAccount": "Don't have an account",
-  "loginPageSignUpForFree": "Sign up for free",
+  "dontHaveAnAccount": "Don't have an account",
+  "signUpForFree": "Sign up for free",
+  "alreadyHaveAnAccount": "Already have an account?",
+  "login": "Login",
+  "justEmail": "Email",
+  "justPassword": "Password",
   "loginPageSignInToHepbit": "Sign in to Hepbit",
   "loginPageCorrectUrl": "Please ensure you are visiting the correct url.",
   "loginPageHepBit": "Hepbit",
@@ -43,5 +47,18 @@
   "loginPageScanToLogin": "Scan to login",
   "loginPageForgotPassword": "Forgot Password",
   "loginPageLogin": "Login",
+  "forgotPasswordPageForgotPassword": "Forgot Password",
+  "forgotPasswordPageSecurityPurpose": "For security purposes, no withdrawals are permitted for 24 hours after password changed.",
+  "forgotPasswordPageEnterEmail": "Enter The Account Email",
+  "forgotPasswordPageEmailPlaceholder": "Your Email",
+  "forgotPasswordPageContinue": "Contunie",
+  "forgotPasswordPageNeverMind": "Nevermind, I got it",
+  "forgotPasswordPageSecurityVerification": "Security verification",
+  "forgotPasswordPageToSecure": "To secure your account, please complete the following verification.",
+  "forgotPasswordPageSixDigit": "Enter the 6 digit code received by",
+  "forgotPasswordPageResendCode": "Resend Code",
+  "forgotPasswordPageNewPassword": "New Password",
+  "forgotPasswordPageConfirmPassword": "Confirm Password",
+
   "password is a required field": "Please fill the password input"
 }
