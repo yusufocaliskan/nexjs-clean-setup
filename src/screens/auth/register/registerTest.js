@@ -19,6 +19,8 @@ import Form from "@/components/Form";
 import { useFormik } from "formik";
 import { registerFormValidations } from "@/validations/auth";
 import { useTranslation } from "@/app/i18n/client";
+import ReCAPTCHA from "react-google-recaptcha";
+import { appConfigs } from "@/configs";
 
 const RegisterTest = () => {
   const { t } = useTranslation();
@@ -115,6 +117,7 @@ const RegisterTest = () => {
                     registerForm.setFieldValue("declaration", value)
                   }
                 />
+                <ReCAPTCHA sitekey={appConfigs.reCapthcha.site_key} />
               </div>
             </div>
 
