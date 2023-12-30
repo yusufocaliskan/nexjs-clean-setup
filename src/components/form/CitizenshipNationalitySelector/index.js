@@ -83,7 +83,7 @@ const CitizenshipNationalitySelector = ({ formInstance, label }) => {
               setValue={(value) =>
                 formInstance.setFieldValue("foreingNationalId", value)
               }
-              leftSideRenderItem={<span>99</span>}
+              leftSideRenderItem={<span>9</span>}
             />
           </div>
         )}

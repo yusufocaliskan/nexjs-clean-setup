@@ -31,7 +31,7 @@ export const registerFormValidations = yup.object().shape({
   birthYear: yup.object().required(),
   citizenship: yup.object().required(),
   nationality: yup.object().required(),
-  foreingNationalId: yup.string().required(),
+  foreingNationalId: yup.string().check4ValidIndentity().required(),
   tukishNationalId: yup.string().check4ValidIndentity().required(),
   //nationalId: yup.number().required(),
   termAndPolicy: yup.boolean().required(),
