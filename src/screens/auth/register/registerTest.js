@@ -3,7 +3,6 @@ import "../auth.scss";
 import Image from "next/image";
 import LeftBG from "../../../../public/assets/images/auth/left-background.png";
 import {
-  CoolButton,
   TextBox,
   Title,
   PasswordInputs,
@@ -14,16 +13,17 @@ import {
   FormTriggerButton,
   TermAndPolicyCheckBox,
   DeclarationCheckBox,
+  GoogleReCaptcha,
 } from "@/components";
 import Form from "@/components/Form";
 import { useFormik } from "formik";
 import { registerFormValidations } from "@/validations/auth";
 import { useTranslation } from "@/app/i18n/client";
-import ReCAPTCHA from "react-google-recaptcha";
-import { appConfigs } from "@/configs";
+import { useRef } from "react";
 
 const RegisterTest = () => {
   const { t } = useTranslation();
+  const reCapthchaRef = useRef();
 
   //form validations
   const registerForm = useFormik({
@@ -41,8 +41,14 @@ const RegisterTest = () => {
     validationSchema: registerFormValidations,
     onSubmit: () => handleOnSubmitRegisterForm(),
   });
+
   const handleOnSubmitRegisterForm = (vals) => {
+    const isRecaptchaValid = reCapthchaRef.current.getValue();
     console.log("All errors gone and form submitted");
+  };
+
+  const handleOnReCaptchaChanged = (val) => {
+    console.log(val);
   };
 
   return (
@@ -58,8 +64,9 @@ const RegisterTest = () => {
             <span className="sign-up-for-free">Sign up for free</span>
           </p>
         </div>
-        <Title text="Sign in to Hepbit" />
+
         <div className="login-page-right-content">
+          <Title text="Sign in to Hepbit" />
           <Form
             onSubmit={registerForm.handleSubmit}
             formInstance={registerForm}
@@ -117,7 +124,10 @@ const RegisterTest = () => {
                     registerForm.setFieldValue("declaration", value)
                   }
                 />
-                <ReCAPTCHA sitekey={appConfigs.reCapthcha.site_key} />
+                <GoogleReCaptcha
+                  reCapthchaRef={reCapthchaRef}
+                  onChange={handleOnReCaptchaChanged}
+                />
               </div>
             </div>
 

@@ -12,15 +12,11 @@ yup.addMethod(yup.string, "check4ValidIndentity", function (errorMessage) {
 export const registerFormValidations = yup.object().shape({
   name: yup
     .string()
-    .matches(
-      /^[a-zA-ZığşàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžĞŞİÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]+(([ ][a-zA-ZışğàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžŞĞİÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ])?[a-zA-ZığşàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžŞİĞÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*)*$/g,
-    )
+
     .required(),
   surname: yup
     .string()
-    .matches(
-      /^[a-zA-ZığşàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžĞŞİÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]+(([ ][a-zA-ZışğàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžŞĞİÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ])?[a-zA-ZığşàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžŞİĞÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]*)*$/g,
-    )
+
     .required(),
   email: yup.string().email().required(),
   password: yup
@@ -37,7 +33,7 @@ export const registerFormValidations = yup.object().shape({
   nationality: yup.object().required(),
   foreingNationalId: yup.string().required(),
   tukishNationalId: yup.string().check4ValidIndentity().required(),
-  nationalId: yup.number().required(),
+  //nationalId: yup.number().required(),
   termAndPolicy: yup.boolean().required(),
   declaration: yup.boolean().required(),
 });

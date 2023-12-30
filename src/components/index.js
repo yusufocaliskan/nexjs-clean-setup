@@ -6,6 +6,7 @@ export { default as PhoneInput } from "./Form/PhoneWithCountryCodeInput";
 export { default as PasswordInputs } from "./Form/PasswordInputs";
 export { default as FullNameInputs } from "./Form/FullNameInputs";
 export { default as DateSelectBox } from "./Form/DateSelectBox";
+export { default as GoogleReCaptcha } from "./GoogleReCaptcha";
 
 //Register Form Components
 export { default as CitizenshipNationalitySelector } from "./Form/CitizenshipNationalitySelector";
