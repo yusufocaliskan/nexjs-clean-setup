@@ -1,12 +1,15 @@
 //Form
-export { default as TextBox } from "./form/TextBox";
-export { default as SelectBox } from "./form/SelectBox";
-export { default as CoolButton } from "./form/CoolButton";
-export { default as PhoneInput } from "./form/PhoneWithCountryCodeInput";
-export { default as PasswordInputs } from "./form/PasswordInputs";
-export { default as FullNameInputs } from "./form/FullNameInputs";
-export { default as DateSelectBox } from "./form/DateSelectBox";
-export { default as CitizenshipNationalitySelector } from "./form/CitizenshipNationalitySelector";
+export { default as TextBox } from "./Form/TextBox";
+export { default as SelectBox } from "./Form/SelectBox";
+export { default as PhoneInput } from "./Form/PhoneWithCountryCodeInput";
+export { default as PasswordInputs } from "./Form/PasswordInputs";
+export { default as FullNameInputs } from "./Form/FullNameInputs";
+export { default as DateSelectBox } from "./Form/DateSelectBox";
+export { default as CitizenshipNationalitySelector } from "./Form/CitizenshipNationalitySelector";
+
+//buttons
+export { default as CoolButton } from "./Form/CoolButton";
+export { default as FormTriggerButton } from "./Form/FormTriggerButton";
 
 //Screen Commons
 export { default as Title } from "./ScreenCommons/Title";

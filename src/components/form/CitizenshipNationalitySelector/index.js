@@ -1,94 +1,94 @@
 import { useEffect, useState } from "react";
 import "./stye.scss";
-import { SelectBox } from "@/components";
+import { SelectBox, TextBox } from "@/components";
 import { useTranslation } from "@/app/i18n/client";
 import countries from "@/store/statics/countries";
+import nationalities from "@/store/statics/nationalities";
 
-const DateSelectBox = ({ formInstance }) => {
-  const [getDays, setDays] = useState([]);
-  const [getMonths, setMonths] = useState([]);
-  const [getYears, setYears] = useState([]);
+const CitizenshipNationalitySelector = ({ formInstance, label }) => {
   const { t } = useTranslation();
+  const [getCountries, setCountries] = useState(countries.getAllCountries());
 
-  //create options
   useEffect(() => {
-    console.log(countries.getAllCountries());
-    const days = [];
-    const months = [];
-    const years = [];
-
-    for (let d = 1; d <= getDaysInCurrentMonth(); d++) {
-      days.push({ val: d });
+    //On citizenship selectbox has changed
+    if (formInstance.values.citizenship.val == "tr") {
+      setCountries([{ val: "tr", title: "Turkey" }]);
+      formInstance.setFieldValue("nationality", "");
+    } else {
+      setCountries(countries.getAllCountries());
+      formInstance.setFieldValue("nationality", "");
     }
-    for (let m = 1; m <= 12; m++) {
-      months.push({ val: m });
-    }
-    const currentDate = new Date();
-    const currentYear = currentDate.getFullYear();
-    const startYear = "1945";
-
-    for (let y = startYear; y <= currentYear; y++) {
-      years.push({ val: y });
-    }
-
-    setDays(days);
-    setMonths(months);
-    setYears(years);
-    console.log(formInstance.citizenship);
-  }, []);
+  }, [formInstance.values.citizenship]);
 
   //Returns the number of days of the current month
-  const getDaysInCurrentMonth = () => {
-    const date = new Date();
-    return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
-  };
-
-  const handleMakeSelection = (val) => {
-    //setIsOptionOpen(false);
-    console.log(val);
-    formInstance.setFieldValue("citizenship", val);
-  };
-
   return (
-    <div className="date-selectbox-wrapper">
-      <SelectBox
-        formInstance={formInstance}
-        label={t("day")}
-        placeholder={t("dayPlaceholder")}
-        name="citizenship"
-        value={formInstance.values.citizenship}
-        setValue={(value) => formInstance.setFieldValue("citizenship", value)}
-        RenderOption={() => {
-          return countries.getAllCountries().map((item, index) => {
-            console.log(formInstance.citizenship, item.value);
-            return (
-              <div
-                key={index}
-                onClick={() => handleMakeSelection(item.value.replace("'", ""))}
-                className={`
-                    selectbox-item ${
-                      formInstance.citizenship == item.value.replace("'", "") &&
-                      "selectbox-selected-item"
-                    }`}
-              >
-                <span>{item.text}</span>
-              </div>
-            );
-          });
-        }}
-      />
-      <SelectBox
-        optionsData={getMonths}
-        formInstance={formInstance}
-        isSecure
-        label={t("month")}
-        placeholder={t("monthPlaceholder")}
-        name="birthMonth"
-        value={formInstance.values.birthMonth}
-        setValue={(value) => formInstance.setFieldValue("birthMonth", value)}
-      />
-    </div>
+    <>
+      {/* <div style={{ marginBottom: "-1rem" }} className="text-box-label"> */}
+      {/*   {label} */}
+      {/* </div> */}
+
+      <div className="date-selectbox-wrapper">
+        <SelectBox
+          optionsData={nationalities.getAllNationalities()}
+          formInstance={formInstance}
+          label={t("citizenship")}
+          placeholder={t("citizenshipPlaceholder")}
+          name="citizenship"
+          value={formInstance.values.citizenship}
+          setValue={(value) => formInstance.setFieldValue("citizenship", value)}
+        />
+
+        {/* Displayed just for nontr citizenships */}
+        {formInstance.values.citizenship.val && (
+          <SelectBox
+            optionsData={getCountries}
+            formInstance={formInstance}
+            label={t("nationality")}
+            placeholder={t("nationalityPlaceholder")}
+            name="citizenship"
+            value={formInstance.values.nationality}
+            setValue={(value) =>
+              formInstance.setFieldValue("nationality", value)
+            }
+          />
+        )}
+      </div>
+
+      {/* Turkish nationality  */}
+      {formInstance.values.nationality &&
+        formInstance.values.citizenship.val == "tr" && (
+          <div className="nationaly-id-wrapper">
+            <TextBox
+              formInstance={formInstance}
+              label={t("turkishNationalIdLabel")}
+              placeholder={t("turkishNonationalIdPlaceholder")}
+              name="tukishNationalId"
+              value={formInstance.values.tukishNationalId}
+              setValue={(value) =>
+                formInstance.setFieldValue("tukishNationalId", value)
+              }
+            />
+          </div>
+        )}
+      {/* None-Turkish  ID must start with 99  */}
+      {formInstance.values.nationality &&
+        formInstance.values.citizenship.val !== "tr" && (
+          <div className="nationaly-id-wrapper">
+            <TextBox
+              formInstance={formInstance}
+              label={t("foreingNationalIdLabel")}
+              placeholder={t("foreingNonationalIdPlaceholder")}
+              name="foreingNationalId"
+              value={formInstance.values.foreingNationalId}
+              setValue={(value) =>
+                formInstance.setFieldValue("foreingNationalId", value)
+              }
+              leftSideRenderItem={<span>99</span>}
+            />
+          </div>
+        )}
+    </>
   );
 };
 
-export default DateSelectBox;
+export default CitizenshipNationalitySelector;

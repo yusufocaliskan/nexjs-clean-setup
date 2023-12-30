@@ -1,0 +1,18 @@
+.formik-error-popup {
+  border-radius: 0.75rem;
+  border: 2px solid var(--Neutrals-6, #e6e8ec);
+  padding: 2rem;
+
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 999;
+  background: var(--white);
+}
+.form-errors {
+  color: var(--red-error);
+  margin-bottom: 0.5rem;
+  &::before {
+    content: " - ";
+  }
+}

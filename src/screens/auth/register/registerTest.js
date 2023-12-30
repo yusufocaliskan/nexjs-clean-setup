@@ -11,6 +11,7 @@ import {
   FullNameInputs,
   DateSelectBox,
   CitizenshipNationalitySelector,
+  FormTriggerButton,
 } from "@/components";
 import Form from "@/components/Form";
 import { useFormik } from "formik";
@@ -32,11 +33,10 @@ const RegisterTest = () => {
       birthDay: "",
     },
     validationSchema: registerFormValidations,
-    onSubmit: () => console.log("Res"),
+    onSubmit: () => handleOnSubmitRegisterForm(),
   });
-
-  const handleOnSubmitRegisterForm = () => {
-    console.log("handleOnSubmitRegisterForm");
+  const handleOnSubmitRegisterForm = (vals) => {
+    console.log("All errors gone and form submitted");
   };
 
   return (
@@ -55,7 +55,7 @@ const RegisterTest = () => {
         <Title text="Sign in to Hepbit" />
         <div className="login-page-right-content">
           <Form
-            onSubmit={handleOnSubmitRegisterForm}
+            onSubmit={registerForm.handleSubmit}
             formInstance={registerForm}
           >
             <div className="login-form">
@@ -90,7 +90,10 @@ const RegisterTest = () => {
 
                 <FullNameInputs formInstance={registerForm} />
                 <DateSelectBox formInstance={registerForm} />
-                <CitizenshipNationalitySelector formInstance={registerForm} />
+                <CitizenshipNationalitySelector
+                  label={t("Citizenship")}
+                  formInstance={registerForm}
+                />
                 <TextBox
                   formInstance={registerForm}
                   isSecure
@@ -115,16 +118,10 @@ const RegisterTest = () => {
                     registerForm.setFieldValue("passwordAgain", value)
                   }
                 />
-
-                <div className="scan-and-forgot">
-                  <p className="scan-login">Scan to login</p>
-                  <p className="forgot-password">Forgot Password?</p>
-                </div>
-                <div className="login-btn-area">
-                  <CoolButton className="login-btn" label="Login" />
-                </div>
               </div>
             </div>
+
+            <FormTriggerButton label="Login" />
           </Form>
         </div>
       </div>

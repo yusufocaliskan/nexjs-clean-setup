@@ -1,6 +1,6 @@
 import { EyeSlash, EyeLine } from "@/components/";
 import "./stye.scss";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const TextBox = ({
   value,
@@ -11,8 +11,11 @@ const TextBox = ({
   label,
   name,
   formInstance,
+  leftSideRenderItem,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
+  const isError = formInstance?.errors[name] && formInstance.submitCount > 0;
+
   const handleOnKeyDown = (e) => {
     setValue(e.target.value);
   };
@@ -25,17 +28,20 @@ const TextBox = ({
     <div className="text-box-wrapper">
       <label>
         <p className="text-box-label">{label}</p>
+        {leftSideRenderItem && (
+          <div className="left-side-of-input">{leftSideRenderItem}</div>
+        )}
         <input
           placeholder={placeholder}
-          className="text-box-input"
+          className={` text-box-input ${value && "text-box-has-val-input"} 
+            ${isError && "text-box-errorred-input"}`}
+          style={leftSideRenderItem && { textIndent: 25 }}
           type={showPassword ? "text" : type}
           value={value}
           onChange={handleOnKeyDown}
         />
       </label>
-      {formInstance?.errors[name] && (
-        <div className="text-box-errors">{formInstance?.errors[name]}</div>
-      )}
+
       {isSecure && (
         <span className="password-toggle" onClick={togglePasswordVisibility}>
           {showPassword ? <EyeSlash /> : <EyeLine />}

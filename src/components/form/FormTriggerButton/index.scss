@@ -1,0 +1,26 @@
+.form-trigger-button {
+  width: 100%;
+  height: 100%;
+  background: red;
+}
+.form-trigger-button-wrapper {
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+  width: 100%;
+}
+.btn-main {
+  display: flex;
+  padding: 1rem 1.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  align-self: stretch;
+  border-radius: 5.625rem;
+  background: var(--Primary-1, #3772ff);
+  color: var(--Neutrals-8, #fcfcfd);
+  text-align: center;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1rem;
+}
