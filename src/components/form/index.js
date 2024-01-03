@@ -4,7 +4,15 @@ import ErrorDisplayer from "./ErrorsDisplayer";
 const Form = ({ children, onSubmit, formInstance }) => {
   const { t } = useTranslation();
   return (
-    <form style={{ width: "100%" }} onSubmit={onSubmit}>
+    <form
+      style={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        gap: "2rem",
+      }}
+      onSubmit={onSubmit}
+    >
       <ErrorDisplayer formInstance={formInstance} />
       {children}
     </form>

@@ -140,6 +140,7 @@
                         justify-content: center;
                         gap: 1rem;
                         padding: 1rem;
+                        font-weight: 900;
                         width: 100%;
                         align-self: stretch;
                         border-radius: 0.5rem;
@@ -228,8 +229,6 @@
                 align-items: center;
                 flex-direction: column;
                 gap: 1.5rem;
-
-                .forgot-page-right-top-logo {}
             }
 
             .forgot-page-right-content {

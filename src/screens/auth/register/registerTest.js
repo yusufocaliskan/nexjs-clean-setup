@@ -89,7 +89,7 @@ const RegisterTest = () => {
                   label="Phone Number"
                   onChange={(e) => console.log(e)}
                 />
-                <PasswordInputs formInstance={registerForm} />
+                <PasswordInputs isAgain formInstance={registerForm} />
                 <TextBox
                   formInstance={registerForm}
                   label={t("referralId")}
