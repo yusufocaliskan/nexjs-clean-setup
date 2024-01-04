@@ -57,33 +57,26 @@ const RegisterTest = () => {
     validationSchema: registerFormValidations,
     onSubmit: () => handleOnSubmitRegisterForm(),
   });
-
   //On form submitted
-  const handleOnSubmitRegisterForm = (vals) => {
+  const handleOnSubmitRegisterForm = () => {
     const captchaToken = reCapthchaRef.current.getValue();
 
-    const data = {
-      Email: registerForm.values.Email,
-      PhoneNumber: registerForm.values.PhoneNumber,
-      Password: registerForm.values.Password,
-      ConfirmPassword: registerForm.values.ConfirmPassword,
-      ReferralCode: registerForm.values.ReferralCode,
-      Agreement: registerForm.values.Agreement,
-      Declaration: registerForm.values.Declaration,
-      FirstName: registerForm.values.FirstName,
-      LastName: registerForm.values.LastName,
-      BirthDate: {
-        Day: registerForm.values.BirthDate.Day.val,
-        Month: registerForm.values.BirthDate.Month.val,
-        Year: registerForm.values.BirthDate.Year.val,
-      },
-      Citizenship: registerForm.values.Citizenship.val,
-      Country: registerForm.values.Country.val,
-      IdentityNo: reFormattedIdentityNumber(registerForm.values.IdentityNo),
-    };
+    const data = { ...registerForm.values };
 
-    console.log("Register Form  : ", registerForm);
-    console.log("All errors gone and form submitted");
+    data["BirthDate"] = {
+      Day: registerForm.values.BirthDate.Day.val,
+      Month: registerForm.values.BirthDate.Month.val,
+      Year: registerForm.values.BirthDate.Year.val,
+    };
+    data["Citizenship"] = registerForm.values.Citizenship.val;
+    data["Country"] = registerForm.values.Country.val;
+
+    data["IdentityNo"] = reFormattedIdentityNumber(
+      registerForm.values.IdentityNo,
+    );
+
+    console.log("Reformatted Register Form  : ", data);
+    console.log("All errors are gone and the form has submitted");
     newRegisteration(data, captchaToken);
   };
 
