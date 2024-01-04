@@ -1,4 +1,5 @@
 //Form
+export { default as Form } from "./Form";
 export { default as TextBox } from "./Form/TextBox";
 export { default as SelectBox } from "./Form/SelectBox";
 export { default as CheckBox } from "./Form/CheckBox";
@@ -29,3 +30,4 @@ export { default as Logo } from "./Icons/Logo";
 export { default as MailBox } from "./Icons/MailBox";
 export { default as ChevronDownIcon } from "./Icons/ChevronDownIcon";
 export { default as ChevronUpIcon } from "./Icons/ChevronUpIcon";
+export { default as LoadingGif } from "./LoadingGif";

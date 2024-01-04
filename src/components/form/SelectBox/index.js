@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./stye.scss";
 import ChevronDownIcon from "@/components/Icons/ChevronDownIcon";
 import ChevronUpIcon from "@/components/Icons/ChevronUpIcon";
+import { motion } from "framer-motion";
 
 const SelectBox = ({
   value,
@@ -64,9 +65,13 @@ const SelectBox = ({
         </span>
       </div>
       {isOptionOpen && (
-        <div className="selectbox-options">
+        <motion.div
+          initial={{ y: -20 }}
+          animate={{ y: 0 }}
+          className="selectbox-options"
+        >
           <RenderItem />
-        </div>
+        </motion.div>
       )}
     </div>
   );

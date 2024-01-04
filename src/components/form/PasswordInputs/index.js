@@ -11,9 +11,9 @@ const PasswordInputs = ({ formInstance, isAgain }) => {
         label={t("loginPagePassword")}
         type="password"
         placeholder={t("passwordPlaceholder")}
-        name="password"
-        value={formInstance.values.password}
-        setValue={(value) => formInstance.setFieldValue("password", value)}
+        name="Password"
+        value={formInstance.values.Password}
+        setValue={(value) => formInstance.setFieldValue("Password", value)}
       />
       {isAgain && (
         <TextBox
@@ -21,10 +21,10 @@ const PasswordInputs = ({ formInstance, isAgain }) => {
           label={t("passwordAgain")}
           type="password"
           placeholder={t("passwordAgainPlaceholder")}
-          name="passwordAgain"
-          value={formInstance.values.passwordAgain}
+          name="ConfirmPassword"
+          value={formInstance.values.ConfirmPassword}
           setValue={(value) =>
-            formInstance.setFieldValue("passwordAgain", value)
+            formInstance.setFieldValue("ConfirmPassword", value)
           }
         />
       )}

@@ -6,6 +6,30 @@ const FormikFormErrorDisplayer = ({ formInstance }) => {
   //We use it to translate the errors of the form validations
   const { t } = useTranslation();
 
+  const DisplayError = ({ errors, subKey }) => {
+    return errors.map((key, index) => {
+      let item = formInstance?.errors[key];
+
+      if (subKey) {
+        item = formInstance?.errors[subKey][key];
+      }
+
+      const isObject =
+        item !== null && typeof item === "object" && !Array.isArray(item);
+
+      if (isObject) {
+        return (
+          <DisplayError key={index} errors={Object.keys(item)} subKey={key} />
+        );
+      }
+      return <RenderErrorsItem key={index} item={item} />;
+    });
+  };
+
+  const RenderErrorsItem = ({ item }) => {
+    return <div className="form-errors">{t(item)}</div>;
+  };
+
   if (formInstance?.errors)
     return (
       <motion.div
@@ -16,13 +40,7 @@ const FormikFormErrorDisplayer = ({ formInstance }) => {
         {!formInstance?.isValid && (
           <div className="text-box-label">{t("required_fileds_message")}</div>
         )}
-        {Object.keys(formInstance?.errors).map((key, index) => {
-          return (
-            <div className="form-errors" key={index}>
-              {t(formInstance.errors[key])}
-            </div>
-          );
-        })}
+        <DisplayError errors={Object.keys(formInstance?.errors)} />
       </motion.div>
     );
   return <></>;

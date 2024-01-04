@@ -1,7 +1,7 @@
-import ResgisterTest from "@/screens/auth/register/registerTest";
+import { RegisterScreen } from "@/screens";
 
 const Page = ({ params: { lng } }) => {
-  return <ResgisterTest lng={lng} />;
+  return <RegisterScreen lng={lng} />;
 };
 
 export default Page;

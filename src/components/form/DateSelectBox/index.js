@@ -48,8 +48,8 @@ const DateSelectBox = ({ formInstance }) => {
         label={t("day")}
         placeholder={t("dayPlaceholder")}
         name="birthDay"
-        value={formInstance.values.birthDay}
-        setValue={(value) => formInstance.setFieldValue("birthDay", value)}
+        value={formInstance.values.BirthDate.Day}
+        setValue={(value) => formInstance.setFieldValue("BirthDate.Day", value)}
       />
       <SelectBox
         optionsData={getMonths}
@@ -58,8 +58,10 @@ const DateSelectBox = ({ formInstance }) => {
         label={t("month")}
         placeholder={t("monthPlaceholder")}
         name="birthMonth"
-        value={formInstance.values.birthMonth}
-        setValue={(value) => formInstance.setFieldValue("birthMonth", value)}
+        value={formInstance.values.BirthDate.Month}
+        setValue={(value) =>
+          formInstance.setFieldValue("BirthDate.Month", value)
+        }
       />
       <SelectBox
         optionsData={getYears}
@@ -68,8 +70,10 @@ const DateSelectBox = ({ formInstance }) => {
         label={t("year")}
         placeholder={t("yearPlaceholder")}
         name="birthYear"
-        value={formInstance.values.birthYear}
-        setValue={(value) => formInstance.setFieldValue("birthYear", value)}
+        value={formInstance.values.BirthDate.Year}
+        setValue={(value) => {
+          return formInstance.setFieldValue("BirthDate.Year", value);
+        }}
       />
     </div>
   );

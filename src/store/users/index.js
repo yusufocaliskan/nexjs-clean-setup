@@ -1,4 +1,4 @@
-import { loginApi } from "@/services/auth/login";
+import { authApi } from "@/services/auth";
 import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
 export const userAdapter = createEntityAdapter();
 
@@ -16,28 +16,20 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      loginApi.endpoints.check4CandidateData.matchFulfilled,
+      authApi.endpoints.newRegistration.matchFulfilled,
       (state, action) => {
         console.log("USer : Action Fulfilled -->", action.payload.user);
         state.informations = action.payload.user;
       },
     );
     builder.addMatcher(
-      loginApi.endpoints.getTokenByMail.matchFulfilled,
-      (state, action) => {
-        console.log("Token Data in Store", action.payload.user);
-        state.informations = action.payload.user;
-      },
-    );
-
-    builder.addMatcher(
-      loginApi.endpoints.check4CandidateData.matchPending,
+      authApi.endpoints.newRegistration.matchPending,
       (state, action) => {
         console.log("Action Pending-->", action);
       },
     );
     builder.addMatcher(
-      loginApi.endpoints.check4CandidateData.matchRejected,
+      authApi.endpoints.newRegistration.matchRejected,
       (state, action) => {
         console.log("Action Rejected -->", action);
       },
@@ -45,6 +37,6 @@ const userSlice = createSlice({
   },
 });
 
-export { loginApi };
+export { authApi };
 export const { setUser } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,30 +1,25 @@
 "use client";
+
 import "../auth.scss";
-import Image from "next/image";
-import LeftBG from "../../../../public/assets/images/auth/left-background.png";
 import { useState } from "react";
 import { useTranslation } from "@/app/i18n/client";
 import { usePathname, useSearchParams } from "next/navigation";
 import {
   LockLine,
-  EyeLine,
-  EyeSlash,
   CoolButton,
   PhoneInput,
-  Logo,
   Title,
   PasswordInputs,
   TextBox,
   FormTriggerButton,
 } from "@/components";
 import Form from "@/components/form";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
-import LogoBg from "@/components/Logo";
 import Link from "next/link";
 import SmallLogo from "@/components/Logo/smallLogo";
 import { useFormik } from "formik";
 import { loginFormValidations } from "@/validations/auth";
 import { useRef } from "react";
+import LeftSide from "../leftSide";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
@@ -49,9 +44,7 @@ const Login = () => {
 
   return (
     <div className="login-page-container">
-      <div className="login-page-left-background">
-        <LogoBg />
-      </div>
+      <LeftSide />
       <div className="login-page-right">
         <div className="login-page-right-top">
           <SmallLogo />

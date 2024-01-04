@@ -2,12 +2,13 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "./persist-storage.js";
-import user, { loginApi } from "./users";
+import user from "./users";
 import app from "./app";
+import { authApi } from "@/services/auth/index.js";
 
 //using for persist storage, due to ssr or crs
 const reducers = combineReducers({
-  [loginApi.reducerPath]: loginApi.reducer,
+  [authApi.reducerPath]: authApi.reducer,
   user: user,
   app: app,
 });
@@ -21,7 +22,7 @@ const rootReducers = (state, action) => {
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: [loginApi.reducerPath, "app"],
+  whitelist: [authApi.reducerPath, "app"],
 };
 
 //Combine theme.
@@ -35,12 +36,14 @@ const configuredStore = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
       immutableCheck: false,
-    }).concat(loginApi.middleware),
+    }).concat(authApi.middleware),
 });
 
 //Before the store initialized
 const onRehydrate = () => {};
+
 const persistor = persistStore(configuredStore, {}, onRehydrate);
 
 setupListeners(configuredStore.dispatch);
+
 export { configuredStore as store, persistor };

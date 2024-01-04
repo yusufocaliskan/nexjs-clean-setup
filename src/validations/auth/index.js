@@ -10,26 +10,33 @@ yup.addMethod(yup.string, "check4ValidIndentity", function (errorMessage) {
 
 //Register Form
 export const registerFormValidations = yup.object().shape({
-  name: yup.string().required(),
-  surname: yup.string().required(),
-  email: yup.string().email().required(),
-  password: yup
+  Email: yup.string().email().required(),
+  PhoneNumber: yup.string().required(),
+  Password: yup.string().required(),
+  ConfirmPassword: yup
     .string()
-    .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
+    .oneOf([yup.ref("Password"), null], "Passwords must match")
     .required(),
-  passwordAgain: yup.string().required(),
-  referralId: yup.string(),
 
-  birthDay: yup.object().required(),
-  birthMonth: yup.object().required(),
-  birthYear: yup.object().required(),
-  citizenship: yup.object().required(),
-  nationality: yup.object().required(),
-  foreingNationalId: yup.string().check4ValidIndentity().required(),
-  tukishNationalId: yup.string().check4ValidIndentity().required(),
-  //nationalId: yup.number().required(),
-  termAndPolicy: yup.boolean().required(),
-  declaration: yup.boolean().required(),
+  ReferralCode: yup.string(),
+  Agreement: yup
+    .boolean()
+    .required()
+    .test("is-true", "Agreement must be accepted", (value) => value === true),
+  Declaration: yup
+    .boolean()
+    .required()
+    .test("is-true", "Declaration must be accepted", (value) => value === true),
+  FirstName: yup.string().required(),
+  LastName: yup.string().required(),
+  BirthDate: yup.object().shape({
+    Day: yup.object().required(),
+    Month: yup.object().required(),
+    Year: yup.object().required(),
+  }),
+  Citizenship: yup.object().required(),
+  Country: yup.object().required(),
+  IdentityNo: yup.string().check4ValidIndentity().required(),
 });
 
 //Login form
@@ -66,9 +73,9 @@ export const forgotPasswordSecondStepFormValidations = yup.object().shape({
         .test(
           "isValidCode",
           "Doğrulama kodu rakamlardan oluşmalıdır",
-          (value) => /^\d$/.test(value)
+          (value) => /^\d$/.test(value),
         )
-        .required("Doğrulama kodu boş bırakılamaz")
+        .required("Doğrulama kodu boş bırakılamaz"),
     )
     .min(6, "Doğrulama kodu 6 karakterden oluşmalıdır")
     .max(6, "Doğrulama kodu 6 karakterden oluşmalıdır"),

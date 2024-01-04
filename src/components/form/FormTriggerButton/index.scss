@@ -2,6 +2,9 @@
   width: 100%;
   height: 100%;
   background: red;
+  &:disabled {
+    background: var(--disabled-button);
+  }
 }
 .form-trigger-button-wrapper {
   margin-top: 2rem;
