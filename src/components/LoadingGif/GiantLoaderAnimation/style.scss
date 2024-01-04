@@ -1,0 +1,46 @@
+.giant-loader-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 999;
+
+  .giant-loader-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 888;
+    background: rgb(0, 0, 0, 0.7);
+  }
+
+  .giant-loader-content {
+    position: absolute;
+    z-index: 9999;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .giant-loader-text {
+    font-size: 50px;
+    font-weight: 300;
+  }
+  .giant-loader-cloose-button {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+  }
+}

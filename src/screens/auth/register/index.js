@@ -60,7 +60,6 @@ const RegisterTest = () => {
   //On form submitted
   const handleOnSubmitRegisterForm = () => {
     const captchaToken = reCapthchaRef.current.getValue();
-
     const data = { ...registerForm.values };
 
     data["BirthDate"] = {
@@ -113,7 +112,10 @@ const RegisterTest = () => {
 
         <div className="login-page-right-content">
           <Title text="Sign in to Hepbit" />
-          <Form formInstance={registerForm}>
+          <Form
+            formInstance={registerForm}
+            isLoading={regitrationResponse.isLoading}
+          >
             <div className="login-form">
               <div className="form-inputs">
                 <TextBox

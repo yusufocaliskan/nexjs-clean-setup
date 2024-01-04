@@ -1,9 +1,10 @@
 import toast from "react-hot-toast";
 import ErrorDisplayer from "./ErrorsDisplayer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { appConfigs } from "@/configs";
+import GiantLoaderAnimation from "../LoadingGif/GiantLoaderAnimation";
 
-const Form = ({ children, formInstance }) => {
+const Form = ({ children, formInstance, isLoading, setIsLoading }) => {
   //set a max post request
   useEffect(() => {
     if (formInstance.submitCount >= appConfigs.form.maxFormRequestSize) {
@@ -15,18 +16,21 @@ const Form = ({ children, formInstance }) => {
   }, [formInstance.submitCount]);
 
   return (
-    <form
-      style={{
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        gap: "2rem",
-      }}
-      onSubmit={formInstance.handleSubmit}
-    >
-      <ErrorDisplayer formInstance={formInstance} />
-      {children}
-    </form>
+    <>
+      <GiantLoaderAnimation isOpen={isLoading} setIsLoading={setIsLoading} />
+      <form
+        style={{
+          width: "100%",
+          display: "flex",
+          flexDirection: "column",
+          gap: "2rem",
+        }}
+        onSubmit={formInstance.handleSubmit}
+      >
+        <ErrorDisplayer formInstance={formInstance} />
+        {children}
+      </form>
+    </>
   );
 };
 
