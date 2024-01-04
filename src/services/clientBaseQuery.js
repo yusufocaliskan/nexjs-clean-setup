@@ -1,4 +1,4 @@
-const { default: clientInstance } = require("./clientInstance");
+import clientInstance from "./clientInstance";
 
 const clientBaseQuery =
   ({ baseUrl } = { baseUrl: "" }) =>

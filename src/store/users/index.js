@@ -23,6 +23,14 @@ const userSlice = createSlice({
       },
     );
     builder.addMatcher(
+      loginApi.endpoints.getTokenByMail.matchFulfilled,
+      (state, action) => {
+        console.log("Token Data in Store", action.payload.user);
+        state.informations = action.payload.user;
+      },
+    );
+
+    builder.addMatcher(
       loginApi.endpoints.check4CandidateData.matchPending,
       (state, action) => {
         console.log("Action Pending-->", action);
