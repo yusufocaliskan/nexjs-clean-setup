@@ -10,14 +10,8 @@ yup.addMethod(yup.string, "check4ValidIndentity", function (errorMessage) {
 
 //Register Form
 export const registerFormValidations = yup.object().shape({
-  name: yup
-    .string()
-
-    .required(),
-  surname: yup
-    .string()
-
-    .required(),
+  name: yup.string().required(),
+  surname: yup.string().required(),
   email: yup.string().email().required(),
   password: yup
     .string()
@@ -40,6 +34,42 @@ export const registerFormValidations = yup.object().shape({
 
 //Login form
 export const loginFormValidations = yup.object().shape({
-  password: yup.string().required(),
-  email: yup.string().email(),
+  password: yup
+    .string()
+    .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
+    .required(),
+  email: yup.string().email().required(),
+});
+
+export const forgotPasswordLastStepFormValidations = yup.object().shape({
+  password: yup
+    .string()
+    .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
+    .required(),
+  passwordAgain: yup
+    .string()
+    .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
+    .required(),
+  email: yup.string().email().required(),
+});
+
+export const forgotPasswordFirstStepFormValidations = yup.object().shape({
+  email: yup.string().email().required(),
+});
+
+export const forgotPasswordSecondStepFormValidations = yup.object().shape({
+  verificationCode: yup
+    .array()
+    .of(
+      yup
+        .mixed()
+        .test(
+          "isValidCode",
+          "Doğrulama kodu rakamlardan oluşmalıdır",
+          (value) => /^\d$/.test(value)
+        )
+        .required("Doğrulama kodu boş bırakılamaz")
+    )
+    .min(6, "Doğrulama kodu 6 karakterden oluşmalıdır")
+    .max(6, "Doğrulama kodu 6 karakterden oluşmalıdır"),
 });

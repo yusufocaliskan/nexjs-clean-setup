@@ -12,18 +12,35 @@ import {
   CoolButton,
   PhoneInput,
   Logo,
+  Title,
+  PasswordInputs,
+  TextBox,
+  FormTriggerButton,
 } from "@/components";
+import Form from "@/components/form";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import LogoBg from "@/components/Logo";
 import Link from "next/link";
 import SmallLogo from "@/components/Logo/smallLogo";
+import { useFormik } from "formik";
+import { loginFormValidations } from "@/validations/auth";
+import { useRef } from "react";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
-  const [showPassword, setShowPassword] = useState(false);
+  const reCapthchaRef = useRef();
+  const loginForm = useFormik({
+    initialValues: {
+      password: "",
+      email: "",
+    },
+    validationSchema: loginFormValidations,
+    onSubmit: () => handleOnSubmitLoginForm(),
+  });
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const handleOnSubmitLoginForm = (vals) => {
+    const isRecaptchaValid = reCapthchaRef.current.getValue();
+    console.log("All errors gone and form submitted");
   };
 
   const path = usePathname();
@@ -47,7 +64,7 @@ const Login = () => {
           </p>
         </div>
         <div className="login-page-right-content">
-          <p className="sign-in-to-hepbit">{t("loginPageSignInToHepbit")} </p>
+          <Title text={t("loginPageSignInToHepbit")} />
           <div className="visit-url">
             <p className="visit-text">{t("loginPageCorrectUrl")}</p>
             <p className="visit-url-login">
@@ -57,105 +74,77 @@ const Login = () => {
             </p>
           </div>
           <div className="divider" />
-          <div className="login-form">
-            <div className="form-buttons">
-              <CoolButton
-                selected={button === "Email"}
-                onClick={() => setButton("Email")}
-                label={t("loginPageEmail")}
-                type="Selected"
-              />
-              <CoolButton
-                onClick={() => setButton("Mobile")}
-                selected={button === "Mobile"}
-                label={t("loginPageMobile")}
-                type="Selected"
-              />
+          <Form onSubmit={loginForm.handleSubmit} formInstance={loginForm}>
+            <div className="login-form">
+              <div className="form-buttons">
+                <CoolButton
+                  selected={button === "Email"}
+                  onClick={() => setButton("Email")}
+                  label={t("loginPageEmail")}
+                  type="Selected"
+                />
+                <CoolButton
+                  onClick={() => setButton("Mobile")}
+                  selected={button === "Mobile"}
+                  label={t("loginPageMobile")}
+                  type="Selected"
+                />
+              </div>
+              {button === "Email" && (
+                <div className="form-inputs">
+                  <div className="email">
+                    <TextBox
+                      formInstance={loginForm}
+                      label={t("loginPageEmail")}
+                      type="email"
+                      name={t("loginPageEmail")}
+                      placeholder={t("loginPageEmailPlaceHolder")}
+                      value={loginForm.values.email}
+                      setValue={(value) =>
+                        loginForm.setFieldValue("email", value)
+                      }
+                    />
+                  </div>
+                  <div className="password">
+                    <div className="password-area">
+                      <PasswordInputs formInstance={loginForm} />
+                    </div>
+                  </div>
+                  <div className="scan-and-forgot">
+                    <p className="scan-login">{t("loginPageScanToLogin")} </p>
+                    <p className="forgot-password">
+                      <Link href="/auth/forgot-password">
+                        {t("loginPageForgotPassword")}
+                      </Link>
+                    </p>
+                  </div>
+                  <FormTriggerButton label={t("loginPageLogin")} />
+                </div>
+              )}
+              {button === "Mobile" && (
+                <div className="form-inputs">
+                  <div className="email">
+                    <p className="email-label">{t("loginPageMobile")}</p>
+                    <PhoneInput onChange={(e) => console.log(e)} />
+                  </div>
+                  <div className="password">
+                    <div className="password-area">
+                      <PasswordInputs formInstance={loginForm} />
+                    </div>
+                  </div>
+                  <div className="scan-and-forgot">
+                    <p className="scan-login">{t("loginPageScanToLogin")} </p>
+                    <p className="forgot-password">
+                      <Link href="/auth/forgot-password">
+                        {t("loginPageForgotPassword")}
+                      </Link>
+                    </p>
+                  </div>
+                  <FormTriggerButton label={t("loginPageLogin")} />
+                </div>
+              )}
             </div>
-            {button === "Email" && (
-              <div className="form-inputs">
-                <div className="email">
-                  <p className="email-label">{t("loginPageEmail")}</p>
-                  <input
-                    type="email"
-                    placeholder={t("loginPageEmailPlaceHolder")}
-                    className="email-input"
-                  />
-                </div>
-                <div className="password">
-                  <p className="password-label">{t("loginPagePassword")}</p>
-                  <div className="password-area">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      placeholder={t("loginPagePasswordPlaceHolder")}
-                      className="password-input"
-                    />
-                    <button
-                      className="password-toggle-page"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? <EyeSlash /> : <EyeLine />}
-                    </button>
-                  </div>
-                </div>
-                <div className="scan-and-forgot">
-                  <p className="scan-login">{t("loginPageScanToLogin")} </p>
-                  <p className="forgot-password">
-                    <Link href="/auth/forgot-password">
-                      {t("loginPageForgotPassword")}
-                    </Link>
-                  </p>
-                </div>
-                <div className="login-btn-area">
-                  <CoolButton
-                    className="login-btn"
-                    type="Main"
-                    label={t("loginPageLogin")}
-                  />
-                </div>
-              </div>
-            )}
-            {button === "Mobile" && (
-              <div className="form-inputs">
-                <div className="email">
-                  <p className="email-label">{t("loginPageMobile")}</p>
-
-                  <PhoneInput onChange={(e) => console.log(e)} />
-                </div>
-                <div className="password">
-                  <p className="password-label">{t("loginPagePassword")}</p>
-                  <div className="password-area">
-                    <input
-                      type={showPassword ? "text" : "password"}
-                      placeholder={t("loginPagePasswordPlaceHolder")}
-                      className="password-input"
-                    />
-                    <button
-                      className="password-toggle-page"
-                      onClick={togglePasswordVisibility}
-                    >
-                      {showPassword ? <EyeSlash /> : <EyeLine />}
-                    </button>
-                  </div>
-                </div>
-                <div className="scan-and-forgot">
-                  <p className="scan-login">{t("loginPageScanToLogin")} </p>
-                  <p className="forgot-password">
-                    <Link href="/auth/forgot-password">
-                      {t("loginPageForgotPassword")}
-                    </Link>
-                  </p>
-                </div>
-                <div className="login-btn-area">
-                  <CoolButton
-                    className="login-btn"
-                    type="Main"
-                    label={t("loginPageLogin")}
-                  />
-                </div>
-              </div>
-            )}
-          </div>
+          </Form>
         </div>
       </div>
     </div>
