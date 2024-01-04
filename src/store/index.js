@@ -5,10 +5,12 @@ import storage from "./persist-storage.js";
 import user from "./users";
 import app from "./app";
 import { authApi } from "@/services/auth/index.js";
+import { referralApi } from "./referral/index.js";
 
 //using for persist storage, due to ssr or crs
 const reducers = combineReducers({
   [authApi.reducerPath]: authApi.reducer,
+  [referralApi.reducerPath]: referralApi.reducer,
   user: user,
   app: app,
 });
@@ -36,7 +38,9 @@ const configuredStore = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
       immutableCheck: false,
-    }).concat(authApi.middleware),
+    })
+      .concat(authApi.middleware)
+      .concat(referralApi.middleware),
 });
 
 //Before the store initialized

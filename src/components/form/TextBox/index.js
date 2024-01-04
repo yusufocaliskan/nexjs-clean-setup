@@ -1,4 +1,4 @@
-import { EyeSlash, EyeLine } from "@/components/";
+import { EyeSlash, EyeLine, LoadingGif } from "@/components/";
 import "./stye.scss";
 import { useState } from "react";
 
@@ -13,7 +13,9 @@ const TextBox = ({
   formInstance,
   icon,
   leftSideRenderItem,
-  main,
+  onBlur,
+  isLoading,
+  message,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const isError = formInstance?.errors[name] && formInstance.submitCount > 0;
@@ -41,9 +43,15 @@ const TextBox = ({
           type={showPassword ? "text" : type}
           value={value}
           onChange={handleOnKeyDown}
+          disabled={isLoading}
+          onBlur={onBlur}
         />
       </label>
-
+      {isLoading && (
+        <span className="password-toggle">
+          <LoadingGif isPuff />
+        </span>
+      )}
       {isSecure && (
         <span className="password-toggle" onClick={togglePasswordVisibility}>
           {showPassword ? <EyeSlash /> : <EyeLine />}
@@ -54,6 +62,7 @@ const TextBox = ({
           {icon}
         </span>
       )}
+      {message && value && <span className="error-message">{message}</span>}
     </div>
   );
 };

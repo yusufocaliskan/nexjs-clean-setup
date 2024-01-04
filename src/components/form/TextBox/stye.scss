@@ -31,6 +31,9 @@
 .text-box-errorred-input {
   border: 2px solid var(--red-error) !important;
 }
+.error-message {
+  color: var(--red-error);
+}
 .left-side-of-input {
   position: absolute;
   background: var(--white);

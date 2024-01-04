@@ -18,9 +18,10 @@ import {
 import { useFormik } from "formik";
 import { registerFormValidations } from "@/validations/auth";
 import { useTranslation } from "@/app/i18n/client";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import LeftSide from "../leftSide";
 import { authApi } from "@/services/auth";
+import { referralApi } from "@/services/referral";
 
 const RegisterTest = () => {
   const { t } = useTranslation();
@@ -28,6 +29,9 @@ const RegisterTest = () => {
 
   const [newRegisteration, regitrationResponse] =
     authApi.useNewRegistrationMutation();
+
+  const [checkIReferralIdIsValid, referralIdResponse] =
+    referralApi.useCheckIReferralIdIsValidMutation();
 
   //form validations
   const registerForm = useFormik({
@@ -97,6 +101,11 @@ const RegisterTest = () => {
     console.log(val);
   };
 
+  //Check if given referralCode is valid
+  const handleOnReferralIdInputBlur = () => {
+    if (registerForm.values.ReferralCode)
+      checkIReferralIdIsValid(registerForm.values.ReferralCode);
+  };
   return (
     <div className="login-page-container">
       <LeftSide />
@@ -135,7 +144,10 @@ const RegisterTest = () => {
                   label={t("referralId")}
                   placeholder={t("referralIdPlaceholder")}
                   name="referralId"
+                  onBlur={handleOnReferralIdInputBlur}
                   value={registerForm.values.ReferralCode}
+                  isLoading={referralIdResponse.isLoading}
+                  message={referralIdResponse?.error?.data?.Message || ""}
                   setValue={(value) =>
                     registerForm.setFieldValue("ReferralCode", value)
                   }
