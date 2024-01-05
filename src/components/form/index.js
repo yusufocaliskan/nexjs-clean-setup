@@ -18,7 +18,9 @@ const Form = ({ children, formInstance, isLoading, setIsLoading }) => {
 
   return (
     <>
-      <GiantLoaderAnimation isOpen={isLoading} setIsLoading={setIsLoading} />
+      {isLoading && (
+        <GiantLoaderAnimation isOpen={isLoading} setIsLoading={setIsLoading} />
+      )}
       <motion.form
         initial={{ opacity: 0.5, y: 30 }}
         animate={{ opacity: 1, y: 0 }}

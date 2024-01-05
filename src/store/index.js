@@ -2,7 +2,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "./persist-storage.js";
-import user from "./users";
+import user from "./user";
 import app from "./app";
 import { authApi } from "@/services/auth/index.js";
 import { referralApi } from "./referral/index.js";

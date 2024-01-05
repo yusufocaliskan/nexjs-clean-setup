@@ -1,0 +1,21 @@
+.verification-div {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  .verification-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    font-weight: 900;
+    width: 100%;
+    align-self: stretch;
+    border-radius: 0.5rem;
+    border: 1px solid var(--inputBorderColor);
+    background: var(--inputBg);
+  }
+}

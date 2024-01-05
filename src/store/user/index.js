@@ -18,40 +18,30 @@ const userSlice = createSlice({
     builder.addMatcher(
       authApi.endpoints.newRegistration.matchFulfilled,
       (state, action) => {
-        console.log("USer : Action Fulfilled -->", action.payload.user);
-        state.informations = action.payload.user;
-      }
+        console.log("USer : Action Fulfilled -->", action.payload.data?.Token);
+        //Set the token on success
+        state.token = action.payload.data?.Token;
+      },
     );
-    builder.addMatcher(
-      authApi.endpoints.newRegistration.matchPending,
-      (state, action) => {
-        console.log("Action Pending-->", action);
-      }
-    );
-    builder.addMatcher(
-      authApi.endpoints.newRegistration.matchRejected,
-      (state, action) => {
-        console.log("Action Rejected -->", action);
-      }
-    );
+
     builder.addMatcher(
       authApi.endpoints.login.matchFulfilled,
       (state, action) => {
         console.log("USer : login Fulfilled -->", action.payload.user);
         state.informations = action.payload.user;
-      }
+      },
     );
     builder.addMatcher(
       authApi.endpoints.login.matchPending,
       (state, action) => {
         console.log("login Pending-->", action);
-      }
+      },
     );
     builder.addMatcher(
       authApi.endpoints.login.matchRejected,
       (state, action) => {
         console.log("login Rejected -->", action);
-      }
+      },
     );
   },
 });

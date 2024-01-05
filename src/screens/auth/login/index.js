@@ -3,11 +3,9 @@
 import "../auth.scss";
 import { useState } from "react";
 import { useTranslation } from "@/app/i18n/client";
-import { usePathname, useSearchParams } from "next/navigation";
 import {
   LockLine,
   CoolButton,
-  PhoneInput,
   Title,
   PasswordInputs,
   TextBox,
@@ -37,9 +35,7 @@ const Login = () => {
   });
   const [login, loginResponse] = authApi.useLoginMutation();
   const data = loginForm.values;
-  const path = usePathname();
-  const lang = path.substring(1).split("/")[0];
-  const { t } = useTranslation(lang);
+  const { t } = useTranslation();
 
   const handleOnSubmitLoginForm = (vals) => {
     login(data);

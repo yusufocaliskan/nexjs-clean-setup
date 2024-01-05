@@ -23,8 +23,12 @@ import { authApi } from "@/services/auth";
 import { referralApi } from "@/services/referral";
 import { AuthLayout } from "@/layouts";
 import useDebounce from "@/hooks/useDebounce";
+import toast from "react-hot-toast";
+import { queryResult } from "@/services/queryResult";
+import routes from "@/routes";
+import Link from "next/link";
 
-const RegisterTest = () => {
+const Register = () => {
   const { t } = useTranslation();
   const referralCodeInput = useRef();
   const reCapthchaRef = useRef();
@@ -84,7 +88,7 @@ const RegisterTest = () => {
   }, [referralIdResponse]);
 
   //On form submitted
-  const handleOnSubmitRegisterForm = () => {
+  const handleOnSubmitRegisterForm = async () => {
     const captchaToken = reCapthchaRef.current.getValue();
     const data = { ...registerForm.values };
 
@@ -102,7 +106,29 @@ const RegisterTest = () => {
 
     console.log("Reformatted Register Form  : ", data);
     console.log("All errors are gone and the form has submitted");
-    newRegisteration(data, captchaToken);
+    try {
+      const resp = await newRegisteration(data, captchaToken);
+
+      //There is an error
+      if (queryResult.isError(resp) || queryResult.isWarning(resp)) {
+        //TODO: remove the resetForm comment, they need to refill the form
+        // on production
+        if (queryResult.isWarning(resp)) {
+          // registerForm.resetForm();
+        }
+        return toast.error(resp.error?.data?.Message);
+      }
+
+      //On success
+      if (queryResult.isSuccess(resp)) {
+        //TODO: Set the token to the store
+        //registerForm.resetForm();
+
+        return toast.success(resp.error?.data?.Message);
+      }
+    } catch (error) {
+      return toast.error(t("unknownRequestErrorMessage"));
+    }
   };
 
   //Add '9' foreing persons
@@ -115,18 +141,17 @@ const RegisterTest = () => {
     return number;
   };
 
-  const handleOnReCaptchaChanged = (val) => {
-    console.log(val);
-  };
-
   const HeaderLinkRender = () => {
     return (
       <p className="login-page-right-top-text">
-        Don’t have an account?
-        <span className="sign-up-for-free">Sign up for free</span>
+        {t("dontHaveAnAccount")}
+        <Link href={routes.auth.register} className="sign-up-for-free">
+          {t("signUpForFree")}
+        </Link>
       </p>
     );
   };
+
   return (
     <AuthLayout headerLinkRender={<HeaderLinkRender />}>
       <Title text="Sign in to Hepbit" />
@@ -138,15 +163,15 @@ const RegisterTest = () => {
           <div className="form-inputs">
             <TextBox
               formInstance={registerForm}
-              label="E-MAIL"
+              label={t("email")}
               type="email"
               name="email"
-              placeholder="Type a valid e-mail address"
+              placeholder={t("emailInputPlaceholder")}
               value={registerForm.values.Email}
               setValue={(value) => registerForm.setFieldValue("Email", value)}
             />
             <PhoneInput
-              label="Phone Number"
+              label={t("phoneNumber")}
               onChange={(e) => registerForm.setFieldValue("PhoneNumber", e)}
             />
             <PasswordInputs isAgain formInstance={registerForm} />
@@ -187,10 +212,7 @@ const RegisterTest = () => {
             />
 
             {/* //TODO: Check if the stastus of the captcha is active */}
-            <GoogleReCaptcha
-              reCapthchaRef={reCapthchaRef}
-              onChange={handleOnReCaptchaChanged}
-            />
+            <GoogleReCaptcha reCapthchaRef={reCapthchaRef} />
           </div>
         </div>
 
@@ -204,4 +226,4 @@ const RegisterTest = () => {
   );
 };
 
-export default RegisterTest;
+export default Register;

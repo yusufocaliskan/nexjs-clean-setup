@@ -1,12 +1,13 @@
 import React from "react";
-import { useState } from "react";
 import "../../../screens/auth/forgot-password/index.scss";
 import "../TextBox/stye.scss";
+import "./verification-style.scss";
 
 const VerificationCode = ({
   verificationCode,
   setVerificationCode,
   formInstance,
+  name,
 }) => {
   const inputRefs = Array.from({ length: 6 }, () => React.createRef());
   const isError = formInstance?.errors[name] && formInstance.submitCount > 0;

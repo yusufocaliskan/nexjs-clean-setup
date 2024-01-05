@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 const FormikFormErrorDisplayer = ({ formInstance }) => {
   //Get the selected language
   //We use it to translate the errors of the form validations
-  const { t } = useTranslation();
+  const { t } = useTranslation("errors");
 
   const [getCurrentWindowWidth, setCurrentWindowWidth] = useState(
     window.innerWidth,

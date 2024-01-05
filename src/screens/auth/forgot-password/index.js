@@ -74,9 +74,7 @@ const ForgotPassword = () => {
 
   const handleOnSubmitThirdForm = () => {};
 
-  const path = usePathname();
-  const lang = path.substring(1).split("/")[0];
-  const { t } = useTranslation(lang);
+  const { t } = useTranslation();
   const router = useRouter();
 
   return (

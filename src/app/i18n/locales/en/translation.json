@@ -1,4 +1,20 @@
 {
+  "verify": "Verify",
+  "emailInputPlaceholder": "Type a valid e-mail address",
+  "unknownRequestErrorMessage": "An unknow error occured. Please try again later. ",
+  "citizenship": "Citizenship",
+  "citizenshipPlaceholder": "Select your citizenship",
+
+  "nationality": "Nationality",
+  "nationalityPlaceholder": "Select your nationality",
+
+  "turkishNationalIdLabel": "Turkish ID Number",
+  "turkishNonationalIdPlaceholder": "Enter your Id number",
+
+  "foreingNationalIdLabel": "ID Number",
+  "foreingNonationalIdPlaceholder": "Enter your Id number",
+
+  "phoneNumber": "Phone Number",
   "welcome_slogan": "Hey user, we're glad to have you here :))",
   "email": "E-mail",
   "light": "Light Mode",
@@ -25,6 +41,7 @@
   "year": "Year",
   "yearPlaceholder": "Year",
 
+  "completeTheRegistration": "Complete The Registration",
   "dontHaveAnAccount": "Don't have an account",
   "signUpForFree": "Sign up for free",
   "alreadyHaveAnAccount": "Already have an account?",
