@@ -22,6 +22,7 @@ import { useEffect, useRef } from "react";
 import LeftSide from "../leftSide";
 import { authApi } from "@/services/auth";
 import { referralApi } from "@/services/referral";
+import { AuthLayout } from "@/layouts";
 
 const RegisterTest = () => {
   const { t } = useTranslation();
@@ -98,95 +99,89 @@ const RegisterTest = () => {
     if (registerForm.values.ReferralCode)
       checkIReferralIdIsValid(registerForm.values.ReferralCode);
   };
+
+  const HeaderLinkRender = () => {
+    return (
+      <p className="login-page-right-top-text">
+        Don’t have an account?
+        <span className="sign-up-for-free">Sign up for free</span>
+      </p>
+    );
+  };
   return (
-    <div className="login-page-container">
-      <LeftSide />
-      <div className="login-page-right">
-        <div className="login-page-right-top">
-          <div className="login-page-right-top-logo"></div>
-          <p className="login-page-right-top-text">
-            Don’t have an account?
-            <span className="sign-up-for-free">Sign up for free</span>
-          </p>
-        </div>
-
-        <div className="login-page-right-content">
-          <Title text="Sign in to Hepbit" />
-          <Form
-            formInstance={registerForm}
-            isLoading={regitrationResponse.isLoading}
-          >
-            <div className="login-form">
-              <div className="form-inputs">
-                <TextBox
-                  formInstance={registerForm}
-                  label="E-MAIL"
-                  type="email"
-                  name="email"
-                  placeholder="Type a valid e-mail address"
-                  value={registerForm.values.Email}
-                  setValue={(value) =>
-                    registerForm.setFieldValue("Email", value)
-                  }
-                />
-                <PhoneInput
-                  label="Phone Number"
-                  onChange={(e) => registerForm.setFieldValue("PhoneNumber", e)}
-                />
-                <PasswordInputs isAgain formInstance={registerForm} />
-                <TextBox
-                  formInstance={registerForm}
-                  label={t("referralId")}
-                  placeholder={t("referralIdPlaceholder")}
-                  name="referralId"
-                  onBlur={handleOnReferralIdInputBlur}
-                  value={registerForm.values.ReferralCode}
-                  isLoading={referralIdResponse.isLoading}
-                  message={referralIdResponse?.error?.data?.Message || ""}
-                  setValue={(value) =>
-                    registerForm.setFieldValue("ReferralCode", value)
-                  }
-                />
-                <FullNameInputs formInstance={registerForm} />
-                <DateSelectBox formInstance={registerForm} />
-                <CitizenshipNationalitySelector
-                  label={t("Citizenship")}
-                  formInstance={registerForm}
-                />
-                <TermAndPolicyCheckBox
-                  formInstance={registerForm}
-                  name="Agreement"
-                  value={registerForm.values.Agreement}
-                  setValue={(value) =>
-                    registerForm.setFieldValue("Agreement", value)
-                  }
-                />
-                <DeclarationCheckBox
-                  formInstance={registerForm}
-                  name="Declaration"
-                  value={registerForm.values.Declaration}
-                  setValue={(value) =>
-                    registerForm.setFieldValue("Declaration", value)
-                  }
-                />
-
-                {/* //TODO: Check if the stastus of the captcha is active */}
-                <GoogleReCaptcha
-                  reCapthchaRef={reCapthchaRef}
-                  onChange={handleOnReCaptchaChanged}
-                />
-              </div>
-            </div>
-
-            <FormTriggerButton
+    <AuthLayout headerLinkRender={<HeaderLinkRender />}>
+      <Title text="Sign in to Hepbit" />
+      <Form
+        formInstance={registerForm}
+        isLoading={regitrationResponse.isLoading}
+      >
+        <div className="login-form">
+          <div className="form-inputs">
+            <TextBox
               formInstance={registerForm}
-              isLoading={regitrationResponse.isLoading}
-              label="Login"
+              label="E-MAIL"
+              type="email"
+              name="email"
+              placeholder="Type a valid e-mail address"
+              value={registerForm.values.Email}
+              setValue={(value) => registerForm.setFieldValue("Email", value)}
             />
-          </Form>
+            <PhoneInput
+              label="Phone Number"
+              onChange={(e) => registerForm.setFieldValue("PhoneNumber", e)}
+            />
+            <PasswordInputs isAgain formInstance={registerForm} />
+            <TextBox
+              formInstance={registerForm}
+              label={t("referralId")}
+              placeholder={t("referralIdPlaceholder")}
+              name="referralId"
+              onBlur={handleOnReferralIdInputBlur}
+              value={registerForm.values.ReferralCode}
+              isLoading={referralIdResponse.isLoading}
+              message={referralIdResponse?.error?.data?.Message || ""}
+              setValue={(value) =>
+                registerForm.setFieldValue("ReferralCode", value)
+              }
+            />
+            <FullNameInputs formInstance={registerForm} />
+            <DateSelectBox formInstance={registerForm} />
+            <CitizenshipNationalitySelector
+              label={t("Citizenship")}
+              formInstance={registerForm}
+            />
+            <TermAndPolicyCheckBox
+              formInstance={registerForm}
+              name="Agreement"
+              value={registerForm.values.Agreement}
+              setValue={(value) =>
+                registerForm.setFieldValue("Agreement", value)
+              }
+            />
+            <DeclarationCheckBox
+              formInstance={registerForm}
+              name="Declaration"
+              value={registerForm.values.Declaration}
+              setValue={(value) =>
+                registerForm.setFieldValue("Declaration", value)
+              }
+            />
+
+            {/* //TODO: Check if the stastus of the captcha is active */}
+            <GoogleReCaptcha
+              reCapthchaRef={reCapthchaRef}
+              onChange={handleOnReCaptchaChanged}
+            />
+          </div>
         </div>
-      </div>
-    </div>
+
+        <FormTriggerButton
+          formInstance={registerForm}
+          isLoading={regitrationResponse.isLoading}
+          label="Login"
+        />
+      </Form>
+    </AuthLayout>
   );
 };
 

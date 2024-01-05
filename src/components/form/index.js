@@ -3,6 +3,7 @@ import ErrorDisplayer from "./ErrorsDisplayer";
 import { useEffect, useState } from "react";
 import { appConfigs } from "@/configs";
 import GiantLoaderAnimation from "../LoadingGif/GiantLoaderAnimation";
+import { motion } from "framer-motion";
 
 const Form = ({ children, formInstance, isLoading, setIsLoading }) => {
   //set a max post request
@@ -18,7 +19,9 @@ const Form = ({ children, formInstance, isLoading, setIsLoading }) => {
   return (
     <>
       <GiantLoaderAnimation isOpen={isLoading} setIsLoading={setIsLoading} />
-      <form
+      <motion.form
+        initial={{ opacity: 0.5, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
         style={{
           width: "100%",
           display: "flex",
@@ -29,7 +32,7 @@ const Form = ({ children, formInstance, isLoading, setIsLoading }) => {
       >
         <ErrorDisplayer formInstance={formInstance} />
         {children}
-      </form>
+      </motion.form>
     </>
   );
 };
