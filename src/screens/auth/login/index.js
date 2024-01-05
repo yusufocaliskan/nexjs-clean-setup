@@ -12,36 +12,45 @@ import {
   PasswordInputs,
   TextBox,
   FormTriggerButton,
+  Form,
+  GoogleReCaptcha,
 } from "@/components";
-import Form from "@/components/form";
 import Link from "next/link";
 import SmallLogo from "@/components/Logo/smallLogo";
 import { useFormik } from "formik";
 import { loginFormValidations } from "@/validations/auth";
 import { useRef } from "react";
 import LeftSide from "../leftSide";
+import { authApi } from "@/services/auth";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
+  const [isCaptcha, setIsCaptcha] = useState(false);
   const reCapthchaRef = useRef();
   const loginForm = useFormik({
     initialValues: {
-      password: "",
-      email: "",
+      Password: "",
+      Email: "",
     },
     validationSchema: loginFormValidations,
     onSubmit: () => handleOnSubmitLoginForm(),
   });
-
-  const handleOnSubmitLoginForm = (vals) => {
-    const isRecaptchaValid = reCapthchaRef.current.getValue();
-    console.log("All errors gone and form submitted");
-  };
-
+  const [login, loginResponse] = authApi.useLoginMutation();
+  const data = loginForm.values;
   const path = usePathname();
   const lang = path.substring(1).split("/")[0];
   const { t } = useTranslation(lang);
 
+  const handleOnSubmitLoginForm = (vals) => {
+    login(data);
+  };
+
+  const handleOnReCaptchaChanged = (val) => {
+    const isRecaptchaValid = reCapthchaRef.current?.getValue();
+    setIsCaptcha(isRecaptchaValid);
+  };
+
+  console.log("11", isCaptcha);
   return (
     <div className="login-page-container">
       <LeftSide />
@@ -67,23 +76,27 @@ const Login = () => {
             </p>
           </div>
           <div className="divider" />
-          <Form onSubmit={loginForm.handleSubmit} formInstance={loginForm}>
-            <div className="login-form">
-              <div className="form-buttons">
-                <CoolButton
-                  selected={button === "Email"}
-                  onClick={() => setButton("Email")}
-                  label={t("loginPageEmail")}
-                  type="Selected"
-                />
-                <CoolButton
-                  onClick={() => setButton("Mobile")}
-                  selected={button === "Mobile"}
-                  label={t("loginPageMobile")}
-                  type="Selected"
-                />
-              </div>
-              {button === "Email" && (
+          <div className="login-form">
+            <div className="form-buttons">
+              <CoolButton
+                selected={button === "Email"}
+                onClick={() => setButton("Email")}
+                label={t("loginPageEmail")}
+                type="Selected"
+              />
+              <CoolButton
+                onClick={() => setButton("Mobile")}
+                selected={button === "Mobile"}
+                label={t("loginPageMobile")}
+                type="Selected"
+              />
+            </div>
+            {button === "Email" && (
+              <Form
+                onSubmit={loginForm.handleSubmit}
+                formInstance={loginForm}
+                isLoading={loginResponse.isLoading}
+              >
                 <div className="form-inputs">
                   <div className="email">
                     <TextBox
@@ -94,7 +107,7 @@ const Login = () => {
                       placeholder={t("loginPageEmailPlaceHolder")}
                       value={loginForm.values.email}
                       setValue={(value) =>
-                        loginForm.setFieldValue("email", value)
+                        loginForm.setFieldValue("Email", value)
                       }
                     />
                   </div>
@@ -111,10 +124,26 @@ const Login = () => {
                       </Link>
                     </p>
                   </div>
-                  <FormTriggerButton label={t("loginPageLogin")} />
+
+                  <div style={{ width: "100%" }}>
+                    <GoogleReCaptcha
+                      reCapthchaRef={reCapthchaRef}
+                      onChange={handleOnReCaptchaChanged}
+                    />
+                    <FormTriggerButton
+                      disabled={isCaptcha ? false : true}
+                      label={t("loginPageLogin")}
+                    />
+                  </div>
                 </div>
-              )}
-              {button === "Mobile" && (
+              </Form>
+            )}
+            {/* {button === "Mobile" && (
+              <Form
+                onSubmit={loginForm.handleSubmit}
+                formInstance={loginForm}
+                isLoading={loginResponse.isLoading}
+              >
                 <div className="form-inputs">
                   <div className="email">
                     <p className="email-label">{t("loginPageMobile")}</p>
@@ -133,11 +162,15 @@ const Login = () => {
                       </Link>
                     </p>
                   </div>
+                  <GoogleReCaptcha
+                    reCapthchaRef={reCapthchaRef}
+                    onChange={handleOnReCaptchaChanged}
+                  />
                   <FormTriggerButton label={t("loginPageLogin")} />
                 </div>
-              )}
-            </div>
-          </Form>
+              </Form>
+            )} */}
+          </div>
         </div>
       </div>
     </div>

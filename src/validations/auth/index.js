@@ -41,31 +41,31 @@ export const registerFormValidations = yup.object().shape({
 
 //Login form
 export const loginFormValidations = yup.object().shape({
-  password: yup
+  Password: yup
     .string()
     .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
     .required(),
-  email: yup.string().email().required(),
+  Email: yup.string().email().required(),
 });
 
 export const forgotPasswordLastStepFormValidations = yup.object().shape({
-  password: yup
+  Password: yup
     .string()
     .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
     .required(),
-  passwordAgain: yup
+  PasswordAgain: yup
     .string()
     .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
     .required(),
-  email: yup.string().email().required(),
+  Email: yup.string().email().required(),
 });
 
 export const forgotPasswordFirstStepFormValidations = yup.object().shape({
-  email: yup.string().email().required(),
+  Email: yup.string().email().required(),
 });
 
 export const forgotPasswordSecondStepFormValidations = yup.object().shape({
-  verificationCode: yup
+  Token: yup
     .array()
     .of(
       yup
