@@ -32,10 +32,8 @@ const CoolButton = ({ disabled, type, selected, label, onClick, fullSize }) => {
         </div>
       )}
       {type === "Small" && (
-        <div className="btn-small-padding">
-          <button disabled={disabled} onClick={onClick}>
-            {label}
-          </button>
+        <div className="btn-small-padding" onClick={onClick}>
+          {label}
         </div>
       )}
       {type === "Main&Small" && (

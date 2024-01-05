@@ -23,7 +23,7 @@ const FormikFormErrorDisplayer = ({ formInstance }) => {
       }
 
       const isObject =
-        item !== null && typeof item === "object" && !Array.isArray(item);
+        (item !== null && typeof item === "object") || Array.isArray(item);
 
       if (isObject) {
         return (
@@ -54,6 +54,7 @@ const FormikFormErrorDisplayer = ({ formInstance }) => {
   }, [getCurrentWindowWidth]);
 
   const RenderErrorsItem = ({ item }) => {
+    if (!item) return;
     return (
       <div
         initial={{ y: -20, opacity: 0 }}
@@ -80,7 +81,7 @@ const FormikFormErrorDisplayer = ({ formInstance }) => {
               </div>
             )}
             <div className="error-displayer-icon">
-              <MdErrorOutline color="red" size="50px" />{" "}
+              <MdErrorOutline color="red" size="50px" />
             </div>
           </div>
           {isErrorDisplayerOpen && (

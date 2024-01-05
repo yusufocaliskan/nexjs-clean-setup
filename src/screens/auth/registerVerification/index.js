@@ -3,45 +3,45 @@ import "../auth.scss";
 
 import {
   Form,
-  TextBox,
   Title,
-  PasswordInputs,
-  PhoneInput,
-  FullNameInputs,
-  DateSelectBox,
-  CitizenshipNationalitySelector,
   FormTriggerButton,
-  TermAndPolicyCheckBox,
-  DeclarationCheckBox,
-  GoogleReCaptcha,
+  CoolButton,
+  Spacer,
 } from "@/components";
 import { useFormik } from "formik";
-import { registerFormValidations } from "@/validations/auth";
+import { registerVerificationFormValidations } from "@/validations/auth";
 import { useTranslation } from "@/app/i18n/client";
 import { useEffect, useRef } from "react";
-import { authApi } from "@/services/auth";
-import { referralApi } from "@/services/referral";
 import { AuthLayout } from "@/layouts";
-import useDebounce from "@/hooks/useDebounce";
-import toast from "react-hot-toast";
 import { queryResult } from "@/services/queryResult";
 import routes from "@/routes";
 import Link from "next/link";
 import VerificationCode from "@/components/form/VerificationCodeInput";
+import { useSelector } from "react-redux";
+import { useSession } from "next-auth/react";
 
+const VERIFICATION_CODE_NUMBER = 6;
 const RegisterVerification = () => {
   const { t } = useTranslation();
-  const referralCodeInput = useRef();
   const reCapthchaRef = useRef();
+  const user = useSelector((state) => state.user);
 
+  const session = useSession();
+  console.log("Session", session);
   //form validations
   const registerVerificationForm = useFormik({
     initialValues: {
       Token: ["", "", "", "", "", ""],
+      email: "test@gmail.com",
     },
-    validationSchema: registerFormValidations,
+    validationSchema: registerVerificationFormValidations,
     onSubmit: () => handleOnSubmitRegisterForm(),
   });
+
+  //The description above inputs
+  const descriptionText = t("completeTheRegistraionScreenDesc")
+    .replace("%d", VERIFICATION_CODE_NUMBER)
+    .replace("%s", registerVerificationForm.values.email);
 
   //On form submitted
   const handleOnSubmitRegisterForm = async () => {};
@@ -59,10 +59,15 @@ const RegisterVerification = () => {
 
   return (
     <AuthLayout headerLinkRender={<HeaderLinkRender />}>
+      <Spacer h={100} />
       <Title text={t("completeTheRegistration")} />
-      <Form formInstance={registerVerificationForm}>
+      <Form formInstance={registerVerificationForm} dontDisplayErrors>
         <div className="login-form">
           <div className="form-inputs">
+            <div className="text-align-center">
+              <p dangerouslySetInnerHTML={{ __html: descriptionText }} />
+            </div>
+
             <div className="verification-div">
               <VerificationCode
                 formInstance={registerVerificationForm}
@@ -73,14 +78,16 @@ const RegisterVerification = () => {
                 }
               />
             </div>
+            <div className="input-groups">
+              <CoolButton label={t("resendCode")} type="Small" />
+              <FormTriggerButton
+                formInstance={registerVerificationForm}
+                // isLoading={regitrationResponse.isLoading}
+                label={t("verify")}
+              />
+            </div>
           </div>
         </div>
-
-        <FormTriggerButton
-          formInstance={registerVerificationForm}
-          // isLoading={regitrationResponse.isLoading}
-          label={t("verify")}
-        />
       </Form>
     </AuthLayout>
   );

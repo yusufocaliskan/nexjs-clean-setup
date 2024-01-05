@@ -1,4 +1,5 @@
 {
+  "maxFormRequestSizeText": "You have reach the maximum post of the form. Please fill the form again",
   "verify": "Verify",
   "emailInputPlaceholder": "Type a valid e-mail address",
   "unknownRequestErrorMessage": "An unknow error occured. Please try again later. ",
@@ -41,7 +42,9 @@
   "year": "Year",
   "yearPlaceholder": "Year",
 
-  "completeTheRegistration": "Complete The Registration",
+  "completeTheRegistration": "Security verification",
+  "completeTheRegistraionScreenDesc": "To secure your account, please complete the following verification. Enter the %d digit code received by <b>%s</b>",
+  "resendCode": "Resend Code",
   "dontHaveAnAccount": "Don't have an account",
   "signUpForFree": "Sign up for free",
   "alreadyHaveAnAccount": "Already have an account?",

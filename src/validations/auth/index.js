@@ -70,13 +70,23 @@ export const forgotPasswordSecondStepFormValidations = yup.object().shape({
     .of(
       yup
         .mixed()
-        .test(
-          "isValidCode",
-          "Doğrulama kodu rakamlardan oluşmalıdır",
-          (value) => /^\d$/.test(value),
-        )
-        .required("Doğrulama kodu boş bırakılamaz"),
+        .test("isValidCode", "codeMustBeNumber", (value) => /^\d$/.test(value))
+        .required("verificationCodeisRequired"),
     )
-    .min(6, "Doğrulama kodu 6 karakterden oluşmalıdır")
-    .max(6, "Doğrulama kodu 6 karakterden oluşmalıdır"),
+    .min(6, "codeMustBeMin6")
+    .max(6, "codeMustBeMax6"),
+});
+
+//REgister Verification screen
+export const registerVerificationFormValidations = yup.object().shape({
+  Token: yup
+    .array()
+    .of(
+      yup
+        .mixed()
+        .test("isValidCode", "codeMustBeNumber", (value) => /^\d$/.test(value))
+        .required("verificationCodeisRequired"),
+    )
+    .min(6, "codeMustBeMin6")
+    .max(6, "codeMustBeMax6"),
 });

@@ -1,23 +1,31 @@
 import toast from "react-hot-toast";
 import ErrorDisplayer from "./ErrorsDisplayer";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { appConfigs } from "@/configs";
 import GiantLoaderAnimation from "../LoadingGif/GiantLoaderAnimation";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/app/i18n/client";
 
-const Form = ({ children, formInstance, isLoading, setIsLoading }) => {
+const Form = ({
+  children,
+  formInstance,
+  dontDisplayErrors = false,
+  isLoading,
+  setIsLoading,
+}) => {
+  const { t } = useTranslation();
+
   //set a max post request
   useEffect(() => {
     if (formInstance.submitCount >= appConfigs.form.maxFormRequestSize) {
-      toast.error(
-        "You have riched the maximum post of the form. Please fill the form again.",
-      );
+      toast.error(t("maxFormRequestSizeText"));
       formInstance.resetForm();
     }
   }, [formInstance.submitCount]);
 
   return (
     <>
+      {/* //TODO: Try to find a better desing of GiantLoaderAnimation */}
       {isLoading && (
         <GiantLoaderAnimation isOpen={isLoading} setIsLoading={setIsLoading} />
       )}
@@ -32,7 +40,7 @@ const Form = ({ children, formInstance, isLoading, setIsLoading }) => {
         }}
         onSubmit={formInstance.handleSubmit}
       >
-        <ErrorDisplayer formInstance={formInstance} />
+        {!dontDisplayErrors && <ErrorDisplayer formInstance={formInstance} />}
         {children}
       </motion.form>
     </>

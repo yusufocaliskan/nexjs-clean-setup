@@ -21,6 +21,7 @@ export { default as FormTriggerButton } from "./Form/FormTriggerButton";
 //Screen Commons
 export { default as Title } from "./ScreenCommons/Title";
 export { default as VerticalDivider } from "./ScreenCommons/VerticalDiverder";
+export { default as Spacer } from "./ScreenCommons/Spacer";
 
 //Icons
 export { default as LockLine } from "./Icons/LockLine.js";
