@@ -16,6 +16,7 @@ const TextBox = ({
   onBlur,
   isLoading,
   message,
+  inputRef,
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const isError = formInstance?.errors[name] && formInstance.submitCount > 0;
@@ -45,6 +46,7 @@ const TextBox = ({
           onChange={handleOnKeyDown}
           disabled={isLoading}
           onBlur={onBlur}
+          ref={inputRef}
         />
       </label>
       {isLoading && (

@@ -19,13 +19,14 @@ import { useFormik } from "formik";
 import { registerFormValidations } from "@/validations/auth";
 import { useTranslation } from "@/app/i18n/client";
 import { useEffect, useRef } from "react";
-import LeftSide from "../leftSide";
 import { authApi } from "@/services/auth";
 import { referralApi } from "@/services/referral";
 import { AuthLayout } from "@/layouts";
+import useDebounce from "@/hooks/useDebounce";
 
 const RegisterTest = () => {
   const { t } = useTranslation();
+  const referralCodeInput = useRef();
   const reCapthchaRef = useRef();
 
   const [newRegisteration, regitrationResponse] =
@@ -58,6 +59,30 @@ const RegisterTest = () => {
     validationSchema: registerFormValidations,
     onSubmit: () => handleOnSubmitRegisterForm(),
   });
+
+  //Check if given referralCode is valid
+  const [textDebouncedReferralCode] = useDebounce(
+    registerForm.values.ReferralCode,
+    600,
+  );
+
+  useEffect(() => {
+    const check4ValidRefferalCode = async () => {
+      if (textDebouncedReferralCode) {
+        const res = await checkIReferralIdIsValid(textDebouncedReferralCode);
+        console.log(res);
+
+        //FIX: this does't work, I dont know why!
+        referralCodeInput.current.focus();
+      }
+    };
+    check4ValidRefferalCode();
+  }, [textDebouncedReferralCode]);
+
+  useEffect(() => {
+    referralIdResponse?.error?.data && referralCodeInput.current.focus();
+  }, [referralIdResponse]);
+
   //On form submitted
   const handleOnSubmitRegisterForm = () => {
     const captchaToken = reCapthchaRef.current.getValue();
@@ -92,12 +117,6 @@ const RegisterTest = () => {
 
   const handleOnReCaptchaChanged = (val) => {
     console.log(val);
-  };
-
-  //Check if given referralCode is valid
-  const handleOnReferralIdInputBlur = () => {
-    if (registerForm.values.ReferralCode)
-      checkIReferralIdIsValid(registerForm.values.ReferralCode);
   };
 
   const HeaderLinkRender = () => {
@@ -135,14 +154,14 @@ const RegisterTest = () => {
               formInstance={registerForm}
               label={t("referralId")}
               placeholder={t("referralIdPlaceholder")}
-              name="referralId"
-              onBlur={handleOnReferralIdInputBlur}
+              name="ReferralCode"
               value={registerForm.values.ReferralCode}
               isLoading={referralIdResponse.isLoading}
               message={referralIdResponse?.error?.data?.Message || ""}
               setValue={(value) =>
                 registerForm.setFieldValue("ReferralCode", value)
               }
+              inputRef={referralCodeInput}
             />
             <FullNameInputs formInstance={registerForm} />
             <DateSelectBox formInstance={registerForm} />
