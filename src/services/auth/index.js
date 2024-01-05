@@ -24,3 +24,24 @@ export const authApi = createApi({
     }),
   }),
 });
+
+export const forgotPassword = createApi({
+  reducerPath: "forgotPassword",
+  baseQuery: clientBaseQuery(),
+  endpoints: (builder) => ({
+    deletePassword: builder.mutation({
+      query: (data) => ({
+        url: "users/password",
+        method: "DELETE",
+        data: data,
+      }),
+    }),
+    createPassword: builder.mutation({
+      query: (data) => ({
+        url: "users/password",
+        method: "POST",
+        data: data,
+      }),
+    }),
+  }),
+});

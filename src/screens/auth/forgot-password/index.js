@@ -10,6 +10,7 @@ import {
   TextBox,
   Title,
   FormTriggerButton,
+  Form,
 } from "@/components";
 import LogoBg from "@/components/Logo";
 import SmallLogo from "@/components/Logo/smallLogo";
@@ -22,15 +23,19 @@ import {
   loginFormValidations,
 } from "@/validations/auth";
 import { useRef } from "react";
-import Form from "@/components/form";
 import { hiddenEmail } from "@/utils/helpers";
+import { forgotPassword } from "@/services/auth";
 
 const ForgotPassword = () => {
   const [stepper, setStepper] = useState(1);
+  const [createPassword, createPasswordResponse] =
+    forgotPassword.useCreatePasswordMutation();
+  const [deletePassword, deletePasswordResponse] =
+    forgotPassword.useDeletePasswordMutation();
 
   const firsStep = useFormik({
     initialValues: {
-      email: "",
+      Email: "",
     },
     validationSchema: forgotPasswordFirstStepFormValidations,
     onSubmit: () => handleOnSubmitFirstForm(),
@@ -38,7 +43,7 @@ const ForgotPassword = () => {
 
   const secondStep = useFormik({
     initialValues: {
-      verificationCode: ["", "", "", "", "", ""],
+      Token: ["", "", "", "", "", ""],
     },
     validationSchema: forgotPasswordSecondStepFormValidations,
     onSubmit: () => handleOnSubmitSecondForm(),
@@ -46,37 +51,28 @@ const ForgotPassword = () => {
 
   const thirdStep = useFormik({
     initialValues: {
-      password: "",
-      passwordAgain: "",
-      email: "",
+      Password: "",
+      PasswordAgain: "",
+      Email: "",
     },
     validationSchema: forgotPasswordLastStepFormValidations,
     onSubmit: () => handleOnSubmitThirdForm(),
   });
 
-  const handleOnSubmitFirstForm = () => {
-    if (stepper < 3) {
+  //will be adjusted according to the upcoming update.
+  const handleOnSubmitFirstForm = async () => {
+    const deletePasswordResponse = await deletePassword(firsStep.values);
+    console.log(deletePasswordResponse);
+    if (deletePasswordResponse.isSuccess) {
       setStepper(stepper + 1);
-    } else {
-      router.push("/auth/login");
     }
   };
 
   const handleOnSubmitSecondForm = () => {
-    if (stepper < 3) {
-      setStepper(stepper + 1);
-    } else {
-      router.push("/auth/login");
-    }
+    setStepper(stepper + 1);
   };
 
-  const handleOnSubmitThirdForm = () => {
-    if (stepper < 3) {
-      setStepper(stepper + 1);
-    } else {
-      router.push("/auth/login");
-    }
-  };
+  const handleOnSubmitThirdForm = () => {};
 
   const path = usePathname();
   const lang = path.substring(1).split("/")[0];
@@ -101,7 +97,11 @@ const ForgotPassword = () => {
         </div>
         <div className="forgot-page-right-content">
           {stepper === 1 && (
-            <Form onSubmit={firsStep.handleSubmit} formInstance={firsStep}>
+            <Form
+              onSubmit={firsStep.handleSubmit}
+              isLoading={deletePasswordResponse.isLoading}
+              formInstance={firsStep}
+            >
               <Title text={t("forgotPasswordPageForgotPassword")} />
               <div className="visit-url">
                 <p className="visit-text">
@@ -115,8 +115,8 @@ const ForgotPassword = () => {
                   placeholder={t("justEmail")}
                   icon={<MailBox />}
                   formInstance={firsStep}
-                  value={firsStep.values.email}
-                  setValue={(value) => firsStep.setFieldValue("email", value)}
+                  value={firsStep.values.Email}
+                  setValue={(value) => firsStep.setFieldValue("Email", value)}
                 />
               </div>
               <FormTriggerButton label={t("forgotPasswordPageContinue")} />
@@ -139,15 +139,15 @@ const ForgotPassword = () => {
                   {t("forgotPasswordPageSixDigit")}
                   <span className="visit-text-six-digit-mail">
                     {" "}
-                    {hiddenEmail(firsStep.values.email)}
+                    {hiddenEmail(firsStep.values.Email)}
                   </span>
                 </p>
                 <div className="verification-div">
                   <VerificationCode
                     formInstance={secondStep}
-                    verificationCode={secondStep.values.verificationCode}
+                    verificationCode={secondStep.values.Token}
                     setVerificationCode={(value) =>
-                      secondStep.setFieldValue("verificationCode", value)
+                      secondStep.setFieldValue("Token", value)
                     }
                   />
                 </div>
@@ -171,8 +171,8 @@ const ForgotPassword = () => {
                 name="email"
                 placeholder={t("justEmail")}
                 formInstance={thirdStep}
-                value={thirdStep.values.email}
-                setValue={(value) => thirdStep.setFieldValue("email", value)}
+                value={thirdStep.values.Email}
+                setValue={(value) => thirdStep.setFieldValue("Email", value)}
               />
               <TextBox
                 label={t("forgotPasswordPageNewPassword")}
@@ -181,8 +181,8 @@ const ForgotPassword = () => {
                 placeholder={t("justPassword")}
                 isSecure
                 formInstance={thirdStep}
-                value={thirdStep.values.password}
-                setValue={(value) => thirdStep.setFieldValue("password", value)}
+                value={thirdStep.values.Password}
+                setValue={(value) => thirdStep.setFieldValue("Password", value)}
               />
               <TextBox
                 label={t("forgotPasswordPageConfirmPassword")}
@@ -191,9 +191,9 @@ const ForgotPassword = () => {
                 placeholder={t("justPassword")}
                 isSecure
                 formInstance={thirdStep}
-                value={thirdStep.values.passwordAgain}
+                value={thirdStep.values.PasswordAgain}
                 setValue={(value) =>
-                  thirdStep.setFieldValue("passwordAgain", value)
+                  thirdStep.setFieldValue("PasswordAgain", value)
                 }
               />
               <FormTriggerButton label={t("forgotPasswordPageContinue")} />
