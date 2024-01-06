@@ -1,8 +1,9 @@
 "use client";
 
 import "../auth.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "@/app/i18n/client";
+
 import {
   LockLine,
   CoolButton,
@@ -13,6 +14,7 @@ import {
   Form,
   GoogleReCaptcha,
 } from "@/components";
+
 import Link from "next/link";
 import SmallLogo from "@/components/Logo/smallLogo";
 import { useFormik } from "formik";
@@ -20,11 +22,26 @@ import { loginFormValidations } from "@/validations/auth";
 import { useRef } from "react";
 import LeftSide from "../leftSide";
 import { authApi } from "@/services/auth";
+import { signIn, useSession } from "next-auth/react";
+import toast from "react-hot-toast";
+import ThemeSwitcher from "@/components/ThemeSwitcher";
+import { useRouter } from "next/navigation";
+import routes from "@/routes";
+import { setToken } from "@/store/user";
+import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
   const [isCaptcha, setIsCaptcha] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const reCapthchaRef = useRef();
+  const router = useRouter();
+  const { t } = useTranslation();
+  const session = useSession();
+  const isAuthorized = session.status === "authenticated";
+
   const loginForm = useFormik({
     initialValues: {
       Password: "",
@@ -33,12 +50,33 @@ const Login = () => {
     validationSchema: loginFormValidations,
     onSubmit: () => handleOnSubmitLoginForm(),
   });
-  const [login, loginResponse] = authApi.useLoginMutation();
-  const data = loginForm.values;
-  const { t } = useTranslation();
 
-  const handleOnSubmitLoginForm = (vals) => {
-    login(data);
+  const data = loginForm.values;
+
+  //store the user token that comes from server
+  useEffect(() => {
+    if (isAuthorized) {
+      const tokens = session?.data?.accessToken;
+      if (tokens) {
+        dispatch(setToken(tokens));
+        //router.push(routes.welcome);
+      }
+    }
+  }, [session, dispatch, isAuthorized, router]);
+
+  const handleOnSubmitLoginForm = async (vals) => {
+    setIsLoading(true);
+    const resp = await signIn("credentials", {
+      ...data,
+      redirect: false,
+      callbackUrl: routes.welcome,
+    });
+
+    if (resp.ok) {
+      router.push(routes.welcome);
+    }
+
+    setIsLoading(false);
   };
 
   const handleOnReCaptchaChanged = (val) => {
@@ -46,7 +84,6 @@ const Login = () => {
     setIsCaptcha(isRecaptchaValid);
   };
 
-  console.log("11", isCaptcha);
   return (
     <div className="login-page-container">
       <LeftSide />
@@ -57,6 +94,7 @@ const Login = () => {
             style={{ display: "flex", gap: "10px" }}
             className="login-page-right-top-text"
           >
+            <ThemeSwitcher />
             {t("dontHaveAnAccount")}
             <span className="sign-up-for-free">{t("signUpForFree")}</span>
           </p>
@@ -91,7 +129,7 @@ const Login = () => {
               <Form
                 onSubmit={loginForm.handleSubmit}
                 formInstance={loginForm}
-                isLoading={loginResponse.isLoading}
+                isLoading={isLoading}
               >
                 <div className="form-inputs">
                   <div className="email">
@@ -101,7 +139,7 @@ const Login = () => {
                       type="email"
                       name={t("loginPageEmail")}
                       placeholder={t("loginPageEmailPlaceHolder")}
-                      value={loginForm.values.email}
+                      value={loginForm.values.Email}
                       setValue={(value) =>
                         loginForm.setFieldValue("Email", value)
                       }

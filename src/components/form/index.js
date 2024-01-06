@@ -18,8 +18,8 @@ const Form = ({
   //set a max post request
   useEffect(() => {
     if (formInstance.submitCount >= appConfigs.form.maxFormRequestSize) {
-      toast.error(t("maxFormRequestSizeText"));
       formInstance.resetForm();
+      toast.error(t("maxFormRequestSizeText"));
     }
   }, [formInstance.submitCount]);
 

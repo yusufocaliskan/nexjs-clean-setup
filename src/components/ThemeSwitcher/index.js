@@ -2,7 +2,10 @@ import { useTranslation } from "@/app/i18n/client";
 import { setTheme } from "@/store/app";
 import { getSelectedLanguage } from "@/utils";
 import { useDispatch, useSelector } from "react-redux";
-import { CoolButton } from "@/components";
+
+import { MdSunny } from "react-icons/md";
+import { TbMoonFilled } from "react-icons/tb";
+import { motion } from "framer-motion";
 
 const ThemeSwitcher = () => {
   const dispatch = useDispatch();
@@ -31,14 +34,33 @@ const ThemeSwitcher = () => {
 
   return (
     <>
-      <CoolButton
-        label={app.currentTheme !== "dark_theme" ? t("dark") : t("light")}
+      <div
+        style={{ cursor: "pointer" }}
         onClick={() =>
           handleSwitcheTheme(
             app.currentTheme == "dark_theme" ? "light_theme" : "dark_theme",
           )
         }
-      />
+      >
+        {app.currentTheme == "light_theme" && (
+          <motion.div
+            initial={{ rotate: -90, scale: 0.8, opacity: 0.5 }}
+            animate={{ rotate: 0, scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <TbMoonFilled size={20} />
+          </motion.div>
+        )}
+        {app.currentTheme == "dark_theme" && (
+          <motion.div
+            initial={{ rotate: 90, scale: 0.8, opacity: 0.5 }}
+            animate={{ rotate: 0, scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5 }}
+          >
+            <MdSunny size={22} />
+          </motion.div>
+        )}
+      </div>
     </>
   );
 };

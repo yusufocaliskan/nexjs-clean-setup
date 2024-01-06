@@ -27,6 +27,7 @@ import toast from "react-hot-toast";
 import { queryResult } from "@/services/queryResult";
 import routes from "@/routes";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -69,6 +70,7 @@ const Register = () => {
     registerForm.values.ReferralCode,
     600,
   );
+  useEffect(() => {}, []);
 
   useEffect(() => {
     const check4ValidRefferalCode = async () => {

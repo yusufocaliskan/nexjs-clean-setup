@@ -13,6 +13,11 @@ const userSlice = createSlice({
     setUser(state, action) {
       state.user = action.payload;
     },
+
+    //On login
+    setToken(state, action) {
+      state.token = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -47,5 +52,5 @@ const userSlice = createSlice({
 });
 
 export { authApi };
-export const { setUser } = userSlice.actions;
+export const { setUser, setToken } = userSlice.actions;
 export default userSlice.reducer;

@@ -22,6 +22,13 @@ export const authApi = createApi({
         data: data,
       }),
     }),
+    logoutSession: builder.mutation({
+      query: (data) => ({
+        url: "users/logout",
+        method: "DELETE",
+        data: data,
+      }),
+    }),
   }),
 });
 
