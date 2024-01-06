@@ -66,6 +66,7 @@ const Login = () => {
 
   //store the user token that comes from server
   useEffect(() => {
+    //signOut({ redirect: false });
     //is user need to confirm her/his e-mail?
     //redirect to email confirmation page
     if (session?.data?.notConfirmedEmail) {
@@ -94,6 +95,9 @@ const Login = () => {
       callbackUrl: routes.welcome,
     });
 
+    if (!resp.ok) {
+      toast.error("Wrong informations");
+    }
     if (resp.ok) {
       //loginForm.resetForm();
       //router.push(routes.welcome);

@@ -33,6 +33,7 @@ const nextAuthOptions = {
           // If login failed, return null
           return null;
         } catch (error) {
+          return null;
           return error;
         }
       },
