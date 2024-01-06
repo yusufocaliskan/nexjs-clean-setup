@@ -21,24 +21,31 @@ import { useFormik } from "formik";
 import { loginFormValidations } from "@/validations/auth";
 import { useRef } from "react";
 import LeftSide from "../leftSide";
-import { authApi } from "@/services/auth";
 import { signIn, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { useRouter } from "next/navigation";
 import routes from "@/routes";
-import { setToken } from "@/store/user";
+import { authApi, setToken } from "@/store/user";
 import { useDispatch, useSelector } from "react-redux";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
   const [isCaptcha, setIsCaptcha] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  //Store
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+
+  const [getUserInformations, userInformationResponse] =
+    authApi.useGetUserInformationsMutation();
+
   const reCapthchaRef = useRef();
   const router = useRouter();
   const { t } = useTranslation();
+
+  //SEssions
   const session = useSession();
   const isAuthorized = session.status === "authenticated";
 
@@ -63,6 +70,7 @@ const Login = () => {
     //Is signIn success
     if (isAuthorized) {
       const tokens = session?.data?.accessToken;
+      console.log("Heeee");
       if (tokens) {
         dispatch(setToken(tokens));
         //router.push(routes.welcome);
@@ -70,6 +78,9 @@ const Login = () => {
     }
   }, [session, dispatch, isAuthorized, router]);
 
+  useEffect(() => {
+    getUserInformations();
+  }, []);
   const handleOnSubmitLoginForm = async (vals) => {
     setIsLoading(true);
     const resp = await signIn("credentials", {

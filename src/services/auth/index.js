@@ -15,10 +15,10 @@ export const authApi = createApi({
         },
       }),
     }),
-    login: builder.mutation({
+    getUserInformations: builder.mutation({
       query: (data) => ({
-        url: "users/login",
-        method: "POST",
+        url: "account/informations",
+        method: "GET",
         data: data,
       }),
     }),

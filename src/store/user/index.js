@@ -4,6 +4,7 @@ export const userAdapter = createEntityAdapter();
 
 const initialState = userAdapter.getInitialState({
   informations: {},
+  token: {},
 });
 
 const userSlice = createSlice({
@@ -16,6 +17,7 @@ const userSlice = createSlice({
 
     //On login
     setToken(state, action) {
+      console.log("Herrrreee works", action.payload);
       state.token = action.payload;
     },
   },
@@ -30,22 +32,10 @@ const userSlice = createSlice({
     );
 
     builder.addMatcher(
-      authApi.endpoints.login.matchFulfilled,
+      authApi.endpoints.getUserInformations.matchFulfilled,
       (state, action) => {
-        console.log("USer : login Fulfilled -->", action.payload.user);
-        state.informations = action.payload.user;
-      },
-    );
-    builder.addMatcher(
-      authApi.endpoints.login.matchPending,
-      (state, action) => {
-        console.log("login Pending-->", action);
-      },
-    );
-    builder.addMatcher(
-      authApi.endpoints.login.matchRejected,
-      (state, action) => {
-        console.log("login Rejected -->", action);
+        console.log("USer : Inforrmations -->", action.payload);
+        //state.informations = action.payload;
       },
     );
   },

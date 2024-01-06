@@ -1,15 +1,25 @@
 import { languages } from "@/app/i18n/settings";
+import { setSelectedLanguage } from "@/store/app";
 import { getSelectedLanguage } from "@/utils";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 
 const LanguageSwitcher = () => {
   const path = usePathname();
   const selectedLangue = getSelectedLanguage();
+  const router = useRouter();
+  const dispatch = useDispatch();
 
-  //TODO: Try to find the best approach when switching the language
   const generateLanguageLink = (lng) => {
     const newPath = path.replace(selectedLangue, lng);
+    console.log(newPath);
     return newPath;
+  };
+
+  const handleOnLanguageSwitched = (lang) => {
+    const path = generateLanguageLink(lang);
+    dispatch(setSelectedLanguage(lang));
+    router.push(path);
   };
 
   return (
@@ -17,13 +27,13 @@ const LanguageSwitcher = () => {
       <div>
         {Object.keys(languages).map((key, index) => {
           return (
-            <a
+            <div
               style={{ cursor: "pointer", marginRight: 10 }}
               key={index}
-              href={generateLanguageLink(languages[key])}
+              onClick={() => handleOnLanguageSwitched(languages[key])}
             >
               {languages[key]}
-            </a>
+            </div>
           );
         })}
       </div>

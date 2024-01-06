@@ -28,6 +28,7 @@ import { queryResult } from "@/services/queryResult";
 import routes from "@/routes";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -147,6 +148,7 @@ const Register = () => {
     return (
       <p className="login-page-right-top-text">
         {t("dontHaveAnAccount")}
+        <LanguageSwitcher />
         <Link href={routes.auth.register} className="sign-up-for-free">
           {t("signUpForFree")}
         </Link>

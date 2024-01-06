@@ -24,7 +24,7 @@ const rootReducers = (state, action) => {
 const persistConfig = {
   key: "root",
   storage: storage,
-  whitelist: [authApi.reducerPath, "app"],
+  whitelist: [authApi.reducerPath, "app", "user"],
 };
 
 //Combine theme.
@@ -46,7 +46,7 @@ const configuredStore = configureStore({
 //Before the store initialized
 const onRehydrate = () => {};
 
-const persistor = persistStore(configuredStore, {}, onRehydrate);
+const persistor = persistStore(configuredStore, null, () => {});
 
 setupListeners(configuredStore.dispatch);
 
