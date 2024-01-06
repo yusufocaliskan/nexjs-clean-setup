@@ -20,9 +20,15 @@ const nextAuthOptions = {
             credentials,
           );
 
+          //is email of the user confirmed?
+          //if (queryResult.IS_EMAIL_NOT_CONFIRMED(response.data)) {
           // Check if the login was successful based on your server's response structure
           if (queryResult.isSuccess(response.data)) {
             return { token: response.data.Data };
+          }
+
+          if (queryResult.IS_EMAIL_NOT_CONFIRMED(response.data)) {
+            return { email: credentials.Email, notConfirmedEmail: true };
           }
           // If login failed, return null
           return null;
@@ -38,10 +44,20 @@ const nextAuthOptions = {
     async session({ session, user, token }) {
       //console.log("CalBack Session", { session, user, token });
       session.accessToken = token.accessToken;
+      session.notConfirmedEmail = token?.notConfirmedEmail;
+      session.email = token?.email;
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
-      if (user) {
+      //is email confirmed??
+      console.log(user, token);
+      if (user?.notConfirmedEmail) {
+        token.notConfirmedEmail = true;
+        token.user = user.email;
+      }
+
+      //if the sing in success
+      if (user?.token) {
         token.accessToken = user.token;
       }
       return token;

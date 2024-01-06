@@ -55,6 +55,12 @@ const Login = () => {
 
   //store the user token that comes from server
   useEffect(() => {
+    //is user need to confirm her/his e-mail?
+    //redirect to email confirmation page
+    if (session?.data?.notConfirmedEmail) {
+    }
+
+    //Is signIn success
     if (isAuthorized) {
       const tokens = session?.data?.accessToken;
       if (tokens) {
@@ -73,7 +79,7 @@ const Login = () => {
     });
 
     if (resp.ok) {
-      router.push(routes.welcome);
+      //router.push(routes.welcome);
     }
 
     setIsLoading(false);
