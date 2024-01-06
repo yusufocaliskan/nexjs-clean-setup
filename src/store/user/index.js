@@ -17,15 +17,17 @@ const userSlice = createSlice({
 
     //On login
     setToken(state, action) {
-      console.log("Herrrreee works", action.payload);
       state.token = action.payload;
+    },
+    cleanUpUserStore(state, action) {
+      state.token = {};
+      state.informations = {};
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
       authApi.endpoints.newRegistration.matchFulfilled,
       (state, action) => {
-        console.log("USer : Action Fulfilled -->", action.payload.data?.Token);
         //Set the token on success
         state.token = action.payload.data?.Token;
       },
@@ -34,13 +36,12 @@ const userSlice = createSlice({
     builder.addMatcher(
       authApi.endpoints.getUserInformations.matchFulfilled,
       (state, action) => {
-        console.log("USer : Inforrmations -->", action.payload);
-        //state.informations = action.payload;
+        state.informations = action.payload.Data;
       },
     );
   },
 });
 
 export { authApi };
-export const { setUser, setToken } = userSlice.actions;
+export const { setUser, setToken, cleanUpUserStore } = userSlice.actions;
 export default userSlice.reducer;

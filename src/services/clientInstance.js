@@ -1,6 +1,5 @@
 import { appConfigs } from "@/configs";
 import { store } from "@/store";
-import { getSelectedLanguage } from "@/utils";
 import axios from "axios";
 
 const clientInstance = axios.create({

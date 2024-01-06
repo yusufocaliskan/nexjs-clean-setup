@@ -21,13 +21,15 @@ import { useFormik } from "formik";
 import { loginFormValidations } from "@/validations/auth";
 import { useRef } from "react";
 import LeftSide from "../leftSide";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { useRouter } from "next/navigation";
 import routes from "@/routes";
-import { authApi, setToken } from "@/store/user";
+import { authApi, cleanUpUserStore, setToken } from "@/store/user";
 import { useDispatch, useSelector } from "react-redux";
+import ProtectedArea from "@/layouts/area";
+import queryResult from "@/services/queryResult";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
@@ -40,6 +42,8 @@ const Login = () => {
 
   const [getUserInformations, userInformationResponse] =
     authApi.useGetUserInformationsMutation();
+
+  const [logoutSession, logoutResp] = authApi.useLogoutSessionMutation();
 
   const reCapthchaRef = useRef();
   const router = useRouter();
@@ -73,14 +77,15 @@ const Login = () => {
       console.log("Heeee");
       if (tokens) {
         dispatch(setToken(tokens));
+        //Get user informations.
+
+        getUserInformations();
         //router.push(routes.welcome);
       }
     }
   }, [session, dispatch, isAuthorized, router]);
 
-  useEffect(() => {
-    getUserInformations();
-  }, []);
+  useEffect(() => {}, []);
   const handleOnSubmitLoginForm = async (vals) => {
     setIsLoading(true);
     const resp = await signIn("credentials", {
@@ -90,6 +95,7 @@ const Login = () => {
     });
 
     if (resp.ok) {
+      //loginForm.resetForm();
       //router.push(routes.welcome);
     }
 
@@ -99,6 +105,47 @@ const Login = () => {
   const handleOnReCaptchaChanged = (val) => {
     const isRecaptchaValid = reCapthchaRef.current?.getValue();
     setIsCaptcha(isRecaptchaValid);
+  };
+
+  const handleOnLoggout = async () => {
+    const rep = await logoutSession();
+    if (queryResult.isSuccess(rep)) {
+      dispatch(cleanUpUserStore());
+      signOut({ redirect: false });
+    }
+  };
+
+  const LoggedInProfileCard = () => {
+    return (
+      <ProtectedArea session={session}>
+        <div
+          style={{
+            borderWidth: 1,
+            borderColor: "#aaa",
+            borderRadius: 15,
+            padding: 15,
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div>
+            <p>
+              {t("welcome")}, {user.informations.name}{" "}
+              {user.informations.surname}
+            </p>
+            <b>{user.informations.email}</b>
+          </div>
+          <div>
+            <CoolButton
+              label={t("logout")}
+              type="Small"
+              onClick={() => handleOnLoggout()}
+            />
+          </div>
+        </div>
+      </ProtectedArea>
+    );
   };
 
   return (
@@ -128,21 +175,24 @@ const Login = () => {
           </div>
           <div className="divider" />
           <div className="login-form">
-            <div className="form-buttons">
-              <CoolButton
-                selected={button === "Email"}
-                onClick={() => setButton("Email")}
-                label={t("loginPageEmail")}
-                type="Selected"
-              />
-              <CoolButton
-                onClick={() => setButton("Mobile")}
-                selected={button === "Mobile"}
-                label={t("loginPageMobile")}
-                type="Selected"
-              />
-            </div>
-            {button === "Email" && (
+            {!isAuthorized && (
+              <div className="form-buttons">
+                <CoolButton
+                  selected={button === "Email"}
+                  onClick={() => setButton("Email")}
+                  label={t("loginPageEmail")}
+                  type="Selected"
+                />
+                <CoolButton
+                  onClick={() => setButton("Mobile")}
+                  selected={button === "Mobile"}
+                  label={t("loginPageMobile")}
+                  type="Selected"
+                />
+              </div>
+            )}
+            <LoggedInProfileCard />
+            {!isAuthorized && button === "Email" && (
               <Form
                 onSubmit={loginForm.handleSubmit}
                 formInstance={loginForm}
