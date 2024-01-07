@@ -19,6 +19,9 @@ const userSlice = createSlice({
     setToken(state, action) {
       state.token = action.payload;
     },
+    setUserInformations(state, action) {
+      state.informations = action.payload;
+    },
     cleanUpUserStore(state, action) {
       state.token = {};
       state.informations = {};
@@ -43,5 +46,6 @@ const userSlice = createSlice({
 });
 
 export { authApi };
-export const { setUser, setToken, cleanUpUserStore } = userSlice.actions;
+export const { setUser, setToken, setUserInformations, cleanUpUserStore } =
+  userSlice.actions;
 export default userSlice.reducer;

@@ -364,7 +364,29 @@
     }
   }
 }
-
+.verification-method-card {
+  width: 100% !important;
+}
+.verification-item {
+  display: flex;
+  width: 100% !important;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 45px;
+  justify-content: space-between;
+  .verification-item-left {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  p {
+    color: var(--gray-text);
+  }
+  b {
+    font-weight: 400;
+    color: var(--black-text);
+  }
+}
 @media (max-width: 768px) {
   .login-page-container {
     padding: 2rem;

@@ -21,7 +21,7 @@ import { useSelector } from "react-redux";
 import { useSession } from "next-auth/react";
 
 const VERIFICATION_CODE_NUMBER = 6;
-const RegisterVerification = () => {
+const Verification = ({ verificationMethod }) => {
   const { t } = useTranslation();
   const reCapthchaRef = useRef();
   const user = useSelector((state) => state.user);
@@ -93,4 +93,4 @@ const RegisterVerification = () => {
   );
 };
 
-export default RegisterVerification;
+export default Verification;

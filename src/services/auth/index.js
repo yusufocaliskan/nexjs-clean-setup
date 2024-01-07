@@ -15,6 +15,27 @@ export const authApi = createApi({
         },
       }),
     }),
+    verfiyEmailOPhoneNumber: builder.mutation({
+      query: (data) => ({
+        url: "/users/registration/complete",
+        method: "POST",
+        data: data,
+      }),
+    }),
+    reSendVerificationCode2Email: builder.mutation({
+      query: (data) => ({
+        url: "/users/registration/sendemail",
+        method: "POST",
+        data: data,
+      }),
+    }),
+    reSendVerificationCode2Email: builder.mutation({
+      query: (data) => ({
+        url: "/users/registration/sendsms",
+        method: "POST",
+        data: data,
+      }),
+    }),
     getUserInformations: builder.mutation({
       query: (data) => ({
         url: "account/informations",
@@ -22,6 +43,7 @@ export const authApi = createApi({
         data: data,
       }),
     }),
+
     logoutSession: builder.mutation({
       query: (data) => ({
         url: "users/logout",

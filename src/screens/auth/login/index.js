@@ -66,7 +66,6 @@ const Login = () => {
 
   //store the user token that comes from server
   useEffect(() => {
-    //signOut({ redirect: false });
     //is user need to confirm her/his e-mail?
     //redirect to email confirmation page
     if (session?.data?.notConfirmedEmail) {

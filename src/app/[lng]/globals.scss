@@ -39,3 +39,7 @@ body {
 .text-align-center {
   text-align: center;
 }
+
+.fill-icon-gray svg {
+  fill: var(--gray-text);
+}

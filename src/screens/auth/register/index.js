@@ -27,13 +27,20 @@ import toast from "react-hot-toast";
 import { queryResult } from "@/services/queryResult";
 import routes from "@/routes";
 import Link from "next/link";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { setUserInformations } from "@/store/user";
 
 const Register = () => {
   const { t } = useTranslation();
   const referralCodeInput = useRef();
   const reCapthchaRef = useRef();
+  const session = useSession();
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const [newRegisteration, regitrationResponse] =
     authApi.useNewRegistrationMutation();
@@ -71,7 +78,12 @@ const Register = () => {
     registerForm.values.ReferralCode,
     600,
   );
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("Settion SESSION");
+  }, []);
+  useEffect(() => {
+    console.log("Information", user.informations);
+  }, [user]);
 
   useEffect(() => {
     const check4ValidRefferalCode = async () => {
@@ -125,9 +137,18 @@ const Register = () => {
       //On success
       if (queryResult.isSuccess(resp)) {
         //TODO: Set the token to the store
-        //registerForm.resetForm();
+        // set some information to the session, in order to use in verification screen
+        console.log(resp);
+        const data = { ...registerForm.values, token: resp.data?.Data?.Token };
+        dispatch(setUserInformations(data));
+        toast.success(
+          "Good, now need some verification, please waith for a while.",
+        );
 
-        return toast.success(resp.error?.data?.Message);
+        registerForm.resetForm();
+        return setTimeout(() => {
+          router.push(routes.verification.index);
+        }, 3000);
       }
     } catch (error) {
       return toast.error(t("unknownRequestErrorMessage"));

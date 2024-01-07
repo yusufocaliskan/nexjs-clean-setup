@@ -20,21 +20,22 @@ const nextAuthOptions = {
             credentials,
           );
 
-          //is email of the user confirmed?
           //if (queryResult.IS_EMAIL_NOT_CONFIRMED(response.data)) {
           // Check if the login was successful based on your server's response structure
           if (queryResult.isSuccess(response.data)) {
             return { token: response.data.Data };
           }
 
+          //send use to the
           if (queryResult.IS_EMAIL_NOT_CONFIRMED(response.data)) {
             return { email: credentials.Email, notConfirmedEmail: true };
           }
+
           // If login failed, return null
           return null;
         } catch (error) {
+          console.log(error);
           return null;
-          return error;
         }
       },
     }),
@@ -51,7 +52,7 @@ const nextAuthOptions = {
     },
     async jwt({ token, user, account, profile, isNewUser }) {
       //is email confirmed??
-      console.log(user, token);
+
       if (user?.notConfirmedEmail) {
         token.notConfirmedEmail = true;
         token.user = user.email;
@@ -66,7 +67,8 @@ const nextAuthOptions = {
   },
 
   //use the below command and generate new one.
-  // openssl rand -base64 32
+  // NOTE: openssl rand -base64 32
+  // FIX: Save it in a .env file
   secret: "3gHjDz8qrY6cankwnlWvBNIo6tQWAfpOPfDd52Pdfqw=",
 
   // Customized the pages

@@ -10,6 +10,7 @@ const Form = ({
   children,
   formInstance,
   dontDisplayErrors = false,
+  setIsFormReachedMaxTresholde,
   isLoading,
   setIsLoading,
 }) => {
@@ -20,6 +21,7 @@ const Form = ({
     if (formInstance.submitCount >= appConfigs.form.maxFormRequestSize) {
       formInstance.resetForm();
       toast.error(t("maxFormRequestSizeText"));
+      setIsFormReachedMaxTresholde(true);
     }
   }, [formInstance.submitCount]);
 
@@ -40,7 +42,10 @@ const Form = ({
         }}
         onSubmit={formInstance.handleSubmit}
       >
-        {!dontDisplayErrors && <ErrorDisplayer formInstance={formInstance} />}
+        {/* Do not display any erro till first submit */}
+        {!dontDisplayErrors && formInstance.submitCount > 0 && (
+          <ErrorDisplayer formInstance={formInstance} />
+        )}
         {children}
       </motion.form>
     </>

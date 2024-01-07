@@ -43,6 +43,15 @@ const CoolButton = ({ disabled, type, selected, label, onClick, fullSize }) => {
           </button>
         </div>
       )}
+      {type === "Main&Small&Plain" && (
+        <div
+          onClick={onClick}
+          className="btn-small-padding-main"
+          style={{ cursor: "pointer" }}
+        >
+          {label}
+        </div>
+      )}
     </div>
   );
 };
