@@ -1,6 +1,14 @@
 import "./index.scss";
 
-const CoolButton = ({ disabled, type, selected, label, onClick, fullSize }) => {
+const CoolButton = ({
+  disabled,
+  type,
+  selected,
+  label,
+  onClick,
+  fullSize,
+  style,
+}) => {
   return (
     <div className="cool-button">
       {selected && type === "Selected" && (
@@ -25,10 +33,12 @@ const CoolButton = ({ disabled, type, selected, label, onClick, fullSize }) => {
         </div>
       )}
       {type === "Main" && !fullSize && (
-        <div className="btn-main">
-          <button disabled={disabled} sonClick={onClick}>
-            {label}
-          </button>
+        <div
+          className="btn-main"
+          onClick={onClick}
+          style={({ cursor: "pointer" }, { ...style })}
+        >
+          {label}
         </div>
       )}
       {type === "Small" && (
@@ -47,7 +57,7 @@ const CoolButton = ({ disabled, type, selected, label, onClick, fullSize }) => {
         <div
           onClick={onClick}
           className="btn-small-padding-main"
-          style={{ cursor: "pointer" }}
+          style={[{ cursor: "pointer" }, ...style]}
         >
           {label}
         </div>

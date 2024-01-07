@@ -39,12 +39,20 @@ const Verification = ({ verificationMethod }) => {
   const [getSelectedVerificationMethod, setSelectedVerificationMethod] =
     useState();
 
-  const emailCounter = useCounter("emailCounter", 50);
+  //counters
+  const emailCounter = useCounter(
+    "emailCounter",
+    appConfigs.form.counterTimeOut,
+  );
 
-  const smsCounter = useCounter("smsCounter", 29);
+  const smsCounter = useCounter("smsCounter", appConfigs.form.counterTimeOut);
+
   //queries
   const [reSendVerificationCode2Email, resendEmailCodeResponse] =
     authApi.useReSendVerificationCode2EmailMutation();
+
+  const [reSendVerificationCode2Sms, resendSmsCodeResponse] =
+    authApi.useReSendVerificationCode2SmsMutation();
 
   const [verfiyEmailOPhoneNumber, emailVerificationResponse] =
     authApi.useVerfiyEmailOPhoneNumberMutation();
@@ -64,22 +72,11 @@ const Verification = ({ verificationMethod }) => {
     .replace("%s", emailVerificationForm.values.email);
 
   const handleOnEmailVerificationFormSubmit = async () => {
-    const data = {
-      verifyToken: user.informations.token,
-      emailCode: emailVerificationForm.values.Token,
-      //smsCode: emailVerificationForm.values.Token,
-      smsCode: 123456,
-    };
-    const resp = await verfiyEmailOPhoneNumber(data);
-    if (queryResult.isSuccess(resp)) {
-      return toast.success("Verfied");
+    if (smsVerificationForm.submitCount <= 0) {
+      setSelectedVerificationMethod(verificationMethodTypes.sms);
+    } else {
+      setSelectedVerificationMethod();
     }
-    const isRedirect = queryResult.IIS_REDIRECTS_REDIRECT(resp);
-    if (isRedirect) {
-      router.push(routes[resp.data.Data]);
-      return dispatch(cleanUpUserStore());
-    }
-
     console.log(" handleOnEmailVerificationFormSubmit FormSubmtttteedd", resp);
     return toast.error(resp.data.error.data.Message);
     console.log(" handleOnEmailVerificationFormSubmit FormSubmtttteedd", resp);
@@ -101,12 +98,18 @@ const Verification = ({ verificationMethod }) => {
     .replace("%s", smsVerificationForm.values.phone);
 
   const handleOnSmsVerificationFormSubmit = () => {
+    if (emailVerificationForm.submitCount <= 0) {
+      setSelectedVerificationMethod(verificationMethodTypes.email);
+    } else {
+      setSelectedVerificationMethod();
+    }
     console.log("FormSubmtttteedd");
   };
 
   //When user needs verification code
   const handleOnClickResendEmailCodeButton = async () => {
     emailCounter.startCounter();
+
     const resp = await reSendVerificationCode2Email({
       verifyToken: user.informations.token,
     });
@@ -118,20 +121,59 @@ const Verification = ({ verificationMethod }) => {
       return dispatch(cleanUpUserStore());
     }
     if (queryResult.isSuccess(resp)) {
-      return toast.success("We have sent a new code to your e-mail");
+      return toast.success(resp.data.Message || t("success"));
     }
 
-    return toast.error("Error");
-    console.log("Resending Email code", resp);
+    return toast.error(resp.error.data.Message);
   };
 
-  const handleOnClickResendSmsCodeButton = () => {
-    console.log("Resending Sms code");
+  const handleOnClickResendSmsCodeButton = async () => {
+    smsCounter.startCounter();
+
+    const resp = await reSendVerificationCode2Sms({
+      verifyToken: user.informations.token,
+    });
+
+    //If backend wants to redirect
+    const isRedirect = queryResult.IIS_REDIRECTS_REDIRECT(resp);
+    if (isRedirect) {
+      router.push(routes[resp.data.Data]);
+      return dispatch(cleanUpUserStore());
+    }
+    if (queryResult.isSuccess(resp)) {
+      return toast.success(resp.data.Message);
+    }
+
+    return toast.error(resp.error.data.Message);
   };
 
-  useEffect(() => {
-    console.log("HERE", user, user.informations.PhoneNumber);
-  }, [user]);
+  //When all forms are filled
+  const completeTheVerification = async () => {
+    const data = {
+      verifyToken: user.informations.token,
+      emailCode: emailVerificationForm.values.Token,
+      smsCode: smsVerificationForm.values.Token,
+    };
+
+    //send code
+    const resp = await verfiyEmailOPhoneNumber(data);
+
+    if (queryResult.isSuccess(resp)) {
+      toast.success(resp.data.Message);
+
+      //Send the use tho the login page.
+      return router.push(routes.login);
+    }
+
+    //if server needs to redirect
+    const isRedirect = queryResult.IIS_REDIRECTS_REDIRECT(resp);
+    if (isRedirect) {
+      router.push(routes[resp.data.Data]);
+      return dispatch(cleanUpUserStore());
+    }
+
+    return toast.error(resp.error.data.Message);
+  };
 
   const HeaderLinkRender = () => {
     return (
@@ -220,6 +262,21 @@ const Verification = ({ verificationMethod }) => {
             counter={smsCounter}
           />
         )}
+        <Spacer />
+        {!getSelectedVerificationMethod &&
+          emailVerificationForm.isValid &&
+          smsVerificationForm.isValid &&
+          emailVerificationForm.submitCount > 0 &&
+          smsVerificationForm.submitCount > 0 && (
+            <div>
+              <CoolButton
+                label="Done"
+                type="Main"
+                onClick={completeTheVerification}
+                style={{ width: "100%", cursor: "pointer" }}
+              />
+            </div>
+          )}
       </div>
     </AuthLayout>
   );
@@ -232,9 +289,12 @@ const VerificationForm = ({
   onClickResenButton,
   counter,
 }) => {
+  let label = t("resendCode");
+  if (counter.isCounterStarted) {
+    label = `${t("wait")} (${counter.counter})`;
+  }
   return (
     <Form formInstance={formInstance} dontDisplayErrors>
-      {counter.isCounterStarted.toString()}
       <div className="login-form">
         <div className="form-inputs">
           <div className="text-align-center">
@@ -253,14 +313,15 @@ const VerificationForm = ({
           </div>
           <div className="input-groups">
             <CoolButton
-              label={`${t("resendCode")} (${counter.counter})`}
+              label={label}
               type="Small"
-              onClick={onClickResenButton}
+              onClick={!counter.isCounterStarted ? onClickResenButton : null}
+              disabled={counter.isCounterStarted}
             />
             <FormTriggerButton
               formInstance={formInstance}
               // isLoading={regitrationResponse.isLoading}
-              label={t("verify")}
+              label={t("continue")}
             />
           </div>
         </div>
