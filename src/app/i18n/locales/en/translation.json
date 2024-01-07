@@ -1,6 +1,14 @@
 {
   "maxFormRequestSizeText": "You have reach the maximum post of the form. Please fill the form again",
   "verify": "Verify",
+  "continue": "Contunie",
+  "select": "Select",
+  "verificationScreenTitle": "Let’s confirm it’s really you",
+  "verificationScreenDesc": "Help us secure your account. Please complete the verifications below",
+
+  "emailConfirmationCardTitle": "Get the code by email",
+  "smsConfirmationCardTitle": "Get the code by text message (SMS)",
+  "wait": "Wait",
   "emailInputPlaceholder": "Type a valid e-mail address",
   "unknownRequestErrorMessage": "An unknow error occured. Please try again later. ",
   "citizenship": "Citizenship",

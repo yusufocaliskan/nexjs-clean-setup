@@ -24,14 +24,14 @@ import { verificationMethodTypes } from "@/constants";
 import { authApi } from "@/services/auth";
 import queryResult from "@/services/queryResult";
 import { useRouter } from "next/navigation";
-import { describeRoute } from "@/utils";
 import { cleanUpUserStore } from "@/store/user";
 import toast from "react-hot-toast";
 import useCounter from "@/hooks/useCounter";
 import { appConfigs } from "@/configs";
 
 const VERIFICATION_CODE_NUMBER = 6;
-const Verification = ({ verificationMethod }) => {
+
+const Verification = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const user = useSelector((state) => state.user);
@@ -67,20 +67,10 @@ const Verification = ({ verificationMethod }) => {
     validationSchema: registerVerificationFormValidations,
     onSubmit: () => handleOnEmailVerificationFormSubmit(),
   });
+
   const emailDescriptionText = t("completeTheRegistraionScreenDesc")
     .replace("%d", VERIFICATION_CODE_NUMBER)
     .replace("%s", emailVerificationForm.values.email);
-
-  const handleOnEmailVerificationFormSubmit = async () => {
-    if (smsVerificationForm.submitCount <= 0) {
-      setSelectedVerificationMethod(verificationMethodTypes.sms);
-    } else {
-      setSelectedVerificationMethod();
-    }
-    console.log(" handleOnEmailVerificationFormSubmit FormSubmtttteedd", resp);
-    return toast.error(resp.data.error.data.Message);
-    console.log(" handleOnEmailVerificationFormSubmit FormSubmtttteedd", resp);
-  };
 
   ///SMS FORM
   const smsVerificationForm = useFormik({
@@ -97,13 +87,37 @@ const Verification = ({ verificationMethod }) => {
     .replace("%d", VERIFICATION_CODE_NUMBER)
     .replace("%s", smsVerificationForm.values.phone);
 
+  //We won't let user to see this page
+  //if they didnt' come with informatios
+  useEffect(() => {
+    if (
+      !user ||
+      !user.informations.token ||
+      !user.informations.Email ||
+      !user.informations.PhoneNumber
+    ) {
+      router.push(routes.register);
+    }
+  }, [user.infomations]);
+
+  //When on e-mail form submitted
+  const handleOnEmailVerificationFormSubmit = async () => {
+    if (smsVerificationForm.submitCount <= 0) {
+      setSelectedVerificationMethod(verificationMethodTypes.sms);
+    } else {
+      setSelectedVerificationMethod();
+    }
+    console.log(" handleOnEmailVerificationFormSubmit FormSubmtttteedd", resp);
+    return toast.error(resp.data.error.data.Message);
+    console.log(" handleOnEmailVerificationFormSubmit FormSubmtttteedd", resp);
+  };
+
   const handleOnSmsVerificationFormSubmit = () => {
     if (emailVerificationForm.submitCount <= 0) {
       setSelectedVerificationMethod(verificationMethodTypes.email);
     } else {
       setSelectedVerificationMethod();
     }
-    console.log("FormSubmtttteedd");
   };
 
   //When user needs verification code
@@ -151,8 +165,8 @@ const Verification = ({ verificationMethod }) => {
   const completeTheVerification = async () => {
     const data = {
       verifyToken: user.informations.token,
-      emailCode: emailVerificationForm.values.Token,
-      smsCode: smsVerificationForm.values.Token,
+      emailCode: emailVerificationForm.values.Token.join(""),
+      smsCode: smsVerificationForm.values.Token.join(""),
     };
 
     //send code
@@ -210,7 +224,7 @@ const Verification = ({ verificationMethod }) => {
             <CoolButton
               onClick={() => setMethod(method)}
               type="Small"
-              label="Select"
+              label={t("select")}
             />
           </div>
         )}
@@ -222,12 +236,12 @@ const Verification = ({ verificationMethod }) => {
     <AuthLayout headerLinkRender={<HeaderLinkRender />}>
       <Spacer h={100} />
       <Title
-        text="Let’s confirm it’s really you"
-        desc="Help us secure your account. Please complete the verifications below"
+        text={t("verificationScreenTitle")}
+        desc={t("verificationScreenDesc")}
       />
       <div className="verification-method-card">
         <VerificationMethodItemRender
-          title="Get the code by email at "
+          title={t("emailConfirmationCardTitle")}
           desc={`at ${user.informations.Email}`}
           icon={<MdEmail size="30px" color="black" />}
           method={verificationMethodTypes.email}
@@ -246,7 +260,7 @@ const Verification = ({ verificationMethod }) => {
 
         <VerticalDivider />
         <VerificationMethodItemRender
-          title="Get the code by text message (SMS)"
+          title={t("smsConfirmationCardTitle")}
           desc={`at +${user.informations.PhoneNumber}`}
           icon={<MdSms size="30px" color="black" />}
           method={verificationMethodTypes.sms}

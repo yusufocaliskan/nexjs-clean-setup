@@ -6,22 +6,20 @@ const useCounter = (timerName, start) => {
   const dispatch = useDispatch();
   const [counter, setCounter] = useState(start);
   const [isCounterStarted, setIsCounterStarted] = useState(false);
+
   useEffect(() => {
     const stored = localStorage.getItem(timerName);
     setCounter(stored);
   }, []);
 
   const startCounter = () => {
-    localStorage.setItem(timerName, JSON.stringify(counter));
-    setCounter(start);
-    setIsCounterStarted(true);
-  };
-
-  const resetCounter = () => {
-    localStorage.setItem(timerName, JSON.stringify(counter));
-    setCounter(start);
-
-    setIsCounterStarted(true);
+    try {
+      localStorage.setItem(timerName, JSON.stringify(counter));
+      setCounter(start);
+      setIsCounterStarted(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -40,6 +38,6 @@ const useCounter = (timerName, start) => {
     };
   }, [counter]);
 
-  return { counter, startCounter, resetCounter, isCounterStarted };
+  return { counter, startCounter, isCounterStarted };
 };
 export default useCounter;

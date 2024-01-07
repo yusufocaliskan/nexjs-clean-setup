@@ -115,10 +115,10 @@ const Register = () => {
     data["Citizenship"] = registerForm.values.Citizenship.val;
     data["Country"] = registerForm.values.Country.val;
 
-    data["IdentityNo"] = reFormattedIdentityNumber(
-      registerForm.values.IdentityNo,
-    );
-
+    // data["IdentityNo"] = reFormattedIdentityNumber(
+    //   registerForm.values.IdentityNo,
+    // );
+    //
     console.log("Reformatted Register Form  : ", data);
     console.log("All errors are gone and the form has submitted");
     try {

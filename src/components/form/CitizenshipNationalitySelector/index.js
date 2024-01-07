@@ -97,7 +97,7 @@ const CitizenshipNationalitySelector = ({ formInstance, label }) => {
               setValue={(value) =>
                 formInstance.setFieldValue("IdentityNo", value)
               }
-              leftSideRenderItem={<span>9</span>}
+              // leftSideRenderItem={<span>9</span>}
             />
           </motion.div>
         )}
