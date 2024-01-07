@@ -8,6 +8,8 @@ const initialState = appAdapter.getInitialState({
 
   //selected language of the app
   selectedLanguage: "en",
+
+  counter: 10,
 });
 
 const appSlice = createSlice({
@@ -23,8 +25,12 @@ const appSlice = createSlice({
     setSelectedLanguage(state, action) {
       state.selectedLanguage = action.payload;
     },
+
+    setCounter(state, action) {
+      state.counter = action.payload;
+    },
   },
 });
 
-export const { setTheme, setSelectedLanguage } = appSlice.actions;
+export const { setTheme, setSelectedLanguage, setCounter } = appSlice.actions;
 export default appSlice.reducer;

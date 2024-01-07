@@ -6,6 +6,7 @@ export const appConfigs = {
   },
   form: {
     maxFormRequestSize: 10,
+    counterTimeOut: 60, //starts
   },
   reCapthcha: {
     site_key: "6Le0X04UAAAAAMmQUFh9fmor_VgLZ74086iMNAYI",

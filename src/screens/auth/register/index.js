@@ -147,7 +147,7 @@ const Register = () => {
 
         registerForm.resetForm();
         return setTimeout(() => {
-          router.push(routes.verification.index);
+          router.push(routes.verification);
         }, 3000);
       }
     } catch (error) {
@@ -170,7 +170,7 @@ const Register = () => {
       <p className="login-page-right-top-text">
         {t("dontHaveAnAccount")}
         <LanguageSwitcher />
-        <Link href={routes.auth.register} className="sign-up-for-free">
+        <Link href={routes.register} className="sign-up-for-free">
           {t("signUpForFree")}
         </Link>
       </p>

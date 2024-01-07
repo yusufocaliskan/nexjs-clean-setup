@@ -113,8 +113,11 @@ export const queryResult = {
   IS_TRADE_NOT_ACTIVE(input) {
     return input && input.StatusCode === 5007;
   },
-  IS_REDIRECT(input) {
-    return input && input.StatusCode === 5008;
+  IIS_REDIRECTS_REDIRECT(input) {
+    console.log(input.data);
+    return (
+      (input && input.StatusCode === 5008) || input.data?.StatusCode === 5008
+    );
   },
   /**
    *

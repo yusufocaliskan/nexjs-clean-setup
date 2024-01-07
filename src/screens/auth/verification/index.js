@@ -15,20 +15,41 @@ import routes from "@/routes";
 import Link from "next/link";
 import { MdEmail, MdSms } from "react-icons/md";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import VerificationCode from "@/components/form/VerificationCodeInput";
 import { useFormik } from "formik";
 import { registerVerificationFormValidations } from "@/validations/auth";
 import { verificationMethodTypes } from "@/constants";
+import { authApi } from "@/services/auth";
+import queryResult from "@/services/queryResult";
+import { useRouter } from "next/navigation";
+import { describeRoute } from "@/utils";
+import { cleanUpUserStore } from "@/store/user";
+import toast from "react-hot-toast";
+import useCounter from "@/hooks/useCounter";
+import { appConfigs } from "@/configs";
 
 const VERIFICATION_CODE_NUMBER = 6;
 const Verification = ({ verificationMethod }) => {
   const { t } = useTranslation();
+  const router = useRouter();
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const [getSelectedVerificationMethod, setSelectedVerificationMethod] =
     useState();
 
+  const emailCounter = useCounter("emailCounter", 50);
+
+  const smsCounter = useCounter("smsCounter", 29);
+  //queries
+  const [reSendVerificationCode2Email, resendEmailCodeResponse] =
+    authApi.useReSendVerificationCode2EmailMutation();
+
+  const [verfiyEmailOPhoneNumber, emailVerificationResponse] =
+    authApi.useVerfiyEmailOPhoneNumberMutation();
+
+  //EMaIL FORM
   const emailVerificationForm = useFormik({
     initialValues: {
       Token: ["", "", "", "", "", ""],
@@ -38,7 +59,33 @@ const Verification = ({ verificationMethod }) => {
     validationSchema: registerVerificationFormValidations,
     onSubmit: () => handleOnEmailVerificationFormSubmit(),
   });
+  const emailDescriptionText = t("completeTheRegistraionScreenDesc")
+    .replace("%d", VERIFICATION_CODE_NUMBER)
+    .replace("%s", emailVerificationForm.values.email);
 
+  const handleOnEmailVerificationFormSubmit = async () => {
+    const data = {
+      verifyToken: user.informations.token,
+      emailCode: emailVerificationForm.values.Token,
+      //smsCode: emailVerificationForm.values.Token,
+      smsCode: 123456,
+    };
+    const resp = await verfiyEmailOPhoneNumber(data);
+    if (queryResult.isSuccess(resp)) {
+      return toast.success("Verfied");
+    }
+    const isRedirect = queryResult.IIS_REDIRECTS_REDIRECT(resp);
+    if (isRedirect) {
+      router.push(routes[resp.data.Data]);
+      return dispatch(cleanUpUserStore());
+    }
+
+    console.log(" handleOnEmailVerificationFormSubmit FormSubmtttteedd", resp);
+    return toast.error(resp.data.error.data.Message);
+    console.log(" handleOnEmailVerificationFormSubmit FormSubmtttteedd", resp);
+  };
+
+  ///SMS FORM
   const smsVerificationForm = useFormik({
     initialValues: {
       Token: ["", "", "", "", "", ""],
@@ -49,28 +96,48 @@ const Verification = ({ verificationMethod }) => {
     onSubmit: () => handleOnSmsVerificationFormSubmit(),
   });
 
-  const handleOnEmailVerificationFormSubmit = () => {
-    console.log(" handleOnEmailVerificationFormSubmit FormSubmtttteedd");
-  };
-  const handleOnSmsVerificationFormSubmit = () => {
-    console.log("FormSubmtttteedd");
-  };
-  //The description above inputs
-  const emailDescriptionText = t("completeTheRegistraionScreenDesc")
-    .replace("%d", VERIFICATION_CODE_NUMBER)
-    .replace("%s", emailVerificationForm.values.email);
   const smsDescriptionText = t("completeTheRegistraionScreenDesc")
     .replace("%d", VERIFICATION_CODE_NUMBER)
     .replace("%s", smsVerificationForm.values.phone);
 
+  const handleOnSmsVerificationFormSubmit = () => {
+    console.log("FormSubmtttteedd");
+  };
+
+  //When user needs verification code
+  const handleOnClickResendEmailCodeButton = async () => {
+    emailCounter.startCounter();
+    const resp = await reSendVerificationCode2Email({
+      verifyToken: user.informations.token,
+    });
+
+    //If backend wants to redirect
+    const isRedirect = queryResult.IIS_REDIRECTS_REDIRECT(resp);
+    if (isRedirect) {
+      router.push(routes[resp.data.Data]);
+      return dispatch(cleanUpUserStore());
+    }
+    if (queryResult.isSuccess(resp)) {
+      return toast.success("We have sent a new code to your e-mail");
+    }
+
+    return toast.error("Error");
+    console.log("Resending Email code", resp);
+  };
+
+  const handleOnClickResendSmsCodeButton = () => {
+    console.log("Resending Sms code");
+  };
+
   useEffect(() => {
     console.log("HERE", user, user.informations.PhoneNumber);
   }, [user]);
+
   const HeaderLinkRender = () => {
     return (
       <p className="login-page-right-top-text">
         {t("dontHaveAnAccount")}
-        <Link href={routes.auth.register} className="sign-up-for-free">
+        <Link href={routes.register} className="sign-up-for-free">
           {t("signUpForFree")}
         </Link>
       </p>
@@ -129,6 +196,8 @@ const Verification = ({ verificationMethod }) => {
           <VerificationForm
             formInstance={emailVerificationForm}
             descriptionText={emailDescriptionText}
+            onClickResenButton={handleOnClickResendEmailCodeButton}
+            counter={emailCounter}
             t={t}
           />
         )}
@@ -146,7 +215,9 @@ const Verification = ({ verificationMethod }) => {
           <VerificationForm
             formInstance={smsVerificationForm}
             descriptionText={smsDescriptionText}
+            onClickResenButton={handleOnClickResendSmsCodeButton}
             t={t}
+            counter={smsCounter}
           />
         )}
       </div>
@@ -154,9 +225,16 @@ const Verification = ({ verificationMethod }) => {
   );
 };
 
-const VerificationForm = ({ formInstance, descriptionText, t }) => {
+const VerificationForm = ({
+  formInstance,
+  descriptionText,
+  t,
+  onClickResenButton,
+  counter,
+}) => {
   return (
     <Form formInstance={formInstance} dontDisplayErrors>
+      {counter.isCounterStarted.toString()}
       <div className="login-form">
         <div className="form-inputs">
           <div className="text-align-center">
@@ -174,7 +252,11 @@ const VerificationForm = ({ formInstance, descriptionText, t }) => {
             />
           </div>
           <div className="input-groups">
-            <CoolButton label={t("resendCode")} type="Small" />
+            <CoolButton
+              label={`${t("resendCode")} (${counter.counter})`}
+              type="Small"
+              onClick={onClickResenButton}
+            />
             <FormTriggerButton
               formInstance={formInstance}
               // isLoading={regitrationResponse.isLoading}

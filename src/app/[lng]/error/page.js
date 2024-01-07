@@ -1,5 +1,5 @@
 const Page = () => {
-  return <>Auth Errror </>;
+  return <>Error Screen </>;
 };
 
 export default Page;

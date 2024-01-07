@@ -22,8 +22,8 @@ const Welcome = () => {
         <LanguageSwitcher />
       </div>
       <div>
-        <Link href={routes.auth.login}>Login</Link> |
-        <Link href={routes.auth.register}>Register</Link>
+        <Link href={routes.login}>Login</Link> |
+        <Link href={routes.register}>Register</Link>
       </div>
     </>
   );

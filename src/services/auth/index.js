@@ -29,7 +29,7 @@ export const authApi = createApi({
         data: data,
       }),
     }),
-    reSendVerificationCode2Email: builder.mutation({
+    reSendVerificationCode2Sms: builder.mutation({
       query: (data) => ({
         url: "/users/registration/sendsms",
         method: "POST",

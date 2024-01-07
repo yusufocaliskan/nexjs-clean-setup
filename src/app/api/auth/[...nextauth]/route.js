@@ -73,10 +73,10 @@ const nextAuthOptions = {
 
   // Customized the pages
   pages: {
-    singIn: routes.auth.login,
+    singIn: routes.login,
 
     // Redirect to the error page on errors
-    error: routes.auth.error,
+    error: routes.error,
   },
 
   session: {
