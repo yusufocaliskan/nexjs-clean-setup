@@ -43,22 +43,22 @@ const ThemeSwitcher = () => {
         }
       >
         {app.currentTheme == "light_theme" && (
-          <motion.div
+          <motion.p
             initial={{ rotate: -90, scale: 0.8, opacity: 0.5 }}
             animate={{ rotate: 0, scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
             <TbMoonFilled size={20} />
-          </motion.div>
+          </motion.p>
         )}
         {app.currentTheme == "dark_theme" && (
-          <motion.div
+          <motion.p
             initial={{ rotate: 90, scale: 0.8, opacity: 0.5 }}
             animate={{ rotate: 0, scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
             <MdSunny size={22} />
-          </motion.div>
+          </motion.p>
         )}
       </div>
     </>

@@ -3,13 +3,14 @@ import { CoolButton } from "@/components";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "@/app/i18n/client";
 import { authApi } from "@/services/auth";
-import { signOut } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { cleanUpUserStore } from "@/store/user";
 import queryResult from "@/services/queryResult";
 
-const LoggedInProfileCard = ({ session }) => {
+const LoggedInProfileCard = () => {
   const user = useSelector((state) => state.user);
   const { t } = useTranslation();
+  const session = useSession();
 
   const dispatch = useDispatch();
   const [logoutSession, logoutResp] = authApi.useLogoutSessionMutation();
@@ -18,7 +19,7 @@ const LoggedInProfileCard = ({ session }) => {
     const rep = await logoutSession();
     if (queryResult.isSuccess(rep)) {
       dispatch(cleanUpUserStore());
-      signOut({ redirect: false });
+      signOut({ redirect: true });
     }
   };
 

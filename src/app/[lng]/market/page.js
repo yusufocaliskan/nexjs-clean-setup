@@ -1,13 +1,9 @@
 "use client";
-import { ProtectedScreen } from "@/layouts";
-import { MarketScreen } from "@/screens";
+import { AuthLayout, ProtectionBarrier } from "@/layouts";
+import { DashboardScreen } from "@/screens";
 
 const Page = () => {
-  return (
-    <ProtectedScreen>
-      <MarketScreen />
-    </ProtectedScreen>
-  );
+  return <DashboardScreen />;
 };
 
 export default Page;

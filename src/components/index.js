@@ -27,7 +27,7 @@ export { default as LoggedInProfileCard } from "./ScreenCommons/LoggedInProfileC
 
 //Icons
 export { default as LockLine } from "./Icons/LockLine.js";
-export { default as EyeLine } from "./Icons/EyeLine.js";
+export { default as EyeLine } from "./Icons/EyeLine";
 export { default as EyeSlash } from "./Icons/EyeSlash.js";
 export { default as Logo } from "./Icons/Logo";
 export { default as MailBox } from "./Icons/MailBox";

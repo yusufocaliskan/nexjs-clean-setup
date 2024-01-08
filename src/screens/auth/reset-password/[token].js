@@ -19,8 +19,7 @@ import toast from "react-hot-toast";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 
-
-const ForgotPassword = () => {
+const ForgotPassword = (props) => {
   const [createPassword, createPasswordResponse] =
     forgotPassword.useCreatePasswordMutation();
 
@@ -30,6 +29,7 @@ const ForgotPassword = () => {
   const { t } = useTranslation();
   const router = useRouter();
 
+  console.log("Here", props);
   useEffect(() => {
     setResetToken(token);
   }, [token]);

@@ -1,5 +1,14 @@
+"use client";
+import { LoggedInProfileCard } from "@/components";
+
 const Dashboard = () => {
-  return <>DashBoard Screen</>;
+  return (
+    <>
+      <h1>DashBoard Screen</h1>
+
+      <LoggedInProfileCard />
+    </>
+  );
 };
 
 export default Dashboard;

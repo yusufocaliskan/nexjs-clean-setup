@@ -1,5 +1,4 @@
 "use client";
-import { AuthLayout, ProtectionBarrier } from "@/layouts";
 import { DashboardScreen } from "@/screens";
 
 const Page = () => {
