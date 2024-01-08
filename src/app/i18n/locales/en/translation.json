@@ -6,9 +6,11 @@
   "verificationScreenTitle": "Let’s confirm it’s really you",
   "verificationScreenDesc": "Help us secure your account. Please complete the verifications below",
 
+  "successRegistrationMessage": "Good, now need some verification, please waith for a while.",
   "emailConfirmationCardTitle": "Get the code by email",
   "smsConfirmationCardTitle": "Get the code by text message (SMS)",
   "wait": "Wait",
+  "register": "Register",
   "emailInputPlaceholder": "Type a valid e-mail address",
   "unknownRequestErrorMessage": "An unknow error occured. Please try again later. ",
   "citizenship": "Citizenship",

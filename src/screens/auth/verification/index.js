@@ -1,14 +1,7 @@
 "use client";
 import "../auth.scss";
 
-import {
-  Form,
-  Title,
-  CoolButton,
-  Spacer,
-  VerticalDivider,
-  FormTriggerButton,
-} from "@/components";
+import { Title, CoolButton, Spacer, VerticalDivider } from "@/components";
 import { useTranslation } from "@/app/i18n/client";
 import { AuthLayout } from "@/layouts";
 import routes from "@/routes";
@@ -16,8 +9,7 @@ import Link from "next/link";
 import { MdEmail, MdSms } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-import VerificationCode from "@/components/form/VerificationCodeInput";
+import VerificationForm from "./verification-form/";
 import { useFormik } from "formik";
 import { registerVerificationFormValidations } from "@/validations/auth";
 import { verificationMethodTypes } from "@/constants";
@@ -28,6 +20,7 @@ import { cleanUpUserStore } from "@/store/user";
 import toast from "react-hot-toast";
 import useCounter from "@/hooks/useCounter";
 import { appConfigs } from "@/configs";
+import GiantLoaderAnimation from "@/components/LoadingGif/GiantLoaderAnimation";
 
 const VERIFICATION_CODE_NUMBER = 6;
 
@@ -36,6 +29,8 @@ const Verification = () => {
   const router = useRouter();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const [isLoading, setIsLoading] = useState(true);
+
   const [getSelectedVerificationMethod, setSelectedVerificationMethod] =
     useState();
 
@@ -96,24 +91,29 @@ const Verification = () => {
       !user.informations.Email ||
       !user.informations.PhoneNumber
     ) {
+      setIsLoading(true);
       router.push(routes.register);
+    } else {
+      setIsLoading(false);
     }
   }, [user.infomations]);
 
   //When on e-mail form submitted
   const handleOnEmailVerificationFormSubmit = async () => {
     if (smsVerificationForm.submitCount <= 0) {
+      toast.success(
+        "Grate!, you're so close to the end, please go head and fill in the sms verification code.",
+      );
       setSelectedVerificationMethod(verificationMethodTypes.sms);
     } else {
       setSelectedVerificationMethod();
     }
-    console.log(" handleOnEmailVerificationFormSubmit FormSubmtttteedd", resp);
     return toast.error(resp.data.error.data.Message);
-    console.log(" handleOnEmailVerificationFormSubmit FormSubmtttteedd", resp);
   };
 
   const handleOnSmsVerificationFormSubmit = () => {
     if (emailVerificationForm.submitCount <= 0) {
+      toast.success("All most done! Now we need the e-mail verification code.");
       setSelectedVerificationMethod(verificationMethodTypes.email);
     } else {
       setSelectedVerificationMethod();
@@ -161,7 +161,7 @@ const Verification = () => {
     return toast.error(resp.error.data.Message);
   };
 
-  //When all forms are filled
+  //When all inputs of the forms are filled
   const completeTheVerification = async () => {
     const data = {
       verifyToken: user.informations.token,
@@ -232,6 +232,10 @@ const Verification = () => {
     );
   };
 
+  if (isLoading) {
+    return <GiantLoaderAnimation isLoading={true} />;
+  }
+
   return (
     <AuthLayout headerLinkRender={<HeaderLinkRender />}>
       <Spacer h={100} />
@@ -293,54 +297,6 @@ const Verification = () => {
           )}
       </div>
     </AuthLayout>
-  );
-};
-
-const VerificationForm = ({
-  formInstance,
-  descriptionText,
-  t,
-  onClickResenButton,
-  counter,
-}) => {
-  let label = t("resendCode");
-  if (counter.isCounterStarted) {
-    label = `${t("wait")} (${counter.counter})`;
-  }
-  return (
-    <Form formInstance={formInstance} dontDisplayErrors>
-      <div className="login-form">
-        <div className="form-inputs">
-          <div className="text-align-center">
-            <p dangerouslySetInnerHTML={{ __html: descriptionText }} />
-          </div>
-
-          <div className="verification-div">
-            <VerificationCode
-              formInstance={formInstance}
-              verificationCode={formInstance.values.Token}
-              name="Token"
-              setVerificationCode={(value) =>
-                formInstance.setFieldValue("Token", value)
-              }
-            />
-          </div>
-          <div className="input-groups">
-            <CoolButton
-              label={label}
-              type="Small"
-              onClick={!counter.isCounterStarted ? onClickResenButton : null}
-              disabled={counter.isCounterStarted}
-            />
-            <FormTriggerButton
-              formInstance={formInstance}
-              // isLoading={regitrationResponse.isLoading}
-              label={t("continue")}
-            />
-          </div>
-        </div>
-      </div>
-    </Form>
   );
 };
 

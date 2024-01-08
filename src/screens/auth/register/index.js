@@ -14,6 +14,7 @@ import {
   TermAndPolicyCheckBox,
   DeclarationCheckBox,
   GoogleReCaptcha,
+  Spacer,
 } from "@/components";
 import { useFormik } from "formik";
 import { registerFormValidations } from "@/validations/auth";
@@ -27,7 +28,6 @@ import toast from "react-hot-toast";
 import { queryResult } from "@/services/queryResult";
 import routes from "@/routes";
 import Link from "next/link";
-import { signIn, useSession } from "next-auth/react";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
@@ -37,7 +37,6 @@ const Register = () => {
   const { t } = useTranslation();
   const referralCodeInput = useRef();
   const reCapthchaRef = useRef();
-  const session = useSession();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -78,12 +77,6 @@ const Register = () => {
     registerForm.values.ReferralCode,
     600,
   );
-  useEffect(() => {
-    console.log("Settion SESSION");
-  }, []);
-  useEffect(() => {
-    console.log("Information", user.informations);
-  }, [user]);
 
   useEffect(() => {
     const check4ValidRefferalCode = async () => {
@@ -92,7 +85,7 @@ const Register = () => {
         console.log(res);
 
         //FIX: this does't work, I dont know why!
-        referralCodeInput.current.focus();
+        // referralCodeInput.current.focus();
       }
     };
     check4ValidRefferalCode();
@@ -118,9 +111,7 @@ const Register = () => {
     // data["IdentityNo"] = reFormattedIdentityNumber(
     //   registerForm.values.IdentityNo,
     // );
-    //
-    console.log("Reformatted Register Form  : ", data);
-    console.log("All errors are gone and the form has submitted");
+
     try {
       const resp = await newRegisteration(data, captchaToken);
 
@@ -131,6 +122,7 @@ const Register = () => {
         if (queryResult.isWarning(resp)) {
           // registerForm.resetForm();
         }
+
         return toast.error(resp.error?.data?.Message);
       }
 
@@ -141,9 +133,7 @@ const Register = () => {
         console.log(resp);
         const data = { ...registerForm.values, token: resp.data?.Data?.Token };
         dispatch(setUserInformations(data));
-        toast.success(
-          "Good, now need some verification, please waith for a while.",
-        );
+        toast.success(t("successRegistrationMessage"));
 
         registerForm.resetForm();
         return setTimeout(() => {
@@ -183,6 +173,8 @@ const Register = () => {
       <Form
         formInstance={registerForm}
         isLoading={regitrationResponse.isLoading}
+        submitButtonText={t("register")}
+        captchaRef={reCapthchaRef}
       >
         <div className="login-form">
           <div className="form-inputs">
@@ -235,17 +227,8 @@ const Register = () => {
                 registerForm.setFieldValue("Declaration", value)
               }
             />
-
-            {/* //TODO: Check if the stastus of the captcha is active */}
-            <GoogleReCaptcha reCapthchaRef={reCapthchaRef} />
           </div>
         </div>
-
-        <FormTriggerButton
-          formInstance={registerForm}
-          isLoading={regitrationResponse.isLoading}
-          label="Login"
-        />
       </Form>
     </AuthLayout>
   );

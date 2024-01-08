@@ -5,12 +5,15 @@ import { appConfigs } from "@/configs";
 import GiantLoaderAnimation from "../LoadingGif/GiantLoaderAnimation";
 import { motion } from "framer-motion";
 import { useTranslation } from "@/app/i18n/client";
+import { FormTriggerButton, GoogleReCaptcha, Spacer } from "@/components";
 
 const Form = ({
   children,
   formInstance,
   dontDisplayErrors = false,
-  setIsFormReachedMaxTresholde,
+  dontDisplayCaptcha = false,
+  submitButtonText = "Custom Text",
+  captchaRef,
   isLoading,
   setIsLoading,
 }) => {
@@ -21,16 +24,16 @@ const Form = ({
     if (formInstance.submitCount >= appConfigs.form.maxFormRequestSize) {
       formInstance.resetForm();
       toast.error(t("maxFormRequestSizeText"));
-      setIsFormReachedMaxTresholde(true);
+      //setIsFormReachedMaxTresholde(true);
     }
   }, [formInstance.submitCount]);
 
   return (
     <>
       {/* //TODO: Try to find a better desing of GiantLoaderAnimation */}
-      {isLoading && (
-        <GiantLoaderAnimation isOpen={isLoading} setIsLoading={setIsLoading} />
-      )}
+      {/* {isLoading && ( */}
+      {/*   <GiantLoaderAnimation isOpen={isLoading} setIsLoading={setIsLoading} /> */}
+      {/* )} */}
       <motion.form
         initial={{ opacity: 0.5, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
@@ -47,6 +50,17 @@ const Form = ({
           <ErrorDisplayer formInstance={formInstance} />
         )}
         {children}
+
+        {/* //TODO: Check if the stastus of the captcha is active */}
+        {!dontDisplayCaptcha && <GoogleReCaptcha reCapthchaRef={captchaRef} />}
+
+        <FormTriggerButton
+          formInstance={formInstance}
+          isLoading={formInstance.isLoading}
+          label={submitButtonText}
+        />
+
+        <Spacer />
       </motion.form>
     </>
   );

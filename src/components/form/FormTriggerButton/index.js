@@ -1,11 +1,6 @@
 import LoadingGif from "@/components/LoadingGif";
 import "./index.scss";
-const FormTriggerButton = ({
-  formInstance,
-  disabled,
-  isLoading = false,
-  label,
-}) => {
+const FormTriggerButton = ({ disabled, isLoading = false, label }) => {
   return (
     <>
       <div className=" form-trigger-button-wrapper">
@@ -14,7 +9,7 @@ const FormTriggerButton = ({
           type="submit"
           className="btn-main  form-trigger-button"
         >
-          {isLoading && disabled ? <LoadingGif isPuff color="white" /> : label}
+          {isLoading || disabled ? <LoadingGif isPuff color="white" /> : label}
         </button>
       </div>
     </>

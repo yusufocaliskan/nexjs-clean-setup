@@ -8,6 +8,7 @@ export { default as PasswordInputs } from "./Form/PasswordInputs";
 export { default as FullNameInputs } from "./Form/FullNameInputs";
 export { default as DateSelectBox } from "./Form/DateSelectBox";
 export { default as GoogleReCaptcha } from "./GoogleReCaptcha";
+export { default as VerificationCode } from "./Form/VerificationCodeInput";
 
 //Register Form Components
 export { default as CitizenshipNationalitySelector } from "./Form/CitizenshipNationalitySelector";
