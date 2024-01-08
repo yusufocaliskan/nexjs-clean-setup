@@ -40,7 +40,7 @@ const Register = () => {
   const router = useRouter();
 
   const session = useSession();
-  const isAuthorized = session.status === "authenticated";
+  const isAuthorized = session?.status === "authenticated";
 
   const [newRegisteration, regitrationResponse] =
     authApi.useNewRegistrationMutation();

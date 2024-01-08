@@ -4,6 +4,8 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "./persist-storage.js";
 import user from "./user";
 import app from "./app";
+
+//Services
 import { authApi } from "@/services/auth/index.js";
 import { referralApi } from "./referral/index.js";
 
@@ -46,7 +48,7 @@ const configuredStore = configureStore({
 //Before the store initialized
 const onRehydrate = () => {};
 
-const persistor = persistStore(configuredStore, null, () => {});
+const persistor = persistStore(configuredStore, null, onRehydrate);
 
 setupListeners(configuredStore.dispatch);
 

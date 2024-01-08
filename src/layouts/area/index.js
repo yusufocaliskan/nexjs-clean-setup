@@ -1,7 +1,7 @@
 //To protec a area in any component,
 //cover it tthis
 const ProtectedArea = ({ children, session }) => {
-  const isAuthorized = session.status === "authenticated";
+  const isAuthorized = session?.status === "authenticated";
 
   // or let the see the actual page
   if (!isAuthorized) return <></>;

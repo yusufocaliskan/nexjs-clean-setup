@@ -14,6 +14,7 @@ const Form = ({
   dontDisplayCaptcha = false,
   submitButtonText = "Custom Text",
   captchaRef,
+  onRecaptchaChanged,
   isLoading,
   setIsLoading,
 }) => {
@@ -52,7 +53,12 @@ const Form = ({
         {children}
 
         {/* //TODO: Check if the stastus of the captcha is active */}
-        {!dontDisplayCaptcha && <GoogleReCaptcha reCapthchaRef={captchaRef} />}
+        {!dontDisplayCaptcha && (
+          <GoogleReCaptcha
+            onChange={(val) => formInstance.setFieldValue("reCaptcha", val)}
+            reCapthchaRef={captchaRef}
+          />
+        )}
 
         <FormTriggerButton
           formInstance={formInstance}

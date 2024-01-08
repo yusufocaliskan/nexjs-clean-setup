@@ -45,7 +45,6 @@ const userSlice = createSlice({
   },
 });
 
-export { authApi };
 export const { setUser, setToken, setUserInformations, cleanUpUserStore } =
   userSlice.actions;
 export default userSlice.reducer;

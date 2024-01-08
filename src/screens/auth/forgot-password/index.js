@@ -1,10 +1,9 @@
 "use client";
 import React from "react";
 import "./index.scss";
-import { useState } from "react";
 import { useTranslation } from "@/app/i18n/client";
 import { useRouter } from "next/navigation";
-import { MailBox, TextBox, Title, FormTriggerButton, Form } from "@/components";
+import { MailBox, TextBox, Title, Form } from "@/components";
 import LogoBg from "@/components/Logo";
 import SmallLogo from "@/components/Logo/smallLogo";
 import { useFormik } from "formik";
@@ -23,6 +22,7 @@ const ResetPassword = () => {
   const deletePasswordForm = useFormik({
     initialValues: {
       Email: "",
+      reCaptcha: "",
     },
     validationSchema: deletePasswordFormValidations,
     onSubmit: () => handleDeletePasswordFormSubmit(),
@@ -80,6 +80,7 @@ const ResetPassword = () => {
             onSubmit={deletePasswordForm.handleSubmit}
             isLoading={deletePasswordResponse.isLoading}
             formInstance={deletePasswordForm}
+            submitButtonText={t("forgotPasswordPageContinue")}
           >
             <Title text={t("forgotPasswordPageForgotPassword")} />
             <div className="visit-url">
@@ -100,7 +101,6 @@ const ResetPassword = () => {
                 }
               />
             </div>
-            <FormTriggerButton label={t("forgotPasswordPageContinue")} />
             <div className="forgot-password-buttons-bottom">
               <p
                 className="forgot-password-never-mind"

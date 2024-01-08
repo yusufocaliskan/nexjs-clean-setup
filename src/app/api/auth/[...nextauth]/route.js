@@ -43,6 +43,9 @@ const nextAuthOptions = {
 
   //Some  usefull calbacks
   callbacks: {
+    authorized({ req }) {
+      console.log("reeeeee----->");
+    },
     async session({ session, user, token }) {
       //console.log("CalBack Session", { session, user, token });
       session.accessToken = token.accessToken;

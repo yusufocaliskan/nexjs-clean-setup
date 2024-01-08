@@ -27,18 +27,17 @@ import toast from "react-hot-toast";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { useRouter } from "next/navigation";
 import routes from "@/routes";
-import { authApi, cleanUpUserStore, setToken } from "@/store/user";
+import { cleanUpUserStore, setToken } from "@/store/user";
 import { useDispatch, useSelector } from "react-redux";
 import queryResult from "@/services/queryResult";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { authApi } from "@/services/auth";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
-  const [isCaptcha, setIsCaptcha] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   //Store
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const [getUserInformations, userInformationResponse] =
@@ -46,18 +45,18 @@ const Login = () => {
 
   const [logoutSession, logoutResp] = authApi.useLogoutSessionMutation();
 
-  const reCapthchaRef = useRef();
   const router = useRouter();
   const { t } = useTranslation();
 
   //SEssions
   const session = useSession();
-  const isAuthorized = session.status === "authenticated";
+  const isAuthorized = session?.status === "authenticated";
 
   const loginForm = useFormik({
     initialValues: {
       Password: "",
       Email: "",
+      reCaptcha: "",
     },
     validationSchema: loginFormValidations,
     onSubmit: () => handleOnSubmitLoginForm(),
@@ -85,7 +84,6 @@ const Login = () => {
     }
   }, [session, dispatch, isAuthorized, router]);
 
-  useEffect(() => {}, []);
   const handleOnSubmitLoginForm = async (vals) => {
     setIsLoading(true);
     const resp = await signIn("credentials", {
@@ -103,19 +101,6 @@ const Login = () => {
     }
 
     setIsLoading(false);
-  };
-
-  const handleOnReCaptchaChanged = (val) => {
-    const isRecaptchaValid = reCapthchaRef.current?.getValue();
-    setIsCaptcha(isRecaptchaValid);
-  };
-
-  const handleOnLoggout = async () => {
-    const rep = await logoutSession();
-    if (queryResult.isSuccess(rep)) {
-      dispatch(cleanUpUserStore());
-      signOut({ redirect: false });
-    }
   };
 
   return (
@@ -162,12 +147,13 @@ const Login = () => {
                 />
               </div>
             )}
-            <LoggedInProfileCard />
+            <LoggedInProfileCard session={session} />
             {!isAuthorized && button === "Email" && (
               <Form
                 onSubmit={loginForm.handleSubmit}
                 formInstance={loginForm}
                 isLoading={isLoading}
+                submitButtonText={t("loginPageLogin")}
               >
                 <div className="form-inputs">
                   <div className="email">
@@ -175,7 +161,7 @@ const Login = () => {
                       formInstance={loginForm}
                       label={t("loginPageEmail")}
                       type="email"
-                      name={t("loginPageEmail")}
+                      name="Email"
                       placeholder={t("loginPageEmailPlaceHolder")}
                       value={loginForm.values.Email}
                       setValue={(value) =>
@@ -195,17 +181,6 @@ const Login = () => {
                         {t("loginPageForgotPassword")}
                       </Link>
                     </p>
-                  </div>
-
-                  <div className="btn-area-login">
-                    <GoogleReCaptcha
-                      reCapthchaRef={reCapthchaRef}
-                      onChange={handleOnReCaptchaChanged}
-                    />
-                    <FormTriggerButton
-                      disabled={isCaptcha ? false : true}
-                      label={t("loginPageLogin")}
-                    />
                   </div>
                 </div>
               </Form>

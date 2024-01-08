@@ -3,9 +3,7 @@ import { AuthLayout, ProtectionBarrier } from "@/layouts";
 import { DashboardScreen } from "@/screens";
 
 const Page = () => {
-  <AuthLayout>
-    <DashboardScreen />
-  </AuthLayout>;
+  return <DashboardScreen />;
 };
 
 export default Page;

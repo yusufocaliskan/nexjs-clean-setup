@@ -46,3 +46,4 @@ const VerificationForm = ({
     </Form>
   );
 };
+export default VerificationForm;

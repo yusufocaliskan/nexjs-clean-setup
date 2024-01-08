@@ -10,7 +10,7 @@ const ProtectedScreen = ({ children }) => {
   //NOTE: There are many way to protect a page, we choose using laoyut logic
   //which is more customizable
   const session = useSession();
-  const isAuthorized = session.status === "authenticated";
+  const isAuthorized = session?.status === "authenticated";
   const router = useRouter();
   const dispatch = useDispatch();
 
@@ -24,7 +24,7 @@ const ProtectedScreen = ({ children }) => {
 
   //Left them to singIn
   useEffect(() => {
-    if (!isAuthorized) router.push(routes.auth.login);
+    if (!isAuthorized) router.push(routes.login);
   }, [isAuthorized, router]);
 
   //Display a gif while sending them to the login page

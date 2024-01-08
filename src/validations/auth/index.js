@@ -37,6 +37,8 @@ export const registerFormValidations = yup.object().shape({
   Citizenship: yup.object().required(),
   Country: yup.object().required(),
   IdentityNo: yup.string().check4ValidIndentity().required(),
+
+  reCaptcha: yup.string().required(),
 });
 
 //Login form
@@ -46,6 +48,7 @@ export const loginFormValidations = yup.object().shape({
     .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
     .required(),
   Email: yup.string().email().required(),
+  reCaptcha: yup.string().required(),
 });
 
 export const resetPasswordFormValidations = yup.object().shape({
@@ -58,10 +61,13 @@ export const resetPasswordFormValidations = yup.object().shape({
     .oneOf([yup.ref("Password"), null], "Passwords must match")
     .required("Confirm Password is required"),
   Email: yup.string().email().required(),
+
+  reCaptcha: yup.string().required(),
 });
 
 export const deletePasswordFormValidations = yup.object().shape({
   Email: yup.string().email().required(),
+  reCaptcha: yup.string().required(),
 });
 
 export const forgotPasswordSecondStepFormValidations = yup.object().shape({
@@ -71,7 +77,7 @@ export const forgotPasswordSecondStepFormValidations = yup.object().shape({
       yup
         .mixed()
         .test("isValidCode", "codeMustBeNumber", (value) => /^\d$/.test(value))
-        .required("verificationCodeisRequired")
+        .required("verificationCodeisRequired"),
     )
     .min(6, "codeMustBeMin6")
     .max(6, "codeMustBeMax6"),
@@ -85,7 +91,7 @@ export const registerVerificationFormValidations = yup.object().shape({
       yup
         .mixed()
         .test("isValidCode", "codeMustBeNumber", (value) => /^\d$/.test(value))
-        .required("verificationCodeisRequired")
+        .required("verificationCodeisRequired"),
     )
     .min(6, "codeMustBeMin6")
     .max(6, "codeMustBeMax6"),

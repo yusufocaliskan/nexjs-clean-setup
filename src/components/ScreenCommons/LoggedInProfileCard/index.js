@@ -8,7 +8,7 @@ import { cleanUpUserStore } from "@/store/user";
 import queryResult from "@/services/queryResult";
 
 const LoggedInProfileCard = ({ session }) => {
-  const user = useSelector((state) => state.app);
+  const user = useSelector((state) => state.user);
   const { t } = useTranslation();
 
   const dispatch = useDispatch();
