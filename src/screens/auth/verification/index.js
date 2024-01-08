@@ -199,6 +199,7 @@ const Verification = () => {
       </p>
     );
   };
+
   const VerificationMethodItemRender = ({
     title,
     desc,
@@ -281,6 +282,7 @@ const Verification = () => {
           />
         )}
         <Spacer />
+
         {!getSelectedVerificationMethod &&
           emailVerificationForm.isValid &&
           smsVerificationForm.isValid &&

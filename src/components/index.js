@@ -23,6 +23,7 @@ export { default as FormTriggerButton } from "./Form/FormTriggerButton";
 export { default as Title } from "./ScreenCommons/Title";
 export { default as VerticalDivider } from "./ScreenCommons/VerticalDiverder";
 export { default as Spacer } from "./ScreenCommons/Spacer";
+export { default as LoggedInProfileCard } from "./ScreenCommons/LoggedInProfileCard";
 
 //Icons
 export { default as LockLine } from "./Icons/LockLine.js";

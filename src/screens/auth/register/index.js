@@ -10,11 +10,9 @@ import {
   FullNameInputs,
   DateSelectBox,
   CitizenshipNationalitySelector,
-  FormTriggerButton,
   TermAndPolicyCheckBox,
   DeclarationCheckBox,
-  GoogleReCaptcha,
-  Spacer,
+  LoggedInProfileCard,
 } from "@/components";
 import { useFormik } from "formik";
 import { registerFormValidations } from "@/validations/auth";
@@ -32,14 +30,17 @@ import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInformations } from "@/store/user";
+import { useSession } from "next-auth/react";
 
 const Register = () => {
   const { t } = useTranslation();
   const referralCodeInput = useRef();
   const reCapthchaRef = useRef();
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const session = useSession();
+  const isAuthorized = session.status === "authenticated";
 
   const [newRegisteration, regitrationResponse] =
     authApi.useNewRegistrationMutation();
@@ -166,6 +167,15 @@ const Register = () => {
       </p>
     );
   };
+
+  if (isAuthorized) {
+    return (
+      <AuthLayout>
+        <Title text="Welcome back!" />
+        <LoggedInProfileCard session={session} />;
+      </AuthLayout>
+    );
+  }
 
   return (
     <AuthLayout headerLinkRender={<HeaderLinkRender />}>

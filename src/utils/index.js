@@ -26,6 +26,7 @@ export const isMobile = function () {
     return false;
   }
 };
+
 //Check if the given value is a turkish Id card number
 export const isTurkishIdentity = (value) => {
   let sum = 0;

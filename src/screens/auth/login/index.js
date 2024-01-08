@@ -13,6 +13,7 @@ import {
   FormTriggerButton,
   Form,
   GoogleReCaptcha,
+  LoggedInProfileCard,
 } from "@/components";
 
 import Link from "next/link";
@@ -28,7 +29,6 @@ import { useRouter } from "next/navigation";
 import routes from "@/routes";
 import { authApi, cleanUpUserStore, setToken } from "@/store/user";
 import { useDispatch, useSelector } from "react-redux";
-import ProtectedArea from "@/layouts/area";
 import queryResult from "@/services/queryResult";
 
 const Login = () => {
@@ -116,39 +116,6 @@ const Login = () => {
       dispatch(cleanUpUserStore());
       signOut({ redirect: false });
     }
-  };
-
-  const LoggedInProfileCard = () => {
-    return (
-      <ProtectedArea session={session}>
-        <div
-          style={{
-            borderWidth: 1,
-            borderColor: "#aaa",
-            borderRadius: 15,
-            padding: 15,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <div>
-            <p>
-              {t("welcome")}, {user.informations.name}{" "}
-              {user.informations.surname}
-            </p>
-            <b>{user.informations.email}</b>
-          </div>
-          <div>
-            <CoolButton
-              label={t("logout")}
-              type="Small"
-              onClick={() => handleOnLoggout()}
-            />
-          </div>
-        </div>
-      </ProtectedArea>
-    );
   };
 
   return (
