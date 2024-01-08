@@ -89,6 +89,8 @@
   "forgotPasswordPageResendCode": "Resend Code",
   "forgotPasswordPageNewPassword": "New Password",
   "forgotPasswordPageConfirmPassword": "Confirm Password",
+  "forgotPasswordPageSuccessMessage": "The password reset link has been sent to your email.",
+  "resetPasswordPageSuccessMessage": "Your password has been successfully reset",
 
   "password is a required field": "Please fill the password input"
 }

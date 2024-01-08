@@ -1,4 +1,4 @@
-@import "../../../public/assets/colors/variables.scss";
+@import "../../../../public/assets/colors/variables.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 .login-page-container {
@@ -294,6 +294,12 @@
               line-height: 1.25rem;
               cursor: pointer;
             }
+          }
+          .btn-area-login {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 2rem;
           }
 
           .login-btn-area {

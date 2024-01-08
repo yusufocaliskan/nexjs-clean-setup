@@ -87,6 +87,9 @@
   "forgotPasswordPageResendCode": "Kodu Yeniden Gönder",
   "forgotPasswordPageNewPassword": "Yeni Parola",
   "forgotPasswordPageConfirmPassword": "Parolayı Onayla",
+  "forgotPasswordPageSuccessMessage": "Parola sıfırlama linki mailinize gönderildi.",
+  "resetPasswordPageSuccessMessage": "Parolanız başarıyla sıfırlandı",
+
 
   "password is a required field": "Lütfen parola alanını doldurun"
 }

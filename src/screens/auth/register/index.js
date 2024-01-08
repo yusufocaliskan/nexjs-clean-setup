@@ -1,5 +1,5 @@
 "use client";
-import "../auth.scss";
+import "./index.scss";
 
 import {
   Form,
@@ -158,7 +158,7 @@ const Register = () => {
 
   const HeaderLinkRender = () => {
     return (
-      <p className="login-page-right-top-text">
+      <p className="register-page-right-top-text">
         {t("dontHaveAnAccount")}
         <LanguageSwitcher />
         <Link href={routes.register} className="sign-up-for-free">
@@ -186,7 +186,7 @@ const Register = () => {
         submitButtonText={t("register")}
         captchaRef={reCapthchaRef}
       >
-        <div className="login-form">
+        <div className="register-form">
           <div className="form-inputs">
             <TextBox
               formInstance={registerForm}

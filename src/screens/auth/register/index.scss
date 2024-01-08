@@ -1,4 +1,4 @@
-@import "../../../public/assets/colors/variables.scss";
+@import "../../../../public/assets/colors/variables.scss";
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 .login-page-container {
@@ -69,7 +69,7 @@
       }
     }
 
-    .login-page-right-content {
+    .register-page-right-content {
       width: 500px;
       display: flex;
       justify-content: center;
@@ -145,7 +145,7 @@
         margin-bottom: 1.5rem;
       }
 
-      .login-form {
+      .register-form {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -356,7 +356,7 @@
         }
       }
 
-      .login-page-right-content {
+      .register-page-right-content {
         display: flex;
         align-items: flex-start;
         gap: 0.625rem;
@@ -401,7 +401,7 @@
         gap: 1.5rem;
       }
 
-      .login-page-right-content {
+      .register-page-right-content {
         display: flex;
         align-items: center;
         justify-content: center;
