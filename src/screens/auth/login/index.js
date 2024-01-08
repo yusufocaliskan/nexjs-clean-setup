@@ -1,6 +1,6 @@
 "use client";
 
-import "../auth.scss";
+import "./index.scss";
 import { useEffect, useState } from "react";
 import { useTranslation } from "@/app/i18n/client";
 
@@ -30,6 +30,7 @@ import { authApi, cleanUpUserStore, setToken } from "@/store/user";
 import { useDispatch, useSelector } from "react-redux";
 import ProtectedArea from "@/layouts/area";
 import queryResult from "@/services/queryResult";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
@@ -74,7 +75,6 @@ const Login = () => {
     //Is signIn success
     if (isAuthorized) {
       const tokens = session?.data?.accessToken;
-      console.log("Heeee");
       if (tokens) {
         dispatch(setToken(tokens));
         //Get user informations.
@@ -162,6 +162,7 @@ const Login = () => {
             className="login-page-right-top-text"
           >
             <ThemeSwitcher />
+            <LanguageSwitcher />
             {t("dontHaveAnAccount")}
             <span className="sign-up-for-free">{t("signUpForFree")}</span>
           </p>
@@ -173,7 +174,7 @@ const Login = () => {
             <p className="visit-url-login">
               <LockLine />
               <span className="visit-https"> {t("loginPageHttps")}</span>
-              {t("loginPageLoginUrl")}
+              accounts.hepbit.com/login
             </p>
           </div>
           <div className="divider" />
@@ -229,7 +230,7 @@ const Login = () => {
                     </p>
                   </div>
 
-                  <div style={{ width: "100%" }}>
+                  <div className="btn-area-login">
                     <GoogleReCaptcha
                       reCapthchaRef={reCapthchaRef}
                       onChange={handleOnReCaptchaChanged}

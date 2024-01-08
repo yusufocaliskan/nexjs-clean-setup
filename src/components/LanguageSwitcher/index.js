@@ -3,16 +3,16 @@ import { setSelectedLanguage } from "@/store/app";
 import { getSelectedLanguage } from "@/utils";
 import { usePathname, useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
+import "./index.scss";
 
 const LanguageSwitcher = () => {
   const path = usePathname();
-  const selectedLangue = getSelectedLanguage();
+  const selectedLanguage = getSelectedLanguage();
   const router = useRouter();
   const dispatch = useDispatch();
 
   const generateLanguageLink = (lng) => {
-    const newPath = path.replace(selectedLangue, lng);
-    console.log(newPath);
+    const newPath = path.replace(selectedLanguage, lng);
     return newPath;
   };
 
@@ -25,17 +25,17 @@ const LanguageSwitcher = () => {
   return (
     <>
       <div>
-        {Object.keys(languages).map((key, index) => {
-          return (
-            <div
-              style={{ cursor: "pointer", marginRight: 10 }}
-              key={index}
-              onClick={() => handleOnLanguageSwitched(languages[key])}
-            >
+        <select
+          className="language-switch"
+          value={selectedLanguage}
+          onChange={(e) => handleOnLanguageSwitched(e.target.value)}
+        >
+          {Object.keys(languages).map((key, index) => (
+            <option key={index} value={languages[key]}>
               {languages[key]}
-            </div>
-          );
-        })}
+            </option>
+          ))}
+        </select>
       </div>
     </>
   );

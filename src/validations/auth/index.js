@@ -48,19 +48,19 @@ export const loginFormValidations = yup.object().shape({
   Email: yup.string().email().required(),
 });
 
-export const forgotPasswordLastStepFormValidations = yup.object().shape({
+export const resetPasswordFormValidations = yup.object().shape({
   Password: yup
     .string()
     .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
     .required(),
-  PasswordAgain: yup
+  ConfirmPassword: yup
     .string()
-    .matches(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$/)
-    .required(),
+    .oneOf([yup.ref("Password"), null], "Passwords must match")
+    .required("Confirm Password is required"),
   Email: yup.string().email().required(),
 });
 
-export const forgotPasswordFirstStepFormValidations = yup.object().shape({
+export const deletePasswordFormValidations = yup.object().shape({
   Email: yup.string().email().required(),
 });
 
@@ -71,7 +71,7 @@ export const forgotPasswordSecondStepFormValidations = yup.object().shape({
       yup
         .mixed()
         .test("isValidCode", "codeMustBeNumber", (value) => /^\d$/.test(value))
-        .required("verificationCodeisRequired"),
+        .required("verificationCodeisRequired")
     )
     .min(6, "codeMustBeMin6")
     .max(6, "codeMustBeMax6"),
@@ -85,7 +85,7 @@ export const registerVerificationFormValidations = yup.object().shape({
       yup
         .mixed()
         .test("isValidCode", "codeMustBeNumber", (value) => /^\d$/.test(value))
-        .required("verificationCodeisRequired"),
+        .required("verificationCodeisRequired")
     )
     .min(6, "codeMustBeMin6")
     .max(6, "codeMustBeMax6"),
