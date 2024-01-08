@@ -1,5 +1,5 @@
-import clientBaseQuery from "@/services/clientBaseQuery";
 import { createApi } from "@reduxjs/toolkit/query/react";
+import clientBaseQuery from "@/services/clientBaseQuery";
 
 export const referralApi = createApi({
   reducerPath: "referralApi",
