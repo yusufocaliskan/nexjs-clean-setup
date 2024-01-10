@@ -91,6 +91,14 @@
   "forgotPasswordPageConfirmPassword": "Confirm Password",
   "forgotPasswordPageSuccessMessage": "The password reset link has been sent to your email.",
   "resetPasswordPageSuccessMessage": "Your password has been successfully reset",
+  "publicHeaderExchange":"Exchange",
+  "publicHeaderBuyCrypto":"Buy Crypto",
+  "publicHeaderMarket":"Market",
+  "publicHeaderDiscover":"Discover",
+  "publicHeaderSignUp":"Sign Up",
+  "publicHeaderLogin":"Login",
+
+
 
   "password is a required field": "Please fill the password input"
 }

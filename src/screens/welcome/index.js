@@ -6,6 +6,7 @@ import Link from "next/link";
 import routes from "@/routes";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import PublicHeader from "@/layouts/header/public";
 
 const Welcome = () => {
   const session = useSession();
@@ -14,17 +15,7 @@ const Welcome = () => {
   }, [session]);
   return (
     <>
-      <div>
-        <ThemeSwitcher />
-      </div>
-
-      <div>
-        <LanguageSwitcher />
-      </div>
-      <div>
-        <Link href={routes.login}>Login</Link> |
-        <Link href={routes.register}>Register</Link>
-      </div>
+      <PublicHeader />
     </>
   );
 };

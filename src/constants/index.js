@@ -3,4 +3,4 @@ export const verificationMethodTypes = {
   email: "VerifiyEmail",
 };
 
-export const protectedScreens = [/(.*)\/dashboard/, /(.*)\/wallet/];
+export const protectedScreens = [/(.*)\/dashboard/, /(.*)\/wallet/, /(.*)\/account/];
