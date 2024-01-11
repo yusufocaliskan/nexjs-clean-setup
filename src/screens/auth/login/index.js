@@ -12,6 +12,7 @@ import {
   Form,
   LoggedInProfileCard,
   Modal,
+  VerificationCode,
 } from "@/components";
 
 import Link from "next/link";
@@ -51,6 +52,7 @@ const Login = () => {
       Password: "",
       Email: "",
       reCaptcha: "",
+      Token: ["", "", "", "", "", ""],
     },
     validationSchema: loginFormValidations,
     onSubmit: () => handleOnSubmitLoginForm(),
@@ -114,7 +116,7 @@ const Login = () => {
 
   return (
     <div className="login-page-container">
-      <Modal>
+      <Modal w="430px">
         <div className="twofa-form-wrapper">
           <Form
             onSubmit={loginForm.handleSubmit}
@@ -125,15 +127,16 @@ const Login = () => {
             <Title text={t("verification")} />
             <div className="form-inputs">
               <div className="email">
-                <TextBox
-                  formInstance={loginForm}
-                  label={t("loginPageEmail")}
-                  type="number"
-                  name="2faCode"
-                  placeholder={t("loginPageEmailPlaceHolder")}
-                  value={loginForm.values.Email}
-                  setValue={(value) => loginForm.setFieldValue("Email", value)}
-                />
+                <div className="verification-div">
+                  <VerificationCode
+                    formInstance={loginForm}
+                    verificationCode={loginForm.values.Token}
+                    name="Token"
+                    setVerificationCode={(value) =>
+                      loginForm.setFieldValue("Token", value)
+                    }
+                  />
+                </div>
               </div>
             </div>
           </Form>
