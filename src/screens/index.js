@@ -9,3 +9,6 @@ export { default as LoginScreen } from "./auth/login";
 //marketing
 export { default as MarketScreen } from "./market";
 export { default as DashboardScreen } from "./dashboard";
+
+//account
+export { default as ProfileScreen } from "./account/profile";

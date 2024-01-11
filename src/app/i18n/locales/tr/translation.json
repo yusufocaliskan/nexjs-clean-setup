@@ -89,7 +89,12 @@
   "forgotPasswordPageConfirmPassword": "Parolayı Onayla",
   "forgotPasswordPageSuccessMessage": "Parola sıfırlama linki mailinize gönderildi.",
   "resetPasswordPageSuccessMessage": "Parolanız başarıyla sıfırlandı",
-
-
+  "publicHeaderExchange":"Takas",
+  "publicHeaderBuyCrypto":"Kripto Satın Al",
+  "publicHeaderMarket":"Piyasa",
+  "publicHeaderDiscover":"Keşfet",
+  "publicHeaderSignUp":"Kaydol",
+  "publicHeaderLogin":"Giriş",
+  
   "password is a required field": "Lütfen parola alanını doldurun"
 }

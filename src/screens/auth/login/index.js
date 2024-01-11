@@ -131,7 +131,7 @@ const Login = () => {
           </div>
           <div className="divider" />
           <div className="login-form">
-            {!isAuthorized && (
+            {/* {!isAuthorized && (
               <div className="form-buttons">
                 <CoolButton
                   selected={button === "Email"}
@@ -146,7 +146,7 @@ const Login = () => {
                   type="Selected"
                 />
               </div>
-            )}
+            )} */}
             <LoggedInProfileCard session={session} />
             {!isAuthorized && button === "Email" && (
               <Form
