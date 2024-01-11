@@ -6,13 +6,10 @@ import { useTranslation } from "@/app/i18n/client";
 
 import {
   LockLine,
-  CoolButton,
   Title,
   PasswordInputs,
   TextBox,
-  FormTriggerButton,
   Form,
-  GoogleReCaptcha,
   LoggedInProfileCard,
 } from "@/components";
 
@@ -20,18 +17,17 @@ import Link from "next/link";
 import SmallLogo from "@/components/Logo/smallLogo";
 import { useFormik } from "formik";
 import { loginFormValidations } from "@/validations/auth";
-import { useRef } from "react";
 import LeftSide from "../leftSide";
 import { signIn, signOut, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { useRouter } from "next/navigation";
 import routes from "@/routes";
-import { cleanUpUserStore, setToken } from "@/store/user";
-import { useDispatch, useSelector } from "react-redux";
-import queryResult from "@/services/queryResult";
+import { setToken } from "@/store/user";
+import { useDispatch } from "react-redux";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { authApi } from "@/services/auth";
+import useCustomSession from "@/hooks/useCustomSession";
 
 const Login = () => {
   const [button, setButton] = useState("Email");
@@ -40,17 +36,14 @@ const Login = () => {
   //Store
   const dispatch = useDispatch();
 
+  const { session, isAuthorized } = useCustomSession();
   const [getUserInformations, userInformationResponse] =
     authApi.useGetUserInformationsMutation();
-
-  const [logoutSession, logoutResp] = authApi.useLogoutSessionMutation();
 
   const router = useRouter();
   const { t } = useTranslation();
 
   //SEssions
-  const session = useSession();
-  const isAuthorized = session?.status === "authenticated";
 
   const loginForm = useFormik({
     initialValues: {
@@ -63,25 +56,40 @@ const Login = () => {
   });
 
   const data = loginForm.values;
-
+  useEffect(() => {
+    console.log("Custom Session : ", session);
+  }, [session]);
   //store the user token that comes from server
   useEffect(() => {
-    //is user need to confirm her/his e-mail?
-    //redirect to email confirmation page
-    if (session?.data?.notConfirmedEmail) {
-    }
-
-    //Is signIn success
-    if (isAuthorized) {
-      const tokens = session?.data?.accessToken;
-      if (tokens) {
-        dispatch(setToken(tokens));
-        //Get user informations.
-
-        getUserInformations();
-        //router.push(routes.welcome);
+    const startTheSessionListener = () => {
+      //is user need to confirm her/his e-mail?
+      //redirect to email confirmation page
+      if (session?.data?.notConfirmedEmail) {
+        //return router.push(routes.emailVerification)
       }
-    }
+
+      if (session?.data?.googleAuthenticatorEnabled) {
+      }
+
+      //Is signIn success
+      // - The user's email must be verified and
+      // - google authenticator must be disabled
+      if (
+        isAuthorized &&
+        !session?.data?.notConfirmedEmail &&
+        !session?.data?.googleAuthenticatorEnabled
+      ) {
+        const tokens = session?.data?.accessToken;
+        if (tokens) {
+          dispatch(setToken(tokens));
+          //Get user informations.
+
+          getUserInformations();
+          //router.push(routes.welcome);
+        }
+      }
+    };
+    startTheSessionListener();
   }, [session, dispatch, isAuthorized, router]);
 
   const handleOnSubmitLoginForm = async (vals) => {

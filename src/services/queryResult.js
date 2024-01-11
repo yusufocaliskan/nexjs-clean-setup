@@ -61,7 +61,9 @@ export const queryResult = {
    * @param {*} code
    */
   IS_GOOGLE_AUTHENTICATOR_ENABLED(input) {
-    return input && input.StatusCode === 2001;
+    return (
+      (input && input.StatusCode === 2001) || input.data?.StatusCode === 2001
+    );
   },
 
   /**

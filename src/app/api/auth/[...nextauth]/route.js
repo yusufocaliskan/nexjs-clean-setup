@@ -1,13 +1,11 @@
-import { appConfigs } from "@/configs";
 import routes from "@/routes";
 import clientInstance from "@/services/clientInstance";
 import queryResult from "@/services/queryResult";
-import axios from "axios";
 import NextAuth from "next-auth/next";
 
 import CredentialsProvider from "next-auth/providers/credentials";
 
-const nextAuthOptions = {
+export const nextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -19,7 +17,15 @@ const nextAuthOptions = {
             "users/login",
             credentials,
           );
+          console.log(response);
 
+          if (queryResult.IS_GOOGLE_AUTHENTICATOR_ENABLED(response)) {
+            return {
+              data: response.data.Data,
+              googleAuthenticatorEnabled: true,
+              email: credentials.Email,
+            };
+          }
           //if (queryResult.IS_EMAIL_NOT_CONFIRMED(response.data)) {
           // Check if the login was successful based on your server's response structure
           if (queryResult.isSuccess(response.data)) {
@@ -50,7 +56,9 @@ const nextAuthOptions = {
       //console.log("CalBack Session", { session, user, token });
       session.accessToken = token.accessToken;
       session.notConfirmedEmail = token?.notConfirmedEmail;
+      session.googleAuthenticatorEnabled = token?.googleAuthenticatorEnabled;
       session.email = token?.email;
+      session.isAuthenticated = token?.isAuthenticated;
       return session;
     },
     async jwt({ token, user, account, profile, isNewUser }) {
@@ -59,11 +67,21 @@ const nextAuthOptions = {
       if (user?.notConfirmedEmail) {
         token.notConfirmedEmail = true;
         token.user = user.email;
+        token.isAuthenticated = true;
+      }
+
+      if (user?.googleAuthenticatorEnabled) {
+        token.googleAuthenticatorEnabled = true;
+        token.data = user.data;
+        token.user = user.email;
+        token.isAuthenticated = false;
       }
 
       //if the sing in success
       if (user?.token) {
         token.accessToken = user.token;
+
+        token.isAuthenticated = true;
       }
       return token;
     },
@@ -88,6 +106,6 @@ const nextAuthOptions = {
 
   debug: true,
 };
-const nextAuthHandler = NextAuth(nextAuthOptions);
 
+const nextAuthHandler = NextAuth(nextAuthOptions);
 export { nextAuthHandler as POST, nextAuthHandler as GET };

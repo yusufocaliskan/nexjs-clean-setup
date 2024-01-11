@@ -10,7 +10,8 @@ const ProtectedScreen = ({ children }) => {
   //NOTE: There are many way to protect a page, we choose using laoyut logic
   //which is more customizable
   const session = useSession();
-  const isAuthorized = session?.status === "authenticated";
+  const isAuthorized = session?.data?.isAuthenticated;
+
   const router = useRouter();
   const dispatch = useDispatch();
 
