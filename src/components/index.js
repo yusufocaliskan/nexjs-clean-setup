@@ -1,23 +1,23 @@
 //Form
-export { default as Form } from "./Form";
-export { default as TextBox } from "./Form/TextBox";
-export { default as SelectBox } from "./Form/SelectBox";
-export { default as CheckBox } from "./Form/CheckBox";
-export { default as PhoneInput } from "./Form/PhoneWithCountryCodeInput";
-export { default as PasswordInputs } from "./Form/PasswordInputs";
-export { default as FullNameInputs } from "./Form/FullNameInputs";
-export { default as DateSelectBox } from "./Form/DateSelectBox";
+export { default as Form } from "./form";
+export { default as TextBox } from "./form/TextBox";
+export { default as SelectBox } from "./form/SelectBox";
+export { default as CheckBox } from "./form/CheckBox";
+export { default as PhoneInput } from "./form/PhoneWithCountryCodeInput";
+export { default as PasswordInputs } from "./form/PasswordInputs";
+export { default as FullNameInputs } from "./form/FullNameInputs";
+export { default as DateSelectBox } from "./form/DateSelectBox";
 export { default as GoogleReCaptcha } from "./GoogleReCaptcha";
-export { default as VerificationCode } from "./Form/VerificationCodeInput";
+export { default as VerificationCode } from "./form/VerificationCodeInput";
 
 //Register Form Components
-export { default as CitizenshipNationalitySelector } from "./Form/CitizenshipNationalitySelector";
-export { default as TermAndPolicyCheckBox } from "./Form/TermAndPolicyCheckBox";
-export { default as DeclarationCheckBox } from "./Form/DeclarationCheckBox";
+export { default as CitizenshipNationalitySelector } from "./form/CitizenshipNationalitySelector";
+export { default as TermAndPolicyCheckBox } from "./form/TermAndPolicyCheckBox";
+export { default as DeclarationCheckBox } from "./form/DeclarationCheckBox";
 
 //buttons
-export { default as CoolButton } from "./Form/CoolButton";
-export { default as FormTriggerButton } from "./Form/FormTriggerButton";
+export { default as CoolButton } from "./form/CoolButton";
+export { default as FormTriggerButton } from "./form/FormTriggerButton";
 
 //Screen Commons
 export { default as Title } from "./ScreenCommons/Title";

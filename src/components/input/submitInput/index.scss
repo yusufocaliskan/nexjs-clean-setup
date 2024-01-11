@@ -1,0 +1,20 @@
+.submit-input-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .submit-input {
+        display: flex;
+        width: 16rem;
+        height: 3rem;
+        padding: 0.5rem 0.5rem 0.5rem 1rem;
+        justify-content: flex-end;
+        background-color: var(--inputBg);
+        align-items: center;
+        gap: 1.125rem;
+        border-radius: 5.625rem;
+        border: 2px solid var(--inputBorderColor);
+        margin-right: -2.5rem;
+        color: var(--loginPageText);
+    }
+}

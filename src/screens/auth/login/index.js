@@ -20,7 +20,7 @@ import SmallLogo from "@/components/Logo/smallLogo";
 import { useFormik } from "formik";
 import { loginFormValidations } from "@/validations/auth";
 import LeftSide from "../leftSide";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { useRouter } from "next/navigation";
