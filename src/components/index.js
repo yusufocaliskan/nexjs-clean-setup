@@ -24,6 +24,7 @@ export { default as Title } from "./ScreenCommons/Title";
 export { default as VerticalDivider } from "./ScreenCommons/VerticalDiverder";
 export { default as Spacer } from "./ScreenCommons/Spacer";
 export { default as LoggedInProfileCard } from "./ScreenCommons/LoggedInProfileCard";
+export { default as Modal } from "./ScreenCommons/Modal";
 
 //Icons
 export { default as LockLine } from "./Icons/LockLine.js";

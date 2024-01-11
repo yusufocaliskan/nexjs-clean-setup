@@ -1,0 +1,46 @@
+.modal-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  z-index: 888;
+  justify-content: center;
+}
+.modal-overlay {
+  position: absolute;
+  top: 0;
+
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  z-index: 888;
+  justify-content: center;
+  background: #ddddddc4;
+}
+.modal-content-wrapper {
+  width: max-content;
+  max-width: 60%;
+  min-width: 40%;
+  z-index: 999;
+  overflow-y: scroll;
+  display: flex;
+}
+.modal-content-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.modal-content-wrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.modal-content {
+  width: 100%;
+  border-radius: 20px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 20px;
+}

@@ -7,9 +7,10 @@ import routes from "@/routes";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import PublicHeader from "@/layouts/header/public";
+import useCustomSession from "@/hooks/useCustomSession";
 
 const Welcome = () => {
-  const session = useSession();
+  const { session } = useCustomSession();
   useEffect(() => {
     console.log(session);
   }, [session]);

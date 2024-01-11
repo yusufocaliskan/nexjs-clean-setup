@@ -14,9 +14,6 @@ const Form = ({
   dontDisplayCaptcha = false,
   submitButtonText = "Custom Text",
   captchaRef,
-  onRecaptchaChanged,
-  isLoading,
-  setIsLoading,
 }) => {
   const { t } = useTranslation();
 

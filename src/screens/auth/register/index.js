@@ -31,6 +31,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInformations } from "@/store/user";
 import { useSession } from "next-auth/react";
+import useCustomSession from "@/hooks/useCustomSession";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -39,8 +40,7 @@ const Register = () => {
   const dispatch = useDispatch();
   const router = useRouter();
 
-  const session = useSession();
-  const isAuthorized = session?.data?.isAuthenticated;
+  const { session, isAuthorized } = useCustomSession();
 
   const [newRegisteration, regitrationResponse] =
     authApi.useNewRegistrationMutation();

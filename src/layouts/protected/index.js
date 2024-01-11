@@ -1,4 +1,5 @@
 import GiantLoaderAnimation from "@/components/LoadingGif/GiantLoaderAnimation";
+import useCustomSession from "@/hooks/useCustomSession";
 import routes from "@/routes";
 import { setToken } from "@/store/user";
 import { useSession } from "next-auth/react";
@@ -9,8 +10,7 @@ import { useDispatch } from "react-redux";
 const ProtectedScreen = ({ children }) => {
   //NOTE: There are many way to protect a page, we choose using laoyut logic
   //which is more customizable
-  const session = useSession();
-  const isAuthorized = session?.data?.isAuthenticated;
+  const { session, isAuthorized } = useCustomSession();
 
   const router = useRouter();
   const dispatch = useDispatch();

@@ -11,6 +11,7 @@ import {
   TextBox,
   Form,
   LoggedInProfileCard,
+  Modal,
 } from "@/components";
 
 import Link from "next/link";
@@ -113,6 +114,43 @@ const Login = () => {
 
   return (
     <div className="login-page-container">
+      <Modal>
+        <div className="2fa-form-wrapper">
+          <Form
+            onSubmit={loginForm.handleSubmit}
+            formInstance={loginForm}
+            isLoading={isLoading}
+            submitButtonText={t("loginPageLogin")}
+          >
+            <div className="form-inputs">
+              <div className="email">
+                <TextBox
+                  formInstance={loginForm}
+                  label={t("loginPageEmail")}
+                  type="email"
+                  name="Email"
+                  placeholder={t("loginPageEmailPlaceHolder")}
+                  value={loginForm.values.Email}
+                  setValue={(value) => loginForm.setFieldValue("Email", value)}
+                />
+              </div>
+              <div className="password">
+                <div className="password-area">
+                  <PasswordInputs formInstance={loginForm} />
+                </div>
+              </div>
+              <div className="scan-and-forgot">
+                <p className="scan-login">{t("loginPageScanToLogin")} </p>
+                <p className="forgot-password">
+                  <Link href="/auth/forgot-password">
+                    {t("loginPageForgotPassword")}
+                  </Link>
+                </p>
+              </div>
+            </div>
+          </Form>{" "}
+        </div>
+      </Modal>
       <LeftSide />
       <div className="login-page-right">
         <div className="login-page-right-top">
