@@ -12,10 +12,8 @@ import { CoolButton } from "@/components";
 import HamburgerIcon from "@/components/Icons/HamburgerIcon";
 
 const PublicHeader = () => {
-  const path = usePathname();
-  const lang = path.substring(1).split("/")[0];
   const router = useRouter();
-  const { t } = useTranslation(lang);
+  const { t } = useTranslation();
 
   return (
     <>

@@ -95,6 +95,20 @@
   "publicHeaderDiscover":"Keşfet",
   "publicHeaderSignUp":"Kaydol",
   "publicHeaderLogin":"Giriş",
+  "protectedHeaderWallet": "Wallet",
+  "footerExchange": "Borsa",
+  "footerBuyCrypto": "Kripto Satın Al",
+  "footerMarket": "Piyasa",
+  "footerLearn": "Kripto Öğren",
+  "footerContact": "İletişim",
+  "footerContactTitle": "İLETİŞİM",
+  "footerNavTitle": "ALT MENÜ BAŞLIĞI",
+  "footerNewsletterTitle": "BÜLTEN",
+  "footerContactAddress": "Dubai Silicon Oasis, Dubai, Birleşik Arap Emirlikleri",
+  "footerNewsletterContent": "Daha fazla ücretsiz tasarım kursu ve kaynağı için bültenimize abone olun.",
+  "footerEmailPlaceholder": "E-postanızı girin",
+  "footerCopyright": "Tüm hakları saklıdır © 2021 DecentraHubs",
+
   
   "password is a required field": "Lütfen parola alanını doldurun"
 }

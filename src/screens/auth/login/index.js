@@ -6,13 +6,10 @@ import { useTranslation } from "@/app/i18n/client";
 
 import {
   LockLine,
-  CoolButton,
   Title,
   PasswordInputs,
   TextBox,
-  FormTriggerButton,
   Form,
-  GoogleReCaptcha,
   LoggedInProfileCard,
 } from "@/components";
 
@@ -20,16 +17,14 @@ import Link from "next/link";
 import SmallLogo from "@/components/Logo/smallLogo";
 import { useFormik } from "formik";
 import { loginFormValidations } from "@/validations/auth";
-import { useRef } from "react";
 import LeftSide from "../leftSide";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { useRouter } from "next/navigation";
 import routes from "@/routes";
-import { cleanUpUserStore, setToken } from "@/store/user";
-import { useDispatch, useSelector } from "react-redux";
-import queryResult from "@/services/queryResult";
+import { setToken } from "@/store/user";
+import { useDispatch } from "react-redux";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { authApi } from "@/services/auth";
 

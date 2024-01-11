@@ -1,0 +1,10 @@
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: space-between;
+    .dashboard-content {
+        width: 100%;
+        min-height: 100%;
+    }
+}

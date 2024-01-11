@@ -1,5 +1,12 @@
+import DashboardLayout from "@/layouts/dashboard";
+import ProtectedHeader from "@/layouts/header/protected";
+
 const Profile = () => {
-  return <div>profile</div>;
+  return (
+    <DashboardLayout>
+      <div>profile</div>
+    </DashboardLayout>
+  );
 };
 
 export default Profile;

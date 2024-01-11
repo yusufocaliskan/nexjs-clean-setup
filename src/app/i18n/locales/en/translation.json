@@ -4,7 +4,7 @@
   "continue": "Contunie",
   "select": "Select",
   "verificationScreenTitle": "Let’s confirm it’s really you",
-  "verificationScreenDesc": "Help us secure your account. Please complete the verifications below",
+  "verificationScreenDesc": "Help us secure your account.Please complete the verifications below",
 
   "successRegistrationMessage": "Good, now need some verification, please waith for a while.",
   "emailConfirmationCardTitle": "Get the code by email",
@@ -97,6 +97,19 @@
   "publicHeaderDiscover":"Discover",
   "publicHeaderSignUp":"Sign Up",
   "publicHeaderLogin":"Login",
+  "protectedHeaderWallet": "Wallet",
+  "footerExchange": "Exchange",
+  "footerBuyCrypto": "Buy crypto",
+  "footerMarket": "Market",
+  "footerLearn": "Learn crypto",
+  "footerContact": "Contact",
+  "footerContactTitle": "CONTACT",
+  "footerNavTitle":"FOOTER NAV",
+  "footerNewsletterTitle": "NEWSLETTER",
+  "footerContactAddress": "Dubai Silicon Oasis, Dubai, United Arab Emirates",
+  "footerNewsletterContent":"Subscribe our newsletter to get more free design course and resource.",
+  "footerEmailPlaceholder": "Enter your email",
+  "footerCopyright": "Copyright © 2021 DecentraHubs. All rights reserved",
 
 
 
