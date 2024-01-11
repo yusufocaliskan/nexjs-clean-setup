@@ -115,40 +115,28 @@ const Login = () => {
   return (
     <div className="login-page-container">
       <Modal>
-        <div className="2fa-form-wrapper">
+        <div className="twofa-form-wrapper">
           <Form
             onSubmit={loginForm.handleSubmit}
             formInstance={loginForm}
             isLoading={isLoading}
             submitButtonText={t("loginPageLogin")}
           >
+            <Title text={t("verification")} />
             <div className="form-inputs">
               <div className="email">
                 <TextBox
                   formInstance={loginForm}
                   label={t("loginPageEmail")}
-                  type="email"
-                  name="Email"
+                  type="number"
+                  name="2faCode"
                   placeholder={t("loginPageEmailPlaceHolder")}
                   value={loginForm.values.Email}
                   setValue={(value) => loginForm.setFieldValue("Email", value)}
                 />
               </div>
-              <div className="password">
-                <div className="password-area">
-                  <PasswordInputs formInstance={loginForm} />
-                </div>
-              </div>
-              <div className="scan-and-forgot">
-                <p className="scan-login">{t("loginPageScanToLogin")} </p>
-                <p className="forgot-password">
-                  <Link href="/auth/forgot-password">
-                    {t("loginPageForgotPassword")}
-                  </Link>
-                </p>
-              </div>
             </div>
-          </Form>{" "}
+          </Form>
         </div>
       </Modal>
       <LeftSide />
