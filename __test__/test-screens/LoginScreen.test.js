@@ -1,4 +1,5 @@
-import {WelcomeScreen} from '@/screens';
+import {RootProvider} from '@/boot';
+import {LoginScreen, WelcomeScreen} from '@/screens';
 import {render, screen} from '@testing-library/react';
 
 jest.mock('next/router', () => ({
@@ -7,7 +8,11 @@ jest.mock('next/router', () => ({
 
 describe('1.On the WelcomeScreen', () => {
   it('it should have heading tag with text "Hepbit"', () => {
-    render(<WelcomeScreen />);
+    render(
+      <RootProvider>
+        <LoginScreen />
+      </RootProvider>
+    );
     const el = screen.getByText('Hepbit');
     expect(el).toBeInTheDocument();
   });
