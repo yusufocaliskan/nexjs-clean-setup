@@ -17,7 +17,6 @@ export const nextAuthOptions = {
             "users/login",
             credentials,
           );
-          console.log(response);
 
           if (queryResult.IS_GOOGLE_AUTHENTICATOR_ENABLED(response)) {
             return {
