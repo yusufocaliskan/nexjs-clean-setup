@@ -29,31 +29,29 @@ const ThemeSwitcher = () => {
   // }, []);
 
   return (
-    <>
-      <div
-        style={{cursor: 'pointer'}}
-        onClick={() => handleSwitcheTheme(app.currentTheme == 'dark_theme' ? 'light_theme' : 'dark_theme')}
-      >
-        {app.currentTheme == 'light_theme' && (
-          <motion.div
-            initial={{rotate: -90, scale: 0.8, opacity: 0.5}}
-            animate={{rotate: 0, scale: 1, opacity: 1}}
-            transition={{duration: 0.5}}
-          >
-            <TbMoonFilled size={20} />
-          </motion.div>
-        )}
-        {app.currentTheme == 'dark_theme' && (
-          <motion.div
-            initial={{rotate: 90, scale: 0.8, opacity: 0.5}}
-            animate={{rotate: 0, scale: 1, opacity: 1}}
-            transition={{duration: 0.5}}
-          >
-            <MdSunny size={22} />
-          </motion.div>
-        )}
-      </div>
-    </>
+    <div
+      style={{cursor: 'pointer'}}
+      onClick={() => handleSwitcheTheme(app.currentTheme == 'dark_theme' ? 'light_theme' : 'dark_theme')}
+    >
+      {app.currentTheme == 'light_theme' && (
+        <motion.div
+          initial={{rotate: -90, scale: 0.8, opacity: 0.5}}
+          animate={{rotate: 0, scale: 1, opacity: 1}}
+          transition={{duration: 0.5}}
+        >
+          <TbMoonFilled size={20} />
+        </motion.div>
+      )}
+      {app.currentTheme == 'dark_theme' && (
+        <motion.div
+          initial={{rotate: 90, scale: 0.8, opacity: 0.5}}
+          animate={{rotate: 0, scale: 1, opacity: 1}}
+          transition={{duration: 0.5}}
+        >
+          <MdSunny size={22} />
+        </motion.div>
+      )}
+    </div>
   );
 };
 export default ThemeSwitcher;

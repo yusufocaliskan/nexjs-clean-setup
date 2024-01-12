@@ -1,61 +1,54 @@
-"use client";
-import "../auth.scss";
+'use client';
+import '../auth.scss';
 
-import { Title, CoolButton, Spacer, VerticalDivider } from "@/components";
-import { useTranslation } from "@/app/i18n/client";
-import { AuthLayout } from "@/layouts";
-import routes from "@/routes";
-import Link from "next/link";
-import { MdEmail, MdSms } from "react-icons/md";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import VerificationForm from "./verification-form/";
-import { useFormik } from "formik";
-import { registerVerificationFormValidations } from "@/validations/auth";
-import { verificationMethodTypes } from "@/constants";
-import { authApi } from "@/services/auth";
-import queryResult from "@/services/queryResult";
-import { useRouter } from "next/navigation";
-import { cleanUpUserStore } from "@/store/user";
-import toast from "react-hot-toast";
-import useCounter from "@/hooks/useCounter";
-import { appConfigs } from "@/configs";
-import GiantLoaderAnimation from "@/components/LoadingGif/GiantLoaderAnimation";
+import {Title, CoolButton, Spacer, VerticalDivider} from '@/components';
+import {useTranslation} from '@/app/i18n/client';
+import {AuthLayout} from '@/layouts';
+import routes from '@/routes';
+import Link from 'next/link';
+import {MdEmail, MdSms} from 'react-icons/md';
+import {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import VerificationForm from './verification-form/';
+import {useFormik} from 'formik';
+import {registerVerificationFormValidations} from '@/validations/auth';
+import {verificationMethodTypes} from '@/constants';
+import {authApi} from '@/services/auth';
+import queryResult from '@/services/queryResult';
+import {useRouter} from 'next/navigation';
+import {cleanUpUserStore} from '@/store/user';
+import toast from 'react-hot-toast';
+import useCounter from '@/hooks/useCounter';
+import {appConfigs} from '@/configs';
+import GiantLoaderAnimation from '@/components/LoadingGif/GiantLoaderAnimation';
 
 const VERIFICATION_CODE_NUMBER = 6;
 
 const Verification = () => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const router = useRouter();
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
 
-  const [getSelectedVerificationMethod, setSelectedVerificationMethod] =
-    useState();
+  const [getSelectedVerificationMethod, setSelectedVerificationMethod] = useState();
 
   //counters
-  const emailCounter = useCounter(
-    "emailCounter",
-    appConfigs.form.counterTimeOut,
-  );
+  const emailCounter = useCounter('emailCounter', appConfigs.form.counterTimeOut);
 
-  const smsCounter = useCounter("smsCounter", appConfigs.form.counterTimeOut);
+  const smsCounter = useCounter('smsCounter', appConfigs.form.counterTimeOut);
 
   //queries
-  const [reSendVerificationCode2Email, resendEmailCodeResponse] =
-    authApi.useReSendVerificationCode2EmailMutation();
+  const [reSendVerificationCode2Email, resendEmailCodeResponse] = authApi.useReSendVerificationCode2EmailMutation();
 
-  const [reSendVerificationCode2Sms, resendSmsCodeResponse] =
-    authApi.useReSendVerificationCode2SmsMutation();
+  const [reSendVerificationCode2Sms, resendSmsCodeResponse] = authApi.useReSendVerificationCode2SmsMutation();
 
-  const [verfiyEmailOPhoneNumber, emailVerificationResponse] =
-    authApi.useVerfiyEmailOPhoneNumberMutation();
+  const [verfiyEmailOPhoneNumber, emailVerificationResponse] = authApi.useVerfiyEmailOPhoneNumberMutation();
 
   //EMaIL FORM
   const emailVerificationForm = useFormik({
     initialValues: {
-      Token: ["", "", "", "", "", ""],
+      Token: ['', '', '', '', '', ''],
       email: user.informations.Email,
       phone: user.informations.PhoneNumber,
     },
@@ -63,14 +56,14 @@ const Verification = () => {
     onSubmit: () => handleOnEmailVerificationFormSubmit(),
   });
 
-  const emailDescriptionText = t("completeTheRegistraionScreenDesc")
-    .replace("%d", VERIFICATION_CODE_NUMBER)
-    .replace("%s", emailVerificationForm.values.email);
+  const emailDescriptionText = t('completeTheRegistraionScreenDesc')
+    .replace('%d', VERIFICATION_CODE_NUMBER)
+    .replace('%s', emailVerificationForm.values.email);
 
   ///SMS FORM
   const smsVerificationForm = useFormik({
     initialValues: {
-      Token: ["", "", "", "", "", ""],
+      Token: ['', '', '', '', '', ''],
       email: user.informations.Email,
       phone: user.informations.PhoneNumber,
     },
@@ -78,19 +71,14 @@ const Verification = () => {
     onSubmit: () => handleOnSmsVerificationFormSubmit(),
   });
 
-  const smsDescriptionText = t("completeTheRegistraionScreenDesc")
-    .replace("%d", VERIFICATION_CODE_NUMBER)
-    .replace("%s", smsVerificationForm.values.phone);
+  const smsDescriptionText = t('completeTheRegistraionScreenDesc')
+    .replace('%d', VERIFICATION_CODE_NUMBER)
+    .replace('%s', smsVerificationForm.values.phone);
 
   //We won't let user to see this page
   //if they didnt' come with informatios
   useEffect(() => {
-    if (
-      !user ||
-      !user.informations.token ||
-      !user.informations.Email ||
-      !user.informations.PhoneNumber
-    ) {
+    if (!user || !user.informations.token || !user.informations.Email || !user.informations.PhoneNumber) {
       setIsLoading(true);
       router.push(routes.register);
     } else {
@@ -101,9 +89,7 @@ const Verification = () => {
   //When on e-mail form submitted
   const handleOnEmailVerificationFormSubmit = async () => {
     if (smsVerificationForm.submitCount <= 0) {
-      toast.success(
-        "Grate!, you're so close to the end, please go head and fill in the sms verification code.",
-      );
+      toast.success("Grate!, you're so close to the end, please go head and fill in the sms verification code.");
       setSelectedVerificationMethod(verificationMethodTypes.sms);
     } else {
       setSelectedVerificationMethod();
@@ -113,7 +99,7 @@ const Verification = () => {
 
   const handleOnSmsVerificationFormSubmit = () => {
     if (emailVerificationForm.submitCount <= 0) {
-      toast.success("All most done! Now we need the e-mail verification code.");
+      toast.success('All most done! Now we need the e-mail verification code.');
       setSelectedVerificationMethod(verificationMethodTypes.email);
     } else {
       setSelectedVerificationMethod();
@@ -135,7 +121,7 @@ const Verification = () => {
       return dispatch(cleanUpUserStore());
     }
     if (queryResult.isSuccess(resp)) {
-      return toast.success(resp.data.Message || t("success"));
+      return toast.success(resp.data.Message || t('success'));
     }
 
     return toast.error(resp.error.data.Message);
@@ -165,8 +151,8 @@ const Verification = () => {
   const completeTheVerification = async () => {
     const data = {
       verifyToken: user.informations.token,
-      emailCode: emailVerificationForm.values.Token.join(""),
-      smsCode: smsVerificationForm.values.Token.join(""),
+      emailCode: emailVerificationForm.values.Token.join(''),
+      smsCode: smsVerificationForm.values.Token.join(''),
     };
 
     //send code
@@ -191,23 +177,16 @@ const Verification = () => {
 
   const HeaderLinkRender = () => {
     return (
-      <p className="login-page-right-top-text">
-        {t("dontHaveAnAccount")}
+      <div className="login-page-right-top-text">
+        {t('dontHaveAnAccount')}
         <Link href={routes.register} className="sign-up-for-free">
-          {t("signUpForFree")}
+          {t('signUpForFree')}
         </Link>
-      </p>
+      </div>
     );
   };
 
-  const VerificationMethodItemRender = ({
-    title,
-    desc,
-    icon,
-    method,
-    setMethod,
-    selectedMethod,
-  }) => {
+  const VerificationMethodItemRender = ({title, desc, icon, method, setMethod, selectedMethod}) => {
     return (
       <div className="verification-item">
         <div className="verification-item-left">
@@ -222,11 +201,7 @@ const Verification = () => {
 
         {method !== selectedMethod && (
           <div>
-            <CoolButton
-              onClick={() => setMethod(method)}
-              type="Small"
-              label={t("select")}
-            />
+            <CoolButton onClick={() => setMethod(method)} type="Small" label={t('select')} />
           </div>
         )}
       </div>
@@ -240,13 +215,10 @@ const Verification = () => {
   return (
     <AuthLayout headerLinkRender={<HeaderLinkRender />}>
       <Spacer h={100} />
-      <Title
-        text={t("verificationScreenTitle")}
-        desc={t("verificationScreenDesc")}
-      />
+      <Title text={t('verificationScreenTitle')} desc={t('verificationScreenDesc')} />
       <div className="verification-method-card">
         <VerificationMethodItemRender
-          title={t("emailConfirmationCardTitle")}
+          title={t('emailConfirmationCardTitle')}
           desc={`at ${user.informations.Email}`}
           icon={<MdEmail size="30px" color="black" />}
           method={verificationMethodTypes.email}
@@ -265,7 +237,7 @@ const Verification = () => {
 
         <VerticalDivider />
         <VerificationMethodItemRender
-          title={t("smsConfirmationCardTitle")}
+          title={t('smsConfirmationCardTitle')}
           desc={`at +${user.informations.PhoneNumber}`}
           icon={<MdSms size="30px" color="black" />}
           method={verificationMethodTypes.sms}
@@ -293,7 +265,7 @@ const Verification = () => {
                 label="Done"
                 type="Main"
                 onClick={completeTheVerification}
-                style={{ width: "100%", cursor: "pointer" }}
+                style={{width: '100%', cursor: 'pointer'}}
               />
             </div>
           )}

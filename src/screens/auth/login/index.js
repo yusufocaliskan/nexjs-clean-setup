@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import "./index.scss";
-import { useEffect, useState } from "react";
-import { useTranslation } from "@/app/i18n/client";
+import './index.scss';
+import {useEffect, useState} from 'react';
+import {useTranslation} from '@/app/i18n/client';
 
 import {
   LockLine,
@@ -13,45 +13,44 @@ import {
   LoggedInProfileCard,
   Modal,
   VerificationCode,
-} from "@/components";
+} from '@/components';
 
-import Link from "next/link";
-import SmallLogo from "@/components/Logo/smallLogo";
-import { useFormik } from "formik";
-import { loginFormValidations, twoFAValidations } from "@/validations/auth";
-import LeftSide from "../left-side";
-import { signIn } from "next-auth/react";
-import toast from "react-hot-toast";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
-import { useRouter } from "next/navigation";
-import routes from "@/routes";
-import { setToken } from "@/store/user";
-import { useDispatch } from "react-redux";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import { authApi } from "@/services/auth";
-import useCustomSession from "@/hooks/useCustomSession";
+import Link from 'next/link';
+import SmallLogo from '@/components/Logo/smallLogo';
+import {useFormik} from 'formik';
+import {loginFormValidations, twoFAValidations} from '@/validations/auth';
+import LeftSide from '../left-side';
+import {signIn} from 'next-auth/react';
+import toast from 'react-hot-toast';
+import ThemeSwitcher from '@/components/ThemeSwitcher';
+import {useRouter} from 'next/navigation';
+import routes from '@/routes';
+import {setToken} from '@/store/user';
+import {useDispatch} from 'react-redux';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import {authApi} from '@/services/auth';
+import useCustomSession from '@/hooks/useCustomSession';
 
 const Login = () => {
-  const [button, setButton] = useState("Email");
+  const [button, setButton] = useState('Email');
   const [isLoading, setIsLoading] = useState(false);
 
   //Store
   const dispatch = useDispatch();
 
-  const { session, isAuthorized } = useCustomSession();
-  const [getUserInformations, userInformationResponse] =
-    authApi.useGetUserInformationsMutation();
+  const {session, isAuthorized} = useCustomSession();
+  const [getUserInformations, userInformationResponse] = authApi.useGetUserInformationsMutation();
 
   const router = useRouter();
-  const { t } = useTranslation();
+  const {t} = useTranslation();
 
   //SEssions
 
   const loginForm = useFormik({
     initialValues: {
-      Password: "",
-      Email: "",
-      reCaptcha: "",
+      Password: '',
+      Email: '',
+      reCaptcha: '',
     },
     validationSchema: loginFormValidations,
     onSubmit: () => handleOnSubmitLoginForm(),
@@ -59,17 +58,13 @@ const Login = () => {
 
   const two2FAForm = useFormik({
     initialValues: {
-      Token: ["", "", "", "", "", ""],
+      Token: ['', '', '', '', '', ''],
     },
     validationSchema: twoFAValidations,
     onSubmit: () => handle2FAFormSumit(),
   });
 
   const data = loginForm.values;
-  useEffect(() => {
-    console.log("Custom Session : ", session);
-  }, [session]);
-
   //store the user token that comes from server
   useEffect(() => {
     const startTheSessionListener = () => {
@@ -85,11 +80,7 @@ const Login = () => {
       //Is signIn success
       // - The user's email must be verified and
       // - google authenticator must be disabled
-      if (
-        isAuthorized &&
-        !session?.data?.notConfirmedEmail &&
-        !session?.data?.googleAuthenticatorEnabled
-      ) {
+      if (isAuthorized && !session?.data?.notConfirmedEmail && !session?.data?.googleAuthenticatorEnabled) {
         const tokens = session?.data?.accessToken;
         if (tokens) {
           dispatch(setToken(tokens));
@@ -105,14 +96,14 @@ const Login = () => {
 
   const handleOnSubmitLoginForm = async (vals) => {
     setIsLoading(true);
-    const resp = await signIn("credentials", {
+    const resp = await signIn('credentials', {
       ...data,
       redirect: false,
       callbackUrl: routes.welcome,
     });
 
     if (!resp.ok) {
-      toast.error("Wrong informations");
+      toast.error('Wrong informations');
     }
     if (resp.ok) {
       //loginForm.resetForm();
@@ -154,23 +145,20 @@ const Login = () => {
       <div className="login-page-right">
         <div className="login-page-right-top">
           <SmallLogo />
-          <p
-            style={{ display: "flex", gap: "10px" }}
-            className="login-page-right-top-text"
-          >
+          <div style={{display: 'flex', gap: '10px'}} className="login-page-right-top-text">
             <ThemeSwitcher />
             <LanguageSwitcher />
-            {t("dontHaveAnAccount")}
-            <span className="sign-up-for-free">{t("signUpForFree")}</span>
-          </p>
+            {t('dontHaveAnAccount')}
+            <span className="sign-up-for-free">{t('signUpForFree')}</span>
+          </div>
         </div>
         <div className="login-page-right-content">
-          <Title text={t("loginPageSignInToHepbit")} />
+          <Title text={t('loginPageSignInToHepbit')} />
           <div className="visit-url">
-            <p className="visit-text">{t("loginPageCorrectUrl")}</p>
+            <p className="visit-text">{t('loginPageCorrectUrl')}</p>
             <p className="visit-url-login">
               <LockLine />
-              <span className="visit-https"> {t("loginPageHttps")}</span>
+              <span className="visit-https"> {t('loginPageHttps')}</span>
               accounts.hepbit.com/login
             </p>
           </div>
@@ -193,25 +181,23 @@ const Login = () => {
               </div>
             )} */}
             <LoggedInProfileCard session={session} />
-            {!isAuthorized && button === "Email" && (
+            {!isAuthorized && button === 'Email' && (
               <Form
                 onSubmit={loginForm.handleSubmit}
                 formInstance={loginForm}
                 isLoading={isLoading}
-                submitButtonText={t("loginPageLogin")}
+                submitButtonText={t('loginPageLogin')}
               >
                 <div className="form-inputs">
                   <div className="email">
                     <TextBox
                       formInstance={loginForm}
-                      label={t("loginPageEmail")}
+                      label={t('loginPageEmail')}
                       type="email"
                       name="Email"
-                      placeholder={t("loginPageEmailPlaceHolder")}
+                      placeholder={t('loginPageEmailPlaceHolder')}
                       value={loginForm.values.Email}
-                      setValue={(value) =>
-                        loginForm.setFieldValue("Email", value)
-                      }
+                      setValue={(value) => loginForm.setFieldValue('Email', value)}
                     />
                   </div>
                   <div className="password">
@@ -220,11 +206,9 @@ const Login = () => {
                     </div>
                   </div>
                   <div className="scan-and-forgot">
-                    {/* <p className="scan-login">{t("loginPageScanToLogin")} </p> */}
+                    <p className="scan-login">{t('loginPageScanToLogin')} </p>
                     <p className="forgot-password">
-                      <Link href="/auth/forgot-password">
-                        {t("loginPageForgotPassword")}
-                      </Link>
+                      <Link href="/auth/forgot-password">{t('loginPageForgotPassword')}</Link>
                     </p>
                   </div>
                 </div>

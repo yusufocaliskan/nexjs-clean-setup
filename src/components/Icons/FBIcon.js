@@ -1,17 +1,11 @@
-import React from "react";
+import React from 'react';
 
 const FBIcon = () => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M10.0001 16.668C13.682 16.668 16.6667 13.6832 16.6667 10.0013C16.6667 6.3194 13.682 3.33464 10.0001 3.33464C6.31818 3.33464 3.33341 6.3194 3.33341 10.0013C3.33341 13.6832 6.31818 16.668 10.0001 16.668ZM10.0001 18.3346C14.6024 18.3346 18.3334 14.6036 18.3334 10.0013C18.3334 5.39893 14.6024 1.66797 10.0001 1.66797C5.39771 1.66797 1.66675 5.39893 1.66675 10.0013C1.66675 14.6036 5.39771 18.3346 10.0001 18.3346Z"
         fill="#777E91"
       />

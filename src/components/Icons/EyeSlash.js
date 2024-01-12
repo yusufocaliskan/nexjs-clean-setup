@@ -1,4 +1,4 @@
-const EyeSlash = ({ width = 24, height = 24 }) => {
+const EyeSlash = ({width = 24, height = 24}) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,7 +6,7 @@ const EyeSlash = ({ width = 24, height = 24 }) => {
       width={width}
       height={height}
       viewBox="0 0 24 24"
-      stroke-width="1.5"
+      strokeWidth="1.5"
       stroke="currentColor"
       class="w-6 h-6"
     >
