@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  criex-prod-front:
+    container_name: criex-prod-front
+    build:
+      context: ../
+      dockerfile: prod.Dockerfile
+      args:
+        ENV_VARIABLE: ${ENV_VARIABLE}
+        NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+    restart: always
+    ports:
+      - 3001:3000
+    networks:
+      - criex-prod-front-network
+
+networks:
+  criex-prod-front-network:

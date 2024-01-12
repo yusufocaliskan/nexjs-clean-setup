@@ -1,0 +1,22 @@
+version: "3.8"
+
+#With Hot reload
+services:
+  criex-dev-front:
+    container_name: criex-dev-front
+    build:
+      context: ../
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ../:/app/
+      - /node_modules
+      - /.next
+    restart: always
+    ports:
+      - 3000:3000
+    command: yarn dev
+    networks:
+      - criex-dev-front-network
+
+networks:
+  criex-dev-front-network:
