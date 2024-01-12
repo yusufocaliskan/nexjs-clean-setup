@@ -8,20 +8,20 @@ const createJestConfig = nextJest({
 
 // Jest.config.js
 const customConfig = {
-  // Automatically clear mock calls and instances between every test
-  clearMocks: true,
+  coverageProvider: 'v8',
   // The directory where Jest should output its coverage files
   coverageDirectory: '.coverage',
   // A list of paths to modules that run some code to configure or set up the testing framework before each test
   setupFilesAfterEnv: ['./jest.setup.js'],
   // By default jest will use a node environment, so DOM elements (like document) will be undefined without this
   testEnvironment: 'jsdom',
+
   moduleNameMapper: {
     '^jose$': require.resolve('jose'),
     '^uuid$': require.resolve('uuid'),
     '^@panva/hkdf$': require.resolve('@panva/hkdf'),
     '^preact-render-to-string$': require.resolve('preact-render-to-string'),
-
+    '^node:http$': require.resolve('node:http'),
     '^preact$': require.resolve('preact'),
   },
 };

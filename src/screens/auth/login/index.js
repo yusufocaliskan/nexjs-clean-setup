@@ -30,6 +30,7 @@ import {useDispatch} from 'react-redux';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import {authApi} from '@/services/auth';
 import useCustomSession from '@/hooks/useCustomSession';
+import {getSelectedLanguage} from '@/utils';
 
 const Login = () => {
   const [button, setButton] = useState('Email');
@@ -159,7 +160,7 @@ const Login = () => {
             <p className="visit-url-login">
               <LockLine />
               <span className="visit-https"> {t('loginPageHttps')}</span>
-              accounts.hepbit.com/login
+              criex.com/{getSelectedLanguage()}/auth/login
             </p>
           </div>
           <div className="divider" />
@@ -183,6 +184,7 @@ const Login = () => {
             <LoggedInProfileCard session={session} />
             {!isAuthorized && button === 'Email' && (
               <Form
+                id="registration-form"
                 onSubmit={loginForm.handleSubmit}
                 formInstance={loginForm}
                 isLoading={isLoading}

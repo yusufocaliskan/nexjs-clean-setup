@@ -6,14 +6,17 @@ import GiantLoaderAnimation from '../LoadingGif/GiantLoaderAnimation';
 import {motion} from 'framer-motion';
 import {useTranslation} from '@/app/i18n/client';
 import {FormTriggerButton, GoogleReCaptcha, Spacer} from '@/components';
+import Form4TestingUnits from './Form4TestingUnits';
 
 const Form = ({
+  id,
   children,
   formInstance,
   dontDisplayErrors = false,
   dontDisplayCaptcha = false,
   submitButtonText = 'Custom Text',
   captchaRef,
+  onTestinSubmition,
 }) => {
   const {t} = useTranslation();
 
@@ -26,6 +29,11 @@ const Form = ({
     }
   }, [formInstance.submitCount]);
 
+  //Testing Units
+  if (process.env.NODE_ENV == 'test') {
+    return <Form4TestingUnits id={id}>{children}</Form4TestingUnits>;
+  }
+
   return (
     <>
       {/* //TODO: Try to find a better desing of GiantLoaderAnimation */}
@@ -34,6 +42,7 @@ const Form = ({
       {/* )} */}
       <motion.div initial={{opacity: 0.5, y: 30}} animate={{opacity: 1, y: 0}}>
         <form
+          data-testid={id}
           initial={{opacity: 0.5, y: 30}}
           animate={{opacity: 1, y: 0}}
           style={{
