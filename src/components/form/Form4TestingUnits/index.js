@@ -4,7 +4,6 @@ import {FormTriggerButton} from '@/components';
 const Form4TestingUnits = ({id, children, submitButtonText = 'Custom Text'}) => {
   const {t} = useTranslation();
 
-  //set a max post request
   const handleOnTestingSubmition = async () => {
     console.log('The testing form worked');
     return await Promise.resolve(true);

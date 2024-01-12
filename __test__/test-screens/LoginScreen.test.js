@@ -61,34 +61,34 @@ global.grecaptcha = {
 describe('Step#1:  On the Login Screen', () => {
   //Check if there is the app name, controlling if the useTranslation method works.
   it('controlling if the useTranslation method works', async () => {
-    await act(async () =>
-      render(
-        <RootProvider>
-          <LoginScreen />
-        </RootProvider>
-      )
+    render(
+      <RootProvider>
+        <LoginScreen />
+      </RootProvider>
     );
 
-    const el = screen.getByText('loginPageHepBit');
-    expect(el).toBeInTheDocument();
+    await act(async () => {
+      const el = screen.getByText('loginPageHepBit');
+      expect(el).toBeInTheDocument();
+    });
   });
 
   it('Are inputs rendered?', async () => {
-    await act(async () =>
-      render(
-        <RootProvider>
-          <LoginScreen />
-        </RootProvider>
-      )
+    render(
+      <RootProvider>
+        <LoginScreen />
+      </RootProvider>
     );
 
-    //Email input
-    expect(screen.getByPlaceholderText('loginPageEmailPlaceHolder')).toBeInTheDocument();
-    //password input
-    expect(screen.getByPlaceholderText('passwordPlaceholder')).toBeInTheDocument();
+    await act(async () => {
+      //Email input
+      expect(screen.getByPlaceholderText('loginPageEmailPlaceHolder')).toBeInTheDocument();
+      //password input
+      expect(screen.getByPlaceholderText('passwordPlaceholder')).toBeInTheDocument();
 
-    //Form Submit button
-    expect(screen.getByRole('button', {class: 'form-trigger-button'})).toBeInTheDocument();
+      //Form Submit button
+      expect(screen.getByRole('button', {class: 'form-trigger-button'})).toBeInTheDocument();
+    });
   });
 
   // it('Check if the google reCaptcha loaded', async () => {
@@ -108,19 +108,15 @@ describe('Step#1:  On the Login Screen', () => {
 describe('Step#2', () => {
   it('a - does not submit an empty form', async () => {
     const handleOnSubmitMock = jest.fn();
-    await act(async () =>
-      render(
-        <RootProvider>
-          <LoginScreen />
-        </RootProvider>
-      )
+    render(
+      <RootProvider>
+        <LoginScreen />
+      </RootProvider>
     );
 
-    await act(async () => {
-      const loginForm = screen.getByTestId('registration-form');
+    const loginForm = screen.getByTestId('registration-form');
 
-      fireEvent.submit(loginForm);
-    });
+    fireEvent.submit(loginForm);
     await waitFor(() => {
       expect(handleOnSubmitMock).not.toHaveBeenCalled();
     });
@@ -129,13 +125,11 @@ describe('Step#2', () => {
   it('b- Submitting the login form with valid data', async () => {
     const handleSubmit = jest.fn();
     handleSubmit.mockClear();
-    await act(async () => {
-      render(
-        <RootProvider>
-          <LoginScreen />
-        </RootProvider>
-      );
-    });
+    render(
+      <RootProvider>
+        <LoginScreen />
+      </RootProvider>
+    );
 
     const emailInput = screen.getByPlaceholderText('loginPageEmailPlaceHolder');
     const passwordInput = screen.getByPlaceholderText('passwordPlaceholder');
@@ -147,7 +141,7 @@ describe('Step#2', () => {
     await userEvent.type(emailInput, 'test@gmail.com');
     await userEvent.type(passwordInput, 'Ma5i212131');
 
-    // Use fireEvent.submit instead of clicking the button
+    // Use fireEvent.submit
     fireEvent.submit(loginForm);
 
     expect(handleSubmit).toHaveBeenCalledTimes(1);
