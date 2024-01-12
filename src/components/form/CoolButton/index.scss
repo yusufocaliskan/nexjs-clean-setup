@@ -40,13 +40,13 @@
 
   .btn-selected {
     border-radius: 6.25rem;
-    background: $neutrals3;
+    background: var(--neutrals3);
     display: flex;
     padding: 0.375rem 0.75rem;
     justify-content: center;
     align-items: center;
     gap: 0.625rem;
-    color: $white;
+    color: var(--white);
   }
 
   .btn-not-selected {
