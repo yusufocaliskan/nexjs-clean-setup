@@ -1,5 +1,5 @@
-import Spacer from "../Spacer";
 import "./modalStyle.scss";
+
 const Modal = ({ children, w }) => {
   return (
     <>

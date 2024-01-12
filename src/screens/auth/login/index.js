@@ -18,9 +18,9 @@ import {
 import Link from "next/link";
 import SmallLogo from "@/components/Logo/smallLogo";
 import { useFormik } from "formik";
-import { loginFormValidations } from "@/validations/auth";
-import LeftSide from "../leftSide";
-import { signIn, useSession } from "next-auth/react";
+import { loginFormValidations, twoFAValidations } from "@/validations/auth";
+import LeftSide from "../left-side";
+import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 import ThemeSwitcher from "@/components/ThemeSwitcher";
 import { useRouter } from "next/navigation";
@@ -52,16 +52,24 @@ const Login = () => {
       Password: "",
       Email: "",
       reCaptcha: "",
-      Token: ["", "", "", "", "", ""],
     },
     validationSchema: loginFormValidations,
     onSubmit: () => handleOnSubmitLoginForm(),
+  });
+
+  const two2FAForm = useFormik({
+    initialValues: {
+      Token: ["", "", "", "", "", ""],
+    },
+    validationSchema: twoFAValidations,
+    onSubmit: () => handle2FAFormSumit(),
   });
 
   const data = loginForm.values;
   useEffect(() => {
     console.log("Custom Session : ", session);
   }, [session]);
+
   //store the user token that comes from server
   useEffect(() => {
     const startTheSessionListener = () => {
@@ -116,32 +124,32 @@ const Login = () => {
 
   return (
     <div className="login-page-container">
-      <Modal w="430px">
-        <div className="twofa-form-wrapper">
-          <Form
-            onSubmit={loginForm.handleSubmit}
-            formInstance={loginForm}
-            isLoading={isLoading}
-            submitButtonText={t("loginPageLogin")}
-          >
-            <Title text={t("verification")} />
-            <div className="form-inputs">
-              <div className="email">
-                <div className="verification-div">
-                  <VerificationCode
-                    formInstance={loginForm}
-                    verificationCode={loginForm.values.Token}
-                    name="Token"
-                    setVerificationCode={(value) =>
-                      loginForm.setFieldValue("Token", value)
-                    }
-                  />
-                </div>
-              </div>
-            </div>
-          </Form>
-        </div>
-      </Modal>
+      {/* <Modal w="430px"> */}
+      {/*   <div className="twofa-form-wrapper"> */}
+      {/*     <Form */}
+      {/*       onSubmit={loginForm.handleSubmit} */}
+      {/*       formInstance={loginForm} */}
+      {/*       isLoading={isLoading} */}
+      {/*       submitButtonText={t("loginPageLogin")} */}
+      {/*     > */}
+      {/*       <Title text={t("verification")} /> */}
+      {/*       <div className="form-inputs"> */}
+      {/*         <div className="email"> */}
+      {/*           <div className="verification-div"> */}
+      {/*             <VerificationCode */}
+      {/*               formInstance={two2FAForm} */}
+      {/*               verificationCode={two2FAForm.values.Token} */}
+      {/*               name="Token" */}
+      {/*               setVerificationCode={(value) => */}
+      {/*                 two2FAForm.setFieldValue("Token", value) */}
+      {/*               } */}
+      {/*             /> */}
+      {/*           </div> */}
+      {/*         </div> */}
+      {/*       </div> */}
+      {/*     </Form> */}
+      {/*   </div> */}
+      {/* </Modal> */}
       <LeftSide />
       <div className="login-page-right">
         <div className="login-page-right-top">
@@ -212,7 +220,7 @@ const Login = () => {
                     </div>
                   </div>
                   <div className="scan-and-forgot">
-                    <p className="scan-login">{t("loginPageScanToLogin")} </p>
+                    {/* <p className="scan-login">{t("loginPageScanToLogin")} </p> */}
                     <p className="forgot-password">
                       <Link href="/auth/forgot-password">
                         {t("loginPageForgotPassword")}

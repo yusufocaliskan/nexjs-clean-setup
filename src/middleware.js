@@ -52,7 +52,4 @@ const check4Protection = (req, lng) => {
   return protectedScreens.some(
     (screen) => screen.test(req.nextUrl.pathname) && !cookies?.value,
   );
-  if (isItAProtectedScreen) {
-    //sent them tho the login pagee
-  }
 };

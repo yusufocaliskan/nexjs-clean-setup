@@ -1,4 +1,4 @@
-import LeftSide from "@/screens/auth/leftSide";
+import LeftSide from "@/screens/auth/left-side";
 import { motion } from "framer-motion";
 
 const AuthLayout = ({ children, headerLinkRender }) => {

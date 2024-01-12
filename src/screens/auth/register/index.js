@@ -28,9 +28,8 @@ import routes from "@/routes";
 import Link from "next/link";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUserInformations } from "@/store/user";
-import { useSession } from "next-auth/react";
 import useCustomSession from "@/hooks/useCustomSession";
 
 const Register = () => {
@@ -83,7 +82,6 @@ const Register = () => {
     const check4ValidRefferalCode = async () => {
       if (textDebouncedReferralCode) {
         const res = await checkIReferralIdIsValid(textDebouncedReferralCode);
-        console.log(res);
 
         //FIX: this does't work, I dont know why!
         // referralCodeInput.current.focus();
@@ -109,6 +107,7 @@ const Register = () => {
     data["Citizenship"] = registerForm.values.Citizenship.val;
     data["Country"] = registerForm.values.Country.val;
 
+    //NOTE: no needed any more
     // data["IdentityNo"] = reFormattedIdentityNumber(
     //   registerForm.values.IdentityNo,
     // );
@@ -186,7 +185,7 @@ const Register = () => {
         submitButtonText={t("register")}
         captchaRef={reCapthchaRef}
       >
-        <div className="register-form">
+        <div className="login-form">
           <div className="form-inputs">
             <TextBox
               formInstance={registerForm}

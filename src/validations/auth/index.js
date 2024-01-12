@@ -83,6 +83,19 @@ export const forgotPasswordSecondStepFormValidations = yup.object().shape({
     .max(6, "codeMustBeMax6"),
 });
 
+export const twoFAValidations = yup.object().shape({
+  Token: yup
+    .array()
+    .of(
+      yup
+        .mixed()
+        .test("isValidCode", "codeMustBeNumber", (value) => /^\d$/.test(value))
+        .required("verificationCodeisRequired"),
+    )
+    .min(6, "codeMustBeMin6")
+    .max(6, "codeMustBeMax6"),
+});
+
 //REgister Verification screen
 export const registerVerificationFormValidations = yup.object().shape({
   Token: yup
