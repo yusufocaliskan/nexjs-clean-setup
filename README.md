@@ -2,7 +2,7 @@
 
 Install the Docker Desktop application on your computer and run the following command.
 
-`docker-compose -f docker-compose.dev.yml up --build`
+`cd docker-files && docker-compose -f docker-compose.dev.yml up --build`
 
 Now you're good to go 🚀
 
