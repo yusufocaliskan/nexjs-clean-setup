@@ -6,8 +6,6 @@
     background: var(--disabled-button);
   }
 }
-.form-trigger-button-wrapper {
-}
 .btn-main {
   display: flex;
   padding: 1rem 1.5rem;
@@ -16,8 +14,8 @@
   gap: 0.75rem;
   align-self: stretch;
   border-radius: 5.625rem;
-  background: var(--Primary-1, #3772ff);
-  color: var(--Neutrals-8, #fcfcfd);
+  background: var(--primary1, #3772ff);
+  color: var(--neutrals8, #fcfcfd);
   text-align: center;
   font-size: 1rem;
   font-style: normal;

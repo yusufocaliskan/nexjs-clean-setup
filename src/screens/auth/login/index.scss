@@ -194,7 +194,7 @@
             align-self: stretch;
 
             .email-label {
-              color: var(--Neutrals-5, #b1b5c3);
+              color: var(--neutrals5);
               font-family: "Poppins", sans-serif;
               font-size: 0.75rem;
               font-style: normal;
@@ -224,7 +224,7 @@
             align-self: stretch;
 
             .password-label {
-              color: var(--Neutrals-5, #b1b5c3);
+              color: var(--neutrals5);
               font-family: "Poppins", sans-serif;
               font-size: 0.75rem;
               font-style: normal;
@@ -275,7 +275,7 @@
             align-self: stretch;
 
             .scan-login {
-              color: var(--Neutrals-4, #777e90);
+              color: var(--neutrals4, #777e90);
               font-family: "Poppins", sans-serif;
               font-size: 0.75rem;
               font-style: normal;
@@ -284,7 +284,7 @@
             }
 
             .forgot-password {
-              color: var(--Primary-1, #3772ff);
+              color: var(--primary11);
               text-align: right;
               font-family: "Poppins", sans-serif;
               font-size: 0.75rem;
@@ -309,8 +309,8 @@
             gap: 0.75rem;
             align-self: stretch;
             border-radius: 5.625rem;
-            background: var(--Primary-1, #3772ff);
-            color: var(--Neutrals-8, #fcfcfd);
+            background: var(--primary1);
+            color: var(--neutrals8);
             text-align: center;
             /* Button 1 */
             font-size: 1rem;
