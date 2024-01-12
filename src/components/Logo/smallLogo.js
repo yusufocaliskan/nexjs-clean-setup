@@ -1,16 +1,13 @@
-import Logo from "../../components/Icons/Logo";
-import { useTranslation } from "@/app/i18n/client";
-import { usePathname, useSearchParams } from "next/navigation";
-import "./index.scss";
+import Logo from '../../components/Icons/Logo';
+import {useTranslation} from '@/app/i18n/client';
+import './index.scss';
 
 const SmallLogo = () => {
-    const path = usePathname();
-    const lang = path.substring(1).split("/")[0];
-    const { t } = useTranslation(lang);
-  
+  const {t} = useTranslation();
+
   return (
     <div className="small-logo-div">
-      <Logo /> <p className="hepbit">{t("loginPageHepBit")}</p>
+      <Logo /> <p className="hepbit">{t('loginPageHepBit')}</p>
     </div>
   );
 };

@@ -1,27 +1,27 @@
-import toast from "react-hot-toast";
-import ErrorDisplayer from "./ErrorsDisplayer";
-import { useEffect } from "react";
-import { appConfigs } from "@/configs";
-import GiantLoaderAnimation from "../LoadingGif/GiantLoaderAnimation";
-import { motion } from "framer-motion";
-import { useTranslation } from "@/app/i18n/client";
-import { FormTriggerButton, GoogleReCaptcha, Spacer } from "@/components";
+import toast from 'react-hot-toast';
+import ErrorDisplayer from './ErrorsDisplayer';
+import {useEffect} from 'react';
+import {appConfigs} from '@/configs';
+import GiantLoaderAnimation from '../LoadingGif/GiantLoaderAnimation';
+import {motion} from 'framer-motion';
+import {useTranslation} from '@/app/i18n/client';
+import {FormTriggerButton, GoogleReCaptcha, Spacer} from '@/components';
 
 const Form = ({
   children,
   formInstance,
   dontDisplayErrors = false,
   dontDisplayCaptcha = false,
-  submitButtonText = "Custom Text",
+  submitButtonText = 'Custom Text',
   captchaRef,
 }) => {
-  const { t } = useTranslation();
+  const {t} = useTranslation();
 
   //set a max post request
   useEffect(() => {
     if (formInstance.submitCount >= appConfigs.form.maxFormRequestSize) {
       formInstance.resetForm();
-      toast.error(t("maxFormRequestSizeText"));
+      toast.error(t('maxFormRequestSizeText'));
       //setIsFormReachedMaxTresholde(true);
     }
   }, [formInstance.submitCount]);
@@ -32,39 +32,35 @@ const Form = ({
       {/* {isLoading && ( */}
       {/*   <GiantLoaderAnimation isOpen={isLoading} setIsLoading={setIsLoading} /> */}
       {/* )} */}
-      <motion.form
-        initial={{ opacity: 0.5, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        style={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          gap: "2rem",
-        }}
-        onSubmit={formInstance.handleSubmit}
-      >
-        {/* Do not display any erro till first submit */}
-        {!dontDisplayErrors && formInstance.submitCount > 0 && (
-          <ErrorDisplayer formInstance={formInstance} />
-        )}
-        {children}
+      <motion.div initial={{opacity: 0.5, y: 30}} animate={{opacity: 1, y: 0}}>
+        <form
+          initial={{opacity: 0.5, y: 30}}
+          animate={{opacity: 1, y: 0}}
+          style={{
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '2rem',
+          }}
+          onSubmit={formInstance.handleSubmit}
+        >
+          {!dontDisplayErrors && formInstance.submitCount > 0 && <ErrorDisplayer formInstance={formInstance} />}
+          {/* Do not display any erro till first submit */}
+          {children}
 
-        {/* //TODO: Check if the stastus of the captcha is active */}
-        {!dontDisplayCaptcha && (
-          <GoogleReCaptcha
-            onChange={(val) => formInstance.setFieldValue("reCaptcha", val)}
-            reCapthchaRef={captchaRef}
-          />
-        )}
+          {/* //TODO: Check if the stastus of the captcha is active */}
+          {!dontDisplayCaptcha && (
+            <GoogleReCaptcha
+              onChange={(val) => formInstance.setFieldValue('reCaptcha', val)}
+              reCapthchaRef={captchaRef}
+            />
+          )}
 
-        <FormTriggerButton
-          formInstance={formInstance}
-          isLoading={formInstance.isLoading}
-          label={submitButtonText}
-        />
+          <FormTriggerButton formInstance={formInstance} isLoading={formInstance.isLoading} label={submitButtonText} />
 
-        <Spacer />
-      </motion.form>
+          <Spacer />
+        </form>
+      </motion.div>
     </>
   );
 };
