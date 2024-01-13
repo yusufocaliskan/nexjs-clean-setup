@@ -1,61 +1,20 @@
+import {navigatorMock, reCapatchaMock, sessionMock, translationMock} from '../__mocks__';
 import {RootProvider} from '@/boot';
 import {LoginScreen} from '@/screens';
 import {fireEvent, render, screen, waitFor} from '@testing-library/react';
-import {SessionProvider} from 'next-auth/react';
 import {act} from 'react-dom/test-utils';
-
-import {useTranslation} from '@/app/i18n/client';
 import userEvent from '@testing-library/user-event';
-const mockUsePathname = jest.fn();
-const mockUseRouter = jest.fn();
 
 //We need useRouter and userPathname in this screen
-jest.mock('next/navigation', () => ({
-  useRouter() {
-    return {
-      prefetch: mockUseRouter(),
-    };
-  },
-  usePathname() {
-    return mockUsePathname();
-  },
-}));
+jest.mock('next/navigation', () => navigatorMock);
 
 //Translations ---
 //Also useTranslation is being needed
-jest.mock('react-i18next', () => ({
-  useTranslation: () => ({
-    t: (key) => {
-      return key;
-    },
-    i18n: {
-      changeLanguage: () => new Promise(() => {}),
-    },
-  }),
-  initReactI18next: {
-    type: '3rdParty',
-    init: () => {},
-  },
-}));
+jest.mock('react-i18next', () => translationMock);
 
 //Getting Session
-global.fetch = jest.fn((url) => {
-  if (url.endsWith('/api/auth/session')) {
-    return Promise.resolve({
-      ok: true,
-      json: () => Promise.resolve({user: {name: 'Test User', email: 'test@example.com'}}),
-    });
-  }
-  return Promise.resolve({
-    ok: true,
-    json: () => Promise.resolve({}),
-  });
-});
-
-global.grecaptcha = {
-  render: jest.fn(),
-  ready: jest.fn((callback) => callback()),
-};
+global.fetch = sessionMock;
+global.grecaptcha = reCapatchaMock;
 
 //Lets get start---
 describe('Step#1:  On the Login Screen', () => {
@@ -107,7 +66,7 @@ describe('Step#1:  On the Login Screen', () => {
 
 describe('Step#2', () => {
   it('a - does not submit an empty form', async () => {
-    const handleOnSubmitMock = jest.fn();
+    const handleSubmit = jest.fn();
     render(
       <RootProvider>
         <LoginScreen />
@@ -118,7 +77,7 @@ describe('Step#2', () => {
 
     fireEvent.submit(loginForm);
     await waitFor(() => {
-      expect(handleOnSubmitMock).not.toHaveBeenCalled();
+      expect(handleSubmit).not.toHaveBeenCalled();
     });
   });
 

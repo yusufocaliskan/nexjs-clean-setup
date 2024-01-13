@@ -96,6 +96,7 @@ const Login = () => {
   }, [session, dispatch, isAuthorized, router]);
 
   const handleOnSubmitLoginForm = async (vals) => {
+    console.log('Form works');
     setIsLoading(true);
     const resp = await signIn('credentials', {
       ...data,
