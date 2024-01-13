@@ -4,11 +4,13 @@ import {useDispatch, useSelector} from 'react-redux';
 import {MdSunny} from 'react-icons/md';
 import {TbMoonFilled} from 'react-icons/tb';
 import {motion} from 'framer-motion';
+import Card from '../ScreenCommons/Card';
 
 const ThemeSwitcher = () => {
   const dispatch = useDispatch();
   const app = useSelector((state) => state.app);
 
+  const testDataAttr = process.env.NODE_ENV === 'test' ? {'data-testid': 'theme-switcher'} : {};
   //Switching current themee
   const handleSwitcheTheme = (theme) => {
     //REmove opposite
@@ -29,29 +31,31 @@ const ThemeSwitcher = () => {
   // }, []);
 
   return (
-    <div
-      style={{cursor: 'pointer'}}
-      onClick={() => handleSwitcheTheme(app.currentTheme == 'dark_theme' ? 'light_theme' : 'dark_theme')}
-    >
-      {app.currentTheme == 'light_theme' && (
-        <motion.div
-          initial={{rotate: -90, scale: 0.8, opacity: 0.5}}
-          animate={{rotate: 0, scale: 1, opacity: 1}}
-          transition={{duration: 0.5}}
-        >
-          <TbMoonFilled size={20} />
-        </motion.div>
-      )}
-      {app.currentTheme == 'dark_theme' && (
-        <motion.div
-          initial={{rotate: 90, scale: 0.8, opacity: 0.5}}
-          animate={{rotate: 0, scale: 1, opacity: 1}}
-          transition={{duration: 0.5}}
-        >
-          <MdSunny size={22} />
-        </motion.div>
-      )}
-    </div>
+    <Card id="theme-switcher">
+      <div
+        style={{cursor: 'pointer'}}
+        onClick={() => handleSwitcheTheme(app.currentTheme == 'dark_theme' ? 'light_theme' : 'dark_theme')}
+      >
+        {app.currentTheme == 'light_theme' && (
+          <motion.div
+            initial={{rotate: -90, scale: 0.8, opacity: 0.5}}
+            animate={{rotate: 0, scale: 1, opacity: 1}}
+            transition={{duration: 0.5}}
+          >
+            <TbMoonFilled size={20} />
+          </motion.div>
+        )}
+        {app.currentTheme == 'dark_theme' && (
+          <motion.div
+            initial={{rotate: 90, scale: 0.8, opacity: 0.5}}
+            animate={{rotate: 0, scale: 1, opacity: 1}}
+            transition={{duration: 0.5}}
+          >
+            <MdSunny size={22} />
+          </motion.div>
+        )}
+      </div>
+    </Card>
   );
 };
 export default ThemeSwitcher;

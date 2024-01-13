@@ -15,7 +15,9 @@ const customConfig = {
   setupFilesAfterEnv: ['./jest.setup.js'],
   // By default jest will use a node environment, so DOM elements (like document) will be undefined without this
   testEnvironment: 'jsdom',
-
+  testEnvironmentOptions: {
+    customExportConditions: [''],
+  },
   moduleNameMapper: {
     '^jose$': require.resolve('jose'),
     '^uuid$': require.resolve('uuid'),
