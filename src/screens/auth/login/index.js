@@ -32,7 +32,7 @@ import {authApi} from '@/services/auth';
 import useCustomSession from '@/hooks/useCustomSession';
 import {getSelectedLanguage} from '@/utils';
 
-const Login = () => {
+const Login = ({onSubmitTestHandler}) => {
   const [button, setButton] = useState('Email');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -54,6 +54,7 @@ const Login = () => {
       reCaptcha: '',
     },
     validationSchema: loginFormValidations,
+    validateOnMount: true,
     onSubmit: () => handleOnSubmitLoginForm(),
   });
 
@@ -190,6 +191,7 @@ const Login = () => {
                 formInstance={loginForm}
                 isLoading={isLoading}
                 submitButtonText={t('loginPageLogin')}
+                onSubmitTestHandler={onSubmitTestHandler}
               >
                 <div className="form-inputs">
                   <div className="email">

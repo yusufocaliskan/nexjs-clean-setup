@@ -16,7 +16,7 @@ const Form = ({
   dontDisplayCaptcha = false,
   submitButtonText = 'Custom Text',
   captchaRef,
-  onTestinSubmition,
+  onSubmitTestHandler,
 }) => {
   const {t} = useTranslation();
 
@@ -51,7 +51,7 @@ const Form = ({
             flexDirection: 'column',
             gap: '2rem',
           }}
-          onSubmit={formInstance.handleSubmit}
+          onSubmit={onSubmitTestHandler ? onSubmitTestHandler : formInstance.handleSubmit}
         >
           {!dontDisplayErrors && formInstance.submitCount > 0 && <ErrorDisplayer formInstance={formInstance} />}
           {/* Do not display any erro till first submit */}

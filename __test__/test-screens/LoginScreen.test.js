@@ -18,14 +18,17 @@ global.grecaptcha = reCapatchaMock;
 
 //Lets get start---
 describe('Step#1:  On the Login Screen', () => {
+  beforeEach(async () => {
+    await act(() => {
+      render(
+        <RootProvider>
+          <LoginScreen />
+        </RootProvider>
+      );
+    });
+  });
   //Check if there is the app name, controlling if the useTranslation method works.
   it('controlling if the useTranslation method works', async () => {
-    render(
-      <RootProvider>
-        <LoginScreen />
-      </RootProvider>
-    );
-
     await act(async () => {
       const el = screen.getByText('loginPageHepBit');
       expect(el).toBeInTheDocument();
@@ -33,12 +36,6 @@ describe('Step#1:  On the Login Screen', () => {
   });
 
   it('Are inputs rendered?', async () => {
-    render(
-      <RootProvider>
-        <LoginScreen />
-      </RootProvider>
-    );
-
     await act(async () => {
       //Email input
       expect(screen.getByPlaceholderText('loginPageEmailPlaceHolder')).toBeInTheDocument();
@@ -49,35 +46,21 @@ describe('Step#1:  On the Login Screen', () => {
       expect(screen.getByRole('button', {class: 'form-trigger-button'})).toBeInTheDocument();
     });
   });
-
-  // it('Check if the google reCaptcha loaded', async () => {
-  //   await act(async () =>
-  //     render(
-  //       <RootProvider>
-  //         <LoginScreen />
-  //       </RootProvider>
-  //     )
-  //   );
-  //
-  //   await waitFor(() => expect(global.grecaptcha.render).toHaveBeenCalled());
-  //   expect(screen.getByTestId('google-recaptcha')).toBeInTheDocument();
-  // });
 });
 
-descript('Step#2 - Form Validation', () => {});
+//describe('Step#2 - Form Validation', () => {});
 
 describe('Step#3', () => {
   it('a - does not submit an empty form', async () => {
     const handleSubmit = jest.fn();
     render(
       <RootProvider>
-        <LoginScreen />
+        <LoginScreen onSubmitTestHandler={handleSubmit} />
       </RootProvider>
     );
 
-    const loginForm = screen.getByTestId('login-form');
-
-    fireEvent.submit(loginForm);
+    const submitButton = screen.getByRole('button', {class: 'form-trigger-button'});
+    await userEvent.click(submitButton);
     await waitFor(() => {
       expect(handleSubmit).not.toHaveBeenCalled();
     });
@@ -87,7 +70,7 @@ describe('Step#3', () => {
     const handleSubmit = jest.fn();
     render(
       <RootProvider>
-        <LoginScreen />
+        <LoginScreen onSubmitTestHandler={handleSubmit} />
       </RootProvider>
     );
 
@@ -96,7 +79,6 @@ describe('Step#3', () => {
     const loginForm = screen.getByTestId('login-form');
 
     // Set the mock function as the onSubmit handler
-    loginForm.onsubmit = handleSubmit;
 
     await userEvent.type(emailInput, 'test@gmail.com');
     await userEvent.type(passwordInput, 'Ma5i212131');
