@@ -1,8 +1,9 @@
 .dashboard-container {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--accountPageBg);
     width: 100%;
-    justify-content: space-between;
     .dashboard-content {
         width: 100%;
         min-height: 100%;

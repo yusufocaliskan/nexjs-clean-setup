@@ -12,3 +12,5 @@ export { default as DashboardScreen } from "./dashboard";
 
 //account
 export { default as ProfileScreen } from "./account/profile";
+export { default as ReferralsScreen } from "./account/referrals";
+

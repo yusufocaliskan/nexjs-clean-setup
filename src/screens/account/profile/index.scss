@@ -1,0 +1,263 @@
+.profile-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+    flex: 1 0 0;
+    border-radius: 1rem;
+    background: var(--accountPageContentBg);
+
+    .profile-top {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        align-self: stretch;
+
+        .profile-info {
+            display: flex;
+            height: 4.6875rem;
+            justify-content: space-between;
+            align-items: center;
+            align-self: stretch;
+
+            .profile-name {
+                display: flex;
+                width: 100%;
+                align-items: flex-start;
+                flex-direction: column;
+                justify-content: center;
+
+                .profile-level {
+                    display: flex;
+                    padding: 0.5rem 1rem;
+                    justify-content: center;
+                    align-items: center;
+                    margin-top: 0.75rem;
+                    gap: 0.75rem;
+                    border-radius: 5.625rem;
+                    border: 2px solid var(--inputBorderColor);
+
+                    .level-text {
+                        color: var(--Primary-4, #58BD7D);
+                        text-align: center;
+                        font-family: "DM Sans", sans-serif;
+                        font-size: 0.875rem;
+                        font-style: normal;
+                        font-weight: 700;
+                        line-height: 1rem;
+                    }
+                }
+
+                .name {
+                    color: var(--loginPageText);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 1.5rem;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 2rem;
+                    gap: 0.5rem;
+                }
+
+                .mail {
+                    color: var(--Neutrals-4, #777E90);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5rem;
+                }
+            }
+
+            .profile-country {
+                display: flex;
+                width: 15.5rem;
+                padding: 0.75rem 0.75rem 0.75rem 1rem;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+    }
+
+    .profile-middle {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2.5rem;
+
+        .profile-features {
+            color: var(--loginPageText);
+            font-family: "Poppins", sans-serif;
+            font-size: 1.5rem;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 2rem;
+
+            .features-text {
+                color: var(--loginPageText);
+                font-family: Poppins;
+                font-size: 1.5rem;
+                font-style: normal;
+                font-weight: 600;
+                line-height: 2rem;
+            }
+        }
+
+        .profile-lvl1 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+            align-self: stretch;
+
+            .lvl-title {
+                color: var(--Neutrals-5, #B1B5C3);
+                font-family: "Poppins", sans-serif;
+                font-size: 0.75rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 0.75rem;
+                text-transform: uppercase;
+            }
+
+            .profile-divider {
+                height: 0.0625rem;
+                align-self: stretch;
+                background-color: var(--divider-color);
+            }
+
+            .frame {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                align-self: stretch;
+                color: var(--loginPageText);
+                font-family: "Poppins", sans-serif;
+                font-size: 0.875rem;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.5rem;
+
+                .frame-text {
+                    color: var(--loginPageText);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5rem;
+                }
+
+                .frame-withdraw-text {
+                    color: var(--Neutrals-4, #777E90);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5rem;
+                }
+            }
+        }
+
+        .profile-lvl2 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1.5rem;
+            align-self: stretch;
+
+            .lvl-title {
+                color: var(--Neutrals-5, #B1B5C3);
+                font-family: "Poppins", sans-serif;
+                font-size: 0.75rem;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 0.75rem;
+                text-transform: uppercase;
+            }
+
+            .profile-divider {
+                height: 0.0625rem;
+                align-self: stretch;
+                background-color: var(--divider-color);
+            }
+
+            .frame {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                align-self: stretch;
+                color: var(--loginPageText);
+                font-family: "Poppins", sans-serif;
+                font-size: 0.875rem;
+                font-style: normal;
+                font-weight: 500;
+                line-height: 1.5rem;
+
+                .frame-text {
+                    color: var(--loginPageText);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5rem;
+                }
+
+                .frame-withdraw-text {
+                    color: var(--Neutrals-4, #777E90);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5rem;
+                }
+            }
+        }
+    }
+
+    .profile-bottom {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-end;
+        gap: 0.625rem;
+        align-self: stretch;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-container {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        align-self: stretch;
+    }
+
+    .profile-info {
+        height: 100% !important;
+        flex-direction: column;
+        align-items: flex-start;
+
+        .profile-country {
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            width: 100%;
+            padding: 0.75rem 0rem;
+        }
+
+        .profile-name {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.75rem;
+            align-self: stretch;
+        }
+    }
+
+
+
+}
