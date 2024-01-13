@@ -24,17 +24,19 @@ const LanguageSwitcher = () => {
 
   return (
     <>
-      <select
-        className="language-switch"
-        value={selectedLanguage}
-        onChange={(e) => handleOnLanguageSwitched(e.target.value)}
-      >
-        {Object.keys(languages).map((key, index) => (
-          <option key={index} value={languages[key]}>
-            {languages[key]}
-          </option>
-        ))}
-      </select>
+      <div>
+        <select
+          className="language-switch"
+          value={selectedLanguage}
+          onChange={(e) => handleOnLanguageSwitched(e.target.value)}
+        >
+          {Object.keys(languages).map((key, index) => (
+            <option key={index} value={languages[key]}>
+              {languages[key]}
+            </option>
+          ))}
+        </select>
+      </div>
     </>
   );
 };

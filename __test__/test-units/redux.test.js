@@ -44,7 +44,32 @@ describe('REDUX:  Redux Testoor', () => {
   });
 });
 
-describe('REDUX: Using ThemeSwitcher To test', () => {
+describe('REDUX: Using ThemeSwitcher ', () => {
+  it('REDUX-->Step1. Do we have the div card?', async () => {
+    render(
+      <RootProvider>
+        <ThemeSwitcher />
+      </RootProvider>
+    );
+    await act(async () => {
+      const ThemeSwitcherCard = screen.getByTestId('theme-switcher');
+      expect(ThemeSwitcherCard).toBeInTheDocument();
+    });
+  });
+  it('REDUX--> Click to the div, should the currentTheme changed', async () => {
+    render(
+      <RootProvider>
+        <ThemeSwitcher />
+      </RootProvider>
+    );
+    await act(async () => {
+      const ThemeSwitcherCard = screen.getByTestId('theme-switcher');
+      fireEvent.click(ThemeSwitcherCard);
+    });
+    expect(store.getState().app.currentTheme).toBe('dark_theme');
+  });
+});
+describe('REDUX: Using LanguageSwitcher', () => {
   it('REDUX-->Step1. Do we have the div card?', async () => {
     render(
       <RootProvider>

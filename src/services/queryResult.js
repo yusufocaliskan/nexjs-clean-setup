@@ -15,18 +15,14 @@ export const queryResult = {
    */
   isWarning(input) {
     console.log(input);
-    return (
-      (input && input.StatusCode === 2) || input.error?.data?.StatusCode === 2
-    );
+    return (input && input.StatusCode === 2) || input.error?.data?.StatusCode === 2;
   },
   /**
    *
    * @param {*} code
    */
   isError(input) {
-    return (
-      (input && input.StatusCode === 4) || input.error?.data?.StatusCode === 4
-    );
+    return (input && input.StatusCode === 4) || input.error?.data?.StatusCode === 4;
   },
   /**
    *
@@ -61,9 +57,7 @@ export const queryResult = {
    * @param {*} code
    */
   IS_GOOGLE_AUTHENTICATOR_ENABLED(input) {
-    return (
-      (input && input.StatusCode === 2001) || input.data?.StatusCode === 2001
-    );
+    return (input && input.StatusCode === 2001) || input.data?.StatusCode === 2001;
   },
 
   /**
@@ -71,7 +65,7 @@ export const queryResult = {
    * @param {*} code
    */
   IS_RELOGIN(input) {
-    return input && input.StatusCode === 2002;
+    return (input && input.StatusCode === 2002) || input.data?.StatusCode === 2002;
   },
 
   /**
@@ -117,9 +111,7 @@ export const queryResult = {
   },
   IIS_REDIRECTS_REDIRECT(input) {
     console.log(input.data);
-    return (
-      (input && input.StatusCode === 5008) || input.data?.StatusCode === 5008
-    );
+    return (input && input.StatusCode === 5008) || input.data?.StatusCode === 5008;
   },
   /**
    *

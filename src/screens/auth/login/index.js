@@ -20,24 +20,26 @@ import SmallLogo from '@/components/Logo/smallLogo';
 import {useFormik} from 'formik';
 import {loginFormValidations, twoFAValidations} from '@/validations/auth';
 import LeftSide from '../left-side';
-import {signIn} from 'next-auth/react';
+import {getCsrfToken, signIn} from 'next-auth/react';
 import toast from 'react-hot-toast';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import {useRouter} from 'next/navigation';
-import routes from '@/routes';
 import {setToken} from '@/store/user';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import {authApi} from '@/services/auth';
 import useCustomSession from '@/hooks/useCustomSession';
 import {getSelectedLanguage} from '@/utils';
+import axios from 'axios';
 
 const Login = ({onSubmitTestHandler}) => {
   const [button, setButton] = useState('Email');
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
+  const [is2FAModalOpen, setIs2FAModalOpen] = useState(false);
   //Store
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const {session, isAuthorized} = useCustomSession();
   const [getUserInformations, userInformationResponse] = authApi.useGetUserInformationsMutation();
@@ -61,13 +63,17 @@ const Login = ({onSubmitTestHandler}) => {
   const two2FAForm = useFormik({
     initialValues: {
       Token: ['', '', '', '', '', ''],
+      reCaptcha: '',
     },
+
+    validateOnMount: true,
     validationSchema: twoFAValidations,
-    onSubmit: () => handle2FAFormSumit(),
+    onSubmit: () => handleOn2FAFormSubmit(),
   });
 
   const data = loginForm.values;
   //store the user token that comes from server
+
   useEffect(() => {
     const startTheSessionListener = () => {
       //is user need to confirm her/his e-mail?
@@ -77,6 +83,7 @@ const Login = ({onSubmitTestHandler}) => {
       }
 
       if (session?.data?.googleAuthenticatorEnabled) {
+        setIs2FAModalOpen(true);
       }
 
       //Is signIn success
@@ -96,54 +103,92 @@ const Login = ({onSubmitTestHandler}) => {
     startTheSessionListener();
   }, [session, dispatch, isAuthorized, router]);
 
-  const handleOnSubmitLoginForm = async (vals) => {
-    console.log('Form works');
+  useEffect(() => {
+    const t = async () => {
+      console.log('Heeee');
+      // await fetch('/api/auth/session', {
+      //   method: 'POST',
+      //   headers: {
+      //     'content-type': 'application/json',
+      //   },
+      //   body: JSON.stringify({
+      //     csrfToken: await getCsrfToken(),
+      //     data: {test: 'new-session'},
+      //   }),
+      // });
+    };
+    t();
+  }, []);
+  //If the 2fa form submitted
+  const handleOn2FAFormSubmit = async () => {
     setIsLoading(true);
-    const resp = await signIn('credentials', {
+    const data = {
+      GoogleAuthenticatorCode: two2FAForm.values.Token.join(''),
+      Email: session.data.email,
+      EncryptedToken: session.data.encryptedData,
+    };
+    const resp = await signIn('with-2fa-authentication', {
       ...data,
       redirect: false,
-      callbackUrl: routes.welcome,
+    });
+
+    if (!resp.ok) {
+      toast.error('Wrong informations');
+    }
+
+    //close the modal and display a message
+    if (resp.ok) {
+      two2FAForm.resetForm();
+      //router.push(routes.welcome);
+      setIs2FAModalOpen(false);
+      toast.success(t('welcome'));
+    }
+    setIsLoading(false);
+  };
+
+  const handleOnSubmitLoginForm = async (vals) => {
+    setIsLoading(true);
+    const resp = await signIn('with-email-and-password', {
+      ...data,
+      redirect: false,
+      //callbackUrl: routes.welcome,
     });
 
     if (!resp.ok) {
       toast.error('Wrong informations');
     }
     if (resp.ok) {
-      //loginForm.resetForm();
+      loginForm.resetForm();
       //router.push(routes.welcome);
     }
-
     setIsLoading(false);
   };
-
   return (
     <div className="login-page-container">
-      {/* <Modal w="430px"> */}
-      {/*   <div className="twofa-form-wrapper"> */}
-      {/*     <Form */}
-      {/*       onSubmit={loginForm.handleSubmit} */}
-      {/*       formInstance={loginForm} */}
-      {/*       isLoading={isLoading} */}
-      {/*       submitButtonText={t("loginPageLogin")} */}
-      {/*     > */}
-      {/*       <Title text={t("verification")} /> */}
-      {/*       <div className="form-inputs"> */}
-      {/*         <div className="email"> */}
-      {/*           <div className="verification-div"> */}
-      {/*             <VerificationCode */}
-      {/*               formInstance={two2FAForm} */}
-      {/*               verificationCode={two2FAForm.values.Token} */}
-      {/*               name="Token" */}
-      {/*               setVerificationCode={(value) => */}
-      {/*                 two2FAForm.setFieldValue("Token", value) */}
-      {/*               } */}
-      {/*             /> */}
-      {/*           </div> */}
-      {/*         </div> */}
-      {/*       </div> */}
-      {/*     </Form> */}
-      {/*   </div> */}
-      {/* </Modal> */}
+      <Modal isOpen={is2FAModalOpen} setIsOpen={setIs2FAModalOpen} w="430px">
+        <div className="twofa-form-wrapper">
+          <Form
+            onSubmit={twoFAValidations.handleSubmit}
+            formInstance={two2FAForm}
+            isLoading={isLoading}
+            submitButtonText={t('loginPageLogin')}
+          >
+            <Title text={t('verification')} />
+            <div className="form-inputs">
+              <div className="email">
+                <div className="verification-div">
+                  <VerificationCode
+                    formInstance={two2FAForm}
+                    verificationCode={two2FAForm.values.Token}
+                    name="Token"
+                    setVerificationCode={(value) => two2FAForm.setFieldValue('Token', value)}
+                  />
+                </div>
+              </div>
+            </div>
+          </Form>
+        </div>
+      </Modal>
       <LeftSide />
       <div className="login-page-right">
         <div className="login-page-right-top">
