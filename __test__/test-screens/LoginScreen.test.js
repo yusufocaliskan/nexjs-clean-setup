@@ -64,7 +64,9 @@ describe('Step#1:  On the Login Screen', () => {
   // });
 });
 
-describe('Step#2', () => {
+descript('Step#2 - Form Validation', () => {});
+
+describe('Step#3', () => {
   it('a - does not submit an empty form', async () => {
     const handleSubmit = jest.fn();
     render(
