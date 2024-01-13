@@ -114,7 +114,7 @@ describe('Step#2', () => {
       </RootProvider>
     );
 
-    const loginForm = screen.getByTestId('registration-form');
+    const loginForm = screen.getByTestId('login-form');
 
     fireEvent.submit(loginForm);
     await waitFor(() => {
@@ -124,7 +124,6 @@ describe('Step#2', () => {
 
   it('b- Submitting the login form with valid data', async () => {
     const handleSubmit = jest.fn();
-    handleSubmit.mockClear();
     render(
       <RootProvider>
         <LoginScreen />
@@ -133,7 +132,7 @@ describe('Step#2', () => {
 
     const emailInput = screen.getByPlaceholderText('loginPageEmailPlaceHolder');
     const passwordInput = screen.getByPlaceholderText('passwordPlaceholder');
-    const loginForm = screen.getByTestId('registration-form');
+    const loginForm = screen.getByTestId('login-form');
 
     // Set the mock function as the onSubmit handler
     loginForm.onsubmit = handleSubmit;
@@ -144,6 +143,8 @@ describe('Step#2', () => {
     // Use fireEvent.submit
     fireEvent.submit(loginForm);
 
-    expect(handleSubmit).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(handleSubmit).toHaveBeenCalledTimes(1);
+    });
   });
 });

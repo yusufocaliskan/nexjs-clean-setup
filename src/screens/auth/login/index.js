@@ -184,7 +184,7 @@ const Login = () => {
             <LoggedInProfileCard session={session} />
             {!isAuthorized && button === 'Email' && (
               <Form
-                id="registration-form"
+                id="login-form"
                 onSubmit={loginForm.handleSubmit}
                 formInstance={loginForm}
                 isLoading={isLoading}
