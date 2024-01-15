@@ -1,46 +1,53 @@
 .toggle-switch {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 25px;
-  
-    input[type="checkbox"] {
-      display: none;
-    }
-  
-    .switch {
-      position: absolute;
-      cursor: pointer;
-      background-color: var(--divider-color);
-      border-radius: 25px;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      color: red;
-      transition: background-color 0.2s ease;
-  
-      &::before {
-        position: absolute;
-        content: "";
-        left: 2px;
-        top: 2px;
-        width: 21px;
-        height: 21px;
-        background-color: #3772FF;
-        border-radius: 50%;
-        transition: transform 0.3s ease;
-      }
-    }
-  
-    input[type="checkbox"]:checked + .switch::before {
-      transform: translateX(25px);
-      background-color: #FCFCFD;
-    }
-  
-    input[type="checkbox"]:checked + .switch {
-      background-color: #336699;
+  position: relative;
+  display: inline-block;
+  display: flex;
+  width: 2.5rem;
+  height: 1.25rem;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.625rem;
 
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  .switch {
+    position: absolute;
+    cursor: pointer;
+    background-color: var(--divider-color);
+    border-radius: 25px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    color: red;
+    transition: background-color 0.2s ease;
+
+    &::before {
+      position: absolute;
+      content: "";
+      left: 0.25rem;
+      top: 50%;
+      width: 0.75rem;
+      height: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary_blue);
+      border-radius: 50%;
+      transition: transform 0.3s ease;
+      transform: translateY(-50%);
     }
   }
-  
+
+  input[type="checkbox"]:checked+.switch::before {
+    transform: translate(1.25rem, -50% );
+    background-color: var(--neutrals8);
+  }
+
+  input[type="checkbox"]:checked+.switch {
+    background-color: var(--primary_blue);
+
+  }
+}
