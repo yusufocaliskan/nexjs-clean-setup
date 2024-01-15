@@ -2,12 +2,17 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "./persist-storage.js";
+<<<<<<< HEAD
 import user from "./user";
 import app from "./app";
 
 //Services
 import { authApi } from "@/services/auth/index.js";
 import { referralApi } from "./referral/index.js";
+=======
+import user, { loginApi } from "./users";
+import app from "./app";
+>>>>>>> 597d72a (Created the app store)
 
 //using for persist storage, due to ssr or crs
 const reducers = combineReducers({
