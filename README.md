@@ -1,6 +1,6 @@
 # Installation
 
-Run the below command after cloning the repository.
+Run the command below after cloning the repository
 
 `yarn install`
 
