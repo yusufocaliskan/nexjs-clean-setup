@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import {useEffect} from 'react';
+import {useSelector} from 'react-redux';
 
-const ThemeProvider = ({ children }) => {
+const ThemeProvider = ({children}) => {
   const app = useSelector((state) => state.app);
 
   useEffect(() => {

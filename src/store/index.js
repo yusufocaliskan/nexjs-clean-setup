@@ -1,18 +1,13 @@
-import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/query";
-import { persistReducer, persistStore } from "redux-persist";
-import storage from "./persist-storage.js";
-<<<<<<< HEAD
-import user from "./user";
-import app from "./app";
+import {configureStore, combineReducers} from '@reduxjs/toolkit';
+import {setupListeners} from '@reduxjs/toolkit/query';
+import {persistReducer, persistStore} from 'redux-persist';
+import storage from './persist-storage.js';
+import user from './user';
+import app from './app';
 
 //Services
-import { authApi } from "@/services/auth/index.js";
-import { referralApi } from "./referral/index.js";
-=======
-import user, { loginApi } from "./users";
-import app from "./app";
->>>>>>> 597d72a (Created the app store)
+import {authApi} from '@/services/auth/index.js';
+import {referralApi} from './referral/index.js';
 
 //using for persist storage, due to ssr or crs
 const reducers = combineReducers({
@@ -29,9 +24,9 @@ const rootReducers = (state, action) => {
 
 //save it to the storage
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage: storage,
-  whitelist: [authApi.reducerPath, "app", "user"],
+  whitelist: [authApi.reducerPath, 'app', 'user'],
 };
 
 //Combine theme.
@@ -57,4 +52,4 @@ const persistor = persistStore(configuredStore, null, onRehydrate);
 
 setupListeners(configuredStore.dispatch);
 
-export { configuredStore as store, persistor };
+export {configuredStore as store, persistor};
