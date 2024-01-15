@@ -6,11 +6,11 @@ import NextAuthCustomProvider from './nextAuth';
 const RootProvider = ({children}) => {
   return (
     <>
-      <NextAuthCustomProvider>
-        <ReduxProvider>
+      <ReduxProvider>
+        <NextAuthCustomProvider>
           <ThemeProvider>{children}</ThemeProvider>
-        </ReduxProvider>
-      </NextAuthCustomProvider>
+        </NextAuthCustomProvider>
+      </ReduxProvider>
     </>
   );
 };

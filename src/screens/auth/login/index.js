@@ -91,7 +91,11 @@ const Login = ({onSubmitTestHandler}) => {
       // - google authenticator must be disabled
       if (isAuthorized && !session?.data?.notConfirmedEmail && !session?.data?.googleAuthenticatorEnabled) {
         const tokens = session?.data?.accessToken;
+
         if (tokens) {
+          //TODO: Find a way to clear accessToken in session.
+          //After saving in store. The session is accessable in client side.
+          //(check, dev console/application/cookies)
           dispatch(setToken(tokens));
           //Get user informations.
 
@@ -103,22 +107,6 @@ const Login = ({onSubmitTestHandler}) => {
     startTheSessionListener();
   }, [session, dispatch, isAuthorized, router]);
 
-  useEffect(() => {
-    const t = async () => {
-      console.log('Heeee');
-      // await fetch('/api/auth/session', {
-      //   method: 'POST',
-      //   headers: {
-      //     'content-type': 'application/json',
-      //   },
-      //   body: JSON.stringify({
-      //     csrfToken: await getCsrfToken(),
-      //     data: {test: 'new-session'},
-      //   }),
-      // });
-    };
-    t();
-  }, []);
   //If the 2fa form submitted
   const handleOn2FAFormSubmit = async () => {
     setIsLoading(true);
@@ -163,6 +151,7 @@ const Login = ({onSubmitTestHandler}) => {
     }
     setIsLoading(false);
   };
+
   return (
     <div className="login-page-container">
       <Modal isOpen={is2FAModalOpen} setIsOpen={setIs2FAModalOpen} w="430px">
