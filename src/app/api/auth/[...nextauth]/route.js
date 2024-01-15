@@ -15,23 +15,26 @@ export const nextAuthOptions = {
         try {
           // Make a signIn request using axios directly
           const response = await clientInstance.post('users/login', credentials);
+          console.log('Response-->', response);
 
           if (queryResult.IS_GOOGLE_AUTHENTICATOR_ENABLED(response)) {
+            console.log('Response-->Google');
             return {
               data: response.data.Data,
               googleAuthenticatorEnabled: true,
               email: credentials.Email,
             };
           }
-          //if (queryResult.IS_EMAIL_NOT_CONFIRMED(response.data)) {
-          // Check if the login was successful based on your server's response structure
-          if (queryResult.isSuccess(response.data)) {
-            return {token: response.data.Data};
-          }
-
           //send use to the
           if (queryResult.IS_EMAIL_NOT_CONFIRMED(response.data)) {
+            console.log('Response-->mail');
             return {email: credentials.Email, notConfirmedEmail: true};
+          }
+
+          // Check if the login was successful based on your server's response structure
+          if (queryResult.isSuccess(response.data)) {
+            console.log('Response-->Suss');
+            return {token: response.data.Data};
           }
 
           // If login failed, return null
@@ -50,7 +53,6 @@ export const nextAuthOptions = {
           // Make a signIn request using axios directly
           const response = await clientInstance.post('users/login/authenticator', credentials);
 
-          console.log(response);
           //if (queryResult.IS_EMAIL_NOT_CONFIRMED(response.data)) {
           // Check if the login was successful based on your server's response structure
           if (queryResult.isSuccess(response.data)) {
@@ -81,16 +83,19 @@ export const nextAuthOptions = {
       session.email = token?.email;
       session.encryptedData = token?.encryptedData;
       session.isAuthenticated = token?.isAuthenticated;
+      console.log(session);
       return session;
     },
+
     async jwt({token, user, account, profile, isNewUser}) {
       //is email confirmed??
-
+      console.log('TOKEnn', token);
       if (user?.notConfirmedEmail) {
         token.notConfirmedEmail = true;
         token.user = user.email;
         token.isAuthenticated = false;
       }
+
       if (user?.isReloading) {
         token.isReloading = true;
         token.user = user.email;
@@ -110,6 +115,8 @@ export const nextAuthOptions = {
         token.accessToken = user.token;
         token.isAuthenticated = true;
       }
+
+      console.log(token);
       return token;
     },
   },

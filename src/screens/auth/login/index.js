@@ -20,17 +20,16 @@ import SmallLogo from '@/components/Logo/smallLogo';
 import {useFormik} from 'formik';
 import {loginFormValidations, twoFAValidations} from '@/validations/auth';
 import LeftSide from '../left-side';
-import {getCsrfToken, signIn} from 'next-auth/react';
+import {signIn} from 'next-auth/react';
 import toast from 'react-hot-toast';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import {useRouter} from 'next/navigation';
 import {setToken} from '@/store/user';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import {authApi} from '@/services/auth';
 import useCustomSession from '@/hooks/useCustomSession';
 import {getSelectedLanguage} from '@/utils';
-import axios from 'axios';
 
 const Login = ({onSubmitTestHandler}) => {
   const [button, setButton] = useState('Email');
@@ -39,7 +38,6 @@ const Login = ({onSubmitTestHandler}) => {
   const [is2FAModalOpen, setIs2FAModalOpen] = useState(false);
   //Store
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
 
   const {session, isAuthorized} = useCustomSession();
   const [getUserInformations, userInformationResponse] = authApi.useGetUserInformationsMutation();
@@ -91,11 +89,7 @@ const Login = ({onSubmitTestHandler}) => {
       // - google authenticator must be disabled
       if (isAuthorized && !session?.data?.notConfirmedEmail && !session?.data?.googleAuthenticatorEnabled) {
         const tokens = session?.data?.accessToken;
-
         if (tokens) {
-          //TODO: Find a way to clear accessToken in session.
-          //After saving in store. The session is accessable in client side.
-          //(check, dev console/application/cookies)
           dispatch(setToken(tokens));
           //Get user informations.
 
@@ -107,8 +101,8 @@ const Login = ({onSubmitTestHandler}) => {
     startTheSessionListener();
   }, [session, dispatch, isAuthorized, router]);
 
-  //If the 2fa form submitted
   const handleOn2FAFormSubmit = async () => {
+    console.log(session);
     setIsLoading(true);
     const data = {
       GoogleAuthenticatorCode: two2FAForm.values.Token.join(''),
@@ -118,15 +112,14 @@ const Login = ({onSubmitTestHandler}) => {
     const resp = await signIn('with-2fa-authentication', {
       ...data,
       redirect: false,
+      //callbackUrl: routes.welcome,
     });
 
     if (!resp.ok) {
       toast.error('Wrong informations');
     }
-
-    //close the modal and display a message
     if (resp.ok) {
-      two2FAForm.resetForm();
+      //loginForm.resetForm();
       //router.push(routes.welcome);
       setIs2FAModalOpen(false);
       toast.success(t('welcome'));
@@ -146,12 +139,11 @@ const Login = ({onSubmitTestHandler}) => {
       toast.error('Wrong informations');
     }
     if (resp.ok) {
-      loginForm.resetForm();
+      //loginForm.resetForm();
       //router.push(routes.welcome);
     }
     setIsLoading(false);
   };
-
   return (
     <div className="login-page-container">
       <Modal isOpen={is2FAModalOpen} setIsOpen={setIs2FAModalOpen} w="430px">
