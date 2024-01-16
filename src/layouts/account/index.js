@@ -1,6 +1,6 @@
-"use client";
-import React from "react";
-import DashboardLayout from "../dashboard";
+'use client';
+import React, {useEffect} from 'react';
+import DashboardLayout from '../dashboard';
 import {
   APIKeysIcon,
   LoginHistoryIcon,
@@ -8,17 +8,64 @@ import {
   ProfileIcon,
   ReferralsIcon,
   TwoFAIcon,
-} from "@/components/Icons/ProfileInfoIcons";
-import "./index.scss";
-import { useState } from "react";
-import { sideBarArray } from "./sideBarArrayForMobile";
-import Dropdown from "@/components/form/Dropdown";
-import { useRouter } from "next/navigation";
-import routes from "@/routes";
+} from '@/components/Icons/ProfileInfoIcons';
+import './index.scss';
+import {sideBarArray} from './sideBarArrayForMobile';
+import Dropdown from '@/components/form/Dropdown';
+import {useRouter} from 'next/navigation';
+import routes from '@/routes';
+import usePath from '@/hooks/usePath';
+import {useTranslation} from '@/app/i18n/client';
 
-const AccountLayout = ({ children, title, icon }) => {
-  const [isActive, setIsActive] = useState("");
+const AccountLayout = ({children, title, icon}) => {
+  const {checkIfTheScreenIsActive} = usePath();
   const router = useRouter();
+  const {t} = useTranslation();
+
+  //check if the screen is in used
+  const setActiveAsActivePage = (route) => (checkIfTheScreenIsActive(route) ? 'var(--loginPageText)' : '#777e91');
+  const setSelectedClass = (route) => checkIfTheScreenIsActive(route) && 'selected';
+
+  const leftMenu = [
+    {
+      text: t('profile'),
+      route: routes.accountProfile,
+      icon: ProfileIcon,
+    },
+    {
+      text: t('referrals'),
+      route: routes.accountReferrals,
+      icon: ReferralsIcon,
+    },
+    {
+      text: t('api_keys'),
+      route: routes.accountApiKeys,
+      icon: APIKeysIcon,
+    },
+    {
+      text: t('login_history'),
+      route: routes.accountLoginHistory,
+      icon: LoginHistoryIcon,
+    },
+    {
+      text: t('2fa'),
+      route: routes.account2FA,
+      icon: TwoFAIcon,
+    },
+    {
+      text: t('change_password'),
+      route: routes.accountPasswordChange,
+      icon: PasswordIcon,
+    },
+  ];
+
+  const NavbarLinkItem = ({route, text, Icon}) => {
+    return (
+      <div onClick={() => router.push(route)} className={`side-nav-title ${setSelectedClass(route)}`}>
+        <Icon fill={setActiveAsActivePage(route)} /> <span>{text}</span>
+      </div>
+    );
+  };
 
   return (
     <DashboardLayout>
@@ -28,81 +75,9 @@ const AccountLayout = ({ children, title, icon }) => {
       </div>
       <div className="page-content">
         <div className="side-nav">
-          <p
-            onClick={() => (
-              setIsActive("Profile"), router.push(routes.accountProfile)
-            )}
-            className={`side-nav-title ${
-              isActive === "Profile" ? "selected" : ""
-            }`}
-          >
-            <ProfileIcon
-              fill={isActive === "Profile" ? "var(--loginPageText)" : "#777e91"}
-            />{" "}
-            <span>Profile</span>
-          </p>
-          <p
-            onClick={() => (
-              router.push(routes.accountReferrals), setIsActive("Referrals")
-            )}
-            className={`side-nav-title ${
-              isActive === "Referrals" ? "selected" : ""
-            }`}
-          >
-            <ReferralsIcon
-              fill={
-                isActive === "Referrals" ? "var(--loginPageText)" : "#777e91"
-              }
-            />{" "}
-            <span>Referrals</span>
-          </p>
-          <p
-            onClick={() => setIsActive("API")}
-            className={`side-nav-title ${isActive === "API" ? "selected" : ""}`}
-          >
-            <APIKeysIcon
-              fill={isActive === "API" ? "var(--loginPageText)" : "#777e91"}
-            />{" "}
-            <span>API Keys</span>
-          </p>
-          <div className="account-divider" />
-          <p
-            onClick={() => setIsActive("Login")}
-            className={`side-nav-title ${
-              isActive === "Login" ? "selected" : ""
-            }`}
-          >
-            <LoginHistoryIcon
-              fill={isActive === "Login" ? "var(--loginPageText)" : "#777e91"}
-            />{" "}
-            <span>Sessions & login history</span>
-          </p>
-          <p
-            onClick={() => setIsActive("2FA")}
-            className={`side-nav-title ${isActive === "2FA" ? "selected" : ""}`}
-          >
-            {" "}
-            <TwoFAIcon
-              fill={isActive === "2FA" ? "var(--loginPageText)" : "#777e91"}
-            />{" "}
-            <span>2FA</span>
-          </p>
-          <p
-            onClick={() => (
-              setIsActive("Password"), setIsTitle("Change password")
-            )}
-            className={`side-nav-title ${
-              isActive === "Password" ? "selected" : ""
-            }`}
-          >
-            {" "}
-            <PasswordIcon
-              fill={
-                isActive === "Password" ? "var(--loginPageText)" : "#777e91"
-              }
-            />{" "}
-            <span>Change password</span>
-          </p>
+          {leftMenu.map((item, index) => {
+            return <NavbarLinkItem Icon={item.icon} route={item.route} text={item.text} key={index} />;
+          })}
         </div>
         <div className="account-dropdown">
           <Dropdown options={sideBarArray} route title={title} icon={icon} />
