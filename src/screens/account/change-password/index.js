@@ -9,13 +9,15 @@ import {changePasswordValidations} from '@/validations/account';
 import {useEffect, useState} from 'react';
 import {useFormik} from 'formik';
 
+import {authApi, changeUserPassword} from '@/services/auth';
 const ChangePassword = () => {
   const {t} = useTranslation();
   const {name, surname, email, levelNo, phoneNumber, ...userInformations} = useSelector(
     (state) => state.user.informations
   );
   const [isLoading, setIsLoading] = useState(false);
-  console.log(userInformations);
+  const [changePassword, changePasswordResponse] = authApi.useChangeUserPasswordMutation();
+
   const changePasswordForm = useFormik({
     initialValues: {
       CurrentPassword: '',
@@ -28,7 +30,10 @@ const ChangePassword = () => {
   useEffect(() => {
     console.log(changePasswordForm.values);
   }, [changePasswordForm.values]);
-  const handleOnFormSubmitted = () => {};
+  const handleOnFormSubmitted = async () => {
+    const res = await changePassword({...changePasswordForm.values});
+    console.log(res);
+  };
 
   return (
     <AccountLayout title={t('changePassword')} icon={<ProfileIcon />}>
