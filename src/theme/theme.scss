@@ -1,8 +1,10 @@
 @import "colors/dark_colors.scss";
 @import "colors/light_colors.scss";
+@import "colors/main_colors.scss";
 
 body {
   @extend .light_colors;
+  @extend .main_colors !optional;
 }
 
 body.dark_theme {

@@ -82,8 +82,8 @@
         border-radius: 1rem;
         background: var(--accountPageContentBg);
         color: var(--loginPageText);
-        box-shadow: 0px 64px 64px -48px rgb(15 15 15)
-    }
+        box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.10);
+        }
 }
 
 .account-option {
