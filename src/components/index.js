@@ -26,6 +26,9 @@ export {default as Spacer} from './ScreenCommons/Spacer';
 export {default as LoggedInProfileCard} from './ScreenCommons/LoggedInProfileCard';
 export {default as Modal} from './ScreenCommons/Modal';
 export {default as Card} from './ScreenCommons/Card';
+export {default as CenteredContent} from './ScreenCommons/CenteredContent';
+export {default as Text} from './ScreenCommons/Text';
+export {default as Quote} from './ScreenCommons/Quote';
 
 //Icons
 export {default as LockLine} from './Icons/LockLine.js';
