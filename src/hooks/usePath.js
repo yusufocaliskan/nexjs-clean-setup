@@ -7,6 +7,7 @@ const usePath = () => {
   const languageClearedPath = pathname.substring(3);
 
   //is the given screen is currently in used?
+  //
   const checkIfTheScreenIsActive = (route) => languageClearedPath == route;
 
   return {pathname, languageClearedPath, checkIfTheScreenIsActive};
