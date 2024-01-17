@@ -1,0 +1,285 @@
+.info-container {
+    display: flex;
+    width: 100%;
+    padding: 1.25rem;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.25rem;
+    background: var(--trade-info-bg);
+    box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.10);
+
+    .info-left {
+        display: flex;
+        width: 22.125rem;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-shrink: 0;
+
+        .info-coin {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+
+            .info-coin-name {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+
+                .info-title {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.25rem;
+
+                    .coin-title {
+                        color: var(--trade-info-text);
+                        font-family: "Poppins", sans-serif;
+                        font-size: 1.5rem;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 2rem;
+                    }
+
+                    .coin-fold {
+                        display: flex;
+                        padding: 0.125rem 0.5rem;
+                        justify-content: center;
+                        align-items: center;
+                        gap: 0.625rem;
+                        border-radius: 1.5rem;
+                        background: var(--Primary-4, #58BD7D);
+                        color: var(--Neutrals-8, #FCFCFD);
+                        font-family: "Poppins", sans-serif;
+                        font-size: 0.75rem;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 1.25rem;
+                    }
+                }
+
+                .info-title2 {
+                    color: var(--Neutrals-4, #777E90);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.75rem;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 1.25rem;
+                }
+            }
+
+            .info-price {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+
+                .info-coin-price {
+                    color: var(--Primary-3, #FF6838);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 1.5rem;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 2rem;
+                }
+
+                .info-coin-symbol {
+                    color: var(--Neutrals-4, #777E90);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.75rem;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 1.25rem;
+                    display: flex;
+                    width: 7.375rem;
+                    align-items: center;
+                    gap: 0.25rem;
+                }
+            }
+        }
+
+        .info-dropdown {
+            display: flex;
+            padding: 0.25rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.625rem;
+            border-radius: 2rem;
+            border: 2px solid var(--inputBorderColor);
+        }
+    }
+
+    .info-right {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+
+        .info-change {
+            display: flex;
+            width: 10rem;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            .info-change-div {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 0.25rem;
+
+                .info-change-symbol {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.25rem;
+                    align-self: stretch;
+                    color: var(--Neutrals-4, #777E90);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.75rem;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.25rem;
+                }
+
+                .info-change-ratio-plus {
+                    color: var(--Chart-Green, #00C076);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5rem;
+                }
+
+                .info-change-ratio {
+                    color: var(--trade-info-text);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5rem;
+                }
+            }
+
+            .info-change-divider {
+                width: 0.0625rem;
+                height: 3rem;
+                flex-shrink: 0;
+                border-radius: 0.0625rem;
+                background: var(--divider-color);
+            }
+        }
+
+        .info-change-volume {
+            display: flex;
+            width: 10rem;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            .info-change-div {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                gap: 0.25rem;
+
+                .info-change-symbol {
+                    display: flex;
+                    align-items: center;
+                    gap: 0.25rem;
+                    align-self: stretch;
+                    color: var(--Neutrals-4, #777E90);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.75rem;
+                    font-style: normal;
+                    font-weight: 400;
+                    line-height: 1.25rem;
+                }
+
+                .info-change-ratio-plus {
+                    color: var(--Chart-Green, #00C076);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5rem;
+                }
+
+                .info-change-ratio {
+                    color: var(--trade-info-text);
+                    font-family: "Poppins", sans-serif;
+                    font-size: 0.875rem;
+                    font-style: normal;
+                    font-weight: 500;
+                    line-height: 1.5rem;
+                }
+            }
+
+            .info-change-divider {
+                width: 0.0625rem;
+                height: 3rem;
+                flex-shrink: 0;
+                border-radius: 0.0625rem;
+                background: var(--divider-color);
+            }
+        }
+    }
+}
+
+@media (max-width:1024px) {
+    .info-container {
+        .info-right {
+            .info-change-volume {
+                display: none;
+            }
+
+            .info-change {
+                justify-content: center;
+
+                .info-change-divider {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media (max-width:768px) {
+    .info-container {
+        display: flex;
+        width: 100%;
+        padding: 1rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+
+        .info-left {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            .info-coin {
+                flex-direction: column;
+            }
+        }
+
+        .info-right {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+
+            .info-change-volume {
+                width: 45%;
+                display: flex;
+                box-sizing: border-box;
+                justify-content: center;
+            }
+
+            .info-change {
+                width: 40%;
+                display: flex;
+                box-sizing: border-box;
+            }
+        }
+    }
+
+}
