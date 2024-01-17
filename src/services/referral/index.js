@@ -11,11 +11,35 @@ export const referralApi = createApi({
         method: 'GET',
       }),
     }),
-    login: builder.mutation({
+    getMyReferrals: builder.mutation({
       query: (data) => ({
-        url: 'users/login',
-        method: 'POST',
+        url: '/users/referrals',
+        method: 'GET',
         data: data,
+      }),
+    }),
+    getMyReferralsCountWithKYC: builder.mutation({
+      query: () => ({
+        url: '/users/referrals/count',
+        method: 'GET',
+      }),
+    }),
+    getMyLatestCommissions: builder.mutation({
+      query: () => ({
+        url: '/users/commission',
+        method: 'GET',
+      }),
+    }),
+    getMyCommissionBalance: builder.mutation({
+      query: () => ({
+        url: '/users/commission/balance',
+        method: 'GET',
+      }),
+    }),
+    getTopCommissions: builder.mutation({
+      query: () => ({
+        url: '/commissions/top',
+        method: 'GET',
       }),
     }),
   }),
