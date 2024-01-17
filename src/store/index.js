@@ -11,7 +11,7 @@ import {authApi} from '@/services/auth/index.js';
 import {userApi} from '@/services/user/index.js';
 import {referralApi} from '@/services/referral/index.js';
 import {setClientInstanHeaders} from '@/services/clientInstance.js';
-import {clientInstanceListener} from './listener.js';
+import {clientInstanceListener} from './clientInstanceListener.js';
 
 //using for persist storage, due to ssr or crs
 const reducers = combineReducers({
