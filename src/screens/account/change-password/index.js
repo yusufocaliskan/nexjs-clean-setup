@@ -22,7 +22,7 @@ const ChangePassword = () => {
   );
   const [isLoading, setIsLoading] = useState(false);
   const [changeUserPassword, changePasswordResponse] = userApi.useChangeUserPasswodMutation();
-  const passwordCounter = useCounter('passwordCounter', 5);
+  const passwordCounter = useCounter('passwordCounter', 3);
   const account = useAccount();
 
   const changePasswordForm = useFormik({
@@ -56,6 +56,7 @@ const ChangePassword = () => {
   return (
     <AccountLayout title={t('changePassword')} icon={<ProfileIcon />}>
       <CenteredContent>
+        <Spacer h="30px" />
         <Text>
           {t('hi')} {name} ✋,
         </Text>
