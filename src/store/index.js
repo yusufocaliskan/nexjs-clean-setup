@@ -16,6 +16,7 @@ const reducers = combineReducers({
   authApi: authApi.reducer,
   referralApi: referralApi.reducer,
   app: app,
+  user: user,
 });
 
 //Settings for persists

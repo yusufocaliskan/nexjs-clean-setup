@@ -3,7 +3,7 @@ import clientBaseQuery from '@/services/clientBaseQuery';
 
 export const referralApi = createApi({
   reducerPath: 'referralApi',
-  baseQuery: () => clientBaseQuery(),
+  baseQuery: clientBaseQuery(),
   endpoints: (builder) => ({
     checkIReferralIdIsValid: builder.mutation({
       query: (data) => ({

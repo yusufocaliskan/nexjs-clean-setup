@@ -37,7 +37,7 @@ const userSlice = createSlice({
       state.informations = action.payload.Data;
     });
 
-    builder.addMatcher(authApi?.endpoints.changeUserPassword.matchFulfilled, (state, action) => {
+    builder.addMatcher(authApi?.endpoints.changeUserPasswod.matchFulfilled, (state, action) => {
       console.log('Changein Password', action);
     });
   },

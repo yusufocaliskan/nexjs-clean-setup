@@ -3,7 +3,7 @@ import clientBaseQuery from '@/services/clientBaseQuery';
 
 export const loginApi = createApi({
   reducerPath: 'marketApi',
-  baseQuery: () => clientBaseQuery(),
+  baseQuery: clientBaseQuery(),
   endpoints: (builder) => ({
     check4CandidateData: builder.mutation({
       query: (data) => ({

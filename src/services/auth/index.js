@@ -3,7 +3,7 @@ import {createApi} from '@reduxjs/toolkit/query/react';
 
 export const authApi = createApi({
   reducerPath: 'authApi',
-  baseQuery: () => clientBaseQuery(),
+  baseQuery: clientBaseQuery(),
   endpoints: (builder) => ({
     newRegistration: builder.mutation({
       query: (data, captchaToken) => ({
@@ -59,6 +59,13 @@ export const authApi = createApi({
       }),
     }),
     createPassword: builder.mutation({
+      query: (data) => ({
+        url: 'users/password',
+        method: 'POST',
+        data: data,
+      }),
+    }),
+    changeUserPasswod: builder.mutation({
       query: (data) => ({
         url: 'users/password',
         method: 'POST',
