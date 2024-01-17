@@ -7,17 +7,19 @@ import storage from './persist-storage.js';
 import user from './user';
 import app from './app';
 
-import {referralApi} from './referral/index.js';
 import {authApi} from '@/services/auth/index.js';
 import {userApi} from '@/services/user/index.js';
+import {referralApi} from '@/services/referral/index.js';
+import {setClientInstanHeaders} from '@/services/clientInstance.js';
+import {clientInstanceListener} from './listener.js';
 
 //using for persist storage, due to ssr or crs
 const reducers = combineReducers({
+  app: app,
+  user: user,
   authApi: authApi.reducer,
   referralApi: referralApi.reducer,
   userApi: userApi.reducer,
-  app: app,
-  user: user,
 });
 
 //Settings for persists
@@ -43,11 +45,18 @@ const configuredStore = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
       immutableCheck: false,
-    }).concat(authApi.middleware, userApi.middleware, referralApi.middleware),
+    })
+      .concat(authApi.middleware, userApi.middleware, referralApi.middleware)
+      .prepend(clientInstanceListener.middleware),
 });
 
 //Before the store initialized
-const onRehydrate = () => {};
+const onRehydrate = () => {
+  console.log(configuredStore);
+  const userStore = configuredStore.getState()?.user;
+  const appStore = configuredStore.getState()?.app;
+  setClientInstanHeaders(userStore, appStore);
+};
 
 const persistor = persistStore(configuredStore, null, onRehydrate);
 

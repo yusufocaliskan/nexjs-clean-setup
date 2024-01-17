@@ -1,10 +1,11 @@
+'use client';
 import {ReferralsIcon} from '@/components/Icons/ProfileInfoIcons';
 import AccountLayout from '@/layouts/account';
 import './index.scss';
-import { referralApi } from '@/services/referral';
+import {referralApi} from '@/services/referral';
 
 const Referrals = () => {
-  const [getMyReferrals, userInformationResponse] = referralApi.useGetMyReferrals();
+  const [getMyReferrals, userInformationResponse] = referralApi.useGetMyReferralsMutation();
 
   return (
     <AccountLayout title={'Referrals'} icon={<ReferralsIcon />}>

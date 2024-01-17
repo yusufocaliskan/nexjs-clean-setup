@@ -1,5 +1,5 @@
 import {appConfigs} from '@/configs';
-import {store} from '@/store';
+import {getSelectedLanguage} from '@/utils';
 import axios from 'axios';
 
 const clientInstance = axios.create({
@@ -13,15 +13,14 @@ const clientInstance = axios.create({
 clientInstance.interceptors.request.use(
   (config) => {
     //set the bearer tokens..
-    const userStore = store.getState().user;
-    const appStore = store.getState().app;
-
-    if (userStore.token) {
-      config.headers.Authorization = `Bearer ${userStore.token.AuthToken}`;
-      config.headers['X-CSRF-Token'] = `${userStore.token.CSRFToken}`;
-    }
-
-    config.headers['X-LANGUAGE-LOCALE'] = `${appStore.selectedLanguage}`;
+    // const userStore = store.getState().user;
+    // const appStore = store.getState().app;
+    // if (userStore.token) {
+    //   config.headers.Authorization = `Bearer ${userStore.token.AuthToken}`;
+    //   config.headers['X-CSRF-Token'] = `${userStore.token.CSRFToken}`;
+    // }
+    //
+    // config.headers['X-LANGUAGE-LOCALE'] = `${appStore.selectedLanguage}`;
     return config;
   },
   //On Rejected request
@@ -41,4 +40,15 @@ clientInstance.interceptors.response.use(
   }
 );
 
+export const setClientInstanHeaders = (userStore, appStore) => {
+  //set the bearer tokens..
+
+  if (userStore.token) {
+    clientInstance.defaults.headers.common['Authorization'] = `Bearer ${userStore?.token.AuthToken}`;
+    clientInstance.defaults.headers.common['X-CSRF-Token'] = `${userStore?.token.CSRFToken}`;
+  }
+
+  clientInstance.defaults.headers.common['X-LANGUAGE-LOCALE'] = `${appStore?.selectedLanguage}`;
+};
+//
 export default clientInstance;
