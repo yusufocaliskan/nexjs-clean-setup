@@ -1,19 +1,20 @@
 import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import {setupListeners} from '@reduxjs/toolkit/query';
 import {persistReducer, persistStore} from 'redux-persist';
+
 import storage from './persist-storage.js';
+
+//Services
 import user from './user';
 import app from './app';
 
-//Services
-import {authApi} from '@/services/auth/index.js';
 import {referralApi} from './referral/index.js';
+import {authApi} from '@/services/auth/index.js';
 
 //using for persist storage, due to ssr or crs
 const reducers = combineReducers({
-  [authApi.reducerPath]: authApi.reducer,
-  [referralApi.reducerPath]: referralApi.reducer,
-  user: user,
+  authApi: authApi.reducer,
+  referralApi: referralApi.reducer,
   app: app,
 });
 
