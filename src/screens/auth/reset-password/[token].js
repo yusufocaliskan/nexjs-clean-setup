@@ -1,51 +1,47 @@
-"use client";
-import React from "react";
-import "./index.scss";
-import { useTranslation } from "@/app/i18n/client";
-import { useRouter } from "next/navigation";
-import { TextBox, Title, FormTriggerButton, Form } from "@/components";
-import LogoBg from "@/components/Logo";
-import SmallLogo from "@/components/Logo/smallLogo";
-import { useFormik } from "formik";
-import {
-  forgotPasswordLastStepFormValidations,
-  resetPasswordFormValidations,
-} from "@/validations/auth";
-import { forgotPassword } from "@/services/auth";
-import { useState, useEffect } from "react";
-import queryResult from "@/services/queryResult";
-import routes from "@/routes";
-import toast from "react-hot-toast";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import ThemeSwitcher from "@/components/ThemeSwitcher";
+'use client';
+import React from 'react';
+import './index.scss';
+import {useTranslation} from '@/app/i18n/client';
+import {useRouter} from 'next/navigation';
+import {TextBox, Title, FormTriggerButton, Form} from '@/components';
+import LogoBg from '@/components/Logo';
+import SmallLogo from '@/components/Logo/smallLogo';
+import {useFormik} from 'formik';
+import {resetPasswordFormValidations} from '@/validations/auth';
+import {authApi} from '@/services/auth';
+import {useState, useEffect} from 'react';
+import queryResult from '@/services/queryResult';
+import routes from '@/routes';
+import toast from 'react-hot-toast';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import ThemeSwitcher from '@/components/ThemeSwitcher';
 
 const ForgotPassword = (props) => {
-  const [createPassword, createPasswordResponse] =
-    forgotPassword.useCreatePasswordMutation();
+  const [createPassword, createPasswordResponse] = authApi.useCreatePasswordMutation();
 
   const [resetToken, setResetToken] = useState(null);
   const urlParams = new URLSearchParams(window.location.search);
-  const token = urlParams.get("token");
-  const { t } = useTranslation();
+  const token = urlParams.get('token');
+  const {t} = useTranslation();
   const router = useRouter();
 
-  console.log("Here", props);
+  console.log('Here', props);
   useEffect(() => {
     setResetToken(token);
   }, [token]);
 
   const resetPasswordForm = useFormik({
     initialValues: {
-      Password: "",
-      ConfirmPassword: "",
-      Email: "",
+      Password: '',
+      ConfirmPassword: '',
+      Email: '',
     },
     validationSchema: resetPasswordFormValidations,
     onSubmit: () => handleResetPasswordFormSubmit(),
   });
 
   const handleResetPasswordFormSubmit = async () => {
-    const data = { ...resetPasswordForm.values, Token: resetToken };
+    const data = {...resetPasswordForm.values, Token: resetToken};
 
     try {
       const resp = await createPassword(data);
@@ -59,7 +55,7 @@ const ForgotPassword = (props) => {
 
       //On success
       if (queryResult.isSuccess(resp)) {
-        toast.success(t("resetPasswordPageSuccessMessage"));
+        toast.success(t('resetPasswordPageSuccessMessage'));
 
         resetPasswordForm.resetForm();
 
@@ -68,7 +64,7 @@ const ForgotPassword = (props) => {
         }, 3000);
       }
     } catch (error) {
-      return toast.error(t("unknownRequestErrorMessage"));
+      return toast.error(t('unknownRequestErrorMessage'));
     }
   };
 
@@ -80,58 +76,46 @@ const ForgotPassword = (props) => {
       <div className="reset-page-right">
         <div className="reset-page-right-top">
           <SmallLogo />
-          <p
-            style={{ display: "flex", gap: "10px" }}
-            className="reset-page-right-top-text"
-          >
+          <p style={{display: 'flex', gap: '10px'}} className="reset-page-right-top-text">
             <ThemeSwitcher />
             <LanguageSwitcher />
-            {t("dontHaveAnAccount")}
-            <span className="sign-up-for-free">{t("signUpForFree")}</span>
+            {t('dontHaveAnAccount')}
+            <span className="sign-up-for-free">{t('signUpForFree')}</span>
           </p>
         </div>
         <div className="reset-page-right-content">
-          <Form
-            onSubmit={resetPasswordForm.handleSubmit}
-            formInstance={resetPasswordForm}
-          >
-            <Title text={t("forgotPasswordPageNewPassword")} />
+          <Form onSubmit={resetPasswordForm.handleSubmit} formInstance={resetPasswordForm}>
+            <Title text={t('forgotPasswordPageNewPassword')} />
             <TextBox
-              label={t("forgotPasswordPageEnterEmail")}
+              label={t('forgotPasswordPageEnterEmail')}
               type="email"
               name="email"
-              placeholder={t("justEmail")}
+              placeholder={t('justEmail')}
               formInstance={resetPasswordForm}
               value={resetPasswordForm.values.Email}
-              setValue={(value) =>
-                resetPasswordForm.setFieldValue("Email", value)
-              }
+              setValue={(value) => resetPasswordForm.setFieldValue('Email', value)}
             />
             <TextBox
-              label={t("forgotPasswordPageNewPassword")}
+              label={t('forgotPasswordPageNewPassword')}
               type="password"
               name="new-password"
-              placeholder={t("justPassword")}
+              placeholder={t('justPassword')}
               isSecure
               formInstance={resetPasswordForm}
               value={resetPasswordForm.values.Password}
-              setValue={(value) =>
-                resetPasswordForm.setFieldValue("Password", value)
-              }
+              setValue={(value) => resetPasswordForm.setFieldValue('Password', value)}
             />
             <TextBox
-              label={t("forgotPasswordPageConfirmPassword")}
+              label={t('forgotPasswordPageConfirmPassword')}
               type="password"
               name="confirm-password"
-              placeholder={t("justPassword")}
+              placeholder={t('justPassword')}
               isSecure
               formInstance={resetPasswordForm}
               value={resetPasswordForm.values.ConfirmPassword}
-              setValue={(value) =>
-                resetPasswordForm.setFieldValue("ConfirmPassword", value)
-              }
+              setValue={(value) => resetPasswordForm.setFieldValue('ConfirmPassword', value)}
             />
-            <FormTriggerButton label={t("forgotPasswordPageContinue")} />
+            <FormTriggerButton label={t('forgotPasswordPageContinue')} />
           </Form>
         </div>
       </div>

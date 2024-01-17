@@ -65,12 +65,5 @@ export const authApi = createApi({
         data: data,
       }),
     }),
-    changeUserPasswod: builder.mutation({
-      query: (data) => ({
-        url: 'users/password',
-        method: 'POST',
-        data: data,
-      }),
-    }),
   }),
 });

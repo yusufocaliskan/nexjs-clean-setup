@@ -10,13 +10,20 @@ import {useEffect, useState} from 'react';
 import {useFormik} from 'formik';
 
 import {authApi, changeUserPassword} from '@/services/auth';
+import {userApi} from '@/services/user';
+import queryResult from '@/services/queryResult';
+import toast from 'react-hot-toast';
+import useCounter from '@/hooks/useCounter';
+import useAccount from '@/hooks/useAccount';
 const ChangePassword = () => {
   const {t} = useTranslation();
   const {name, surname, email, levelNo, phoneNumber, ...userInformations} = useSelector(
     (state) => state.user.informations
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [changeUserPassword, changePasswordResponse] = authApi.useChangeUserPasswodMutation();
+  const [changeUserPassword, changePasswordResponse] = userApi.useChangeUserPasswodMutation();
+  const passwordCounter = useCounter('passwordCounter', 5);
+  const account = useAccount();
 
   const changePasswordForm = useFormik({
     initialValues: {
@@ -24,6 +31,7 @@ const ChangePassword = () => {
       NewPassword: '',
       ConfirmNewPassword: '',
     },
+    validateOnMount: false,
     validationSchema: changePasswordValidations,
     onSubmit: () => handleOnFormSubmitted(),
   });
@@ -32,8 +40,20 @@ const ChangePassword = () => {
   }, [changePasswordForm.values]);
   const handleOnFormSubmitted = async () => {
     const res = await changeUserPassword({...changePasswordForm.values});
-    console.log(res);
+    if (queryResult.isSuccess(res)) {
+      toast.success(t('passwordHasUpdatedMessage'));
+      passwordCounter.startCounter();
+    }
   };
+  useEffect(() => {
+    //Logout
+    if (passwordCounter.isCounterStarted && passwordCounter.counter <= 0) {
+      console.log(changePasswordResponse?.data?.Data.AuthToken);
+      account.setAuthToken(changePasswordResponse?.data?.Data.AuthToken);
+
+      account.logout();
+    }
+  }, [passwordCounter.counter]);
 
   return (
     <AccountLayout title={t('changePassword')} icon={<ProfileIcon />}>
@@ -52,6 +72,7 @@ const ChangePassword = () => {
         >
           <TextBox
             formInstance={changePasswordForm}
+            isSecure
             label={t('currentPassword')}
             type="password"
             name="CurrentPassword"
@@ -61,6 +82,7 @@ const ChangePassword = () => {
           />
           <TextBox
             formInstance={changePasswordForm}
+            isSecure
             label={t('newPassword')}
             type="password"
             name="NewPassword"
@@ -70,6 +92,7 @@ const ChangePassword = () => {
           />
           <TextBox
             formInstance={changePasswordForm}
+            isSecure
             label={t('confirmNewPassword')}
             type="password"
             name="ConfirmNewPassword"

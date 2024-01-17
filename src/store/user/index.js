@@ -1,5 +1,6 @@
 import {createSlice, createEntityAdapter} from '@reduxjs/toolkit';
 import {authApi} from '@/services/auth';
+import {userApi} from '@/services/user';
 export const userAdapter = createEntityAdapter();
 
 const initialState = userAdapter.getInitialState({
@@ -28,17 +29,20 @@ const userSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(authApi?.endpoints.newRegistration.matchFulfilled, (state, action) => {
+    builder.addMatcher(authApi.endpoints.newRegistration.matchFulfilled, (state, action) => {
       //Set the token on success
       state.token = action.payload.data?.Token;
     });
 
-    builder.addMatcher(authApi?.endpoints.getUserInformations.matchFulfilled, (state, action) => {
+    builder.addMatcher(authApi.endpoints.getUserInformations.matchFulfilled, (state, action) => {
       state.informations = action.payload.Data;
     });
 
-    builder.addMatcher(authApi?.endpoints.changeUserPasswod.matchFulfilled, (state, action) => {
+    builder.addMatcher(userApi.endpoints.changeUserPasswod.matchFulfilled, (state, action) => {
       console.log('Changein Password', action);
+    });
+    builder.addMatcher(userApi.endpoints.changeUserPasswod.matchRejected, (state, action) => {
+      console.log('Changing Password Rejected', action);
     });
   },
 });
