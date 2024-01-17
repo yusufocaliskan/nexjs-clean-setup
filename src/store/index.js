@@ -47,12 +47,14 @@ const configuredStore = configureStore({
       immutableCheck: false,
     })
       .concat(authApi.middleware, userApi.middleware, referralApi.middleware)
+
+      //Listinin tokens
       .prepend(clientInstanceListener.middleware),
 });
 
 //Before the store initialized
 const onRehydrate = () => {
-  console.log(configuredStore);
+  //Set token, if there was.
   const userStore = configuredStore.getState()?.user;
   const appStore = configuredStore.getState()?.app;
   setClientInstanHeaders(userStore, appStore);

@@ -1,5 +1,6 @@
 {
   "hi": "Hi",
+  "passwordHasUpdatedMessage": "We've updated your password. To be ensure all is good, you need re-signIn, %s seconds remaind to logout.",
   "changePassword": "Change Password",
   "changePasswordDesc": "You're about to change your password. Please ensure your privacy and make sure no one is watching!",
   "currentPassword": "Current Password",

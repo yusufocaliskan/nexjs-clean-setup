@@ -35,23 +35,20 @@ const ChangePassword = () => {
     validationSchema: changePasswordValidations,
     onSubmit: () => handleOnFormSubmitted(),
   });
-  useEffect(() => {
-    console.log(changePasswordForm.values);
-  }, [changePasswordForm.values]);
+
   const handleOnFormSubmitted = async () => {
     const res = await changeUserPassword({...changePasswordForm.values});
     if (queryResult.isSuccess(res)) {
-      console.log(res);
+      //set the tokens..
       account.setAuthToken(res?.data?.Data);
-      toast.success(t('passwordHasUpdatedMessage'));
+      toast.success(t('passwordHasUpdatedMessage').replace('%s', passwordCounter.counter));
       passwordCounter.startCounter();
     }
   };
+
   useEffect(() => {
     //Logout
     if (passwordCounter.isCounterStarted && passwordCounter.counter <= 0) {
-      console.log(changePasswordResponse?.data?.Data.AuthToken);
-
       account.logout();
     }
   }, [passwordCounter.counter]);
