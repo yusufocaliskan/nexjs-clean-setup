@@ -16,7 +16,7 @@ const ChangePassword = () => {
     (state) => state.user.informations
   );
   const [isLoading, setIsLoading] = useState(false);
-  const [changePassword, changePasswordResponse] = authApi.useChangeUserPasswordMutation();
+  const [changeUserPassword, changePasswordResponse] = authApi.useChangeUserPasswodMutation();
 
   const changePasswordForm = useFormik({
     initialValues: {
@@ -31,7 +31,7 @@ const ChangePassword = () => {
     console.log(changePasswordForm.values);
   }, [changePasswordForm.values]);
   const handleOnFormSubmitted = async () => {
-    const res = await changePassword({...changePasswordForm.values});
+    const res = await changeUserPassword({...changePasswordForm.values});
     console.log(res);
   };
 
