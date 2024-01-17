@@ -1,23 +1,30 @@
-"use client";
-import { ProfileIcon } from "@/components/Icons/ProfileInfoIcons";
-import Switch from "@/components/form/Switch";
-import AccountLayout from "@/layouts/account";
-import "./index.scss";
-import LanguageSwitcher from "@/components/LanguageSwitcher";
-import CountrySelector from "@/components/CountrySelector";
-import { CoolButton } from "@/components";
+'use client';
+import {ProfileIcon} from '@/components/Icons/ProfileInfoIcons';
+import Switch from '@/components/form/Switch';
+import AccountLayout from '@/layouts/account';
+import './index.scss';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
+import CountrySelector from '@/components/CountrySelector';
+import {CoolButton} from '@/components';
+import {useSelector} from 'react-redux';
 
 const Profile = () => {
+  const {name, surname, email, levelNo, phoneNumber, ...userInformations} = useSelector(
+    (state) => state.user.informations
+  );
+  const userFullName = `${name} ${surname}`;
+  console.log(userInformations);
   return (
-    <AccountLayout title={"Profile"} icon={<ProfileIcon />}>
+    <AccountLayout title={'Profile'} icon={<ProfileIcon />}>
       <div className="profile-container">
         <div className="profile-top">
           <div className="profile-info">
             <div className="profile-name">
-              <p className="name">Breanne Schinner</p>
-              <p className="mail">schinner@ui8.net</p>
+              <p className="name">{userFullName}</p>
+              <p className="mail">{email}</p>
+              <p className="mail">{phoneNumber}</p>
               <div className="profile-level">
-                <p className="level-text">Level 2 verified</p>
+                <p className="level-text">{`Level ${levelNo} verified`}</p>
               </div>
             </div>
             <div className="profile-country">

@@ -1,15 +1,15 @@
-import { ProtectedArea } from "@/layouts";
-import { CoolButton } from "@/components";
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "@/app/i18n/client";
-import { authApi } from "@/services/auth";
-import { signOut, useSession } from "next-auth/react";
-import { cleanUpUserStore } from "@/store/user";
-import queryResult from "@/services/queryResult";
+import {ProtectedArea} from '@/layouts';
+import {CoolButton} from '@/components';
+import {useDispatch, useSelector} from 'react-redux';
+import {useTranslation} from '@/app/i18n/client';
+import {authApi} from '@/services/auth';
+import {signOut, useSession} from 'next-auth/react';
+import {cleanUpUserStore} from '@/store/user';
+import queryResult from '@/services/queryResult';
 
 const LoggedInProfileCard = () => {
   const user = useSelector((state) => state.user);
-  const { t } = useTranslation();
+  const {t} = useTranslation();
   const session = useSession();
 
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const LoggedInProfileCard = () => {
     const rep = await logoutSession();
     if (queryResult.isSuccess(rep)) {
       dispatch(cleanUpUserStore());
-      signOut({ redirect: true });
+      signOut({redirect: true});
     }
   };
 
@@ -28,27 +28,22 @@ const LoggedInProfileCard = () => {
       <div
         style={{
           borderWidth: 1,
-          borderColor: "#aaa",
+          borderColor: '#aaa',
           borderRadius: 15,
           padding: 15,
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
         }}
       >
         <div>
           <p>
-            {t("welcome")}, {user?.informations?.name}{" "}
-            {user?.informations?.surname}
+            {t('welcome')}, {user?.informations?.name} {user?.informations?.surname}
           </p>
-          <b>{user.informations?.email}</b>
+          <b>{user?.informations?.email}</b>
         </div>
         <div>
-          <CoolButton
-            label={t("logout")}
-            type="Small"
-            onClick={() => handleOnLoggout()}
-          />
+          <CoolButton label={t('logout')} type="Small" onClick={() => handleOnLoggout()} />
         </div>
       </div>
     </ProtectedArea>

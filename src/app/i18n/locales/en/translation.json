@@ -1,4 +1,14 @@
 {
+  "hi": "Hi",
+  "changePassword": "Change Password",
+  "changePasswordDesc": "You're about to change your password. Please ensure your privacy and make sure no one is watching!",
+  "currentPassword": "Current Password",
+  "currentPasswordPlaceholder": "What was your current password?",
+  "newPassword": "New Passworrd",
+  "newPasswordPlaceholder": "Type a new password",
+
+  "confirmNewPassword": "Type Passworrd Again",
+  "confirmNewPasswordPlaceholder": "You need to confirm your new password.",
   "maxFormRequestSizeText": "You have reach the maximum post of the form. Please fill the form again",
   "verify": "Verify",
   "continue": "Contunie",
@@ -91,12 +101,12 @@
   "forgotPasswordPageConfirmPassword": "Confirm Password",
   "forgotPasswordPageSuccessMessage": "The password reset link has been sent to your email.",
   "resetPasswordPageSuccessMessage": "Your password has been successfully reset",
-  "publicHeaderExchange":"Exchange",
-  "publicHeaderBuyCrypto":"Buy Crypto",
-  "publicHeaderMarket":"Market",
-  "publicHeaderDiscover":"Discover",
-  "publicHeaderSignUp":"Sign Up",
-  "publicHeaderLogin":"Login",
+  "publicHeaderExchange": "Exchange",
+  "publicHeaderBuyCrypto": "Buy Crypto",
+  "publicHeaderMarket": "Market",
+  "publicHeaderDiscover": "Discover",
+  "publicHeaderSignUp": "Sign Up",
+  "publicHeaderLogin": "Login",
   "protectedHeaderWallet": "Wallet",
   "footerExchange": "Exchange",
   "footerBuyCrypto": "Buy crypto",
@@ -104,14 +114,12 @@
   "footerLearn": "Learn crypto",
   "footerContact": "Contact",
   "footerContactTitle": "CONTACT",
-  "footerNavTitle":"FOOTER NAV",
+  "footerNavTitle": "FOOTER NAV",
   "footerNewsletterTitle": "NEWSLETTER",
   "footerContactAddress": "Dubai Silicon Oasis, Dubai, United Arab Emirates",
-  "footerNewsletterContent":"Subscribe our newsletter to get more free design course and resource.",
+  "footerNewsletterContent": "Subscribe our newsletter to get more free design course and resource.",
   "footerEmailPlaceholder": "Enter your email",
   "footerCopyright": "Copyright © 2021 DecentraHubs. All rights reserved",
-
-
 
   "password is a required field": "Please fill the password input"
 }

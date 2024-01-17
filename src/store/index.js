@@ -2,19 +2,22 @@ import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import {setupListeners} from '@reduxjs/toolkit/query';
 import {persistReducer, persistStore} from 'redux-persist';
 import storage from './persist-storage.js';
+
+//Services
 import user from './user';
 import app from './app';
 
-//Services
-import {authApi} from '@/services/auth/index.js';
 import {referralApi} from './referral/index.js';
+import {authApi} from '@/services/auth/index.js';
+import {userApi} from '@/services/user/index.js';
 
 //using for persist storage, due to ssr or crs
 const reducers = combineReducers({
-  [authApi.reducerPath]: authApi.reducer,
-  [referralApi.reducerPath]: referralApi.reducer,
-  user: user,
+  authApi: authApi.reducer,
+  referralApi: referralApi.reducer,
+  userApi: userApi.reducer,
   app: app,
+  user: user,
 });
 
 //Settings for persists
@@ -26,7 +29,7 @@ const rootReducers = (state, action) => {
 const persistConfig = {
   key: 'root',
   storage: storage,
-  whitelist: [authApi.reducerPath, 'app', 'user'],
+  whitelist: ['app', 'user'],
 };
 
 //Combine theme.
@@ -40,9 +43,7 @@ const configuredStore = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
       immutableCheck: false,
-    })
-      .concat(authApi.middleware)
-      .concat(referralApi.middleware),
+    }).concat(authApi.middleware, userApi.middleware, referralApi.middleware),
 });
 
 //Before the store initialized

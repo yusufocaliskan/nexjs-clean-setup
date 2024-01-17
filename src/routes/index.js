@@ -9,6 +9,10 @@ const routes = {
   accountProfile: '/account/profile',
   accountReferrals: '/account/referrals',
   trade: '/market/trade',
+  accountApiKeys: '/account/api-keys',
+  accountLoginHistory: '/account/login-history',
+  account2FA: '/account/2fa-authorization',
+  accountPasswordChange: '/account/change-password',
 };
 
 export default routes;

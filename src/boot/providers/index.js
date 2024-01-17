@@ -1,6 +1,7 @@
 'use client';
-import ThemeProvider from '@/theme/provider';
+
 import ReduxProvider from './redux';
+import ThemeProvider from '@/theme/provider';
 import NextAuthCustomProvider from './nextAuth';
 
 const RootProvider = ({children}) => {

@@ -1,13 +1,13 @@
-import { referralApi } from "@/services/referral";
-import { createSlice, createEntityAdapter } from "@reduxjs/toolkit";
-export const referralAdapter = createEntityAdapter();
+import {createSlice, createEntityAdapter} from '@reduxjs/toolkit';
+import {referralApi} from '@/services/referral';
 
+export const referralAdapter = createEntityAdapter();
 const initialState = referralAdapter.getInitialState({
   referrals: {},
 });
 
 const referralSlice = createSlice({
-  name: "referral",
+  name: 'referral',
   initialState,
   reducers: {
     setReferrals(state, action) {
@@ -15,15 +15,12 @@ const referralSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(
-      referralApi.endpoints.checkIReferralIdIsValid.matchFulfilled,
-      (state, action) => {
-        console.log("checkIReferralIdIsValid -->", action.payload.user);
-      },
-    );
+    builder.addMatcher(referralApi.endpoints.checkIReferralIdIsValid.matchFulfilled, (state, action) => {
+      console.log('checkIReferralIdIsValid -->', action.payload.user);
+    });
   },
 });
 
-export { referralApi };
-export const { setUser } = referralSlice.actions;
+export {referralApi};
+export const {setUser} = referralSlice.actions;
 export default referralSlice.reducer;

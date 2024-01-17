@@ -1,0 +1,12 @@
+.centered-content {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+@media (max-width: 768px) {
+  .centered-content {
+    width: 100%;
+  }
+}

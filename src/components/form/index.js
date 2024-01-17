@@ -40,7 +40,7 @@ const Form = ({
       {/* {isLoading && ( */}
       {/*   <GiantLoaderAnimation isOpen={isLoading} setIsLoading={setIsLoading} /> */}
       {/* )} */}
-      <motion.div initial={{opacity: 0.5, y: 30}} animate={{opacity: 1, y: 0}}>
+      <motion.div style={{width: '100%'}} initial={{opacity: 0.5, y: 30}} animate={{opacity: 1, y: 0}}>
         <form
           data-testid={id}
           initial={{opacity: 0.5, y: 30}}
