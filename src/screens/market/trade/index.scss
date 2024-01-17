@@ -1,0 +1,12 @@
+.trade-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: var(--trade-info-bg);
+    margin-top: 0.25rem;
+    .info {
+        width: 100%;
+    }
+}
