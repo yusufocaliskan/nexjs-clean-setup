@@ -41,6 +41,8 @@ const ChangePassword = () => {
   const handleOnFormSubmitted = async () => {
     const res = await changeUserPassword({...changePasswordForm.values});
     if (queryResult.isSuccess(res)) {
+      console.log(res);
+      account.setAuthToken(res?.data?.Data);
       toast.success(t('passwordHasUpdatedMessage'));
       passwordCounter.startCounter();
     }
@@ -49,7 +51,6 @@ const ChangePassword = () => {
     //Logout
     if (passwordCounter.isCounterStarted && passwordCounter.counter <= 0) {
       console.log(changePasswordResponse?.data?.Data.AuthToken);
-      account.setAuthToken(changePasswordResponse?.data?.Data.AuthToken);
 
       account.logout();
     }
