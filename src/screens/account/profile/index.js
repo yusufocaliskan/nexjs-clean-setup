@@ -5,7 +5,7 @@ import AccountLayout from '@/layouts/account';
 import './index.scss';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import CountrySelector from '@/components/CountrySelector';
-import {CoolButton, Quote, Text} from '@/components';
+import {Card, CoolButton, Quote, Text} from '@/components';
 import {useSelector} from 'react-redux';
 import AccountLoginHistory from './login-history';
 
@@ -19,13 +19,20 @@ const Profile = () => {
     <AccountLayout title={'Profile'} icon={<ProfileIcon />}>
       <div className="profile-top">
         <div className="profile-info">
-          <div className="profile-name">
-            <Text>{userFullName}</Text>
-            <Quote>{email}</Quote>
-            <div className="profile-level">
-              <p className="level-text">{`Level ${levelNo} verified`}</p>
-            </div>
-          </div>
+          <Card display="flex" flexDirection="row" justifyContent="space-between">
+            <Card>
+              <Text>{userFullName}</Text>
+              <Quote>{email}</Quote>{' '}
+            </Card>
+            <Card
+              className="profile-level"
+              alignSelf="flex-end"
+              width={{base: '60%', lg: '20%', md: '30%'}}
+              display="flex"
+            >
+              <span className="level-text">{`Level ${levelNo} verified`}</span>
+            </Card>
+          </Card>
           {/* <div className="profile-country"> */}
           {/*   <CountrySelector /> */}
           {/* </div> */}
