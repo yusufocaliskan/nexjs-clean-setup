@@ -4,7 +4,7 @@ import AccountLayout from '@/layouts/account';
 import './changePasswordStyle.scss';
 import {useSelector} from 'react-redux';
 import {useTranslation} from '@/app/i18n/client';
-import {Card, CenteredContent, Form, Quote, Spacer, Text, TextBox} from '@/components';
+import {Card, CenteredContent, Form, MailBox, Quote, Spacer, Text, TextBox, VerticalDivider} from '@/components';
 import {changePasswordValidations} from '@/validations/account';
 import {useEffect, useState} from 'react';
 import {useFormik} from 'formik';
@@ -16,6 +16,7 @@ import toast from 'react-hot-toast';
 import useCounter from '@/hooks/useCounter';
 import useAccount from '@/hooks/useAccount';
 import Image from 'next/image';
+import {AccountLayoutTitle} from '@/layouts';
 const ChangePassword = () => {
   const {t} = useTranslation();
   const {name, surname, email, levelNo, phoneNumber, ...userInformations} = useSelector(
@@ -56,15 +57,25 @@ const ChangePassword = () => {
 
   return (
     <AccountLayout id title={t('changePassword')} icon={<ProfileIcon />}>
-      <Spacer height={{lg: '20px', base: '20px', md: '20px'}} />
-      <Text>
-        {t('hi')} {name} ✋,
-      </Text>
-      <Quote>{t('changePasswordDesc')}</Quote>
-
-      <Spacer height={{lg: '40px', base: '40px', md: '30px'}} />
-      <Card width="100%" gap="5rem" display="flex">
-        <Card width={{base: '100%', lg: '100%', md: '90%'}}>
+      <Card
+        width="100%"
+        gap="5rem"
+        display="flex"
+        flex-direction={{base: 'column', lg: 'row', md: 'column'}}
+        margin-top={{lg: '4rem'}}
+      >
+        <Card display="flex" gap="3rem" flex-direction="column">
+          <AccountLayoutTitle margin-bottom="2rem" title={`${t('hi')} ${name} ✋`} />
+          <Text animated font-size="1.3rem" color="var(--gray-text)">
+            {t('changePasswordDesc')}
+          </Text>{' '}
+        </Card>
+        <Card
+          width={{base: '100%', lg: '100%', md: '90%'}}
+          padding="1.25rem"
+          border-radius="1.25rem"
+          background="var(--neutrals7)"
+        >
           <Form
             onSubmit={changePasswordForm.handleSubmit}
             formInstance={changePasswordForm}
@@ -72,6 +83,7 @@ const ChangePassword = () => {
             submitButtonText={t('changePassword')}
             dontDisplayCaptcha
           >
+            <Text font-size="1.5rem">{t('changeYourPassword')}</Text>
             <TextBox
               formInstance={changePasswordForm}
               isSecure
@@ -109,6 +121,7 @@ const ChangePassword = () => {
           align-items="flex-end"
           justify-content="flex-end"
           display={{base: 'none', lg: 'flex', md: 'none'}}
+          animated
         >
           <Image width="200" height="200" src="/assets/images/auth/composition-1.png" />
         </Card>

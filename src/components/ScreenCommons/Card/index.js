@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
-
+import {motion} from 'framer-motion';
 const Card = (props) => {
-  const {children, onClick, as = 'div', id, className, style, ...rest} = props;
+  const {children, animated, onClick, as = 'div', id, className, style, ...rest} = props;
 
   const testDataAttr = process.env.NODE_ENV === 'test' ? {'data-testid': `${id}`} : id;
 
@@ -22,6 +22,7 @@ const Card = (props) => {
 
   const defaultProperties = `
         width: 100%;
+        font-family: 'DM Sans';
   `;
 
   const CardWrapper = styled.div`
@@ -37,6 +38,23 @@ const Card = (props) => {
     }
   `;
 
+  if (animated) {
+    return (
+      <CardWrapper
+        onClick={onClick}
+        as={motion.div}
+        className={className}
+        {...testDataAttr}
+        {...rest}
+        id={id}
+        style={style}
+        initial={{y: -20, opacity: 0.5}}
+        animate={{y: 0, opacity: 1}}
+      >
+        {children}
+      </CardWrapper>
+    );
+  }
   return (
     <>
       <CardWrapper onClick={onClick} as={as} className={className} {...testDataAttr} {...rest} id={id} style={style}>

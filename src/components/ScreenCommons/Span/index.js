@@ -2,7 +2,7 @@ import Card from '../Card';
 const Text = (props) => {
   const {children, ...rest} = props;
   return (
-    <Card as="p" {...rest}>
+    <Card as="span" {...rest}>
       {children}
     </Card>
   );

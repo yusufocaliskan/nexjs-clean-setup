@@ -29,6 +29,7 @@ export {default as Modal} from './ScreenCommons/Modal';
 export {default as Card} from './ScreenCommons/Card';
 export {default as CenteredContent} from './ScreenCommons/CenteredContent';
 export {default as Text} from './ScreenCommons/Text';
+export {default as Span} from './ScreenCommons/Span';
 export {default as Quote} from './ScreenCommons/Quote';
 
 //Icons
