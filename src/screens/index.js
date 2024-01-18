@@ -15,3 +15,5 @@ export {default as TradeScreen } from "./market/trade";
 export {default as ProfileScreen} from './account/profile';
 export {default as ReferralsScreen} from './account/referrals';
 export {default as ChangePasswordScreen} from './account/change-password';
+export {default as ApiKeysScreen} from './account/api-keys';
+
