@@ -72,12 +72,15 @@ const ApiKeys = () => {
     fetchGetApiKey();
   }, []);
 
-  const ApiKeyItemRenderer = ({item, isOpen, setIsOpen}) => {
+  const ApiKeyItemRenderer = ({item, isOpen, setIsOpen, index}) => {
     const isVisible = isOpen?.id == item?.id;
     return (
       <Card margin-bottom="2rem" background="var(--neutrals7)" padding="1.25rem" border-radius="1.25rem">
         <Card display="flex" justify-content="space-between" align-items="center">
           <Card gap="1rem" font-size="1.25rem" font-weight="thin" display="flex" align-items="center">
+            <Card width="fit-content" as="span" font-size="1.25rem" font-weight="thin">
+              #{index + 1}
+            </Card>
             <APIKeysIcon />
             <Card as="span" font-size="1.25rem" font-weight="thin">
               Name of the api key
@@ -207,7 +210,7 @@ const ApiKeys = () => {
     return (
       <Card>
         {listOfData.map((item, index) => {
-          return <ApiKeyItemRenderer key={index} item={item} isOpen={isOpen} setIsOpen={setIsOpen} />;
+          return <ApiKeyItemRenderer key={index} index={index} item={item} isOpen={isOpen} setIsOpen={setIsOpen} />;
         })}
       </Card>
     );
