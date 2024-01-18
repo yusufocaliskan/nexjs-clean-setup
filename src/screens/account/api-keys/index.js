@@ -44,18 +44,10 @@ const ApiKeys = () => {
   });
 
   const handleOnSubmitGenerateForm = () => {};
-  const fetchGetApiKey = async () => {
-    try {
-      const response = await getAPIKeys();
-
-      console.log('ref', response);
-    } catch (error) {
-    } finally {
-    }
-  };
 
   useEffect(() => {
-    fetchGetApiKey();
+    const res = getAPIKeys();
+    console.log(res);
   }, []);
 
   return (
@@ -70,89 +62,81 @@ const ApiKeys = () => {
           </Card>
         }
       />
-      {!apiCreated && (
-        <Card className="api-container">
-          <Card background="var(--neutrals7)" padding="1.25rem" border-radius="1.25rem">
-            <Form
-              onSubmit={generateApiKeyForm.handleSubmit}
-              formInstance={generateApiKeyForm}
-              submitButtonText={t('generateApiKeyFormButtonText')}
-              dontDisplaySubmitbutton
-              dontDisplayCaptcha
-            >
-              <Card className="api-inputs-div-div">
+      <Card className="api-container">
+        <Card background="var(--neutrals7)" padding="1.25rem" border-radius="1.25rem">
+          <Form
+            onSubmit={generateApiKeyForm.handleSubmit}
+            formInstance={generateApiKeyForm}
+            submitButtonText={t('generateApiKeyFormButtonText')}
+            dontDisplaySubmitbutton
+            dontDisplayCaptcha
+          >
+            <Card className="api-inputs-div-div">
+              <Card
+                display="flex"
+                flex-direction={{base: 'column', lg: 'row', md: 'column'}}
+                gap="2rem"
+                align-items="center"
+              >
+                <Card width={{base: '100%', md: '80%', lg: '80%'}}>
+                  <p className="api-inputs-div-div-text">Enter API Key Name</p>
+                  <TextBox placeholder="Enter API Key Name" />
+                </Card>
                 <Card
-                  display="flex"
-                  flex-direction={{base: 'column', lg: 'row', md: 'column'}}
-                  gap="2rem"
-                  align-items="center"
+                  width={{base: '100%', md: '80%', lg: '20%'}}
+                  margin-top={{base: '1rem', md: '1rem', lg: '2.25rem'}}
                 >
-                  <Card width={{base: '100%', md: '80%', lg: '80%'}}>
-                    <p className="api-inputs-div-div-text">Enter API Key Name</p>
-                    <TextBox placeholder="Enter API Key Name" />
-                  </Card>
-                  <Card
-                    width={{base: '100%', md: '80%', lg: '20%'}}
-                    margin-top={{base: '1rem', md: '1rem', lg: '2.25rem'}}
-                  >
-                    <CoolButton type="Main" fullSize label="Create API Key" />
-                  </Card>
+                  <CoolButton type="Main" fullSize label="Create API Key" />
                 </Card>
               </Card>
-            </Form>
-          </Card>
-          <Card align-items="center" gap="1rem" display="flex">
-            <Text font-size="2rem">{t('listOfApiKeys')}</Text>
-          </Card>
-          <ApiKeysList listOfData={apiMockData} />
-          {/* <ApiKeyItemRenderer /> */}
-          {/* <ApiKeyItemRenderer /> */}
-          {/* <ApiKeyItemRenderer /> */}
+            </Card>
+          </Form>
         </Card>
-      )}
-      {apiCreated && (
-        <div className="api-container">
-          <div className="api-icon">
-            <div className="api-icon-content">
-              <img src="/assets/images/shield.png" alt="shield" />
-            </div>
-            <div className="api-icon-text">
-              <p className="api-icon-text-content">
-                Please check your email to confirm this action. As a security measure, the confirmation link will expire
-                in 15 minutes.
-              </p>
-            </div>
-            <div className="api-icon-mail">
-              <p className="api-icon-mail-content">
-                <MailBox /> schinner@ui8.net
-              </p>
-            </div>
-          </div>
-          <div className="api-button">
-            <div className="api-button-button">API Keys Sayfasına Dön</div>
-          </div>
-          <div className="api-keys">
-            <p className="api-keys-title">Your API Keys</p>
-            <div className="api-keys-div">
-              <p className="api-keys-div-title">deneme title</p>
-              <div className="api-key-div-field">
-                <div className="api-key-div-field-div">
-                  <p className="api-key-div-field-div-title">
-                    5dbcb179df6c87b875a20dde894cc4c62b93a415fe454e54ff6b1c4018240141
-                  </p>
-                  <div className="api-key-div-field-div-btn-field">
-                    <p className="api-key-div-field-div-btn">EDIT</p>
-                    <p className="api-key-div-field-div-btn">COPY</p>
-                  </div>
-                </div>
-                <p>
-                  <CrossIcon />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+        <Card align-items="center" gap="1rem" display="flex">
+          <Text font-size="2rem">{t('listOfApiKeys')}</Text>
+        </Card>
+        <ApiKeysList listOfData={apiMockData} />
+      </Card>
+      {/*       <div className="api-icon-content"> */}
+      {/*         <img src="/assets/images/shield.png" alt="shield" /> */}
+      {/*       </div> */}
+      {/*       <div className="api-icon-text"> */}
+      {/*         <p className="api-icon-text-content"> */}
+      {/*           Please check your email to confirm this action. As a security measure, the confirmation link will expire */}
+      {/*           in 15 minutes. */}
+      {/*         </p> */}
+      {/*       </div> */}
+      {/*       <div className="api-icon-mail"> */}
+      {/*         <p className="api-icon-mail-content"> */}
+      {/*           <MailBox /> schinner@ui8.net */}
+      {/*         </p> */}
+      {/*       </div> */}
+      {/*     </div> */}
+      {/*     <div className="api-button"> */}
+      {/*       <div className="api-button-button">API Keys Sayfasına Dön</div> */}
+      {/*     </div> */}
+      {/*     <div className="api-keys"> */}
+      {/*       <p className="api-keys-title">Your API Keys</p> */}
+      {/*       <div className="api-keys-div"> */}
+      {/*         <p className="api-keys-div-title">deneme title</p> */}
+      {/*         <div className="api-key-div-field"> */}
+      {/*           <div className="api-key-div-field-div"> */}
+      {/*             <p className="api-key-div-field-div-title"> */}
+      {/*               5dbcb179df6c87b875a20dde894cc4c62b93a415fe454e54ff6b1c4018240141 */}
+      {/*             </p> */}
+      {/*             <div className="api-key-div-field-div-btn-field"> */}
+      {/*               <p className="api-key-div-field-div-btn">EDIT</p> */}
+      {/*               <p className="api-key-div-field-div-btn">COPY</p> */}
+      {/*             </div> */}
+      {/*           </div> */}
+      {/*           <p> */}
+      {/*             <CrossIcon /> */}
+      {/*           </p> */}
+      {/*         </div> */}
+      {/*       </div> */}
+      {/*     </div> */}
+      {/*   </div> */}
+      {/* )} */}
     </AccountLayout>
   );
 };

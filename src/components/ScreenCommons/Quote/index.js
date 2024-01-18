@@ -1,10 +1,11 @@
 import Card from '../Card';
+import Text from '../Text';
 const Quote = (props) => {
   const {children, ...rest} = props;
   return (
-    <Card as="p" font-size="1.2rem" color="var(--gray)" font-weight="thin" {...rest}>
+    <Text font-size="1.2rem" color="var(--gray)" font-weight="thin" {...rest}>
       {children}
-    </Card>
+    </Text>
   );
 };
 

@@ -140,7 +140,7 @@ const ApiKeysList = ({listOfData}) => {
   };
 
   return (
-    <Card>
+    <Card animated>
       {listOfData.map((item, index) => {
         return <ApiKeyItemRenderer key={index} index={index} item={item} isOpen={isOpen} setIsOpen={setIsOpen} />;
       })}

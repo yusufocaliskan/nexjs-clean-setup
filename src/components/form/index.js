@@ -41,41 +41,35 @@ const Form = ({
       {/* {isLoading && ( */}
       {/*   <GiantLoaderAnimation isOpen={isLoading} setIsLoading={setIsLoading} /> */}
       {/* )} */}
-      <motion.div style={{width: '100%'}} initial={{opacity: 0.5, y: 30}} animate={{opacity: 1, y: 0}}>
-        <form
-          data-testid={id}
-          initial={{opacity: 0.5, y: 30}}
-          animate={{opacity: 1, y: 0}}
-          style={{
-            width: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '2rem',
-          }}
-          onSubmit={onSubmitTestHandler ? onSubmitTestHandler : formInstance.handleSubmit}
-        >
-          {!dontDisplayErrors && formInstance.submitCount > 0 && <ErrorDisplayer formInstance={formInstance} />}
-          {/* Do not display any erro till first submit */}
-          {children}
+      <motion.form
+        data-testid={id}
+        initial={{opacity: 0.5, y: 30}}
+        animate={{opacity: 1, y: 0}}
+        style={{
+          width: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '2rem',
+        }}
+        onSubmit={onSubmitTestHandler ? onSubmitTestHandler : formInstance.handleSubmit}
+      >
+        {!dontDisplayErrors && formInstance.submitCount > 0 && <ErrorDisplayer formInstance={formInstance} />}
+        {/* Do not display any erro till first submit */}
+        {children}
 
-          {/* //TODO: Check if the stastus of the captcha is active */}
-          {!dontDisplayCaptcha && (
-            <GoogleReCaptcha
-              onChange={(val) => formInstance.setFieldValue('reCaptcha', val)}
-              reCapthchaRef={captchaRef}
-            />
-          )}
+        {/* //TODO: Check if the stastus of the captcha is active */}
+        {!dontDisplayCaptcha && (
+          <GoogleReCaptcha
+            onChange={(val) => formInstance.setFieldValue('reCaptcha', val)}
+            reCapthchaRef={captchaRef}
+          />
+        )}
 
-          {!dontDisplaySubmitbutton && (
-            <FormTriggerButton
-              formInstance={formInstance}
-              isLoading={formInstance.isLoading}
-              label={submitButtonText}
-            />
-          )}
-          <Spacer />
-        </form>
-      </motion.div>
+        {!dontDisplaySubmitbutton && (
+          <FormTriggerButton formInstance={formInstance} isLoading={formInstance.isLoading} label={submitButtonText} />
+        )}
+        <Spacer />
+      </motion.form>
     </>
   );
 };

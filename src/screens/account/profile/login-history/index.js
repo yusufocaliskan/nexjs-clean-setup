@@ -14,7 +14,7 @@ const AccountLoginHistory = () => {
   }, []);
 
   return (
-    <Card>
+    <Card animated>
       <Spacer height={{lg: '40px', base: '50px', md: '30px'}} />
       <Card align-items="center" gap="1rem" display="flex">
         <Text font-size="2rem">{t('loginHistory')}</Text> {loginHistoryResponse.isLoading && <LoadingGif isPuff />}{' '}

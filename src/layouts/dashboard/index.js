@@ -1,14 +1,13 @@
 'use client';
 import React from 'react';
-import {useSession} from 'next-auth/react';
 import ProtectedHeader from '../header/protected';
 import PublicHeader from '../header/public';
 import './index.scss';
 import Footer from './footer';
+import useCustomSession from '@/hooks/useCustomSession';
 
 const DashboardLayout = ({children, withoutFooter}) => {
-  const session = useSession();
-  const isAuthorized = session?.status === 'authenticated';
+  const {isAuthorized} = useCustomSession();
   return (
     <div className="dashboard-container">
       {isAuthorized ? <ProtectedHeader /> : <PublicHeader />}

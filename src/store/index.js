@@ -12,8 +12,8 @@ import {userApi} from '@/services/user/index.js';
 import {referralApi} from '@/services/referral/index.js';
 import {setClientInstanHeaders} from '@/services/clientInstance.js';
 import {clientInstanceListener} from './clientInstanceListener.js';
-import { accountApi } from '@/services/account/index.js';
-import { apiPageApi } from '@/services/account/apiPage/index.js';
+import {accountApi} from '@/services/account/index.js';
+import {apiPageApi} from '@/services/account/apiPage/index.js';
 
 //using for persist storage, due to ssr or crs
 const reducers = combineReducers({
@@ -23,7 +23,7 @@ const reducers = combineReducers({
   referralApi: referralApi.reducer,
   userApi: userApi.reducer,
   accountApi: accountApi.reducer,
-  apiPageApi: apiPageApi.reducer
+  apiPageApi: apiPageApi.reducer,
 });
 
 //Settings for persists
@@ -50,7 +50,7 @@ const configuredStore = configureStore({
       serializableCheck: false,
       immutableCheck: false,
     })
-      .concat(authApi.middleware, userApi.middleware, referralApi.middleware)
+      .concat(authApi.middleware, userApi.middleware, referralApi.middleware, apiPageApi.middleware)
 
       //Listinin tokens
       .prepend(clientInstanceListener.middleware),
