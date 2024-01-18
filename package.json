@@ -11,6 +11,10 @@
     "test:watch": "jest --watchAll --verbose"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.5",
+    "@mui/material": "^5.15.5",
     "@reduxjs/toolkit": "^2.0.1",
     "accept-language": "^3.0.18",
     "axios": "^1.6.2",

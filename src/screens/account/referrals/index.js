@@ -10,7 +10,8 @@ const Referrals = () => {
   const [getMyReferrals, getMyReferralsResponse] = referralApi.useGetMyReferralsMutation();
   const [getReferralNickname, getReferralNicknameResponse] = accountApi.useGetReferralNicknameMutation();
   // const [createReferralNickname, createReferralNicknameResponse] = accountApi.useCreateReferralNicknameMutation();
-  const [getMyReferralsCountWithKYC, getMyReferralsCountWithKYCResponse] = referralApi.useGetMyReferralsCountWithKYCMutation();
+  const [getMyReferralsCountWithKYC, getMyReferralsCountWithKYCResponse] =
+    referralApi.useGetMyReferralsCountWithKYCMutation();
   const [getMyLatestCommissions, getMyLatestCommissionsResponse] = referralApi.useGetMyLatestCommissionsMutation();
   const [getTopCommissions, getTopCommissionsResponse] = referralApi.useGetTopCommissionsMutation();
 
@@ -97,7 +98,6 @@ const Referrals = () => {
       setReferralNick(response.data);
     } catch (error) {}
   };
-  
 
   useEffect(() => {
     fetchReferrals();

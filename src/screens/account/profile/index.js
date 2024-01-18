@@ -7,6 +7,7 @@ import LanguageSwitcher from '@/components/LanguageSwitcher';
 import CountrySelector from '@/components/CountrySelector';
 import {CoolButton} from '@/components';
 import {useSelector} from 'react-redux';
+import AccountLoginHistory from './login-history';
 
 const Profile = () => {
   const {name, surname, email, levelNo, phoneNumber, ...userInformations} = useSelector(
@@ -32,7 +33,9 @@ const Profile = () => {
             </div>
           </div>
         </div>
+
         <div className="profile-middle">
+          <AccountLoginHistory />
           <div className="profile-features">
             <p className="features-text">Features</p>
           </div>

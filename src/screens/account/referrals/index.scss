@@ -1,448 +1,450 @@
 .ref-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2.5rem;
+  width: 100%;
+  gap: 3rem;
+  flex: 1 0 0;
+  border-radius: 1rem;
+  background: var(--accountPageContentBg);
+  box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.1);
+
+  .ref-rewards {
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: flex-start;
-    padding: 2.5rem;
-    width: 100%;
-    gap: 3rem;
-    flex: 1 0 0;
-    border-radius: 1rem;
-    background: var(--accountPageContentBg);
-    box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.10);
+    gap: 0.75rem;
 
-    .ref-rewards {
+    .ref-rewards-total {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+
+      .ref-rewards-total-rewards {
+        color: var(--accountPageTitleTextColor);
+        font-family: 'Poppins', sans-serif;
+        font-size: 0.875rem;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.5rem;
+      }
+
+      .ref-rewards-currencies {
         display: flex;
-        width: 100%;
-        flex-direction: column;
         align-items: flex-start;
-        gap: 0.75rem;
-
-        .ref-rewards-total {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-
-            .ref-rewards-total-rewards {
-                color: var(--accountPageTitleTextColor);
-                font-family: "Poppins", sans-serif;
-                font-size: 0.875rem;
-                font-style: normal;
-                font-weight: 500;
-                line-height: 1.5rem;
-            }
-
-            .ref-rewards-currencies {
-                display: flex;
-                align-items: flex-start;
-                gap: 0.5rem;
-
-                .ref-rewards-amount {
-                    color: var(--loginPageText);
-                    font-family: 'DM Sans', sans-serif;
-                    font-size: 2.5rem;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: 3rem;
-                    letter-spacing: -0.025rem;
-                }
-
-                .ref-rewards-currency {
-                    color: var(--Primary-4, #58BD7D);
-                    font-family: 'DM Sans', sans-serif;
-                    font-size: 2.5rem;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: 3rem;
-                    letter-spacing: -0.025rem;
-                }
-            }
-        }
-
-        .ref-rewards-text {
-            color: var(--Neutrals-4, #777E90);
-            font-family: "Poppins", sans-serif;
-            font-size: 0.75rem;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 1.25rem;
-        }
-    }
-
-    .ref-info {
-        display: flex;
-        width: 100%;
-        align-items: center;
         gap: 0.5rem;
 
-        .ref-info-box {
-            height: 20rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            width: calc(25% - 0.5rem);
-            background: var(--accountPageRefBg);
-
-            .ref-info-amount-commission {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 70%;
-                color: var(--loginPageText);
-                font-family: 'DM Sans', sans-serif;
-                font-size: 2.5rem;
-                font-style: normal;
-                font-weight: 700;
-                line-height: 3rem;
-                letter-spacing: -0.025rem;
-            }
-
-            .ref-info-amount {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                width: 100%;
-                height: 70%;
-
-                .ref-info-amount-value {
-                    color: var(--loginPageText);
-                    font-family: 'DM Sans'sans-serif;
-                    font-size: 1rem;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: 1rem;
-                    letter-spacing: -0.025rem;
-
-                    .ref-info-amount-currency {
-                        color: var(--loginPageText);
-                        font-family: 'DM Sans'sans-serif;
-                        font-size: 1rem;
-                        font-style: normal;
-                        font-weight: 700;
-                        line-height: 1rem;
-                        letter-spacing: -0.025rem;
-                    }
-                }
-
-            }
-
-
-            .ref-info-text {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.125rem;
-                font-weight: 700;
-                width: 100%;
-                height: 30%;
-                color: var(--loginPageText);
-                background: var(--inputBorderColor);
-            }
+        .ref-rewards-amount {
+          color: var(--loginPageText);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 2.5rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 3rem;
+          letter-spacing: -0.025rem;
         }
+
+        .ref-rewards-currency {
+          color: var(--Primary-4, #58bd7d);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 2.5rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 3rem;
+          letter-spacing: -0.025rem;
+        }
+      }
     }
 
-    .ref-invite {
+    .ref-rewards-text {
+      color: var(--Neutrals-4, #777e90);
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.25rem;
+    }
+  }
+
+  .ref-info {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.5rem;
+
+    .ref-info-box {
+      height: 20rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: calc(25% - 0.5rem);
+      background: var(--accountPageRefBg);
+      border-radius: 1.25rem;
+      overflow: hidden;
+
+      .ref-info-amount-commission {
         display: flex;
-        padding: 2rem;
-        flex-direction: column;
+        align-items: center;
         justify-content: center;
-        align-items: flex-start;
-        gap: 2rem;
-        align-self: stretch;
-        border-radius: 1rem;
-        background: var(--accountPageRefBg);
-
-        .ref-invite-commission-text {
-            color: var(--loginPageText);
-            font-family: "Poppins", sans-serif;
-            font-size: 1.5rem;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 2rem;
-        }
-
-        .ref-invite-inputs {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            align-self: stretch;
-
-            .ref-invite-link {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.75rem;
-                flex: 1 0 0;
-
-                .ref-invite-link-text {
-                    color: var(--accountPageTitleTextColor);
-                    font-family: "Poppins", sans-serif;
-                    font-size: 0.75rem;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: 0.75rem;
-                    text-transform: uppercase;
-                }
-
-                .ref-invite-link-div {
-                    display: flex;
-                    height: 3rem;
-                    padding: 0.75rem 1rem;
-                    align-items: flex-start;
-                    gap: 0.625rem;
-                    align-self: stretch;
-                    border-radius: 0.75rem;
-                    background: var(--inputBorderColor);
-
-                    .ref-invite-link-div-text {
-                        color: var(--accountPageTitleTextColor);
-                        font-family: "Poppins", sans-serif;
-                        font-size: 1rem;
-                        font-style: normal;
-                        font-weight: 500;
-                        line-height: 1.5rem;
-                    }
-                }
-            }
-
-            .ref-invite-code {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.75rem;
-                flex: 1 0 0;
-
-                .ref-invite-code-text {
-                    color: var(--accountPageTitleTextColor);
-                    font-family: "Poppins", sans-serif;
-                    font-size: 0.75rem;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: 0.75rem;
-                    text-transform: uppercase;
-                }
-
-                .ref-invite-code-div {
-                    display: flex;
-                    height: 3rem;
-                    padding: 0.75rem 0.75rem 0.75rem 1rem;
-                    justify-content: space-between;
-                    align-items: center;
-                    gap: 0.625rem;
-                    align-self: stretch;
-                    border-radius: 0.75rem;
-                    border: 2px solid var(--Primary-4, #58BD7D);
-                    background: var(--inputBorderColor);
-
-                    .ref-invite-code-div-text {
-                        color: var(--accountPageTitleTextColor);
-                        font-family: "Poppins", sans-serif;
-                        font-size: 1rem;
-                        font-style: normal;
-                        font-weight: 500;
-                        line-height: 1.5rem;
-                    }
-
-                    .ref-invite-code-div-btn {
-                        display: flex;
-                        padding: 0.5rem 0.5rem 0.375rem 0.5rem;
-                        justify-content: center;
-                        align-items: center;
-                        gap: 0.625rem;
-                        border-radius: 0.25rem;
-                        background: var(--Neutrals-2, #23262F);
-
-                        .ref-invite-code-div-btn-text {
-                            color: var(--Neutrals-8, #FCFCFD);
-                            font-family: "Poppins", sans-serif;
-                            font-size: 0.75rem;
-                            font-style: normal;
-                            font-weight: 700;
-                            line-height: 0.75rem;
-                            text-transform: uppercase;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    .ref-commissions {
-        display: flex;
         width: 100%;
+        height: 70%;
+        color: var(--loginPageText);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 2.5rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 3rem;
+        letter-spacing: -0.025rem;
+      }
+
+      .ref-info-amount {
+        display: flex;
         align-items: center;
-        gap: 0.25rem;
+        justify-content: center;
+        width: 100%;
+        height: 70%;
 
-        .ref-commission-box {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-direction: column;
-            padding: 1rem 0rem;
-            gap: 1rem;
-            border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
-            height: 12rem;
-            width: calc(12.5% - 0.25rem);
-            background: var(--accountPageRefBg);
+        .ref-info-amount-value {
+          color: var(--loginPageText);
+          font-family: 'DM Sans' sans-serif;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 1rem;
+          letter-spacing: -0.025rem;
 
-            .ref-commission-top {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-                height: 50%;
-
-                .ref-com-box-top {
-                    color: var(--loginPageText);
-                    font-family: 'DM Sans', sans-serif;
-                    font-size: 2.5rem;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: 3rem;
-                    letter-spacing: -0.025rem;
-                }
-
-                .ref-com-box-mid {
-                    color: var(--loginPageText);
-                    font-family: 'DM Sans', sans-serif;
-                    font-size: 0.875rem;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 1rem;
-                    letter-spacing: -0.025rem;
-                }
-            }
-
-            .ref-com-box-bottom {
-                color: var(--loginPageText);
-                font-family: 'DM Sans', sans-serif;
-                font-size: 0.75rem;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 1rem;
-                letter-spacing: -0.025rem;
-                text-align: center;
-                margin-top: 0.5rem;
-                height: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .ref-com-box-bottom-none {
-                height: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                color: var(--loginPageText);
-                font-family: 'DM Sans', sans-serif;
-                font-size: 3rem;
-                font-style: normal;
-                font-weight: 700;
-                line-height: 1rem;
-                letter-spacing: -0.025rem;
-                text-align: center;
-                margin-top: 0.5rem;
-            }
+          .ref-info-amount-currency {
+            color: var(--loginPageText);
+            font-family: 'DM Sans' sans-serif;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 1rem;
+            letter-spacing: -0.025rem;
+          }
         }
-        .ref-commission-box-selected {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-direction: column;
-            padding: 1rem 0rem;
-            gap: 1rem;
-            border: 2px solid green;
-            border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
-            height: 12rem;
-            width: calc(12.5% - 0.25rem);
-            background: var(--accountPageRefBg);
+      }
 
-            .ref-commission-top {
-                display: flex;
-                flex-direction: column;
-                justify-content: space-between;
-                align-items: center;
-                height: 50%;
+      .ref-info-text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.125rem;
+        font-weight: 700;
+        width: 100%;
+        height: 30%;
+        color: var(--loginPageText);
+        background: var(--inputBorderColor);
+      }
+    }
+  }
 
-                .ref-com-box-top {
-                    color: var(--loginPageText);
-                    font-family: 'DM Sans', sans-serif;
-                    font-size: 2.5rem;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: 3rem;
-                    letter-spacing: -0.025rem;
-                }
+  .ref-invite {
+    display: flex;
+    padding: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+    align-self: stretch;
+    border-radius: 1rem;
+    background: var(--accountPageRefBg);
 
-                .ref-com-box-mid {
-                    color: var(--loginPageText);
-                    font-family: 'DM Sans', sans-serif;
-                    font-size: 0.875rem;
-                    font-style: normal;
-                    font-weight: 400;
-                    line-height: 1rem;
-                    letter-spacing: -0.025rem;
-                }
-            }
-
-            .ref-com-box-bottom {
-                color: var(--loginPageText);
-                font-family: 'DM Sans', sans-serif;
-                font-size: 0.75rem;
-                font-style: normal;
-                font-weight: 400;
-                line-height: 1rem;
-                letter-spacing: -0.025rem;
-                text-align: center;
-                margin-top: 0.5rem;
-                height: 50%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-        }
+    .ref-invite-commission-text {
+      color: var(--loginPageText);
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 2rem;
     }
 
-    .ref-button {
+    .ref-invite-inputs {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      align-self: stretch;
+
+      .ref-invite-link {
         display: flex;
-        padding: 1rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        flex: 1 0 0;
+
+        .ref-invite-link-text {
+          color: var(--accountPageTitleTextColor);
+          font-family: 'Poppins', sans-serif;
+          font-size: 0.75rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 0.75rem;
+          text-transform: uppercase;
+        }
+
+        .ref-invite-link-div {
+          display: flex;
+          height: 3rem;
+          padding: 0.75rem 1rem;
+          align-items: flex-start;
+          gap: 0.625rem;
+          align-self: stretch;
+          border-radius: 0.75rem;
+          background: var(--inputBorderColor);
+
+          .ref-invite-link-div-text {
+            color: var(--accountPageTitleTextColor);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5rem;
+          }
+        }
+      }
+
+      .ref-invite-code {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+        flex: 1 0 0;
+
+        .ref-invite-code-text {
+          color: var(--accountPageTitleTextColor);
+          font-family: 'Poppins', sans-serif;
+          font-size: 0.75rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 0.75rem;
+          text-transform: uppercase;
+        }
+
+        .ref-invite-code-div {
+          display: flex;
+          height: 3rem;
+          padding: 0.75rem 0.75rem 0.75rem 1rem;
+          justify-content: space-between;
+          align-items: center;
+          gap: 0.625rem;
+          align-self: stretch;
+          border-radius: 0.75rem;
+          border: 2px solid var(--Primary-4, #58bd7d);
+          background: var(--inputBorderColor);
+
+          .ref-invite-code-div-text {
+            color: var(--accountPageTitleTextColor);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1.5rem;
+          }
+
+          .ref-invite-code-div-btn {
+            display: flex;
+            padding: 0.5rem 0.5rem 0.375rem 0.5rem;
+            justify-content: center;
+            align-items: center;
+            gap: 0.625rem;
+            border-radius: 0.25rem;
+            background: var(--Neutrals-2, #23262f);
+
+            .ref-invite-code-div-btn-text {
+              color: var(--Neutrals-8, #fcfcfd);
+              font-family: 'Poppins', sans-serif;
+              font-size: 0.75rem;
+              font-style: normal;
+              font-weight: 700;
+              line-height: 0.75rem;
+              text-transform: uppercase;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .ref-commissions {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    gap: 0.25rem;
+
+    .ref-commission-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 1rem 0rem;
+      gap: 1rem;
+      border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+      height: 12rem;
+      width: calc(12.5% - 0.25rem);
+      background: var(--accountPageRefBg);
+      border-radius: 1.25rem;
+      overflow: hidden;
+      .ref-commission-top {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 50%;
+
+        .ref-com-box-top {
+          color: var(--loginPageText);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 2.5rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 3rem;
+          letter-spacing: -0.025rem;
+        }
+
+        .ref-com-box-mid {
+          color: var(--loginPageText);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.875rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1rem;
+          letter-spacing: -0.025rem;
+        }
+      }
+
+      .ref-com-box-bottom {
+        color: var(--loginPageText);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1rem;
+        letter-spacing: -0.025rem;
+        text-align: center;
+        margin-top: 0.5rem;
+        height: 50%;
+        display: flex;
         justify-content: center;
         align-items: center;
-        gap: 0.75rem;
-        border-radius: 5.625rem;
-        border: 2px solid var(--Neutrals-6, #E6E8EC);
+      }
+
+      .ref-com-box-bottom-none {
+        height: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         color: var(--loginPageText);
-        text-align: center;
         font-family: 'DM Sans', sans-serif;
-        font-size: 1rem;
+        font-size: 3rem;
         font-style: normal;
         font-weight: 700;
         line-height: 1rem;
+        letter-spacing: -0.025rem;
+        text-align: center;
+        margin-top: 0.5rem;
+      }
     }
+    .ref-commission-box-selected {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+      padding: 1rem 0rem;
+      gap: 1rem;
+      border: 2px solid green;
+      border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+      height: 12rem;
+      width: calc(12.5% - 0.25rem);
+      background: var(--accountPageRefBg);
+
+      .ref-commission-top {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 50%;
+
+        .ref-com-box-top {
+          color: var(--loginPageText);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 2.5rem;
+          font-style: normal;
+          font-weight: 700;
+          line-height: 3rem;
+          letter-spacing: -0.025rem;
+        }
+
+        .ref-com-box-mid {
+          color: var(--loginPageText);
+          font-family: 'DM Sans', sans-serif;
+          font-size: 0.875rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: 1rem;
+          letter-spacing: -0.025rem;
+        }
+      }
+
+      .ref-com-box-bottom {
+        color: var(--loginPageText);
+        font-family: 'DM Sans', sans-serif;
+        font-size: 0.75rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1rem;
+        letter-spacing: -0.025rem;
+        text-align: center;
+        margin-top: 0.5rem;
+        height: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+
+  .ref-button {
+    display: flex;
+    padding: 1rem 1.5rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    border-radius: 5.625rem;
+    border: 2px solid var(--Neutrals-6, #e6e8ec);
+    color: var(--loginPageText);
+    text-align: center;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1rem;
+  }
 }
 
 @media (max-width: 1024px) {
-    .ref-container {
-        .ref-info {
-            flex-direction: column;
-            .ref-info-box {
-                width: 100%;
-            }
-        }
-        .ref-invite {
-            .ref-invite-inputs {
-                flex-direction: column;
-            }
-        }
-
-        .ref-commissions {
-            flex-direction: column;
-            .ref-commission-box, .ref-commission-box-selected {
-                width: 100%;
-            }
-        }
+  .ref-container {
+    .ref-info {
+      flex-direction: column;
+      .ref-info-box {
+        width: 100%;
+      }
     }
-    
+    .ref-invite {
+      .ref-invite-inputs {
+        flex-direction: column;
+      }
+    }
+
+    .ref-commissions {
+      flex-direction: column;
+      .ref-commission-box,
+      .ref-commission-box-selected {
+        width: 100%;
+      }
+    }
+  }
 }
+

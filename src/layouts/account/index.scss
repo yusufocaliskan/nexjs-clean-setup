@@ -128,21 +128,6 @@
     gap: 2rem;
     align-self: stretch;
 
-    .side-nav {
-      display: flex;
-      width: 16rem;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.75rem;
-
-      .side-nav-title {
-        font-size: 0.875rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 1rem;
-      }
-    }
-
     .account-content {
       display: flex;
       padding: 2.5rem;
@@ -198,4 +183,3 @@
     }
   }
 }
-

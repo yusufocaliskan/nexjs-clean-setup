@@ -6,6 +6,8 @@ import {authApi} from '@/services/auth';
 import {signOut, useSession} from 'next-auth/react';
 import {cleanUpUserStore} from '@/store/user';
 import queryResult from '@/services/queryResult';
+import AccountLayoutMenu from '@/layouts/account/menu';
+import Image from 'next/image';
 
 const LoggedInProfileCard = () => {
   const user = useSelector((state) => state.user);
@@ -29,21 +31,39 @@ const LoggedInProfileCard = () => {
         style={{
           borderWidth: 1,
           borderColor: '#aaa',
-          borderRadius: 15,
-          padding: 15,
+
+          borderRadius: '1.25rem',
+          padding: '1.25rem',
           display: 'flex',
           justifyContent: 'space-between',
-          alignItems: 'center',
+          flexDirection: 'column',
+          gap: '2rem',
         }}
       >
-        <div>
-          <p>
-            {t('welcome')}, {user?.informations?.name} {user?.informations?.surname}
-          </p>
-          <b>{user?.informations?.email}</b>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <div>
+            <b>
+              {t('welcome')} {user?.informations?.name},
+            </b>
+            <div>
+              <i>{user?.informations?.email}</i>
+            </div>
+          </div>
+          <div>
+            <CoolButton label={t('logout')} type="Small" onClick={() => handleOnLoggout()} />
+          </div>{' '}
         </div>
-        <div>
-          <CoolButton label={t('logout')} type="Small" onClick={() => handleOnLoggout()} />
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <AccountLayoutMenu />
+          <div style={{display: 'flex', justifyContent: 'flex-end', alignItems: 'flex-end'}}>
+            <Image width="120" height="120" src="/assets/images/auth/composition-1.png" />
+          </div>
         </div>
       </div>
     </ProtectedArea>
