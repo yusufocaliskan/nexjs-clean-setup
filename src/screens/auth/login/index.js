@@ -182,7 +182,7 @@ const Login = ({onSubmitTestHandler}) => {
           </div>
         </div>
         <div className="login-page-right-content">
-          <Title text={t('loginPageSignInToHepbit')} />
+          <Title text={isAuthorized ? t('welcome') : t('loginPageSignInToHepbit')} />
           <div className="visit-url">
             <p className="visit-text">{t('loginPageCorrectUrl')}</p>
             <p className="visit-url-login">

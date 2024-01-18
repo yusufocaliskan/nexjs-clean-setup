@@ -33,42 +33,15 @@
     display: none;
   }
 
-  .side-nav {
+  .account-divider {
     display: flex;
-    width: 18rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-
-    .account-divider {
-      display: flex;
-      height: 0.0625rem;
-      justify-content: center;
-      align-items: center;
-      gap: 0.625rem;
-      width: 100%;
-      align-self: stretch;
-      background-color: var(--divider-color);
-    }
-
-    .side-nav-title {
-      color: var(--Neutrals-4, #777e90);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.875rem;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 1rem;
-      display: flex;
-      width: 18.25rem;
-      padding: 0.5rem 1rem;
-      align-items: center;
-      gap: 0.5rem;
-      cursor: pointer;
-    }
-
-    .selected {
-      color: var(--loginPageText);
-    }
+    height: 0.0625rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    width: 100%;
+    align-self: stretch;
+    background-color: var(--divider-color);
   }
 
   .account-content {
@@ -78,12 +51,12 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    gap: 3rem;
     flex: 1 0 0;
     border-radius: 1rem;
     background: var(--accountPageContentBg);
     color: var(--loginPageText);
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.1);
+    padding: 2.5rem;
   }
 }
 
@@ -129,27 +102,11 @@
     gap: 2rem;
     align-self: stretch;
 
-    .side-nav {
-      display: flex;
-      width: 16rem;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0.75rem;
-
-      .side-nav-title {
-        font-size: 0.875rem;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 1rem;
-      }
-    }
-
     .account-content {
       display: flex;
       padding: 2.5rem;
       flex-direction: column;
       align-items: flex-start;
-      gap: 3rem;
       flex: 1 0 0;
     }
   }
@@ -186,7 +143,6 @@
     padding: 1rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.5rem;
     align-self: stretch;
 
     .side-nav {
@@ -199,4 +155,3 @@
     }
   }
 }
-

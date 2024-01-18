@@ -1,5 +1,7 @@
-const Spacer = ({ h = 50 }) => {
-  return <div style={{ width: "100%", height: h }}></div>;
+import Card from '../Card';
+
+const Spacer = (props) => {
+  return <Card {...props}></Card>;
 };
 
 export default Spacer;

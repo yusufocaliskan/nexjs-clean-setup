@@ -12,5 +12,11 @@ export const userApi = createApi({
         data: data,
       }),
     }),
+    getLoginHistoryOfTheUser: builder.mutation({
+      query: () => ({
+        url: 'users/logins',
+        method: 'GET',
+      }),
+    }),
   }),
 });
