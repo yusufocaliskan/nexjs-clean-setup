@@ -69,9 +69,9 @@ const LoadingGif = (props) => {
     >
       <defs>
         <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
-          <stop stop-color={color} stop-opacity="0" offset="0%" />
-          <stop stop-color={color} stop-opacity=".631" offset="63.146%" />
-          <stop stop-color={color} offset="100%" />
+          <stop stopColor={color} stop-opacity="0" offset="0%" />
+          <stop stopColor={color} stop-opacity=".631" offset="63.146%" />
+          <stop stopColor={color} offset="100%" />
         </linearGradient>
       </defs>
       <g fill="none" fillRule="evenodd">

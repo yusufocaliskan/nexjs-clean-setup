@@ -121,6 +121,13 @@
   "footerNewsletterContent": "Subscribe our newsletter to get more free design course and resource.",
   "footerEmailPlaceholder": "Enter your email",
   "footerCopyright": "Copyright © 2021 DecentraHubs. All rights reserved",
+  "accountProfile":"Profile",
+  "accountReferrals":"Referrals",
+  "accountApiKeys":"API keys",
+  "accountLoginHistory":"Sessions & login history",
+  "account2FA":"2FA",
+  "accountChangePassword":"Change password",
+
 
   "password is a required field": "Please fill the password input"
 }

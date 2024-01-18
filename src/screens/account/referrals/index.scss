@@ -422,3 +422,27 @@
         line-height: 1rem;
     }
 }
+
+@media (max-width: 1024px) {
+    .ref-container {
+        .ref-info {
+            flex-direction: column;
+            .ref-info-box {
+                width: 100%;
+            }
+        }
+        .ref-invite {
+            .ref-invite-inputs {
+                flex-direction: column;
+            }
+        }
+
+        .ref-commissions {
+            flex-direction: column;
+            .ref-commission-box, .ref-commission-box-selected {
+                width: 100%;
+            }
+        }
+    }
+    
+}
