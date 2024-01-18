@@ -5,16 +5,15 @@ import {useEffect} from 'react';
 
 const AccountLoginHistory = () => {
   const [getLoginHistoryOfTheUser, loginHistoryResponse] = userApi.useGetLoginHistoryOfTheUserMutation();
+
   useEffect(() => {
     getLoginHistoryOfTheUser();
   }, []);
-  useEffect(() => {
-    console.log(loginHistoryResponse);
-  }, [loginHistoryResponse]);
+
   return (
     <Card>
       <Spacer height={{lg: '40px', base: '50px', md: '30px'}} />
-      <Card display="flex" alignItems="center" gap="1rem">
+      <Card alignItems="center" gap="1rem" display="flex">
         <Text>Login History</Text>
         {loginHistoryResponse.isLoading && <LoadingGif isPuff />}
       </Card>

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const Card = (props) => {
-  const {children, id, className, bg, style, ...rest} = props;
+  const {children, id, className, style, ...rest} = props;
 
   const testDataAttr = process.env.NODE_ENV === 'test' ? {'data-testid': `${id}`} : id;
 
@@ -9,7 +9,7 @@ const Card = (props) => {
     width: ${(props) => props.width?.base || props.width || '100%'};
     display: ${(props) => props.display?.base || props.display};
     height: ${(props) => props.height?.base || props.height};
-    background: ${(props) => props.bg?.base || props.bg};
+    background: ${(props) => props.bg?.base};
     justify-content: ${(props) => props.justifyContent?.base || props.justifyContent};
     align-items: ${(props) => props.alignItems?.base || props.alignItems};
     gap: ${(props) => props.gap?.base || props.gap};

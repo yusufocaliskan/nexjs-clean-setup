@@ -55,16 +55,16 @@ const ChangePassword = () => {
   }, [passwordCounter.counter]);
 
   return (
-    <AccountLayout id="profile-screen" title={t('changePassword')} icon={<ProfileIcon />}>
+    <AccountLayout id title={t('changePassword')} icon={<ProfileIcon />}>
       <Spacer height={{lg: '20px', base: '20px', md: '20px'}} />
       <Text>
         {t('hi')} {name} ✋,
       </Text>
       <Quote>{t('changePasswordDesc')}</Quote>
 
-      <Spacer height={{lg: '40px', base: '50px', md: '30px'}} />
-      <Card style={{width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between'}}>
-        <Card width={{base: '100%', lg: '70%', md: '90%'}}>
+      <Spacer height={{lg: '40px', base: '40px', md: '30px'}} />
+      <Card width="100%" gap="5rem" display="flex">
+        <Card width={{base: '100%', lg: '100%', md: '90%'}}>
           <Form
             onSubmit={changePasswordForm.handleSubmit}
             formInstance={changePasswordForm}
@@ -104,7 +104,7 @@ const ChangePassword = () => {
             />
           </Form>
         </Card>
-        <Card display={{base: 'none', lg: 'block', md: 'block'}}>
+        <Card width="40%" display={{base: 'none', lg: 'block', md: 'block'}}>
           <Image width="200" height="200" src="/assets/images/auth/composition-1.png" />{' '}
         </Card>
       </Card>
