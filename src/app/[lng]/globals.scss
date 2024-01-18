@@ -40,3 +40,8 @@ body {
 .fill-icon-gray svg {
   fill: var(--gray-text);
 }
+.table-wrapper {
+  border: 1px solid var(--greyBorder);
+  border-radius: 1.25rem;
+  margin-top: 1.25rem;
+}
