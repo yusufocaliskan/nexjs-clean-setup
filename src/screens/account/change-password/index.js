@@ -104,8 +104,13 @@ const ChangePassword = () => {
             />
           </Form>
         </Card>
-        <Card width="40%" display={{base: 'none', lg: 'block', md: 'block'}}>
-          <Image width="200" height="200" src="/assets/images/auth/composition-1.png" />{' '}
+        <Card
+          width="50%"
+          align-items="flex-end"
+          justify-content="flex-end"
+          display={{base: 'none', lg: 'flex', md: 'none'}}
+        >
+          <Image width="200" height="200" src="/assets/images/auth/composition-1.png" />
         </Card>
       </Card>
     </AccountLayout>

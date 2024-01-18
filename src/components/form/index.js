@@ -14,6 +14,7 @@ const Form = ({
   formInstance,
   dontDisplayErrors = false,
   dontDisplayCaptcha = false,
+  dontDisplaySubmitbutton = false,
   submitButtonText = 'Custom Text',
   captchaRef,
   onSubmitTestHandler,
@@ -23,7 +24,7 @@ const Form = ({
   //set a max post request
   useEffect(() => {
     if (formInstance.submitCount >= appConfigs.form.maxFormRequestSize) {
-      formInstance.resetForm();
+      formInstance?.resetForm();
       toast.error(t('maxFormRequestSizeText'));
       //setIsFormReachedMaxTresholde(true);
     }
@@ -65,8 +66,13 @@ const Form = ({
             />
           )}
 
-          <FormTriggerButton formInstance={formInstance} isLoading={formInstance.isLoading} label={submitButtonText} />
-
+          {!dontDisplaySubmitbutton && (
+            <FormTriggerButton
+              formInstance={formInstance}
+              isLoading={formInstance.isLoading}
+              label={submitButtonText}
+            />
+          )}
           <Spacer />
         </form>
       </motion.div>

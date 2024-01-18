@@ -1,6 +1,7 @@
 //Form
 export {default as Form} from './form';
 export {default as TextBox} from './form/TextBox';
+export {default as TextCopiableBox} from './form/TextCopiableBox';
 export {default as SelectBox} from './form/SelectBox';
 export {default as CheckBox} from './form/CheckBox';
 export {default as PhoneInput} from './form/PhoneWithCountryCodeInput';

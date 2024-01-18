@@ -1,10 +1,13 @@
+import {useTranslation} from '@/app/i18n/client';
 import {Card, LoadingGif, Spacer, Text} from '@/components';
+import {AccountLayoutTitle} from '@/layouts';
 import {userApi} from '@/services/user';
 import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material';
 import {useEffect} from 'react';
 
 const AccountLoginHistory = () => {
   const [getLoginHistoryOfTheUser, loginHistoryResponse] = userApi.useGetLoginHistoryOfTheUserMutation();
+  const {t} = useTranslation();
 
   useEffect(() => {
     getLoginHistoryOfTheUser();
@@ -13,11 +16,9 @@ const AccountLoginHistory = () => {
   return (
     <Card>
       <Spacer height={{lg: '40px', base: '50px', md: '30px'}} />
-      <Card alignItems="center" gap="1rem" display="flex">
-        <Text>Login History</Text>
-        {loginHistoryResponse.isLoading && <LoadingGif isPuff />}
+      <Card align-items="center" gap="1rem" display="flex">
+        <Text font-size="2rem">{t('loginHistory')}</Text> {loginHistoryResponse.isLoading && <LoadingGif isPuff />}{' '}
       </Card>
-
       {!loginHistoryResponse.isLoading && (
         <Card className="table-wrapper">
           <TableContainer>
