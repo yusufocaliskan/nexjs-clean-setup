@@ -6,20 +6,20 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '
 import {useEffect} from 'react';
 
 const AccountLoginHistory = () => {
-  const [getLoginHistoryOfTheUser, loginHistoryResponse] = userApi.useGetLoginHistoryOfTheUserMutation();
+  const {data, error, isLoading} = userApi.useGetLoginHistoryOfTheUserQuery();
   const {t} = useTranslation();
 
   useEffect(() => {
-    getLoginHistoryOfTheUser();
+    console.log('Data: ', data);
   }, []);
 
   return (
     <Card animated>
       <Spacer height={{lg: '40px', base: '50px', md: '30px'}} />
       <Card align-items="center" gap="1rem" display="flex">
-        <Text font-size="2rem">{t('loginHistory')}</Text> {loginHistoryResponse.isLoading && <LoadingGif isPuff />}{' '}
+        <Text font-size="2rem">{t('loginHistory')}</Text> {isLoading && <LoadingGif isPuff />}{' '}
       </Card>
-      {!loginHistoryResponse.isLoading && (
+      {!isLoading && (
         <Card className="table-wrapper">
           <TableContainer>
             <Table>
@@ -32,7 +32,7 @@ const AccountLoginHistory = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {loginHistoryResponse.data?.Data.map((item, index) => {
+                {data?.Data.map((item, index) => {
                   return (
                     <TableRow key={index}>
                       <TableCell>{item.d}</TableCell>

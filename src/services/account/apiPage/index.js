@@ -5,7 +5,7 @@ export const apiPageApi = createApi({
   reducerPath: 'apiPageApi',
   baseQuery: clientBaseQuery(),
   endpoints: (builder) => ({
-    getAPIKeys: builder.mutation({
+    getAPIKeys: builder.query({
       query: () => ({
         url: '/api-key',
         method: 'GET',

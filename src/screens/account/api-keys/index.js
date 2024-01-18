@@ -14,7 +14,16 @@ import ApiKeysList from './api-key-list';
 
 const ApiKeys = () => {
   const user = useSelector((state) => state.user);
-  const [getAPIKeys, getAPIKeysResponse] = apiPageApi.useGetAPIKeysMutation();
+  //TODO: https://redux-toolkit.js.org/rtk-query/usage/queries
+
+  //1.Methd
+  //Ilk render da veriyi alir.
+  const {data: listOfApiKeys, error, isLoading} = apiPageApi.useGetAPIKeysQuery();
+
+  //2. Method
+  //Trigger kullanarak veriyi alir.
+  //  const [getListOfApiKeys, result, promiseInfo] = apiPageApi.useLazyGetAPIKeysQuery();
+
   const [createAPIKey, createAPIKeyResponse] = apiPageApi.useCreateAPIKeyMutation();
   const [confirmAPIKey, confirmAPIKeyResponse] = apiPageApi.useConfirmAPIKeyMutation();
   const [deleteAPIKey, deleteAPIKeyResponse] = apiPageApi.useDeleteAPIKeyMutation();
@@ -44,11 +53,14 @@ const ApiKeys = () => {
   });
 
   const handleOnSubmitGenerateForm = () => {};
-
   useEffect(() => {
-    const res = getAPIKeys();
-    console.log(res);
-  }, []);
+    //   getListOfApiKeys();
+    console.log('Method 1 --> ', listOfApiKeys);
+  }, [listOfApiKeys]);
+
+  // useEffect(() => {
+  //   console.log('Method 2 -->', result);
+  // }, [result]);
 
   return (
     <AccountLayout title={'API Keys'} icon={<APIKeysIcon />}>
