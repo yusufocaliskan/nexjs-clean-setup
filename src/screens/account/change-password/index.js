@@ -4,7 +4,7 @@ import AccountLayout from '@/layouts/account';
 import './changePasswordStyle.scss';
 import {useSelector} from 'react-redux';
 import {useTranslation} from '@/app/i18n/client';
-import {CenteredContent, Form, Quote, Spacer, Text, TextBox} from '@/components';
+import {Card, CenteredContent, Form, Quote, Spacer, Text, TextBox} from '@/components';
 import {changePasswordValidations} from '@/validations/account';
 import {useEffect, useState} from 'react';
 import {useFormik} from 'formik';
@@ -15,6 +15,7 @@ import queryResult from '@/services/queryResult';
 import toast from 'react-hot-toast';
 import useCounter from '@/hooks/useCounter';
 import useAccount from '@/hooks/useAccount';
+import Image from 'next/image';
 const ChangePassword = () => {
   const {t} = useTranslation();
   const {name, surname, email, levelNo, phoneNumber, ...userInformations} = useSelector(
@@ -54,53 +55,59 @@ const ChangePassword = () => {
   }, [passwordCounter.counter]);
 
   return (
-    <AccountLayout title={t('changePassword')} icon={<ProfileIcon />}>
-      <CenteredContent>
-        <Spacer h="30px" />
-        <Text>
-          {t('hi')} {name} ✋,
-        </Text>
-        <Quote>{t('changePasswordDesc')}</Quote>
-        <Spacer h="20px" />
-        <Form
-          onSubmit={changePasswordForm.handleSubmit}
-          formInstance={changePasswordForm}
-          isLoading={isLoading}
-          submitButtonText={t('changePassword')}
-          dontDisplayCaptcha
-        >
-          <TextBox
+    <AccountLayout id="profile-screen" title={t('changePassword')} icon={<ProfileIcon />}>
+      <Spacer height={{lg: '20px', base: '20px', md: '20px'}} />
+      <Text>
+        {t('hi')} {name} ✋,
+      </Text>
+      <Quote>{t('changePasswordDesc')}</Quote>
+
+      <Spacer height={{lg: '40px', base: '50px', md: '30px'}} />
+      <Card style={{width: '100%', display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between'}}>
+        <Card width={{base: '100%', lg: '70%', md: '90%'}}>
+          <Form
+            onSubmit={changePasswordForm.handleSubmit}
             formInstance={changePasswordForm}
-            isSecure
-            label={t('currentPassword')}
-            type="password"
-            name="CurrentPassword"
-            placeholder={t('currentPasswordPlaceholder')}
-            value={changePasswordForm.values.CurrentPassword}
-            setValue={(value) => changePasswordForm.setFieldValue('CurrentPassword', value)}
-          />
-          <TextBox
-            formInstance={changePasswordForm}
-            isSecure
-            label={t('newPassword')}
-            type="password"
-            name="NewPassword"
-            placeholder={t('newPasswordPlaceholder')}
-            value={changePasswordForm.values.NewPassword}
-            setValue={(value) => changePasswordForm.setFieldValue('NewPassword', value)}
-          />
-          <TextBox
-            formInstance={changePasswordForm}
-            isSecure
-            label={t('confirmNewPassword')}
-            type="password"
-            name="ConfirmNewPassword"
-            placeholder={t('confirmNewPasswordPlaceholder')}
-            value={changePasswordForm.values.ConfirmNewPassword}
-            setValue={(value) => changePasswordForm.setFieldValue('ConfirmNewPassword', value)}
-          />
-        </Form>
-      </CenteredContent>
+            isLoading={isLoading}
+            submitButtonText={t('changePassword')}
+            dontDisplayCaptcha
+          >
+            <TextBox
+              formInstance={changePasswordForm}
+              isSecure
+              label={t('currentPassword')}
+              type="password"
+              name="CurrentPassword"
+              placeholder={t('currentPasswordPlaceholder')}
+              value={changePasswordForm.values.CurrentPassword}
+              setValue={(value) => changePasswordForm.setFieldValue('CurrentPassword', value)}
+            />
+            <TextBox
+              formInstance={changePasswordForm}
+              isSecure
+              label={t('newPassword')}
+              type="password"
+              name="NewPassword"
+              placeholder={t('newPasswordPlaceholder')}
+              value={changePasswordForm.values.NewPassword}
+              setValue={(value) => changePasswordForm.setFieldValue('NewPassword', value)}
+            />
+            <TextBox
+              formInstance={changePasswordForm}
+              isSecure
+              label={t('confirmNewPassword')}
+              type="password"
+              name="ConfirmNewPassword"
+              placeholder={t('confirmNewPasswordPlaceholder')}
+              value={changePasswordForm.values.ConfirmNewPassword}
+              setValue={(value) => changePasswordForm.setFieldValue('ConfirmNewPassword', value)}
+            />
+          </Form>
+        </Card>
+        <Card display={{base: 'none', lg: 'block', md: 'block'}}>
+          <Image width="200" height="200" src="/assets/images/auth/composition-1.png" />{' '}
+        </Card>
+      </Card>
     </AccountLayout>
   );
 };

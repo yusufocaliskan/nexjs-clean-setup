@@ -33,11 +33,11 @@ const AccountLayoutMenu = ({children, title, icon}) => {
       route: routes.accountApiKeys,
       icon: APIKeysIcon,
     },
-    {
-      text: t('accountLoginHistory'),
-      route: routes.accountLoginHistory,
-      icon: LoginHistoryIcon,
-    },
+    // {
+    //   text: t('accountLoginHistory'),
+    //   route: routes.accountLoginHistory,
+    //   icon: LoginHistoryIcon,
+    // },
     {
       text: t('account2FA'),
       route: routes.account2FA,

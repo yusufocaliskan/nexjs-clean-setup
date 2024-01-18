@@ -56,7 +56,7 @@ const LoggedInProfileCard = () => {
             </div>
           </div>
           <div>
-            <CoolButton label={t('logout')} type="Small" onClick={() => handleOnLoggout()} />
+            <CoolButton label={t('logout')} type="Main&Small" onClick={() => handleOnLoggout()} />
           </div>{' '}
         </div>
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
