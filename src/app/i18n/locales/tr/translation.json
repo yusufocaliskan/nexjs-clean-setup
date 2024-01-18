@@ -108,6 +108,12 @@
   "footerNewsletterContent": "Daha fazla ücretsiz tasarım kursu ve kaynağı için bültenimize abone olun.",
   "footerEmailPlaceholder": "E-postanızı girin",
   "footerCopyright": "Tüm hakları saklıdır © 2021 DecentraHubs",
+  "accountProfile": "Profil",
+  "accountReferrals": "Referanslar",
+  "accountApiKeys": "API Anahtarları",
+  "accountLoginHistory": "Oturumlar ve Giriş Geçmişi",
+  "account2FA": "2FA",
+  "accountChangePassword": "Şifre Değiştir",
 
   
   "password is a required field": "Lütfen parola alanını doldurun"

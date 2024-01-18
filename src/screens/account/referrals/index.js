@@ -3,9 +3,109 @@ import {ReferralsIcon} from '@/components/Icons/ProfileInfoIcons';
 import AccountLayout from '@/layouts/account';
 import './index.scss';
 import {referralApi} from '@/services/referral';
+import {useState, useEffect} from 'react';
+import {accountApi} from '@/services/account';
 
 const Referrals = () => {
-  const [getMyReferrals, userInformationResponse] = referralApi.useGetMyReferralsMutation();
+  const [getMyReferrals, getMyReferralsResponse] = referralApi.useGetMyReferralsMutation();
+  const [getReferralNickname, getReferralNicknameResponse] = accountApi.useGetReferralNicknameMutation();
+  // const [createReferralNickname, createReferralNicknameResponse] = accountApi.useCreateReferralNicknameMutation();
+  const [getMyReferralsCountWithKYC, getMyReferralsCountWithKYCResponse] = referralApi.useGetMyReferralsCountWithKYCMutation();
+  const [getMyLatestCommissions, getMyLatestCommissionsResponse] = referralApi.useGetMyLatestCommissionsMutation();
+  const [getTopCommissions, getTopCommissionsResponse] = referralApi.useGetTopCommissionsMutation();
+
+  const [value, setValue] = useState(0);
+  const [referralKYCValue, setReferralKYCValue] = useState(0);
+  const [referralKYCMax, setReferralKYCMax] = useState(0);
+  const [referrals, setReferrals] = useState([]);
+  const [referralsIsBusy, setReferralsIsBusy] = useState(false);
+  const [referralsCurrentPage, setReferralsCurrentPage] = useState(1);
+  const [referralsPerPage, setReferralsPerPage] = useState(9);
+  const [referralNick, setReferralNick] = useState(undefined);
+  const [referralNickUrl, setReferralNickUrl] = useState(undefined);
+  const [topCommissions, setTopCommissions] = useState([]);
+  const [latestCommissions, setLatestCommissions] = useState([]);
+  const [latestCommissionsIsBusy, setLatestCommissionsIsBusy] = useState(false);
+  const [latestCommissionsCurrentPage, setLatestCommissionsCurrentPage] = useState(1);
+  const [latestCommissionsPerPage, setLatestCommissionsPerPage] = useState(9);
+  const [commissionValue, setCommissionValue] = useState(0);
+  const [referralFeeAsBTC, setReferralFeeAsBTC] = useState(0);
+  const [referralFeeAsTRY, setReferralFeeAsTRY] = useState(0);
+  const [referralFeeAsUSD, setReferralFeeAsUSD] = useState(0);
+  const [levels, setLevels] = useState([
+    {value: 0, commission: 20, badgeCount: 1},
+    {value: 10, commission: 25, badgeCount: 2},
+    {value: 50, commission: 30, badgeCount: 3},
+    {value: 100, commission: 35, badgeCount: 4},
+    {value: 250, commission: 40, badgeCount: 5},
+    {value: 500, commission: 45, badgeCount: 6},
+    {value: 1000, commission: 50, badgeCount: 7},
+    {value: 2000, commission: 60, badgeCount: 8},
+  ]);
+  const [customRate, setCustomRate] = useState(0);
+  const [active, setActive] = useState(0);
+
+  const fetchReferrals = async () => {
+    try {
+      setReferralsIsBusy(true);
+      const response = await getMyReferrals();
+
+      console.log('ref', response.data);
+      setReferrals(response.data.Data || []);
+    } catch (error) {
+    } finally {
+      setReferralsIsBusy(false);
+    }
+  };
+
+  const fetchLatestCommissions = async () => {
+    try {
+      setLatestCommissionsIsBusy(true);
+      const response = await getMyLatestCommissions();
+
+      setLatestCommissions(response.data.Data.items || []);
+      setReferralFeeAsBTC(response.data.Data.btc.toFixed(8));
+      setReferralFeeAsTRY(response.data.Data.try.toFixed(2));
+      setReferralFeeAsUSD(response.data.Data.usd.toFixed(2));
+    } catch (error) {
+    } finally {
+      setLatestCommissionsIsBusy(false);
+    }
+  };
+
+  const fetchReferralsCountWithKYC = async () => {
+    try {
+      const response = await getMyReferralsCountWithKYC();
+
+      setReferralKYCValue(response.data.Data.value || 0);
+      setReferralKYCMax(response.data.Data.max || 0);
+    } catch (error) {}
+  };
+
+  const fetchTopCommissions = async () => {
+    try {
+      const response = await getTopCommissions();
+
+      setTopCommissions(response.data.Data || []);
+    } catch (error) {}
+  };
+
+  const fetchReferralNick = async () => {
+    try {
+      const response = await getReferralNickname();
+
+      setReferralNick(response.data);
+    } catch (error) {}
+  };
+  
+
+  useEffect(() => {
+    fetchReferrals();
+    fetchLatestCommissions();
+    fetchReferralsCountWithKYC();
+    fetchTopCommissions();
+    fetchReferralNick();
+  }, []);
 
   return (
     <AccountLayout title={'Referrals'} icon={<ReferralsIcon />}>

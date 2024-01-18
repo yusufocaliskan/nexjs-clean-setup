@@ -42,8 +42,8 @@ const MobileLogo = ({ width = 24, height = 24 }) => {
           y2="24.7803"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#008D36" />
-          <stop offset="1" stop-color="#67F6B8" />
+          <stop stopColor="#008D36" />
+          <stop offset="1" stopColor="#67F6B8" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_3286_32473"
@@ -53,8 +53,8 @@ const MobileLogo = ({ width = 24, height = 24 }) => {
           y2="7.22042"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#008D36" />
-          <stop offset="1" stop-color="#67F6B8" />
+          <stop stopColor="#008D36" />
+          <stop offset="1" stopColor="#67F6B8" />
         </linearGradient>
       </defs>
     </svg>

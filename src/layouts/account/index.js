@@ -28,32 +28,32 @@ const AccountLayout = ({children, title, icon}) => {
 
   const leftMenu = [
     {
-      text: t('profile'),
+      text:t('accountProfile'),
       route: routes.accountProfile,
       icon: ProfileIcon,
     },
     {
-      text: t('referrals'),
+      text:t('accountReferrals'),
       route: routes.accountReferrals,
       icon: ReferralsIcon,
     },
     {
-      text: t('api_keys'),
+      text:t('accountApiKeys'),
       route: routes.accountApiKeys,
       icon: APIKeysIcon,
     },
     {
-      text: t('login_history'),
+      text:t('accountLoginHistory'),
       route: routes.accountLoginHistory,
       icon: LoginHistoryIcon,
     },
     {
-      text: t('2fa'),
+      text:t('account2FA'),
       route: routes.account2FA,
       icon: TwoFAIcon,
     },
     {
-      text: t('change_password'),
+      text:t('accountChangePassword'),
       route: routes.accountPasswordChange,
       icon: PasswordIcon,
     },

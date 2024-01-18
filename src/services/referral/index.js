@@ -12,10 +12,9 @@ export const referralApi = createApi({
       }),
     }),
     getMyReferrals: builder.mutation({
-      query: (data) => ({
+      query: () => ({
         url: '/users/referrals',
         method: 'GET',
-        data: data,
       }),
     }),
     getMyReferralsCountWithKYC: builder.mutation({
