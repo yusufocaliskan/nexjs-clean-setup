@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import {motion} from 'framer-motion';
+import {memo} from 'react';
 const Card = (props) => {
   const {children, animated, onClick, as = 'div', id, className, style, ...rest} = props;
 
@@ -22,7 +23,7 @@ const Card = (props) => {
 
   const defaultProperties = `
         width: 100%;
-        font-family: 'DM Sans';
+        
   `;
 
   const CardWrapper = styled.div`
@@ -63,4 +64,4 @@ const Card = (props) => {
     </>
   );
 };
-export default Card;
+export default memo(Card);
